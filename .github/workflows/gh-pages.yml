@@ -13,11 +13,14 @@ jobs:
         yarn install --frozen-lockfile
         yarn run lint
         yarn run build
+        yarn run export
+      env:
+        NEXT_TELEMETRY_DISABLED: 1
 
     - name: Deploy
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
-        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_SPYFALL }}
         BASE_BRANCH: master # The branch the action should deploy from.
         BRANCH: gh-pages # The branch the action should deploy to.
         FOLDER: out # The folder the action should deploy.
