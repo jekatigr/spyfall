@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@zeit/next-less": "^1.0.1",
+    "css-reset-and-normalize": "^2.1.0",
     "less": "^3.10.3",
     "next": "^9.1.4",
     "react": "^16.12.0",

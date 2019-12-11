@@ -2147,6 +2147,11 @@ css-prefers-color-scheme@^3.1.1:
   dependencies:
     postcss "^7.0.5"
 
+css-reset-and-normalize@^2.1.0:
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/css-reset-and-normalize/-/css-reset-and-normalize-2.1.0.tgz#c65b643079191161a2d0b719b0b072ed86c4eec6"
+  integrity sha512-oa+LI5tKye7Uf+AV8GhM+3bRN9SvZzThupr9SXuPRYKKPho+Qy2BWW5jRGc9qIOWhJvCT/oiw9P5IL+4ma8dfw==
+
 css-selector-tokenizer@^0.7.0:
   version "0.7.1"
   resolved "https://registry.yarnpkg.com/css-selector-tokenizer/-/css-selector-tokenizer-0.7.1.tgz#a177271a8bca5019172f4f891fc6eed9cbf68d5d"
