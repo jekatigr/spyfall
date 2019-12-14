@@ -1,4 +1,5 @@
 import * as React from 'react';
+import ProgressBar from 'components/ProgressBar';
 import './App.less';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
@@ -13,6 +14,7 @@ const App: React.FunctionComponent = () => {
     return (
         <div className="container">
             <img src="/logo.svg" />
+            <ProgressBar />
             <div className="players-list">
                 <h1 className="header">Игроки</h1>
                 <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
