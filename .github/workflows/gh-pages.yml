@@ -1,4 +1,4 @@
-name: Deploy Spyfall to Github Pages
+name: Spyfall CI with CD to Github Pages
 on: [push]
 
 jobs:
@@ -25,4 +25,6 @@ jobs:
         BASE_BRANCH: master # The branch the action should deploy from.
         BRANCH: gh-pages # The branch the action should deploy to.
         FOLDER: out # The folder the action should deploy.
+      env:
+        HUSKY_SKIP_HOOKS: 1
    
