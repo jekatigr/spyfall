@@ -15,8 +15,8 @@ const ProgressBar: React.FunctionComponent<Props> = ({ dotsCount, step }) => {
     const [circleAnimationDuration, setCircleAnimationDuration] = React.useState(0);
 
     React.useEffect(() => {
-        const cutsCount = progressbarNode.current.clientWidth / (dotsCount - 1);
-        const relativeCirclePart = cutsCount / CIRCLE_DIAMETER;
+        const cutsWidth = progressbarNode.current.clientWidth / (dotsCount - 1);
+        const relativeCirclePart = cutsWidth / CIRCLE_DIAMETER;
         const duration = NEXT_STEP_ANIMATION_DURATION / relativeCirclePart;
         setCircleAnimationDuration(duration);
     });
@@ -24,7 +24,7 @@ const ProgressBar: React.FunctionComponent<Props> = ({ dotsCount, step }) => {
     const dots = [];
     for (let i = 0; i < dotsCount; i++) {
         dots.push(
-            <div className="progress-bar__circle">
+            <div className="progress-bar__circle" key={i}>
                 <div
                     className={`progress-bar__circle__inner${(step > i) ? ' progress-bar__circle__inner_show' : ''}`}
                     style={{
