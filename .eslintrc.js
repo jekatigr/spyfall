@@ -37,6 +37,21 @@ module.exports =  {
                 ]
             }
         ],
+        "jsx-a11y/alt-text": 0,
+        'no-plusplus': [
+            2,
+            {
+                allowForLoopAfterthoughts: true
+            }
+        ],
+        "react/jsx-one-expression-per-line": [
+            2,
+            {
+                allow: "literal"
+            }
+        ],
+        "linebreak-style": 0,
+        "react/prop-types": 0
     },
     settings:  {
         react:  {
