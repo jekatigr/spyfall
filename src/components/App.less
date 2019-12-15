@@ -72,12 +72,12 @@ body {
 .container__bottom-buttons-block {
   text-align: center;
   margin: 20px 0;
-  padding: 0 55px;
+  padding: 0 26px;
 }
 
 .button {
   width: 100%;
-  max-width: 500px;
+  max-width: 370px;
   height: 62px;
   border-radius: 6px;
   margin: 10px auto;
@@ -104,18 +104,25 @@ body {
   box-sizing: border-box;
 }
 
-.players-list__inner {
+.players-list {
+  text-align: center;
+}
+
+.players-list__wrapper {
+  display: inline-block;
+}
+
+.players-list__wrapper__inner {
   max-width: 650px;
-  margin: 24px auto;
+  margin: 19px -17px;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
 }
 
-.players-list__inner__item {
+.players-list__wrapper__inner__item {
   text-align: center;
-  flex-basis: 107px;
-  margin: 17px 0;
+  margin: 17px;
 }
 
 .add-player-button {
@@ -196,8 +203,9 @@ body {
 
 .empty-hack-for-flexbox-space-between-last-line-problem {
   height: 0;
+  width: 90px;
   visibility: hidden;
-  flex-basis: 107px;
+  margin: 0 17px;
 }
 
 .player__name {

@@ -8,39 +8,43 @@ const colors = ['coral', 'wine', 'pink', 'purple', 'raspberry', 'green', 'acid-g
 const App: React.FunctionComponent = () => {
     const hacks = [];
     for (let i = 0; i < MAX_PLAYERS_IN_ROW - 1; i++) {
-        hacks.push(<div className="empty-hack-for-flexbox-space-between-last-line-problem" />);
+        hacks.push(<div key={i} className="empty-hack-for-flexbox-space-between-last-line-problem" />);
     }
 
     return (
         <div className="container">
             <img src="/logo.svg" />
             <ProgressBar />
-            <div className="players-list">
+            <div className="">
                 <h1 className="header">Игроки</h1>
                 <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
-                <div className="players-list__inner">
-                    {
-                        colors.map((c, p) => (
-                            <div className="players-list__inner__item" key={c}>
-                                <div className="player">
-                                    <button type="button" className={`player__button player__button_${colors[p]}`}>
-                                        <img className="player__button__icon" src="/player.svg" />
-                                    </button>
-                                    <p className="player__name">
-                                        Player
-                                        {' '}
-                                        {p + 1}
-                                    </p>
-                                </div>
+                <div className="players-list">
+                    <div className="players-list__wrapper">
+                        <div className="players-list__wrapper__inner">
+                            {
+                                colors.map((c, p) => (
+                                    <div className="players-list__wrapper__inner__item" key={c}>
+                                        <div className="player">
+                                            <button type="button" className={`player__button player__button_${colors[p]}`}>
+                                                <img className="player__button__icon" src="/player.svg" />
+                                            </button>
+                                            <p className="player__name">
+                                                Player
+                                                {' '}
+                                                {p + 1}
+                                            </p>
+                                        </div>
+                                    </div>
+                                ))
+                            }
+                            <div className="players-list__wrapper__inner__item">
+                                <button type="button" className="add-player-button">
+                                    <img src="/add.svg" />
+                                </button>
                             </div>
-                        ))
-                    }
-                    <div className="players-list__inner__item">
-                        <button type="button" className="add-player-button">
-                            <img src="/add.svg" />
-                        </button>
+                            {hacks}
+                        </div>
                     </div>
-                    {hacks}
                 </div>
             </div>
 
