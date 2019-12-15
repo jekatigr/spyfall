@@ -5,6 +5,8 @@ import './App.less';
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 const colors = ['coral', 'wine', 'pink', 'purple', 'raspberry', 'green', 'acid-green', 'light-green', 'yellow', 'sky-blue', 'blue', 'dark-blue'];
 
+const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
+
 const App: React.FunctionComponent = () => {
     const hacks = [];
     for (let i = 0; i < MAX_PLAYERS_IN_ROW - 1; i++) {
@@ -13,7 +15,7 @@ const App: React.FunctionComponent = () => {
 
     return (
         <div className="container">
-            <img src="/logo.svg" />
+            <img src={`${assetPrefix}/logo.svg`} />
             <ProgressBar />
             <div className="">
                 <h1 className="header">Игроки</h1>
@@ -26,7 +28,7 @@ const App: React.FunctionComponent = () => {
                                     <div className="players-list__wrapper__inner__item" key={c}>
                                         <div className="player">
                                             <button type="button" className={`player__button player__button_${colors[p]}`}>
-                                                <img className="player__button__icon" src="/player.svg" />
+                                                <img className="player__button__icon" src={`${assetPrefix}/player.svg`} />
                                             </button>
                                             <p className="player__name">
                                                 Player
@@ -39,7 +41,7 @@ const App: React.FunctionComponent = () => {
                             }
                             <div className="players-list__wrapper__inner__item">
                                 <button type="button" className="add-player-button">
-                                    <img src="/add.svg" />
+                                    <img src={`${assetPrefix}/add.svg`} />
                                 </button>
                             </div>
                             {hacks}

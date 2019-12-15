@@ -15,6 +15,7 @@ jobs:
         yarn run build
         yarn run export
       env:
+        ASSET_PREFIX: /spyfall
         NEXT_TELEMETRY_DISABLED: 1
 
     - name: Deploy

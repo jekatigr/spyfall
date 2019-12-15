@@ -13,5 +13,5 @@ module.exports = withLess({
         };
         return config;
     },
-    assetPrefix: process.env.NODE_ENV === 'production' ? '/spyfall' : '',
+    assetPrefix: process.env.ASSET_PREFIX,
 });
