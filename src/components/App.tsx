@@ -27,9 +27,12 @@ const App: React.FunctionComponent = () => {
                                 colors.map((c, p) => (
                                     <div className="players-list__wrapper__inner__item" key={c}>
                                         <div className="player">
-                                            <button type="button" className={`player__button player__button_${colors[p]}`}>
-                                                <img className="player__button__icon" src={`${assetPrefix}/player.svg`} />
-                                            </button>
+                                            <div className={`player__image player__image_${colors[p]}`}>
+                                                <img className="player__image__icon" src={`${assetPrefix}/player.svg`} />
+                                            </div>
+                                            <div className="player__edit">
+                                                <img className="player__edit__icon" src={`${assetPrefix}/edit.svg`} />
+                                            </div>
                                             <p className="player__name">
                                                 Player
                                                 {' '}
@@ -68,6 +71,26 @@ const App: React.FunctionComponent = () => {
                 <button type="button" className="button button_additional button_disabled">
                     Выйти
                 </button>
+            </div>
+
+            <div className="player-profile">
+                <h1 className="header">Профиль игрока</h1>
+                <div className="player-profile__inner">
+                    <div className="player">
+                        <div className={`player__image player__image_big player__image_${colors[9]}`}>
+                            <img className="player__image__icon player__image__icon_big" src={`${assetPrefix}/player.svg`} />
+                        </div>
+                    </div>
+                    <div className="player-profile__inner__input">
+                        <input className="input-text" type="text" placeholder="Введите имя игрока" />
+                    </div>
+                    <div className="player-profile__inner__remove-player">
+                        <div className="remove-player">
+                            Удалить игрока
+                            <img className="remove-player__icon" src={`${assetPrefix}/remove.svg`} />
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div>
