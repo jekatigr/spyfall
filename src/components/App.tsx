@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ProgressBar from 'components/ProgressBar';
+import Switcher from 'components/Switcher';
 import './App.less';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
@@ -8,6 +9,11 @@ const colors = ['coral', 'wine', 'pink', 'purple', 'raspberry', 'green', 'acid-g
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const App: React.FunctionComponent = () => {
+    const handleSwitchChange = (enabled: boolean): void => {
+        // eslint-disable-next-line no-console
+        console.log(enabled);
+    };
+
     const hacks = [];
     for (let i = 0; i < MAX_PLAYERS_IN_ROW - 1; i++) {
         hacks.push(<div key={i} className="empty-hack-for-flexbox-space-between-last-line-problem" />);
@@ -17,6 +23,25 @@ const App: React.FunctionComponent = () => {
         <div className="container">
             <img src={`${assetPrefix}/logo.svg`} />
             <ProgressBar />
+
+            <div className="counter">
+                <span className="counter__name">Время на кон</span>
+                <div className="counter__inner">
+                    <div className="counter__controllers counter-controllers">
+                        <div className="counter-controllers__background-minus">
+                            <div className="counter-controllers__controller controller-minus" />
+                        </div>
+                        <div className="counter-controllers__background-plus">
+                            <div className="counter-controllers__controller controller-plus" />
+                        </div>
+                    </div>
+                    <div className="counter__display counter-display">
+                        <div className="counter-display__time">08</div>
+                        <div className="counter-display__units">мин</div>
+                    </div>
+                </div>
+            </div>
+
             <div className="">
                 <h1 className="header">Игроки</h1>
                 <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
@@ -92,6 +117,9 @@ const App: React.FunctionComponent = () => {
                     </div>
                 </div>
             </div>
+
+            <h1 className="header">Настройки</h1>
+            <Switcher onChange={handleSwitchChange}>Шпионы знакомы</Switcher>
 
             <div>
                 <h1 className="header">Правила</h1>

@@ -35,7 +35,7 @@ body {
   text-align: center;
   font-weight: 500;
   line-height: 33px;
-  margin: 44px 0 29px 0;
+  margin: 0 0 29px 0;
 }
 
 .paragraph {
@@ -282,3 +282,138 @@ body {
 .remove-player__icon {
   margin-left: 9px;
 }
+
+.counter {
+  margin-bottom: 41px;
+}
+
+.counter__inner {
+  position: relative;
+  padding: 58px 0;
+}
+
+.counter__name {
+  display: block;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 21px;
+  text-align: center;
+}
+
+.counter-controllers {
+  width: 280px;
+  margin: 0 auto;
+  cursor: pointer;
+}
+
+.counter-controllers__background-minus {
+  background: #00AEE5;
+  display: inline-block;
+  width: 50%;
+  padding: 7px;
+  border-radius: 64px 0 0 64px;
+  height: 64px;
+}
+
+.counter-controllers__background-plus {
+  background: #00AEE5;
+  display: inline-block;
+  width: 50%;
+  text-align: right;
+  padding: 7px;
+  border-radius: 0 64px 64px 0;
+  height: 64px;
+}
+
+.counter-controllers__controller {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  border: 3px solid #FFFFFF;
+  border-radius: 50px;
+  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15), inset 2px 4px 6px rgba(0, 0, 0, 0.15);
+}
+
+.controller-minus {
+  &:after {
+    content: " ";
+    position: relative;
+    display: block;
+    background-color: #FFFFFF;
+    border-radius: 1.5px;
+    height: 3px;
+    width: 18px;
+    top: calc(50% - 1.5px);
+    left: calc(50% - 9px);
+  }
+}
+
+.controller-plus {
+  &:before {
+    content: " ";
+    position: relative;
+    display: block;
+    background-color: #FFFFFF;
+    border-radius: 1.5px;
+    height: 3px;
+    width: 18px;
+    top: calc(50% - 1.5px);
+    left: calc(50% - 9px);
+  }
+
+  &:after {
+    content: " ";
+    position: relative;
+    display: block;
+    background-color: #FFFFFF;
+    border-radius: 1.5px;
+    height: 18px;
+    width: 3px;
+    top: 10px;
+    left: calc(50% - 1.5px);
+  }
+}
+
+.counter-display {
+  position: absolute;
+  top: calc(50% - 70px);
+  left: calc(50% - 70px);
+  height: 140px;
+  width: 140px;
+  border-radius: 50%;
+  background: #002539;
+  border: 5px solid #FFFFFF;
+  box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.25);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.counter-display__units {
+  font-weight: 500;
+  font-size: 20px;
+  text-align: center;
+}
+
+.counter-display__time {
+  font-weight: 500;
+  font-size: 60px;
+  text-align: center;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

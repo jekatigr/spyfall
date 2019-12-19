@@ -1,0 +1,81 @@
+@el: e('.switcher');
+
+@{el} {
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 339px;
+  margin: 10px auto;
+
+  &__label {
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 21px;
+    display: inline-block;
+  }
+
+  &__inner {
+    display: inline-block;
+    background-color: #F74A86;
+    border-radius: 18px;
+    height: 30px;
+    width: 58px;
+    padding: 3px;
+    animation: 0.3s switchBackgroundDisable forwards;
+  }
+
+  &__inner_enabled {
+    animation: 0.3s switchBackgroundEnable forwards;
+  }
+
+  &__switch {
+    width: 24px;
+    height: 24px;
+    background: #FFFFFF;
+    box-shadow: 0 2px 2px rgba(0, 0, 0, 0.08);
+    border-radius: 50%;
+    position: relative;
+    animation: 0.3s switchDisable forwards;
+  }
+
+  &__switch_enabled {
+    animation: 0.3s switchEnable forwards;
+  }
+}
+
+@keyframes switchBackgroundEnable {
+  from {
+    background-color: #F74A86;
+  }
+  to {
+    background-color: #02D113;
+  }
+}
+
+@keyframes switchBackgroundDisable {
+  from {
+    background-color: #02D113;
+  }
+  to {
+    background-color: #F74A86;
+  }
+}
+
+@keyframes switchEnable {
+  from {
+    left: 0
+  }
+  to {
+    left: calc(100% - 24px)
+  }
+}
+
+@keyframes switchDisable {
+  from {
+    left: calc(100% - 24px)
+  }
+  to {
+    left: 0
+  }
+}
