@@ -94,6 +94,20 @@ const App: React.FunctionComponent = () => {
                 </div>
             </div>
 
+            <div className="random-option">
+                <span className="random-option__name">Случайное количество</span>
+                <div className="random-option__inner">
+                    <img className="random-option__image_selected" src={`${assetPrefix}/dice.svg`} />
+                </div>
+            </div>
+
+            <div className="random-option">
+                <span className="random-option__name random-option__name_muted">Случайная выключенная</span>
+                <div className="random-option__inner random-option__inner_muted">
+                    <img className="random-option__image_muted" src={`${assetPrefix}/dice-muted.svg`} />
+                </div>
+            </div>
+
             <div className="">
                 <h1 className="header">Игроки</h1>
                 <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
