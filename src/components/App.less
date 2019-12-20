@@ -300,22 +300,31 @@ body {
   text-align: center;
 }
 
-.counter-controllers {
-  width: 280px;
-  margin: 0 auto;
-  cursor: pointer;
+.counter__name_muted {
+  color: #999999;
 }
 
-.counter-controllers__background-minus {
+.controllers {
+  width: 280px;
+  margin: 0 auto;
+}
+
+.controllers__background-minus {
   background: #00AEE5;
   display: inline-block;
   width: 50%;
   padding: 7px;
   border-radius: 64px 0 0 64px;
   height: 64px;
+  cursor: pointer;
 }
 
-.counter-controllers__background-plus {
+.controllers__background-minus_muted {
+  background: #999999;
+  cursor: not-allowed;
+}
+
+.controllers__background-plus {
   background: #00AEE5;
   display: inline-block;
   width: 50%;
@@ -323,9 +332,15 @@ body {
   padding: 7px;
   border-radius: 0 64px 64px 0;
   height: 64px;
+  cursor: pointer;
 }
 
-.counter-controllers__controller {
+.controllers__background-plus_muted {
+  background: #999999;
+  cursor: not-allowed;
+}
+
+.controllers__controller {
   display: inline-block;
   width: 50px;
   height: 50px;
@@ -334,7 +349,12 @@ body {
   box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15), inset 2px 4px 6px rgba(0, 0, 0, 0.15);
 }
 
-.controller-minus {
+.controllers__controller_muted {
+  border: 3px solid #002539;
+  box-shadow: none;
+}
+
+.controllers__controller-minus {
   &:after {
     content: " ";
     position: relative;
@@ -348,7 +368,13 @@ body {
   }
 }
 
-.controller-plus {
+.controllers__controller-minus_muted {
+  &:after {
+    background-color: #002539;
+  }
+}
+
+.controllers__controller-plus {
   &:before {
     content: " ";
     position: relative;
@@ -374,6 +400,16 @@ body {
   }
 }
 
+.controllers__controller-plus_muted {
+  &:before {
+    background-color: #002539;
+  }
+
+  &:after {
+    background-color: #002539;
+  }
+}
+
 .counter-display {
   position: absolute;
   top: calc(50% - 70px);
@@ -387,6 +423,13 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  cursor: pointer;
+}
+
+.counter-display_muted {
+  color: #999999;
+  border: 5px solid #999999;
+  cursor: not-allowed;
 }
 
 .counter-display__units {
