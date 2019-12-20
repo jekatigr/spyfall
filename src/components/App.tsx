@@ -1,5 +1,6 @@
 import * as React from 'react';
 import ProgressBar from 'components/ProgressBar';
+import Switcher from 'components/Switcher';
 import './App.less';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
@@ -8,6 +9,11 @@ const colors = ['coral', 'wine', 'pink', 'purple', 'raspberry', 'green', 'acid-g
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const App: React.FunctionComponent = () => {
+    const handleSwitchChange = (enabled: boolean): void => {
+        // eslint-disable-next-line no-console
+        console.log(enabled);
+    };
+
     const hacks = [];
     for (let i = 0; i < MAX_PLAYERS_IN_ROW - 1; i++) {
         hacks.push(<div key={i} className="empty-hack-for-flexbox-space-between-last-line-problem" />);
@@ -17,6 +23,91 @@ const App: React.FunctionComponent = () => {
         <div className="container">
             <img src={`${assetPrefix}/logo.svg`} />
             <ProgressBar />
+
+            <div className="counter">
+                <span className="counter__name">Время на кон (обычный)</span>
+                <div className="counter__inner">
+                    <div className="counter__controllers controllers">
+                        <div className="controllers__background-minus">
+                            <div className="controllers__controller controllers__controller-minus" />
+                        </div>
+                        <div className="controllers__background-plus">
+                            <div className="controllers__controller controllers__controller-plus" />
+                        </div>
+                    </div>
+                    <div className="counter__display counter-display">
+                        <div className="counter-display__time">08</div>
+                        <div className="counter-display__units">мин</div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="counter">
+                <span className="counter__name">Меньше одного нельзя</span>
+                <div className="counter__inner">
+                    <div className="counter__controllers controllers">
+                        <div className="controllers__background-minus controllers__background-minus_muted">
+                            <div className="controllers__controller controllers__controller_muted controllers__controller-minus controllers__controller-minus_muted" />
+                        </div>
+                        <div className="controllers__background-plus">
+                            <div className="controllers__controller controllers__controller-plus" />
+                        </div>
+                    </div>
+                    <div className="counter__display counter-display">
+                        <div className="counter-display__time">01</div>
+                        <div className="counter-display__units">мин</div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="counter">
+                <span className="counter__name">Больше 10 нельзя</span>
+                <div className="counter__inner">
+                    <div className="counter__controllers controllers">
+                        <div className="controllers__background-minus">
+                            <div className="controllers__controller controllers__controller-minus" />
+                        </div>
+                        <div className="controllers__background-plus controllers__background-plus_muted">
+                            <div className="controllers__controller controllers__controller_muted controllers__controller-plus controllers__controller-plus_muted" />
+                        </div>
+                    </div>
+                    <div className="counter__display counter-display">
+                        <div className="counter-display__time">10</div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="counter">
+                <span className="counter__name counter__name_muted">Неактивен</span>
+                <div className="counter__inner">
+                    <div className="counter__controllers controllers">
+                        <div className="controllers__background-minus controllers__background-minus_muted">
+                            <div className="controllers__controller controllers__controller_muted controllers__controller-minus controllers__controller-minus_muted" />
+                        </div>
+                        <div className="controllers__background-plus controllers__background-plus_muted">
+                            <div className="controllers__controller controllers__controller_muted controllers__controller-plus controllers__controller-plus_muted" />
+                        </div>
+                    </div>
+                    <div className="counter__display counter-display counter-display_muted">
+                        <div className="counter-display__time">?</div>
+                    </div>
+                </div>
+            </div>
+
+            <div className="random-option">
+                <span className="random-option__name">Случайное количество</span>
+                <div className="random-option__inner">
+                    <img className="random-option__image_selected" src={`${assetPrefix}/dice.svg`} />
+                </div>
+            </div>
+
+            <div className="random-option">
+                <span className="random-option__name random-option__name_muted">Случайная выключенная</span>
+                <div className="random-option__inner random-option__inner_muted">
+                    <img className="random-option__image_muted" src={`${assetPrefix}/dice-muted.svg`} />
+                </div>
+            </div>
+
             <div className="">
                 <h1 className="header">Игроки</h1>
                 <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
@@ -92,6 +183,9 @@ const App: React.FunctionComponent = () => {
                     </div>
                 </div>
             </div>
+
+            <h1 className="header">Настройки</h1>
+            <Switcher onChange={handleSwitchChange}>Шпионы знакомы</Switcher>
 
             <div>
                 <h1 className="header">Правила</h1>
