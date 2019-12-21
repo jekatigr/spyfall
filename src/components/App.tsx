@@ -113,16 +113,16 @@ const App: React.FunctionComponent = () => {
                 <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
                 <div className="players-list">
                     <div className="players-list__wrapper">
-                        <div className="players-list__wrapper__inner">
+                        <div className="players-list__inner">
                             {
                                 colors.map((c, p) => (
-                                    <div className="players-list__wrapper__inner__item" key={c}>
+                                    <div className="players-list__item" key={c}>
                                         <div className="player">
                                             <div className={`player__image player__image_${colors[p]}`}>
-                                                <img className="player__image__icon" src={`${assetPrefix}/player.svg`} />
+                                                <img className="player__icon" src={`${assetPrefix}/player.svg`} />
                                             </div>
-                                            <div className="player__edit">
-                                                <img className="player__edit__icon" src={`${assetPrefix}/edit.svg`} />
+                                            <div className="edit player__edit">
+                                                <img className="edit__icon" src={`${assetPrefix}/edit.svg`} />
                                             </div>
                                             <p className="player__name">
                                                 Player
@@ -133,7 +133,7 @@ const App: React.FunctionComponent = () => {
                                     </div>
                                 ))
                             }
-                            <div className="players-list__wrapper__inner__item">
+                            <div className="players-list__item">
                                 <button type="button" className="add-player-button">
                                     <img src={`${assetPrefix}/add.svg`} />
                                 </button>
@@ -169,27 +169,26 @@ const App: React.FunctionComponent = () => {
                 <div className="player-profile__inner">
                     <div className="player">
                         <div className={`player__image player__image_big player__image_${colors[9]}`}>
-                            <img className="player__image__icon player__image__icon_big" src={`${assetPrefix}/player.svg`} />
+                            <img className="player__icon player__icon_big" src={`${assetPrefix}/player.svg`} />
                         </div>
                     </div>
-                    <div className="player-profile__inner__input">
+                    <div className="player-profile__input">
                         <input className="input-text" type="text" placeholder="Введите имя игрока" />
                     </div>
-                    <div className="player-profile__inner__remove-player">
-                        <div className="remove-player">
-                            Удалить игрока
-                            <img className="remove-player__icon" src={`${assetPrefix}/remove.svg`} />
-                        </div>
+                    <div className="player-profile__remove-player">
+                        Удалить игрока
+                        <img className="player-profile__remove-icon" src={`${assetPrefix}/remove.svg`} />
                     </div>
                 </div>
             </div>
 
             <h1 className="header">Настройки</h1>
             <Switcher onChange={handleSwitchChange}>Шпионы знакомы</Switcher>
+            <Switcher onChange={(): void => {}}>Звук</Switcher>
 
             <div>
                 <h1 className="header">Правила</h1>
-                <p className="paragraph ">Игровая партия</p>
+                <p className="paragraph">Игровая партия</p>
                 <p className="paragraph paragraph_extra-light paragraph_justify">
                     Игровая партия состоит из последовательности коротких раундов.
                     В каждом раунде игроки оказываются в какой-то локации,

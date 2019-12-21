@@ -21,7 +21,7 @@ body {
 
 .container {
   background-color: @baseColor;
-  min-width: 375px;
+  min-width: 320px;
   min-height: 100%;
   margin: 0 auto;
   padding: 18px;
@@ -112,7 +112,7 @@ body {
   display: inline-block;
 }
 
-.players-list__wrapper__inner {
+.players-list__inner {
   max-width: 650px;
   margin: 19px -17px;
   display: flex;
@@ -120,9 +120,9 @@ body {
   justify-content: space-between;
 }
 
-.players-list__wrapper__inner__item {
+.players-list__item {
   text-align: center;
-  margin: 17px;
+  margin: 14.5px;
 }
 
 .add-player-button {
@@ -159,12 +159,12 @@ body {
   border: 5px solid #FFFFFF;
 }
 
-.player__image__icon {
+.player__icon {
   position: relative;
   top: 14px;
 }
 
-.player__image__icon_big {
+.player__icon_big {
   top: 23px;
   width: 92px;
 }
@@ -234,6 +234,9 @@ body {
   position: absolute;
   top: 1px;
   right: -10px;
+}
+
+.edit {
   background-color: #F74A86;
   border-radius: 50%;
   width: 35px;
@@ -241,7 +244,7 @@ body {
   cursor: pointer;
 }
 
-.player__edit__icon {
+.edit__icon {
   position: relative;
   left: -4px;
 }
@@ -251,7 +254,7 @@ body {
   padding-top: 34px;
 }
 
-.player-profile__inner__input {
+.player-profile__input {
   margin-top: 47px;
 }
 
@@ -268,7 +271,7 @@ body {
   font-size: 18px;
 }
 
-.remove-player {
+.player-profile__remove-player {
   margin-top: 60px;
   font-size: 18px;
   font-weight: 500;
@@ -279,7 +282,7 @@ body {
   }
 }
 
-.remove-player__icon {
+.player-profile__remove-icon {
   margin-left: 9px;
 }
 
