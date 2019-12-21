@@ -96,15 +96,84 @@ const App: React.FunctionComponent = () => {
 
             <div className="random-option">
                 <span className="random-option__name">Случайное количество</span>
-                <div className="random-option__inner">
+                <div className="option-circle random-option__inner">
                     <img className="random-option__image_selected" src={`${assetPrefix}/dice.svg`} />
                 </div>
             </div>
 
             <div className="random-option">
                 <span className="random-option__name random-option__name_muted">Случайная выключенная</span>
-                <div className="random-option__inner random-option__inner_muted">
+                <div className="option-circle option-circle_muted random-option__inner">
                     <img className="random-option__image_muted" src={`${assetPrefix}/dice-muted.svg`} />
+                </div>
+            </div>
+
+            <div className="">
+                <h1 className="header">Локации</h1>
+                <p className="paragraph paragraph_light">Нажмите на иконку, чтобы выбрать категории локаций:</p>
+                <div className="location-category">
+                    <div className="option-circle">
+                        <img className="option-circle__image location-category__basic-image_selected" src={`${assetPrefix}/basic.svg`} />
+                    </div>
+                    <div className="location-category__inner">
+                        <span className="location-category__name">Базовые</span>
+                        <div className="location-category__edit">
+                            <div className="location-category__edit-text">
+                                Редактировать категорию
+                            </div>
+                            <div className="edit location-category__edit-icon">
+                                <img src={`${assetPrefix}/edit.svg`} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="location-category">
+                    <div className="option-circle option-circle_muted">
+                        <img className="option-circle__image location-category__basic-image_muted" src={`${assetPrefix}/basic-muted.svg`} />
+                    </div>
+                    <div className="location-category__inner">
+                        <span className="location-category__name location-category__name_muted">Базовые выкл</span>
+                        <div className="location-category__edit">
+                            <div className="location-category__edit-text">
+                                Редактировать категорию
+                            </div>
+                            <div className="edit location-category__edit-icon">
+                                <img src={`${assetPrefix}/edit.svg`} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="location-category">
+                    <div className="option-circle">
+                        <img className="option-circle__image location-category__custom-image_selected" src={`${assetPrefix}/custom.svg`} />
+                    </div>
+                    <div className="location-category__inner">
+                        <span className="location-category__name">Кастомные</span>
+                        <div className="location-category__edit">
+                            <div className="location-category__edit-text">
+                                Редактировать категорию
+                            </div>
+                            <div className="edit location-category__edit-icon">
+                                <img src={`${assetPrefix}/edit.svg`} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className="location-category">
+                    <div className="option-circle option-circle_muted">
+                        <img className="option-circle__image location-category__custom-image_muted" src={`${assetPrefix}/custom-muted.svg`} />
+                    </div>
+                    <div className="location-category__inner">
+                        <span className="location-category__name location-category__name_muted">Кастомные выкл</span>
+                        <div className="location-category__edit">
+                            <div className="location-category__edit-text">
+                                Редактировать категорию
+                            </div>
+                            <div className="edit location-category__edit-icon">
+                                <img src={`${assetPrefix}/edit.svg`} />
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -122,7 +191,7 @@ const App: React.FunctionComponent = () => {
                                                 <img className="player__icon" src={`${assetPrefix}/player.svg`} />
                                             </div>
                                             <div className="edit player__edit">
-                                                <img className="edit__icon" src={`${assetPrefix}/edit.svg`} />
+                                                <img src={`${assetPrefix}/edit.svg`} />
                                             </div>
                                             <p className="player__name">
                                                 Player
