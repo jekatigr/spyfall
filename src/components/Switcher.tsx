@@ -3,7 +3,7 @@ import './Switcher.less';
 
 type Props = {
     children: React.ReactNode;
-    onChange?: (enabled: boolean) => void;
+    onChange: (enabled: boolean) => void;
 }
 
 const Switcher: React.FunctionComponent<Props> = ({ children, onChange }) => {
