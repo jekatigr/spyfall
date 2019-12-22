@@ -4,13 +4,15 @@ import 'components/Settings/Settings.less';
 
 import ProgressBar from 'components/ProgressBar';
 import Switcher from 'components/Switcher';
+import Players from 'components/Settings/Players';
 import {
     SET_SETTINGS_STATE_TO_LOCATIONS,
     SET_SETTINGS_STATE_TO_PLAYERS,
     SET_SETTINGS_STATE_TO_SPIES,
     SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
     SETTINGS_STATES,
-    StoreContext,
+    SET_APP_STATE_TO_GAME,
+    StoreContext, SET_SETTINGS_STATE_TO_START_SCREEN,
 } from 'Store';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
@@ -42,23 +44,17 @@ const Settings: React.FunctionComponent = () => {
                         <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}>
                             Играть
                         </button>
-                        <button type="button" className="button button_action button_disabled">
-                            Играть
-                        </button>
                         <button type="button" className="button button_additional">
                             Правила игры
                         </button>
                         <button type="button" className="button button_additional">
                             Выйти
                         </button>
-                        <button type="button" className="button button_additional button_disabled">
-                            Выйти
-                        </button>
                     </div>
 
                     <div>
                         <h1 className="header">Правила</h1>
-                        <p className="paragraph ">Игровая партия</p>
+                        <p className="paragraph">Игровая партия</p>
                         <p className="paragraph paragraph_extra-light paragraph_justify">
                             Игровая партия состоит из последовательности коротких раундов.
                             В каждом раунде игроки оказываются в какой-то локации,
@@ -76,95 +72,32 @@ const Settings: React.FunctionComponent = () => {
             );
             break;
         case SETTINGS_STATES.PLAYERS:
-            body = (
-                <div className="container">
-                    <ProgressBar />
-
-                    <div className="">
-                        <h1 className="header">Игроки</h1>
-                        <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
-                        <div className="players-list">
-                            <div className="players-list__wrapper">
-                                <div className="players-list__wrapper__inner">
-                                    {
-                                        colors.map((c, p) => (
-                                            <div className="players-list__wrapper__inner__item" key={c}>
-                                                <div className="player">
-                                                    <div className={`player__image player__image_${colors[p]}`}>
-                                                        <img className="player__image__icon" src={`${assetPrefix}/player.svg`} />
-                                                    </div>
-                                                    <div className="player__edit">
-                                                        <img className="player__edit__icon" src={`${assetPrefix}/edit.svg`} />
-                                                    </div>
-                                                    <p className="player__name">
-                                                        Player
-                                                        {' '}
-                                                        {p + 1}
-                                                    </p>
-                                                </div>
-                                            </div>
-                                        ))
-                                    }
-                                    <div className="players-list__wrapper__inner__item">
-                                        <button type="button" className="add-player-button">
-                                            <img src={`${assetPrefix}/add.svg`} />
-                                        </button>
-                                    </div>
-                                    {hacks}
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div className="player-profile">
-                        <h1 className="header">Профиль игрока</h1>
-                        <div className="player-profile__inner">
-                            <div className="player">
-                                <div className={`player__image player__image_big player__image_${colors[9]}`}>
-                                    <img className="player__image__icon player__image__icon_big" src={`${assetPrefix}/player.svg`} />
-                                </div>
-                            </div>
-                            <div className="player-profile__inner__input">
-                                <input className="input-text" type="text" placeholder="Введите имя игрока" />
-                            </div>
-                            <div className="player-profile__inner__remove-player">
-                                <div className="remove-player">
-                                    Удалить игрока
-                                    <img className="remove-player__icon" src={`${assetPrefix}/remove.svg`} />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-
-                    <button type="button" className="additional-settings-link" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>
-                        Настройки
-                    </button>
-                    <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })}>
-                        Вперёд
-                    </button>
-                </div>
-            );
+            body = <Players />;
             break;
         case SETTINGS_STATES.SPIES:
             body = (
                 <div className="container">
-                    <ProgressBar />
+                    <ProgressBar dotsCount={3} step={2} />
+
+                    <h1 className="header">Шпионы</h1>
 
                     <div className="random-option">
                         <span className="random-option__name">Случайное количество</span>
-                        <div className="random-option__inner">
+                        <div className="option-circle random-option__inner">
                             <img className="random-option__image_selected" src={`${assetPrefix}/dice.svg`} />
                         </div>
                     </div>
 
                     <div className="random-option">
                         <span className="random-option__name random-option__name_muted">Случайная выключенная</span>
-                        <div className="random-option__inner random-option__inner_muted">
+                        <div className="option-circle option-circle_muted random-option__inner">
                             <img className="random-option__image_muted" src={`${assetPrefix}/dice-muted.svg`} />
                         </div>
                     </div>
 
                     <h1 className="header">Настройки</h1>
                     <Switcher onChange={handleSwitchChange}>Шпионы знакомы</Switcher>
+                    <Switcher onChange={(): void => {}}>Звук</Switcher>
 
                     <button type="button" className="additional-settings-link" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>
                         Настройки
@@ -172,14 +105,93 @@ const Settings: React.FunctionComponent = () => {
                     <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_LOCATIONS })}>
                         Вперёд
                     </button>
+                    <button type="button" className="button button_action button_disabled">
+                        Вперёд
+                    </button>
+                    <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}>
+                        Назад
+                    </button>
                 </div>
             );
             break;
         case SETTINGS_STATES.LOCATIONS:
             body = (
                 <div className="container">
-                    <ProgressBar />
-                    LOCATIONS
+                    <ProgressBar dotsCount={3} step={3} />
+                    <div className="">
+                        <h1 className="header">Локации</h1>
+                        <p className="paragraph paragraph_light">Нажмите на иконку, чтобы выбрать категории локаций:</p>
+                        <div className="location-category">
+                            <div className="option-circle">
+                                <img className="option-circle__image location-category__basic-image_selected" src={`${assetPrefix}/basic.svg`} />
+                            </div>
+                            <div className="location-category__inner">
+                                <span className="location-category__name">Базовые</span>
+                                <div className="location-category__edit">
+                                    <div className="location-category__edit-text">
+                                        Редактировать категорию
+                                    </div>
+                                    <div className="edit location-category__edit-icon">
+                                        <img src={`${assetPrefix}/edit.svg`} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="location-category">
+                            <div className="option-circle option-circle_muted">
+                                <img className="option-circle__image location-category__basic-image_muted" src={`${assetPrefix}/basic-muted.svg`} />
+                            </div>
+                            <div className="location-category__inner">
+                                <span className="location-category__name location-category__name_muted">Базовые выкл</span>
+                                <div className="location-category__edit">
+                                    <div className="location-category__edit-text">
+                                        Редактировать категорию
+                                    </div>
+                                    <div className="edit location-category__edit-icon">
+                                        <img src={`${assetPrefix}/edit.svg`} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="location-category">
+                            <div className="option-circle">
+                                <img className="option-circle__image location-category__custom-image_selected" src={`${assetPrefix}/custom.svg`} />
+                            </div>
+                            <div className="location-category__inner">
+                                <span className="location-category__name">Кастомные</span>
+                                <div className="location-category__edit">
+                                    <div className="location-category__edit-text">
+                                        Редактировать категорию
+                                    </div>
+                                    <div className="edit location-category__edit-icon">
+                                        <img src={`${assetPrefix}/edit.svg`} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="location-category">
+                            <div className="option-circle option-circle_muted">
+                                <img className="option-circle__image location-category__custom-image_muted" src={`${assetPrefix}/custom-muted.svg`} />
+                            </div>
+                            <div className="location-category__inner">
+                                <span className="location-category__name location-category__name_muted">Кастомные выкл</span>
+                                <div className="location-category__edit">
+                                    <div className="location-category__edit-text">
+                                        Редактировать категорию
+                                    </div>
+                                    <div className="edit location-category__edit-icon">
+                                        <img src={`${assetPrefix}/edit.svg`} />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_APP_STATE_TO_GAME })}>
+                        Вперёд
+                    </button>
+                    <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })}>
+                        Назад
+                    </button>
                 </div>
             );
             break;
@@ -259,7 +271,7 @@ const Settings: React.FunctionComponent = () => {
             );
             break;
         default:
-            console.error('TODO');
+            // console.error('TODO');
     }
 
     return (
