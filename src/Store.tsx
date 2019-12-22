@@ -74,7 +74,7 @@ const initialState = {
     customLocations: [],
 };
 
-export const StoreContext = createContext<{
+export const storeContext = createContext<{
     state: typeof initialState;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch: Dispatch<any>;
@@ -144,8 +144,8 @@ const reducer = (state, action) => {
 export const StoreContainer = ({ children }) => {
     const [state, dispatch] = useReducer(reducer, initialState);
     return (
-        <StoreContext.Provider value={{ state, dispatch }}>
+        <storeContext.Provider value={{ state, dispatch }}>
             {children}
-        </StoreContext.Provider>
+        </storeContext.Provider>
     );
 };
