@@ -7,7 +7,7 @@ import ProgressBar from 'components/ProgressBar';
 import {
     SET_SETTINGS_STATE_TO_SPIES,
     SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
-    StoreContext, SET_SETTINGS_STATE_TO_START_SCREEN, UPDATE_PLAYERS,
+    storeContext, SET_SETTINGS_STATE_TO_START_SCREEN, UPDATE_PLAYERS,
 } from 'Store';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
@@ -17,7 +17,7 @@ const colors = ['coral', 'green', 'wine', 'dark-blue', 'pink', 'yellow', 'purple
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const Players: React.FunctionComponent = () => {
-    const { state: { players }, dispatch } = React.useContext(StoreContext);
+    const { state: { players }, dispatch } = React.useContext(storeContext);
 
     const [isEditPlayer, setEditPlayer] = React.useState(false);
     const [currentPlayerName, updateCurrentPlayerName] = React.useState('');
@@ -55,7 +55,7 @@ const Players: React.FunctionComponent = () => {
                     <h1 className="header">Профиль игрока</h1>
                     <div className="player-profile__inner">
                         <div className="player">
-                            <div className={`player__image player__image_big player__image_${colors[9]}`}>
+                            <div className={`player__image player__image_big player__image_${colors[10]}`}>
                                 <img className="player__icon player__icon_big" src={`${assetPrefix}/player.svg`} />
                             </div>
                         </div>
@@ -96,7 +96,7 @@ const Players: React.FunctionComponent = () => {
                                     </button>
                                 </div>
                                 {
-                                    players.map((player, idx) => (
+                                    players.map((player) => (
                                         <div className="players-list__item" key={player.name}>
                                             <div className="player">
                                                 <div className={`player__image player__image_${player.color}`}>
