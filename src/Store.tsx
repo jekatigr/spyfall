@@ -23,7 +23,7 @@ export const SET_START_ROUND = 'SET_START_ROUND';
 export const SET_DISCUSSION_TIME = 'SET_DISCUSSION_TIME';
 export const SET_START_DISCUSSION = 'SET_START_DISCUSSION';
 
-export const UPDATE_PLAYERS_NUMBER = 'UPDATE_PLAYERS_NUMBER';
+export const UPDATE_PLAYERS = 'UPDATE_PLAYERS';
 
 export const APP_STATES = {
     SETTINGS: 0,
@@ -76,6 +76,7 @@ const initialState = {
 
 export const StoreContext = createContext<{
     state: typeof initialState;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch: Dispatch<any>;
 }>({ state: initialState, dispatch: () => {} });
 
@@ -129,7 +130,7 @@ const reducer = (state, action) => {
                     roundTime: action.time,
                 },
             };
-        case UPDATE_PLAYERS_NUMBER:
+        case UPDATE_PLAYERS:
             return {
                 ...state,
                 players: action.players,

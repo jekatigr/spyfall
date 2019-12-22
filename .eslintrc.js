@@ -59,7 +59,8 @@ module.exports =  {
         "react/prop-types": 0,
         "jsx-a11y/anchor-is-valid": 0,
         "jsx-a11y/click-events-have-key-events": 0,
-        "jsx-a11y/no-static-element-interactions": 0
+        "jsx-a11y/no-static-element-interactions": 0,
+        "@typescript-eslint/explicit-function-return-type": 0
     },
     settings:  {
         react:  {
