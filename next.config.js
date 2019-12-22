@@ -14,6 +14,7 @@ const nextConfig = {
         };
         return config;
     },
+    publicPath: process.env.ASSET_PREFIX || '',
     assetPrefix: process.env.ASSET_PREFIX || '',
     // workboxOpts: {
     //     globDirectory: '.',
