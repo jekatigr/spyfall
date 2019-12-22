@@ -5,6 +5,11 @@ module.exports =  {
         'plugin:react/recommended',
         'plugin:@typescript-eslint/recommended',
     ],
+    plugins: [
+        "import",
+        "react",
+        "react-hooks"
+    ],
     parserOptions:  {
         ecmaVersion:  2018,
         sourceType:  'module',
