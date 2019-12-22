@@ -4,6 +4,6 @@
   "theme_color": "#002539",
   "background_color": "#002539",
   "display": "fullscreen",
-  "scope": "/",
+  "scope": "/spyfall",
   "start_url": "/spyfall"
 }
