@@ -21,20 +21,20 @@ const nextConfig = {
     //     globDirectory: '.',
     //     globPatterns: ['./(public|src)/**/*.*']
     // }
-    registerSwPrefix: '/spyfall/static',
+    registerSwPrefix: '/spyfall',
     workboxOpts: {
         swDest: 'static/service-worker.js',
     },
-    experimental: {
-        async rewrites() {
-            return [
-                {
-                    source: '/service-worker.js',
-                    destination: '/_next/static/service-worker.js',
-                },
-            ]
-        },
-    },
+    // experimental: {
+    //     async rewrites() {
+    //         return [
+    //             {
+    //                 source: '/service-worker.js',
+    //                 destination: '/_next/static/service-worker.js',
+    //             },
+    //         ]
+    //     },
+    // },
 };
 
 module.exports = withOffline(withLess(nextConfig));
