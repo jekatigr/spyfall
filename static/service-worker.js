@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "url": "/spyfall/_next/static/7GZW1KtduVgHOCrcdGXe5/pages/_app.js",
-    "revision": "ef0c538dd86c13e65eaf"
+    "url": "/spyfall/_next/static/GW3yc8Qp9rBYmvLzvqdWc/pages/_app.js",
+    "revision": "83eb63cac9f262aad2b7"
   },
   {
-    "url": "/spyfall/_next/static/7GZW1KtduVgHOCrcdGXe5/pages/_error.js",
-    "revision": "3e2a94ed07a5166d2a71"
+    "url": "/spyfall/_next/static/GW3yc8Qp9rBYmvLzvqdWc/pages/_error.js",
+    "revision": "ea623dbeee40ad10a547"
   },
   {
-    "url": "/spyfall/_next/static/7GZW1KtduVgHOCrcdGXe5/pages/index.js",
-    "revision": "78840ef357334b526944"
+    "url": "/spyfall/_next/static/GW3yc8Qp9rBYmvLzvqdWc/pages/index.js",
+    "revision": "b1284a720ed8271b06ad"
   },
   {
     "url": "/spyfall/_next/static/chunks/commons.24465533c80845e16c26.js",
