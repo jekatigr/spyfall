@@ -21,7 +21,7 @@ const nextConfig = {
     //     globDirectory: '.',
     //     globPatterns: ['./(public|src)/**/*.*']
     // }
-    registerSwPrefix: '/spyfall',
+    registerSwPrefix: '/spyfall/static',
     workboxOpts: {
         swDest: 'static/service-worker.js',
     },
