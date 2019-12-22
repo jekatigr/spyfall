@@ -1,8 +1,16 @@
 import * as React from 'react';
+import Head from 'next/head';
 import App from 'components/App';
+import prefixedAsset from 'utils/assetPrefix';
 
 const IndexPage: React.FunctionComponent = () => (
-    <App />
+    <>
+        <Head>
+            <title>Spyfall Game</title>
+            <link rel="manifest" href={prefixedAsset('manifest.json')} />
+        </Head>
+        <App />
+    </>
 );
 
 export default IndexPage;

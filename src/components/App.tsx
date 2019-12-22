@@ -1,12 +1,11 @@
 import * as React from 'react';
 import ProgressBar from 'components/ProgressBar';
 import Switcher from 'components/Switcher';
+import prefixedAsset from 'utils/assetPrefix';
 import './App.less';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 const colors = ['coral', 'wine', 'pink', 'purple', 'raspberry', 'green', 'acid-green', 'light-green', 'yellow', 'sky-blue', 'blue', 'dark-blue'];
-
-const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const App: React.FunctionComponent = () => {
     const handleSwitchChange = (enabled: boolean): void => {
@@ -21,7 +20,7 @@ const App: React.FunctionComponent = () => {
 
     return (
         <div className="container">
-            <img src={`${assetPrefix}/logo.svg`} />
+            <img src={prefixedAsset('logo.svg')} />
             <ProgressBar />
 
             <div className="counter">
@@ -97,14 +96,14 @@ const App: React.FunctionComponent = () => {
             <div className="random-option">
                 <span className="random-option__name">Случайное количество</span>
                 <div className="option-circle random-option__inner">
-                    <img className="random-option__image_selected" src={`${assetPrefix}/dice.svg`} />
+                    <img className="random-option__image_selected" src={prefixedAsset('dice.svg')} />
                 </div>
             </div>
 
             <div className="random-option">
                 <span className="random-option__name random-option__name_muted">Случайная выключенная</span>
                 <div className="option-circle option-circle_muted random-option__inner">
-                    <img className="random-option__image_muted" src={`${assetPrefix}/dice-muted.svg`} />
+                    <img className="random-option__image_muted" src={prefixedAsset('dice-muted.svg')} />
                 </div>
             </div>
 
@@ -113,7 +112,7 @@ const App: React.FunctionComponent = () => {
                 <p className="paragraph paragraph_light">Нажмите на иконку, чтобы выбрать категории локаций:</p>
                 <div className="location-category">
                     <div className="option-circle">
-                        <img className="option-circle__image location-category__basic-image_selected" src={`${assetPrefix}/basic.svg`} />
+                        <img className="option-circle__image location-category__basic-image_selected" src={prefixedAsset('basic.svg')} />
                     </div>
                     <div className="location-category__inner">
                         <span className="location-category__name">Базовые</span>
@@ -122,14 +121,14 @@ const App: React.FunctionComponent = () => {
                                 Редактировать категорию
                             </div>
                             <div className="edit location-category__edit-icon">
-                                <img src={`${assetPrefix}/edit.svg`} />
+                                <img src={prefixedAsset('edit.svg')} />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="location-category">
                     <div className="option-circle option-circle_muted">
-                        <img className="option-circle__image location-category__basic-image_muted" src={`${assetPrefix}/basic-muted.svg`} />
+                        <img className="option-circle__image location-category__basic-image_muted" src={prefixedAsset('basic-muted.svg')} />
                     </div>
                     <div className="location-category__inner">
                         <span className="location-category__name location-category__name_muted">Базовые выкл</span>
@@ -138,14 +137,14 @@ const App: React.FunctionComponent = () => {
                                 Редактировать категорию
                             </div>
                             <div className="edit location-category__edit-icon">
-                                <img src={`${assetPrefix}/edit.svg`} />
+                                <img src={prefixedAsset('edit.svg')} />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="location-category">
                     <div className="option-circle">
-                        <img className="option-circle__image location-category__custom-image_selected" src={`${assetPrefix}/custom.svg`} />
+                        <img className="option-circle__image location-category__custom-image_selected" src={prefixedAsset('custom.svg')} />
                     </div>
                     <div className="location-category__inner">
                         <span className="location-category__name">Кастомные</span>
@@ -154,14 +153,14 @@ const App: React.FunctionComponent = () => {
                                 Редактировать категорию
                             </div>
                             <div className="edit location-category__edit-icon">
-                                <img src={`${assetPrefix}/edit.svg`} />
+                                <img src={prefixedAsset('edit.svg')} />
                             </div>
                         </div>
                     </div>
                 </div>
                 <div className="location-category">
                     <div className="option-circle option-circle_muted">
-                        <img className="option-circle__image location-category__custom-image_muted" src={`${assetPrefix}/custom-muted.svg`} />
+                        <img className="option-circle__image location-category__custom-image_muted" src={prefixedAsset('custom-muted.svg')} />
                     </div>
                     <div className="location-category__inner">
                         <span className="location-category__name location-category__name_muted">Кастомные выкл</span>
@@ -170,7 +169,7 @@ const App: React.FunctionComponent = () => {
                                 Редактировать категорию
                             </div>
                             <div className="edit location-category__edit-icon">
-                                <img src={`${assetPrefix}/edit.svg`} />
+                                <img src={prefixedAsset('edit.svg')} />
                             </div>
                         </div>
                     </div>
@@ -188,10 +187,10 @@ const App: React.FunctionComponent = () => {
                                     <div className="players-list__item" key={c}>
                                         <div className="player">
                                             <div className={`player__image player__image_${colors[p]}`}>
-                                                <img className="player__icon" src={`${assetPrefix}/player.svg`} />
+                                                <img className="player__icon" src={prefixedAsset('player.svg')} />
                                             </div>
                                             <div className="edit player__edit">
-                                                <img src={`${assetPrefix}/edit.svg`} />
+                                                <img src={prefixedAsset('edit.svg')} />
                                             </div>
                                             <p className="player__name">
                                                 Player
@@ -204,7 +203,7 @@ const App: React.FunctionComponent = () => {
                             }
                             <div className="players-list__item">
                                 <button type="button" className="add-player-button">
-                                    <img src={`${assetPrefix}/add.svg`} />
+                                    <img src={prefixedAsset('add.svg')} />
                                 </button>
                             </div>
                             {hacks}
@@ -238,7 +237,7 @@ const App: React.FunctionComponent = () => {
                 <div className="player-profile__inner">
                     <div className="player">
                         <div className={`player__image player__image_big player__image_${colors[9]}`}>
-                            <img className="player__icon player__icon_big" src={`${assetPrefix}/player.svg`} />
+                            <img className="player__icon player__icon_big" src={prefixedAsset('player.svg')} />
                         </div>
                     </div>
                     <div className="player-profile__input">
@@ -246,7 +245,7 @@ const App: React.FunctionComponent = () => {
                     </div>
                     <div className="player-profile__remove-player">
                         Удалить игрока
-                        <img className="player-profile__remove-icon" src={`${assetPrefix}/remove.svg`} />
+                        <img className="player-profile__remove-icon" src={prefixedAsset('remove.svg')} />
                     </div>
                 </div>
             </div>
