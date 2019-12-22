@@ -1,17 +1,5 @@
 self.__precacheManifest = [
   {
-    "url": "/spyfall/_next/static/H79oUCVcrsjHIpVQZLmeV/pages/_app.js",
-    "revision": "e834018107b590e04f79"
-  },
-  {
-    "url": "/spyfall/_next/static/H79oUCVcrsjHIpVQZLmeV/pages/_error.js",
-    "revision": "2ea83cc6c6197e0d1212"
-  },
-  {
-    "url": "/spyfall/_next/static/H79oUCVcrsjHIpVQZLmeV/pages/index.js",
-    "revision": "e73a28f86e2f7e4b53a1"
-  },
-  {
     "url": "/spyfall/_next/static/chunks/commons.24465533c80845e16c26.js",
     "revision": "aee9726b788ed4d112aa"
   },
@@ -22,6 +10,18 @@ self.__precacheManifest = [
   {
     "url": "/spyfall/_next/static/css/styles.24e1c219.chunk.css",
     "revision": "d738bd2055300ddca091"
+  },
+  {
+    "url": "/spyfall/_next/static/gbj2krx5cbaW_dkdn-ymF/pages/_app.js",
+    "revision": "8f7166819fbccbae3ed5"
+  },
+  {
+    "url": "/spyfall/_next/static/gbj2krx5cbaW_dkdn-ymF/pages/_error.js",
+    "revision": "0f5c7eca804dc06777c1"
+  },
+  {
+    "url": "/spyfall/_next/static/gbj2krx5cbaW_dkdn-ymF/pages/index.js",
+    "revision": "60168a339cb09ffaf5e1"
   },
   {
     "url": "/spyfall/_next/static/runtime/main-793971dccce14ec3c06b.js",
