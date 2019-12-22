@@ -12,16 +12,16 @@ self.__precacheManifest = [
     "revision": "d738bd2055300ddca091"
   },
   {
-    "url": "/spyfall/_next/static/fdqID0Fsi0eIqIifHjoSE/pages/_app.js",
-    "revision": "4e7b726151d95dbd31e8"
+    "url": "/spyfall/_next/static/egHl5Q1zVEOv717WOnrbu/pages/_app.js",
+    "revision": "141995b2b0a5eb24d4a4"
   },
   {
-    "url": "/spyfall/_next/static/fdqID0Fsi0eIqIifHjoSE/pages/_error.js",
-    "revision": "b21d5f92028aef90ac98"
+    "url": "/spyfall/_next/static/egHl5Q1zVEOv717WOnrbu/pages/_error.js",
+    "revision": "0b9f98bd8f466f6f3462"
   },
   {
-    "url": "/spyfall/_next/static/fdqID0Fsi0eIqIifHjoSE/pages/index.js",
-    "revision": "2ab1da04216d92bc3b06"
+    "url": "/spyfall/_next/static/egHl5Q1zVEOv717WOnrbu/pages/index.js",
+    "revision": "fe4831210ab22b8c2779"
   },
   {
     "url": "/spyfall/_next/static/runtime/main-793971dccce14ec3c06b.js",
