@@ -1,15 +1,15 @@
 self.__precacheManifest = [
   {
-    "url": "/spyfall/_next/static/Jwy6H63ntaJE1_6Q_wrM3/pages/_app.js",
-    "revision": "a98c2291c8ed4d0204a4"
+    "url": "/spyfall/_next/static/7GZW1KtduVgHOCrcdGXe5/pages/_app.js",
+    "revision": "ef0c538dd86c13e65eaf"
   },
   {
-    "url": "/spyfall/_next/static/Jwy6H63ntaJE1_6Q_wrM3/pages/_error.js",
-    "revision": "daa07eb8a87383a50f5b"
+    "url": "/spyfall/_next/static/7GZW1KtduVgHOCrcdGXe5/pages/_error.js",
+    "revision": "3e2a94ed07a5166d2a71"
   },
   {
-    "url": "/spyfall/_next/static/Jwy6H63ntaJE1_6Q_wrM3/pages/index.js",
-    "revision": "b7a495991846f6b1b195"
+    "url": "/spyfall/_next/static/7GZW1KtduVgHOCrcdGXe5/pages/index.js",
+    "revision": "78840ef357334b526944"
   },
   {
     "url": "/spyfall/_next/static/chunks/commons.24465533c80845e16c26.js",
@@ -24,8 +24,8 @@ self.__precacheManifest = [
     "revision": "d738bd2055300ddca091"
   },
   {
-    "url": "/spyfall/_next/static/runtime/main-58cf7dafcba45a9680c4.js",
-    "revision": "2fa265f544f7f9a91843"
+    "url": "/spyfall/_next/static/runtime/main-793971dccce14ec3c06b.js",
+    "revision": "aa0d9926f286e24c4885"
   },
   {
     "url": "/spyfall/_next/static/runtime/polyfills-29b7810566e8516cb3f7.js",
