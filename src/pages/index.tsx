@@ -7,7 +7,7 @@ const IndexPage: React.FunctionComponent = () => (
     <>
         <Head>
             <title>Spyfall Game</title>
-            <link rel="manifest" href="/spyfall/manifest.json" />
+            <link rel="manifest" href="./manifest.json" />
         </Head>
         <App />
     </>
