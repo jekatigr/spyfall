@@ -213,7 +213,7 @@ const App: React.FunctionComponent = () => {
             </div>
 
 
-            <div className="container__bottom-buttons-block">
+            <div className="bottom-buttons-block">
                 <button type="button" className="additional-settings-link">Расширенные настройки</button>
                 <button type="button" className="button button_action">
                     Играть
@@ -230,6 +230,20 @@ const App: React.FunctionComponent = () => {
                 <button type="button" className="button button_additional button_disabled">
                     Выйти
                 </button>
+            </div>
+
+            <div className="buttons-wizard">
+                <button type="button" className="additional-settings-link">Настройки времени</button>
+                <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">
+                    <button type="button" className="button button_additional buttons-wizard__button">
+                        Назад
+                    </button>
+                </div>
+                <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_next">
+                    <button type="button" className="button button_action buttons-wizard__button">
+                        Вперед
+                    </button>
+                </div>
             </div>
 
             <div className="player-profile">
