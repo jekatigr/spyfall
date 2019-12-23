@@ -6,11 +6,11 @@ import {
     SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
     storeContext,
     SET_SETTINGS_STATE_TO_LOCATIONS,
-    SET_SETTINGS_STATE_TO_PLAYERS, SET_SETTINGS_STATE_TO_START_SCREEN, SET_SETTINGS_STATE_TO_SPIES,
+    SET_SETTINGS_STATE_TO_PLAYERS,
 } from 'Store';
 
 import ProgressBar from 'components/ProgressBar';
-import Switcher from "components/Switcher";
+import Switcher from 'components/Switcher';
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
@@ -21,9 +21,6 @@ const Spies: React.FunctionComponent = () => {
         // eslint-disable-next-line no-console
         console.log(enabled);
     };
-
-    const [isEditPlayer, setEditPlayer] = React.useState(false);
-    const [currentPlayerName, updateCurrentPlayerName] = React.useState('');
 
     return (
         <div className="container">
