@@ -17,7 +17,7 @@ const App: React.FunctionComponent = () => {
             body = <Game />;
             break;
         default:
-            // console.error('TODO');
+        // console.error('TODO');
     }
 
     return (

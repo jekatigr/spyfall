@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import 'components/Settings/Settings.less';
+import './Settings.less';
 
 import ProgressBar from 'components/ProgressBar';
 
@@ -44,6 +44,17 @@ const Players: React.FunctionComponent = () => {
         setEditPlayer(false);
     };
 
+    const deletePlayer = () => {
+        const updatedPlayers = players.slice();
+        for (let idx = 0; idx < players.length; ++idx) {
+            if (players[idx].name === currentPlayerName) {
+                updatedPlayers.splice(idx, 1);
+                dispatch({ type: UPDATE_PLAYERS, players: updatedPlayers });
+            }
+        }
+        setEditPlayer(false);
+    };
+
     let body;
     if (isEditPlayer) {
         body = (
@@ -68,7 +79,7 @@ const Players: React.FunctionComponent = () => {
                                 onChange={(e) => updateCurrentPlayerName(e.target.value)}
                             />
                         </div>
-                        <div className="player-profile__remove-player">
+                        <div className="player-profile__remove-player" onClick={deletePlayer}>
                             Удалить игрока
                             <img className="player-profile__remove-icon" src={`${assetPrefix}/remove.svg`} />
                         </div>
@@ -102,7 +113,7 @@ const Players: React.FunctionComponent = () => {
                                                 <div className={`player__image player__image_${player.color}`}>
                                                     <img className="player__icon" src={`${assetPrefix}/player.svg`} />
                                                 </div>
-                                                <div className="edit player__edit">
+                                                <div className="edit player__edit" onClick={() => { updateCurrentPlayerName(player.name); setEditPlayer(true); }}>
                                                     <img src={`${assetPrefix}/edit.svg`} />
                                                 </div>
                                                 <p className="player__name">
@@ -118,15 +129,19 @@ const Players: React.FunctionComponent = () => {
                     </div>
                 </div>
 
-                <button type="button" className="additional-settings-link" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>
-                    Настройки
-                </button>
-                <button type="button" className={`button button_action ${players.length >= 3 ? '' : 'button_disabled'}`} onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })}>
-                    Вперёд
-                </button>
-                <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN })}>
-                    Назад
-                </button>
+                <div className="buttons-wizard">
+                    <button type="button" className="additional-settings-link" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>Настройки времени</button>
+                    <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">
+                        <button type="button" className="button button_additional buttons-wizard__button" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN })}>
+                            Назад
+                        </button>
+                    </div>
+                    <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_next">
+                        <button type="button" className={`button button_action buttons-wizard__button ${players.length >= 3 ? '' : 'button_disabled'}`} onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })}>
+                            Вперед
+                        </button>
+                    </div>
+                </div>
             </div>
         );
     }
