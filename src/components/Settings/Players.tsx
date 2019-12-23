@@ -31,7 +31,11 @@ const Players: React.FunctionComponent = () => {
         // Check for name duplications
         for (let idx = 0; idx < players.length; ++idx) {
             if (players[idx].name === currentPlayerName) {
-                // TODO: show some message
+                // TODO: show some message 1
+                return;
+            }
+            if (currentPlayerName === '') {
+                // TODO: show some message 2
                 return;
             }
         }
