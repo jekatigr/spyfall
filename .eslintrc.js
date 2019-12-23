@@ -2,13 +2,19 @@ module.exports =  {
     parser:  '@typescript-eslint/parser',
     extends:  [
         'airbnb',
-        'plugin:react/recommended',
         'plugin:@typescript-eslint/recommended',
+        "prettier",
+        "plugin:prettier/recommended",
+        "prettier/react",
+        'plugin:react/recommended',
+        "prettier/@typescript-eslint",
     ],
     plugins: [
         "import",
         "react",
-        "react-hooks"
+        "react-hooks",
+        "prettier",
+        "@typescript-eslint",
     ],
     parserOptions:  {
         ecmaVersion:  2018,
@@ -49,21 +55,16 @@ module.exports =  {
                 allowForLoopAfterthoughts: true
             }
         ],
-        "react/jsx-one-expression-per-line": [
-            2,
-            {
-                allow: "literal"
-            }
-        ],
+        "react/jsx-one-expression-per-line": 0,
         "linebreak-style": 0,
         "react/prop-types": 0,
         "jsx-a11y/anchor-is-valid": 0,
         "jsx-a11y/click-events-have-key-events": 0,
-        "jsx-a11y/no-static-element-interactions": 0
+        "jsx-a11y/no-static-element-interactions": 0,
     },
     settings:  {
         react:  {
-            version:  'detect',
+            version: 'detect',
         },
         "import/resolver": {
             node: {

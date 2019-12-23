@@ -5,7 +5,20 @@ import prefixedAsset from 'utils/assetPrefix';
 import './App.less';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
-const colors = ['coral', 'wine', 'pink', 'purple', 'raspberry', 'green', 'acid-green', 'light-green', 'yellow', 'sky-blue', 'blue', 'dark-blue'];
+const colors = [
+    'coral',
+    'wine',
+    'pink',
+    'purple',
+    'raspberry',
+    'green',
+    'acid-green',
+    'light-green',
+    'yellow',
+    'sky-blue',
+    'blue',
+    'dark-blue',
+];
 
 const App: React.FunctionComponent = () => {
     const handleSwitchChange = (enabled: boolean): void => {
@@ -112,14 +125,15 @@ const App: React.FunctionComponent = () => {
                 <p className="paragraph paragraph_light">Нажмите на иконку, чтобы выбрать категории локаций:</p>
                 <div className="location-category">
                     <div className="option-circle">
-                        <img className="option-circle__image location-category__basic-image_selected" src={prefixedAsset('basic.svg')} />
+                        <img
+                            className="option-circle__image location-category__basic-image_selected"
+                            src={prefixedAsset('basic.svg')}
+                        />
                     </div>
                     <div className="location-category__inner">
                         <span className="location-category__name">Базовые</span>
                         <div className="location-category__edit">
-                            <div className="location-category__edit-text">
-                                Редактировать категорию
-                            </div>
+                            <div className="location-category__edit-text">Редактировать категорию</div>
                             <div className="edit location-category__edit-icon">
                                 <img src={prefixedAsset('edit.svg')} />
                             </div>
@@ -128,14 +142,15 @@ const App: React.FunctionComponent = () => {
                 </div>
                 <div className="location-category">
                     <div className="option-circle option-circle_muted">
-                        <img className="option-circle__image location-category__basic-image_muted" src={prefixedAsset('basic-muted.svg')} />
+                        <img
+                            className="option-circle__image location-category__basic-image_muted"
+                            src={prefixedAsset('basic-muted.svg')}
+                        />
                     </div>
                     <div className="location-category__inner">
                         <span className="location-category__name location-category__name_muted">Базовые выкл</span>
                         <div className="location-category__edit">
-                            <div className="location-category__edit-text">
-                                Редактировать категорию
-                            </div>
+                            <div className="location-category__edit-text">Редактировать категорию</div>
                             <div className="edit location-category__edit-icon">
                                 <img src={prefixedAsset('edit.svg')} />
                             </div>
@@ -144,14 +159,15 @@ const App: React.FunctionComponent = () => {
                 </div>
                 <div className="location-category">
                     <div className="option-circle">
-                        <img className="option-circle__image location-category__custom-image_selected" src={prefixedAsset('custom.svg')} />
+                        <img
+                            className="option-circle__image location-category__custom-image_selected"
+                            src={prefixedAsset('custom.svg')}
+                        />
                     </div>
                     <div className="location-category__inner">
                         <span className="location-category__name">Кастомные</span>
                         <div className="location-category__edit">
-                            <div className="location-category__edit-text">
-                                Редактировать категорию
-                            </div>
+                            <div className="location-category__edit-text">Редактировать категорию</div>
                             <div className="edit location-category__edit-icon">
                                 <img src={prefixedAsset('edit.svg')} />
                             </div>
@@ -160,14 +176,15 @@ const App: React.FunctionComponent = () => {
                 </div>
                 <div className="location-category">
                     <div className="option-circle option-circle_muted">
-                        <img className="option-circle__image location-category__custom-image_muted" src={prefixedAsset('custom-muted.svg')} />
+                        <img
+                            className="option-circle__image location-category__custom-image_muted"
+                            src={prefixedAsset('custom-muted.svg')}
+                        />
                     </div>
                     <div className="location-category__inner">
                         <span className="location-category__name location-category__name_muted">Кастомные выкл</span>
                         <div className="location-category__edit">
-                            <div className="location-category__edit-text">
-                                Редактировать категорию
-                            </div>
+                            <div className="location-category__edit-text">Редактировать категорию</div>
                             <div className="edit location-category__edit-icon">
                                 <img src={prefixedAsset('edit.svg')} />
                             </div>
@@ -182,25 +199,19 @@ const App: React.FunctionComponent = () => {
                 <div className="players-list">
                     <div className="players-list__wrapper">
                         <div className="players-list__inner">
-                            {
-                                colors.map((c, p) => (
-                                    <div className="players-list__item" key={c}>
-                                        <div className="player">
-                                            <div className={`player__image player__image_${colors[p]}`}>
-                                                <img className="player__icon" src={prefixedAsset('player.svg')} />
-                                            </div>
-                                            <div className="edit player__edit">
-                                                <img src={prefixedAsset('edit.svg')} />
-                                            </div>
-                                            <p className="player__name">
-                                                Player
-                                                {' '}
-                                                {p + 1}
-                                            </p>
+                            {colors.map((c, p) => (
+                                <div className="players-list__item" key={c}>
+                                    <div className="player">
+                                        <div className={`player__image player__image_${colors[p]}`}>
+                                            <img className="player__icon" src={prefixedAsset('player.svg')} />
                                         </div>
+                                        <div className="edit player__edit">
+                                            <img src={prefixedAsset('edit.svg')} />
+                                        </div>
+                                        <p className="player__name">Player {p + 1}</p>
                                     </div>
-                                ))
-                            }
+                                </div>
+                            ))}
                             <div className="players-list__item">
                                 <button type="button" className="add-player-button">
                                     <img src={prefixedAsset('add.svg')} />
@@ -212,9 +223,10 @@ const App: React.FunctionComponent = () => {
                 </div>
             </div>
 
-
             <div className="bottom-buttons-block">
-                <button type="button" className="additional-settings-link">Расширенные настройки</button>
+                <button type="button" className="additional-settings-link">
+                    Расширенные настройки
+                </button>
                 <button type="button" className="button button_action">
                     Играть
                 </button>
@@ -233,7 +245,9 @@ const App: React.FunctionComponent = () => {
             </div>
 
             <div className="buttons-wizard">
-                <button type="button" className="additional-settings-link">Настройки времени</button>
+                <button type="button" className="additional-settings-link">
+                    Настройки времени
+                </button>
                 <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">
                     <button type="button" className="button button_additional buttons-wizard__button">
                         Назад
@@ -272,15 +286,11 @@ const App: React.FunctionComponent = () => {
                 <h1 className="header">Правила</h1>
                 <p className="paragraph">Игровая партия</p>
                 <p className="paragraph paragraph_extra-light paragraph_justify">
-                    Игровая партия состоит из последовательности коротких раундов.
-                    В каждом раунде игроки оказываются в какой-то локации,
-                    у каждого — свой статус. Один неизбежно оказывается
-                    шпионом, который не знает, где находится. Его задача — разговорить
-                    других игроков, определить локацию и не разоблачить себя.
-                    Каждый нешпион в свою очередь пытается обтекаемо дать понять «своим»,
-                    что знает, где находится, и
-                    поэтому не является шпионом. Наблюдательность, собранность, выдержка,
-                    хитрость — в этой игре
+                    Игровая партия состоит из последовательности коротких раундов. В каждом раунде игроки оказываются в
+                    какой-то локации, у каждого — свой статус. Один неизбежно оказывается шпионом, который не знает, где
+                    находится. Его задача — разговорить других игроков, определить локацию и не разоблачить себя. Каждый
+                    Каждый нешпион в свою очередь пытается обтекаемо дать понять «своим», что знает, где находится, и
+                    поэтому не является шпионом. Наблюдательность, собранность, выдержка, хитрость — в этой игре
                     пригодится всё. Будьте начеку!
                 </p>
             </div>

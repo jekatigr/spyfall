@@ -4,7 +4,7 @@ import './ProgressBar.less';
 type Props = {
     dotsCount?: number;
     step?: number;
-}
+};
 
 const NEXT_STEP_ANIMATION_DURATION = 0.5; // in seconds
 const CIRCLE_DIAMETER = 17; // in pixels
@@ -26,7 +26,7 @@ const ProgressBar: React.FunctionComponent<Props> = ({ dotsCount, step }) => {
         dots.push(
             <div className="progress-bar__circle" key={i}>
                 <div
-                    className={`progress-bar__circle__inner${(step > i) ? ' progress-bar__circle__inner_show' : ''}`}
+                    className={`progress-bar__circle__inner${step > i ? ' progress-bar__circle__inner_show' : ''}`}
                     style={{
                         animationDuration: `${circleAnimationDuration}s`,
                         animationDelay: `${step > 1 ? NEXT_STEP_ANIMATION_DURATION : 0}s`,
