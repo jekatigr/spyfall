@@ -16,6 +16,7 @@ const colors = ['coral', 'green', 'wine', 'dark-blue', 'pink', 'yellow', 'purple
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
+let editedPlayer = '';
 const Players: React.FunctionComponent = () => {
     const { state: { players }, dispatch } = React.useContext(storeContext);
 
@@ -40,20 +41,33 @@ const Players: React.FunctionComponent = () => {
             }
         }
 
-        const newColor = colors[colorCounter % colors.length];
-        colorCounter += 1;
-        const updatedPlayers = players.slice();
-        updatedPlayers.push({ name: currentPlayerName, color: newColor });
-        dispatch({ type: UPDATE_PLAYERS, players: updatedPlayers });
+        if (editedPlayer === '') {
+            // Create new player
+            const newColor = colors[colorCounter % colors.length];
+            colorCounter += 1;
+            const updatedPlayers = players.slice();
+            updatedPlayers.push({ name: currentPlayerName, color: newColor });
+            dispatch({ type: UPDATE_PLAYERS, players: updatedPlayers });
+        } else {
+            // Rename existing player
+            const updatedPlayers = players.slice();
+            for (let idx = 0; idx < players.length; ++idx) {
+                if (players[idx].name === editedPlayer) {
+                    updatedPlayers[idx].name = currentPlayerName;
+                    dispatch({ type: UPDATE_PLAYERS, players: updatedPlayers });
+                }
+            }
+        }
         setEditPlayer(false);
     };
 
     const deletePlayer = () => {
         const updatedPlayers = players.slice();
         for (let idx = 0; idx < players.length; ++idx) {
-            if (players[idx].name === currentPlayerName) {
+            if (players[idx].name === editedPlayer) {
                 updatedPlayers.splice(idx, 1);
                 dispatch({ type: UPDATE_PLAYERS, players: updatedPlayers });
+                return;
             }
         }
         setEditPlayer(false);
@@ -83,10 +97,13 @@ const Players: React.FunctionComponent = () => {
                                 onChange={(e) => updateCurrentPlayerName(e.target.value)}
                             />
                         </div>
-                        <div className="player-profile__remove-player" onClick={deletePlayer}>
-                            Удалить игрока
-                            <img className="player-profile__remove-icon" src={`${assetPrefix}/remove.svg`} />
-                        </div>
+                        {editedPlayer === '' ? ''
+                            : (
+                                <div className="player-profile__remove-player" onClick={deletePlayer}>
+                                    Удалить игрока
+                                    <img className="player-profile__remove-icon" src={`${assetPrefix}/remove.svg`} />
+                                </div>
+                            )}
                         <button type="button" className="button button_action" onClick={savePlayer}>
                             Сохранить
                         </button>
@@ -95,6 +112,8 @@ const Players: React.FunctionComponent = () => {
             </div>
         );
     } else {
+        editedPlayer = '';
+
         body = (
             <div className="container">
                 <ProgressBar dotsCount={3} step={1} />
@@ -117,7 +136,7 @@ const Players: React.FunctionComponent = () => {
                                                 <div className={`player__image player__image_${player.color}`}>
                                                     <img className="player__icon" src={`${assetPrefix}/player.svg`} />
                                                 </div>
-                                                <div className="edit player__edit" onClick={() => { updateCurrentPlayerName(player.name); setEditPlayer(true); }}>
+                                                <div className="edit player__edit" onClick={() => { editedPlayer = player.name; updateCurrentPlayerName(player.name); setEditPlayer(true); }}>
                                                     <img src={`${assetPrefix}/edit.svg`} />
                                                 </div>
                                                 <p className="player__name">
