@@ -3,17 +3,13 @@ import * as React from 'react';
 import './Settings.less';
 
 import {
-    SET_SETTINGS_STATE_TO_LOCATIONS,
-    SET_SETTINGS_STATE_TO_PLAYERS,
     SET_SETTINGS_STATE_TO_SPIES,
-    SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
     SETTINGS_STATES,
     SET_APP_STATE_TO_GAME,
     storeContext,
 } from 'Store';
 
 import ProgressBar from 'components/ProgressBar';
-import Switcher from 'components/Switcher';
 import Players from 'components/Settings/Players';
 import StartScreen from 'components/Settings/StartScreen';
 import Spies from 'components/Settings/Spies';
@@ -22,11 +18,6 @@ const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const Settings: React.FunctionComponent = () => {
     const { state: { settingsState }, dispatch } = React.useContext(storeContext);
-
-    const handleSwitchChange = (enabled: boolean): void => {
-        // eslint-disable-next-line no-console
-        console.log(enabled);
-    };
 
     let body;
     switch (settingsState) {
