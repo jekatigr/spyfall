@@ -26,29 +26,29 @@ export const SET_START_DISCUSSION = 'SET_START_DISCUSSION';
 export const UPDATE_PLAYERS = 'UPDATE_PLAYERS';
 
 export const APP_STATES = {
-    SETTINGS: 0,
-    GAME: 1,
+    SETTINGS: 'SETTINGS',
+    GAME: 'GAME',
 };
 
 export const SETTINGS_STATES = {
-    START_SCREEN: 0,
-    PLAYERS: 1,
-    SPIES: 2,
-    LOCATIONS: 3,
-    EXTRA_SETTINGS: 4,
+    START_SCREEN: 'START_SCREEN',
+    PLAYERS: 'PLAYERS',
+    SPIES: 'SPIES',
+    LOCATIONS: 'LOCATIONS',
+    EXTRA_SETTINGS: 'EXTRA_SETTINGS',
 };
 
 const GAME_STATES = {
-    ROLES_DISTRIBUTION: 0,
-    PLAY: 1,
-    DISCUSSION: 2,
-    IDENTIFY_SPIES: 3,
-    RESULTS: 4,
+    ROLES_DISTRIBUTION: 'ROLES_DISTRIBUTION',
+    PLAY: 'PLAY',
+    DISCUSSION: 'DISCUSSION',
+    IDENTIFY_SPIES: 'IDENTIFY_SPIES',
+    RESULTS: 'RESULTS',
 };
 
 const LOCATIONS_TYPES = {
-    BASIC: 0,
-    CUSTOM: 1,
+    BASIC: 'BASIC',
+    CUSTOM: 'CUSTOM',
 };
 
 const initialState = {
@@ -67,10 +67,10 @@ const initialState = {
     },
     spies: {
         count: null,
-        spyNames: [], // array of player indexes?
+        spyIndexes: [],
         spiesKnowEachOther: false,
     },
-    locationType: LOCATIONS_TYPES.BASIC,
+    locationType: [LOCATIONS_TYPES.BASIC, LOCATIONS_TYPES.CUSTOM],
     customLocations: [],
 };
 

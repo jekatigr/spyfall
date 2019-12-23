@@ -15,7 +15,8 @@ import {
 import ProgressBar from 'components/ProgressBar';
 import Switcher from 'components/Switcher';
 import Players from 'components/Settings/Players';
-import StartScreen from './StartScreen';
+import StartScreen from 'components/Settings/StartScreen';
+import Spies from 'components/Settings/Spies';
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
@@ -36,44 +37,7 @@ const Settings: React.FunctionComponent = () => {
             body = <Players />;
             break;
         case SETTINGS_STATES.SPIES:
-            body = (
-                <div className="container">
-                    <ProgressBar dotsCount={3} step={2} />
-
-                    <h1 className="header">Шпионы</h1>
-
-                    <div className="random-option">
-                        <span className="random-option__name">Случайное количество</span>
-                        <div className="option-circle random-option__inner">
-                            <img className="random-option__image_selected" src={`${assetPrefix}/dice.svg`} />
-                        </div>
-                    </div>
-
-                    <div className="random-option">
-                        <span className="random-option__name random-option__name_muted">Случайная выключенная</span>
-                        <div className="option-circle option-circle_muted random-option__inner">
-                            <img className="random-option__image_muted" src={`${assetPrefix}/dice-muted.svg`} />
-                        </div>
-                    </div>
-
-                    <h1 className="header">Настройки</h1>
-                    <Switcher onChange={handleSwitchChange}>Шпионы знакомы</Switcher>
-                    <Switcher onChange={(): void => {}}>Звук</Switcher>
-
-                    <button type="button" className="additional-settings-link" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>
-                        Настройки
-                    </button>
-                    <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_LOCATIONS })}>
-                        Вперёд
-                    </button>
-                    <button type="button" className="button button_action button_disabled">
-                        Вперёд
-                    </button>
-                    <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}>
-                        Назад
-                    </button>
-                </div>
-            );
+            body = <Spies />;
             break;
         case SETTINGS_STATES.LOCATIONS:
             body = (
@@ -232,7 +196,7 @@ const Settings: React.FunctionComponent = () => {
             );
             break;
         default:
-            // console.error('TODO');
+        // console.error('TODO');
     }
 
     return (
