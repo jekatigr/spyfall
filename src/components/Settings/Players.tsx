@@ -4,11 +4,14 @@ import './Settings.less';
 
 import ProgressBar from 'components/ProgressBar';
 
+import { storeContext } from 'reducers/storeContext';
+import { UPDATE_PLAYERS } from 'reducers/playersInfo';
+
 import {
     SET_SETTINGS_STATE_TO_SPIES,
     SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
-    storeContext, SET_SETTINGS_STATE_TO_START_SCREEN, UPDATE_PLAYERS,
-} from 'store';
+    SET_SETTINGS_STATE_TO_START_SCREEN,
+} from 'reducers/settings';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 let colorCounter = 0;

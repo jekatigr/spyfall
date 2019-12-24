@@ -1,8 +1,10 @@
 import { createContext } from 'react';
-import combineReducers from './combineReducers';
+import combineReducers from './rootReducer';
 
-export const storeContext = createContext<{
+const storeContext = createContext<{
     state: typeof initialState;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch: Dispatch<any>;
 }>({ state: initialState, dispatch: () => {} });
+
+export default storeContext;
