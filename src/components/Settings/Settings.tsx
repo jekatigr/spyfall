@@ -7,7 +7,7 @@ import {
     SETTINGS_STATES,
     SET_APP_STATE_TO_GAME,
     storeContext,
-} from 'Store';
+} from 'store';
 
 import ProgressBar from 'components/ProgressBar';
 import Players from 'components/Settings/Players';

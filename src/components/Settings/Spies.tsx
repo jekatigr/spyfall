@@ -7,7 +7,7 @@ import {
     storeContext,
     SET_SETTINGS_STATE_TO_LOCATIONS,
     SET_SETTINGS_STATE_TO_PLAYERS,
-} from 'Store';
+} from 'store';
 
 import ProgressBar from 'components/ProgressBar';
 import Switcher from 'components/Switcher';
