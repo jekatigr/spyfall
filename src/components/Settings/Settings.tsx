@@ -2,12 +2,14 @@ import * as React from 'react';
 
 import './Settings.less';
 
+import { storeContext } from 'reducers/storeContext';
+
 import {
     SET_SETTINGS_STATE_TO_SPIES,
     SETTINGS_STATES,
-    SET_APP_STATE_TO_GAME,
-    storeContext,
-} from 'store';
+} from 'reducers/settings';
+
+import { SET_APP_STATE_TO_GAME } from 'reducers/app';
 
 import ProgressBar from 'components/ProgressBar';
 import Players from 'components/Settings/Players';

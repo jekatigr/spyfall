@@ -1,6 +1,7 @@
 import * as React from 'react';
 
-import { storeContext, APP_STATES } from 'store';
+import { storeContext } from 'reducers/storeContext';
+import { APP_STATES } from 'reducers/app';
 
 import Settings from 'components/Settings/Settings';
 import Game from 'components/Game/Game';

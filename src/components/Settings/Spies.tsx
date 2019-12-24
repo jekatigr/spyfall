@@ -2,12 +2,13 @@ import * as React from 'react';
 
 import './Settings.less';
 
+import { storeContext } from 'reducers/storeContext';
+
 import {
     SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
-    storeContext,
     SET_SETTINGS_STATE_TO_LOCATIONS,
     SET_SETTINGS_STATE_TO_PLAYERS,
-} from 'store';
+} from 'reducers/settings';
 
 import ProgressBar from 'components/ProgressBar';
 import Switcher from 'components/Switcher';
