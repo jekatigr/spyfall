@@ -8,7 +8,7 @@ import {
     SET_SETTINGS_STATE_TO_SPIES,
     SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
     storeContext, SET_SETTINGS_STATE_TO_START_SCREEN, UPDATE_PLAYERS,
-} from 'Store';
+} from 'store';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 let colorCounter = 0;
