@@ -2,13 +2,13 @@ import * as React from 'react';
 
 import './Settings.less';
 
-import { storeContext } from 'reducers/storeContext';
+import { storeContext } from 'store';
 
 import {
     SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
     SET_SETTINGS_STATE_TO_LOCATIONS,
     SET_SETTINGS_STATE_TO_PLAYERS,
-} from 'reducers/settings';
+} from 'store/reducers/settings';
 
 import ProgressBar from 'components/ProgressBar';
 import Switcher from 'components/Switcher';
@@ -16,7 +16,7 @@ import Switcher from 'components/Switcher';
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const Spies: React.FunctionComponent = () => {
-    const { state: { players }, dispatch } = React.useContext(storeContext);
+    const { state: { playersInfo: { players } }, dispatch } = React.useContext(storeContext);
 
     const handleSwitchChange = (enabled: boolean): void => {
         // eslint-disable-next-line no-console

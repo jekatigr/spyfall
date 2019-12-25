@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import './Settings.less';
 
-import { storeContext } from 'reducers/storeContext';
+import { storeContext } from 'store';
 
-import { SET_SETTINGS_STATE_TO_PLAYERS } from 'reducers/settings';
+import { SET_SETTINGS_STATE_TO_PLAYERS } from 'store/reducers/settings';
 
 import Rules from 'components/Settings/Rules';
 

@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import { storeContext } from 'reducers/storeContext';
-import { APP_STATES } from 'reducers/app';
+import { storeContext } from 'store';
+import { APP_STATES } from 'store/reducers/app';
 
 import Settings from 'components/Settings/Settings';
 import Game from 'components/Game/Game';
 
 const App: React.FunctionComponent = () => {
-    const { state: { appState } } = React.useContext(storeContext);
+    const { state: { app: { appState } } } = React.useContext(storeContext);
 
     let body;
     switch (appState) {
