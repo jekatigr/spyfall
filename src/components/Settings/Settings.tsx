@@ -2,14 +2,14 @@ import * as React from 'react';
 
 import './Settings.less';
 
-import { storeContext } from 'reducers/storeContext';
+import { storeContext } from 'store';
 
 import {
     SET_SETTINGS_STATE_TO_SPIES,
     SETTINGS_STATES,
-} from 'reducers/settings';
+} from 'store/reducers/settings';
 
-import { SET_APP_STATE_TO_GAME } from 'reducers/app';
+import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 
 import ProgressBar from 'components/ProgressBar';
 import Players from 'components/Settings/Players';
@@ -19,7 +19,7 @@ import Spies from 'components/Settings/Spies';
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const Settings: React.FunctionComponent = () => {
-    const { state: { settingsState }, dispatch } = React.useContext(storeContext);
+    const { state: { settings: { settingsState } }, dispatch } = React.useContext(storeContext);
 
     let body;
     switch (settingsState) {
