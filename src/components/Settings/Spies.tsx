@@ -5,27 +5,37 @@ import './Settings.less';
 import { storeContext } from 'store';
 
 import {
-    SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
     SET_SETTINGS_STATE_TO_LOCATIONS,
     SET_SETTINGS_STATE_TO_PLAYERS,
 } from 'store/reducers/settings';
 
-import ProgressBar from 'components/ProgressBar';
-import Switcher from 'components/tools/Switcher;
+import Switcher from 'components/tools/Switcher/Switcher';
+import ButtonsWizard from 'components/tools/ButtonsWizard/ButtonsWizard';
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const Spies: React.FunctionComponent = () => {
-    const { state: { playersInfo: { players } }, dispatch } = React.useContext(storeContext);
+    const { dispatch } = React.useContext(storeContext);
 
     const handleSwitchChange = (enabled: boolean): void => {
         // eslint-disable-next-line no-console
         console.log(enabled);
     };
 
+    const backButtonInfo = {
+        title: 'Назад',
+        enable: true,
+        action: (): void => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS }),
+    };
+
+    const forwardButtonInfo = {
+        title: 'Вперед',
+        enable: true,
+        action: (): void => dispatch({ type: SET_SETTINGS_STATE_TO_LOCATIONS }),
+    };
+
     return (
-        <div className="container">
-            <ProgressBar dotsCount={3} step={2} />
+        <div>
 
             <h1 className="header">Шпионы</h1>
 
@@ -48,17 +58,10 @@ const Spies: React.FunctionComponent = () => {
             <Switcher onChange={(): void => {}}>Звук</Switcher>
 
             <div className="buttons-wizard">
-                <button type="button" className="additional-settings-link" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>Настройки времени</button>
-                <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">
-                    <button type="button" className="button button_additional buttons-wizard__button" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}>
-                        Назад
-                    </button>
-                </div>
-                <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_next">
-                    <button type="button" className={`button button_action buttons-wizard__button ${players.length >= 3 ? '' : 'button_disabled'}`} onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_LOCATIONS })}>
-                        Вперед
-                    </button>
-                </div>
+                <ButtonsWizard
+                    backButtonInfo={backButtonInfo}
+                    forwardButtonInfo={forwardButtonInfo}
+                />
             </div>
         </div>
     );

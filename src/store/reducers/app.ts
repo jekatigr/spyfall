@@ -10,7 +10,7 @@ const initialState = {
     appState: APP_STATES.SETTINGS,
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action): typeof initialState => {
     switch (action.type) {
         case SET_APP_STATE_TO_SETTINGS:
             return {

@@ -9,7 +9,7 @@ const Rules: React.FunctionComponent = () => {
     return (
         <div className="container">
             <div>
-                <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN })}>
+                <button type="button" className="button button_action" onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN })}>
                     Стрелочка назад
                 </button>
                 <h1 className="header">Правила</h1>

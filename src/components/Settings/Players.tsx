@@ -2,15 +2,13 @@ import * as React from 'react';
 
 import './Settings.less';
 
-import ProgressBar from 'components/ProgressBar';
-import ButtonsWizard from 'components/tools/ButtonsWizard';
+import ButtonsWizard from 'components/tools/ButtonsWizard/ButtonsWizard';
 
 import { storeContext } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
 
 import {
     SET_SETTINGS_STATE_TO_SPIES,
-    SET_SETTINGS_STATE_TO_EXTRA_SETTINGS,
     SET_SETTINGS_STATE_TO_START_SCREEN,
 } from 'store/reducers/settings';
 
@@ -32,7 +30,7 @@ const Players: React.FunctionComponent = () => {
         hacks.push(<div key={i} className="empty-hack-for-flexbox-space-between-last-line-problem" />);
     }
 
-    const savePlayer = () => {
+    const savePlayer = (): void => {
         // Check for name duplications
         for (let idx = 0; idx < players.length; ++idx) {
             if (players[idx].name === currentPlayerName) {
@@ -65,7 +63,7 @@ const Players: React.FunctionComponent = () => {
         setEditPlayer(false);
     };
 
-    const deletePlayer = () => {
+    const deletePlayer = (): void => {
         const updatedPlayers = players.slice();
         for (let idx = 0; idx < players.length; ++idx) {
             if (players[idx].name === editedPlayer) {
@@ -81,7 +79,7 @@ const Players: React.FunctionComponent = () => {
     if (isEditPlayer) {
         body = (
             <div className="container">
-                <button type="button" className="button button_action" onClick={() => setEditPlayer(false)}>
+                <button type="button" className="button button_action" onClick={(): void => setEditPlayer(false)}>
                     Стрелочка назад
                 </button>
                 <div className="player-profile">
@@ -98,7 +96,7 @@ const Players: React.FunctionComponent = () => {
                                 type="text"
                                 placeholder="Введите имя игрока"
                                 value={currentPlayerName}
-                                onChange={(e) => updateCurrentPlayerName(e.target.value)}
+                                onChange={(e): void => updateCurrentPlayerName(e.target.value)}
                             />
                         </div>
                         {editedPlayer === '' ? ''
@@ -121,19 +119,16 @@ const Players: React.FunctionComponent = () => {
         const backButtonInfo = {
             title: 'Назад',
             enable: true,
-            action: () => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN }),
+            action: (): void => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN }),
         };
 
         const forwardButtonInfo = {
             title: 'Вперед',
-            enable: players.length >= 3,
-            action: () => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES }),
+            enable: true, // players.length >= 3,
+            action: (): void => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES }),
         };
-
         body = (
-            <div className="container">
-                <ProgressBar dotsCount={3} step={1} />
-
+            <div>
                 <div className="">
                     <h1 className="header">Игроки</h1>
                     <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
@@ -141,7 +136,7 @@ const Players: React.FunctionComponent = () => {
                         <div className="players-list__wrapper">
                             <div className="players-list__inner">
                                 <div className="players-list__item">
-                                    <button type="button" className="add-player-button" onClick={() => { updateCurrentPlayerName(''); setEditPlayer(true); }}>
+                                    <button type="button" className="add-player-button" onClick={(): void => { updateCurrentPlayerName(''); setEditPlayer(true); }}>
                                         <img src={`${assetPrefix}/add.svg`} />
                                     </button>
                                 </div>
@@ -152,7 +147,7 @@ const Players: React.FunctionComponent = () => {
                                                 <div className={`player__image player__image_${player.color}`}>
                                                     <img className="player__icon" src={`${assetPrefix}/player.svg`} />
                                                 </div>
-                                                <div className="edit player__edit" onClick={() => { editedPlayer = player.name; updateCurrentPlayerName(player.name); setEditPlayer(true); }}>
+                                                <div className="edit player__edit" onClick={(): void => { editedPlayer = player.name; updateCurrentPlayerName(player.name); setEditPlayer(true); }}>
                                                     <img src={`${assetPrefix}/edit.svg`} />
                                                 </div>
                                                 <p className="player__name">
@@ -167,21 +162,10 @@ const Players: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <ButtonsWizard backButtonInfo={backButtonInfo} forwardButtonInfo={forwardButtonInfo} />
-
-                {/*<div className="buttons-wizard">*/}
-                {/*    <button type="button" className="additional-settings-link" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>Настройки времени</button>*/}
-                {/*    <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">*/}
-                {/*        <button type="button" className="button button_additional buttons-wizard__button" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN })}>*/}
-                {/*            Назад*/}
-                {/*        </button>*/}
-                {/*    </div>*/}
-                {/*    <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_next">*/}
-                {/*        <button type="button" className={`button button_action buttons-wizard__button ${players.length >= 3 ? '' : 'button_disabled'}`} onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })}>*/}
-                {/*            Вперед*/}
-                {/*        </button>*/}
-                {/*    </div>*/}
-                {/*</div>*/}
+                <ButtonsWizard
+                    backButtonInfo={backButtonInfo}
+                    forwardButtonInfo={forwardButtonInfo}
+                />
             </div>
         );
     }

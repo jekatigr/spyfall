@@ -4,7 +4,7 @@ const initialState = {
     players: [],
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action): typeof initialState => {
     switch (action.type) {
         case UPDATE_PLAYERS:
             return {
