@@ -3,6 +3,7 @@ import * as React from 'react';
 import './Settings.less';
 
 import ProgressBar from 'components/ProgressBar';
+import ButtonsWizard from 'components/tools/ButtonsWizard';
 
 import { storeContext } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
@@ -117,6 +118,18 @@ const Players: React.FunctionComponent = () => {
     } else {
         editedPlayer = '';
 
+        const backButtonInfo = {
+            title: 'Назад',
+            enable: true,
+            action: () => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN }),
+        };
+
+        const forwardButtonInfo = {
+            title: 'Вперед',
+            enable: players.length >= 3,
+            action: () => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES }),
+        };
+
         body = (
             <div className="container">
                 <ProgressBar dotsCount={3} step={1} />
@@ -154,20 +167,21 @@ const Players: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
+                <ButtonsWizard backButtonInfo={backButtonInfo} forwardButtonInfo={forwardButtonInfo} />
 
-                <div className="buttons-wizard">
-                    <button type="button" className="additional-settings-link" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>Настройки времени</button>
-                    <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">
-                        <button type="button" className="button button_additional buttons-wizard__button" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN })}>
-                            Назад
-                        </button>
-                    </div>
-                    <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_next">
-                        <button type="button" className={`button button_action buttons-wizard__button ${players.length >= 3 ? '' : 'button_disabled'}`} onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })}>
-                            Вперед
-                        </button>
-                    </div>
-                </div>
+                {/*<div className="buttons-wizard">*/}
+                {/*    <button type="button" className="additional-settings-link" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>Настройки времени</button>*/}
+                {/*    <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">*/}
+                {/*        <button type="button" className="button button_additional buttons-wizard__button" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN })}>*/}
+                {/*            Назад*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
+                {/*    <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_next">*/}
+                {/*        <button type="button" className={`button button_action buttons-wizard__button ${players.length >= 3 ? '' : 'button_disabled'}`} onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })}>*/}
+                {/*            Вперед*/}
+                {/*        </button>*/}
+                {/*    </div>*/}
+                {/*</div>*/}
             </div>
         );
     }
