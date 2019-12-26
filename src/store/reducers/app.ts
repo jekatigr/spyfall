@@ -22,6 +22,7 @@ export default (state = initialState, action): typeof initialState => {
                 ...state,
                 appState: SET_APP_STATE_TO_GAME,
             };
-        default: return state;
+        default:
+            return state;
     }
 };

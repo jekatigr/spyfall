@@ -51,6 +51,7 @@ export default (state = initialState, action): typeof initialState => {
                 ...state,
                 game: GAME_STATES.RESULTS,
             };
-        default: return state;
+        default:
+            return state;
     }
 };

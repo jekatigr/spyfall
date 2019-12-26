@@ -7,20 +7,35 @@ import ButtonsWizard from 'components/tools/ButtonsWizard/ButtonsWizard';
 import { storeContext } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
 
-import {
-    SET_SETTINGS_STATE_TO_SPIES,
-    SET_SETTINGS_STATE_TO_START_SCREEN,
-} from 'store/reducers/settings';
+import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_START_SCREEN } from 'store/reducers/settings';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 let colorCounter = 0;
-const colors = ['coral', 'green', 'wine', 'dark-blue', 'pink', 'yellow', 'purple', 'raspberry', 'acid-green', 'light-green', 'sky-blue', 'blue'];
+const colors = [
+    'coral',
+    'green',
+    'wine',
+    'dark-blue',
+    'pink',
+    'yellow',
+    'purple',
+    'raspberry',
+    'acid-green',
+    'light-green',
+    'sky-blue',
+    'blue',
+];
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 let editedPlayer = '';
 const Players: React.FunctionComponent = () => {
-    const { state: { playersInfo: { players } }, dispatch } = React.useContext(storeContext);
+    const {
+        state: {
+            playersInfo: { players },
+        },
+        dispatch,
+    } = React.useContext(storeContext);
 
     const [isEditPlayer, setEditPlayer] = React.useState(false);
     const [currentPlayerName, updateCurrentPlayerName] = React.useState('');
@@ -99,13 +114,14 @@ const Players: React.FunctionComponent = () => {
                                 onChange={(e): void => updateCurrentPlayerName(e.target.value)}
                             />
                         </div>
-                        {editedPlayer === '' ? ''
-                            : (
-                                <div className="player-profile__remove-player" onClick={deletePlayer}>
-                                    Удалить игрока
-                                    <img className="player-profile__remove-icon" src={`${assetPrefix}/remove.svg`} />
-                                </div>
-                            )}
+                        {editedPlayer === '' ? (
+                            ''
+                        ) : (
+                            <div className="player-profile__remove-player" onClick={deletePlayer}>
+                                Удалить игрока
+                                <img className="player-profile__remove-icon" src={`${assetPrefix}/remove.svg`} />
+                            </div>
+                        )}
                         <button type="button" className="button button_action" onClick={savePlayer}>
                             Сохранить
                         </button>
@@ -136,45 +152,48 @@ const Players: React.FunctionComponent = () => {
                         <div className="players-list__wrapper">
                             <div className="players-list__inner">
                                 <div className="players-list__item">
-                                    <button type="button" className="add-player-button" onClick={(): void => { updateCurrentPlayerName(''); setEditPlayer(true); }}>
+                                    <button
+                                        type="button"
+                                        className="add-player-button"
+                                        onClick={(): void => {
+                                            updateCurrentPlayerName('');
+                                            setEditPlayer(true);
+                                        }}
+                                    >
                                         <img src={`${assetPrefix}/add.svg`} />
                                     </button>
                                 </div>
-                                {
-                                    players.map((player) => (
-                                        <div className="players-list__item" key={player.name}>
-                                            <div className="player">
-                                                <div className={`player__image player__image_${player.color}`}>
-                                                    <img className="player__icon" src={`${assetPrefix}/player.svg`} />
-                                                </div>
-                                                <div className="edit player__edit" onClick={(): void => { editedPlayer = player.name; updateCurrentPlayerName(player.name); setEditPlayer(true); }}>
-                                                    <img src={`${assetPrefix}/edit.svg`} />
-                                                </div>
-                                                <p className="player__name">
-                                                    {player.name}
-                                                </p>
+                                {players.map(player => (
+                                    <div className="players-list__item" key={player.name}>
+                                        <div className="player">
+                                            <div className={`player__image player__image_${player.color}`}>
+                                                <img className="player__icon" src={`${assetPrefix}/player.svg`} />
                                             </div>
+                                            <div
+                                                className="edit player__edit"
+                                                onClick={(): void => {
+                                                    editedPlayer = player.name;
+                                                    updateCurrentPlayerName(player.name);
+                                                    setEditPlayer(true);
+                                                }}
+                                            >
+                                                <img src={`${assetPrefix}/edit.svg`} />
+                                            </div>
+                                            <p className="player__name">{player.name}</p>
                                         </div>
-                                    ))
-                                }
+                                    </div>
+                                ))}
                                 {hacks}
                             </div>
                         </div>
                     </div>
                 </div>
-                <ButtonsWizard
-                    backButtonInfo={backButtonInfo}
-                    forwardButtonInfo={forwardButtonInfo}
-                />
+                <ButtonsWizard backButtonInfo={backButtonInfo} forwardButtonInfo={forwardButtonInfo} />
             </div>
         );
     }
 
-    return (
-        <div>
-            {body}
-        </div>
-    );
+    return <div>{body}</div>;
 };
 
 export default Players;

@@ -15,7 +15,11 @@ import Locations from 'components/Settings/Locations';
 import ExtraSettings from 'components/Settings/ExtraSettings';
 
 const Settings: React.FunctionComponent = () => {
-    const { state: { settings: { settingsState } } } = React.useContext(storeContext);
+    const {
+        state: {
+            settings: { settingsState },
+        },
+    } = React.useContext(storeContext);
 
     let body;
     let showProgressBar = true;
@@ -46,7 +50,7 @@ const Settings: React.FunctionComponent = () => {
             body = <ExtraSettings />;
             break;
         default:
-            // console.error('TODO');
+        // console.error('TODO');
     }
 
     return (

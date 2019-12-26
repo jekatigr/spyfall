@@ -7,7 +7,11 @@ import Settings from 'components/Settings/Settings';
 import Game from 'components/Game/Game';
 
 const App: React.FunctionComponent = () => {
-    const { state: { app: { appState } } } = React.useContext(storeContext);
+    const {
+        state: {
+            app: { appState },
+        },
+    } = React.useContext(storeContext);
 
     let body;
     switch (appState) {
@@ -21,11 +25,7 @@ const App: React.FunctionComponent = () => {
         // console.error('TODO');
     }
 
-    return (
-        <div>
-            {body}
-        </div>
-    );
+    return <div>{body}</div>;
 };
 
 export default App;

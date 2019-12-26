@@ -4,10 +4,7 @@ import './Settings.less';
 
 import { storeContext } from 'store';
 
-import {
-    SET_SETTINGS_STATE_TO_LOCATIONS,
-    SET_SETTINGS_STATE_TO_PLAYERS,
-} from 'store/reducers/settings';
+import { SET_SETTINGS_STATE_TO_LOCATIONS, SET_SETTINGS_STATE_TO_PLAYERS } from 'store/reducers/settings';
 
 import Switcher from 'components/tools/Switcher/Switcher';
 import ButtonsWizard from 'components/tools/ButtonsWizard/ButtonsWizard';
@@ -36,7 +33,6 @@ const Spies: React.FunctionComponent = () => {
 
     return (
         <div>
-
             <h1 className="header">Шпионы</h1>
 
             <div className="random-option">
@@ -58,10 +54,7 @@ const Spies: React.FunctionComponent = () => {
             <Switcher onChange={(): void => {}}>Звук</Switcher>
 
             <div className="buttons-wizard">
-                <ButtonsWizard
-                    backButtonInfo={backButtonInfo}
-                    forwardButtonInfo={forwardButtonInfo}
-                />
+                <ButtonsWizard backButtonInfo={backButtonInfo} forwardButtonInfo={forwardButtonInfo} />
             </div>
         </div>
     );

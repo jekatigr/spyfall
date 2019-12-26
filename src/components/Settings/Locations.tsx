@@ -35,14 +35,15 @@ const Players: React.FunctionComponent = () => {
                     <p className="paragraph paragraph_light">Нажмите на иконку, чтобы выбрать категории локаций:</p>
                     <div className="location-category">
                         <div className="option-circle">
-                            <img className="option-circle__image location-category__basic-image_selected" src={`${assetPrefix}/basic.svg`} />
+                            <img
+                                className="option-circle__image location-category__basic-image_selected"
+                                src={`${assetPrefix}/basic.svg`}
+                            />
                         </div>
                         <div className="location-category__inner">
                             <span className="location-category__name">Базовые</span>
                             <div className="location-category__edit">
-                                <div className="location-category__edit-text">
-                                    Редактировать категорию
-                                </div>
+                                <div className="location-category__edit-text">Редактировать категорию</div>
                                 <div className="edit location-category__edit-icon">
                                     <img src={`${assetPrefix}/edit.svg`} />
                                 </div>
@@ -51,14 +52,15 @@ const Players: React.FunctionComponent = () => {
                     </div>
                     <div className="location-category">
                         <div className="option-circle option-circle_muted">
-                            <img className="option-circle__image location-category__basic-image_muted" src={`${assetPrefix}/basic-muted.svg`} />
+                            <img
+                                className="option-circle__image location-category__basic-image_muted"
+                                src={`${assetPrefix}/basic-muted.svg`}
+                            />
                         </div>
                         <div className="location-category__inner">
                             <span className="location-category__name location-category__name_muted">Базовые выкл</span>
                             <div className="location-category__edit">
-                                <div className="location-category__edit-text">
-                                    Редактировать категорию
-                                </div>
+                                <div className="location-category__edit-text">Редактировать категорию</div>
                                 <div className="edit location-category__edit-icon">
                                     <img src={`${assetPrefix}/edit.svg`} />
                                 </div>
@@ -67,14 +69,15 @@ const Players: React.FunctionComponent = () => {
                     </div>
                     <div className="location-category">
                         <div className="option-circle">
-                            <img className="option-circle__image location-category__custom-image_selected" src={`${assetPrefix}/custom.svg`} />
+                            <img
+                                className="option-circle__image location-category__custom-image_selected"
+                                src={`${assetPrefix}/custom.svg`}
+                            />
                         </div>
                         <div className="location-category__inner">
                             <span className="location-category__name">Кастомные</span>
                             <div className="location-category__edit">
-                                <div className="location-category__edit-text">
-                                    Редактировать категорию
-                                </div>
+                                <div className="location-category__edit-text">Редактировать категорию</div>
                                 <div className="edit location-category__edit-icon">
                                     <img src={`${assetPrefix}/edit.svg`} />
                                 </div>
@@ -83,14 +86,17 @@ const Players: React.FunctionComponent = () => {
                     </div>
                     <div className="location-category">
                         <div className="option-circle option-circle_muted">
-                            <img className="option-circle__image location-category__custom-image_muted" src={`${assetPrefix}/custom-muted.svg`} />
+                            <img
+                                className="option-circle__image location-category__custom-image_muted"
+                                src={`${assetPrefix}/custom-muted.svg`}
+                            />
                         </div>
                         <div className="location-category__inner">
-                            <span className="location-category__name location-category__name_muted">Кастомные выкл</span>
+                            <span className="location-category__name location-category__name_muted">
+                                Кастомные выкл
+                            </span>
                             <div className="location-category__edit">
-                                <div className="location-category__edit-text">
-                                    Редактировать категорию
-                                </div>
+                                <div className="location-category__edit-text">Редактировать категорию</div>
                                 <div className="edit location-category__edit-icon">
                                     <img src={`${assetPrefix}/edit.svg`} />
                                 </div>
@@ -98,10 +104,7 @@ const Players: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <ButtonsWizard
-                    backButtonInfo={backButtonInfo}
-                    forwardButtonInfo={forwardButtonInfo}
-                />
+                <ButtonsWizard backButtonInfo={backButtonInfo} forwardButtonInfo={forwardButtonInfo} />
             </div>
         </div>
     );

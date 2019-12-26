@@ -13,11 +13,7 @@ const { Provider } = storeContext;
 
 const StoreProvider = ({ children }): JSX.Element => {
     const [state, dispatch] = useReducer(rootReducer, initialState);
-    return (
-        <Provider value={{ state, dispatch }}>
-            {children}
-        </Provider>
-    );
+    return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };
 
 export { storeContext, StoreProvider };

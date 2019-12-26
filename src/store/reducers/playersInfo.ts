@@ -11,6 +11,7 @@ export default (state = initialState, action): typeof initialState => {
                 ...state,
                 players: action.players,
             };
-        default: return state;
+        default:
+            return state;
     }
 };

@@ -50,6 +50,7 @@ export default (state = initialState, action): typeof initialState => {
                 ...state,
                 settingsState: SETTINGS_STATES.RULES,
             };
-        default: return state;
+        default:
+            return state;
     }
 };
