@@ -16,10 +16,10 @@ const StartScreen: React.FunctionComponent = () => {
             <div>
                 <img src={`${assetPrefix}/logo.svg`} />
                 <div className="container__bottom-buttons-block">
-                    <button type="button" className="button button_action" onClick={() => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}>
+                    <button type="button" className="button button_action" onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}>
                         Играть
                     </button>
-                    <button type="button" className="button button_additional" onClick={() => dispatch({ type: SET_SETTINGS_STATE_RULES })}>
+                    <button type="button" className="button button_additional" onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_RULES })}>
                         Правила игры
                     </button>
                     <button type="button" className="button button_additional">

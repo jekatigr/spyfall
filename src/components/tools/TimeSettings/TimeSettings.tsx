@@ -8,7 +8,9 @@ type Props = {
 }
 
 const TimeSettings: React.FunctionComponent<Props> = ({ children, action }) => (
-    <button type="button" className="additional-settings-link" onClick={action}>{children}</button>
+    <button type="button" className="additional-settings-link" onClick={action}>
+        { children }
+    </button>
 );
 
 export default TimeSettings;

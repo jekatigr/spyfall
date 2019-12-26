@@ -18,7 +18,7 @@ const initialState = {
     settingsState: SETTINGS_STATES.START_SCREEN,
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action): typeof initialState => {
     switch (action.type) {
         case SET_SETTINGS_STATE_TO_START_SCREEN:
             return {

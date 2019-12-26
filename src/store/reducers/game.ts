@@ -29,7 +29,7 @@ const initialState = {
     game: GAME_STATES.ROLES_DISTRIBUTION,
 };
 
-export default (state = initialState, action) => {
+export default (state = initialState, action): typeof initialState => {
     switch (action.type) {
         case SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS:
             return {
