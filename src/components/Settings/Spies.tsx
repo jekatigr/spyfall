@@ -11,7 +11,7 @@ import {
 } from 'store/reducers/settings';
 
 import ProgressBar from 'components/ProgressBar';
-import Switcher from 'components/Switcher';
+import Switcher from 'components/tools/Switcher;
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
