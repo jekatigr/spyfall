@@ -15,6 +15,7 @@ import ProgressBar from 'components/ProgressBar';
 import Players from 'components/Settings/Players';
 import StartScreen from 'components/Settings/StartScreen';
 import Spies from 'components/Settings/Spies';
+import Rules from 'components/Settings/Rules';
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
@@ -25,6 +26,9 @@ const Settings: React.FunctionComponent = () => {
     switch (settingsState) {
         case SETTINGS_STATES.START_SCREEN:
             body = <StartScreen />;
+            break;
+        case SETTINGS_STATES.RULES:
+            body = <Rules />;
             break;
         case SETTINGS_STATES.PLAYERS:
             body = <Players />;
