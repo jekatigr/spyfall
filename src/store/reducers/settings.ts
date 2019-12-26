@@ -3,9 +3,11 @@ export const SET_SETTINGS_STATE_TO_PLAYERS = 'SET_SETTINGS_STATE_TO_PLAYERS';
 export const SET_SETTINGS_STATE_TO_SPIES = 'SET_SETTINGS_STATE_TO_SPIES';
 export const SET_SETTINGS_STATE_TO_LOCATIONS = 'SET_SETTINGS_STATE_TO_LOCATIONS';
 export const SET_SETTINGS_STATE_TO_EXTRA_SETTINGS = 'SET_SETTINGS_STATE_TO_EXTRA_SETTINGS';
+export const SET_SETTINGS_STATE_RULES = 'SET_SETTINGS_STATE_RULES';
 
 export const SETTINGS_STATES = {
     START_SCREEN: 'START_SCREEN',
+    RULES: 'RULES',
     PLAYERS: 'PLAYERS',
     SPIES: 'SPIES',
     LOCATIONS: 'LOCATIONS',
@@ -42,6 +44,11 @@ export default (state = initialState, action) => {
             return {
                 ...state,
                 settingsState: SETTINGS_STATES.EXTRA_SETTINGS,
+            };
+        case SET_SETTINGS_STATE_RULES:
+            return {
+                ...state,
+                settingsState: SETTINGS_STATES.RULES,
             };
         default: return state;
     }
