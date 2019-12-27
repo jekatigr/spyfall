@@ -1,6 +1,8 @@
 @import '../styles/base';
 
-.container {
+@el: e('.app-container');
+
+@{el} {
   background-color: @baseColor;
   min-width: 320px;
   min-height: 100%;
@@ -8,5 +10,5 @@
   padding: 18px;
   display: flex;
   flex-direction: column;
-  justify-content: space-around;
+  justify-content: space-between;
 }

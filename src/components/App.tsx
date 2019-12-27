@@ -27,7 +27,7 @@ const App: React.FunctionComponent = () => {
         // console.error('TODO');
     }
 
-    return <div className="container">{body}</div>;
+    return <div className="app-container">{body}</div>;
 };
 
 export default App;
