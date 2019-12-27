@@ -31,7 +31,7 @@ const Spies: React.FunctionComponent = () => {
     };
 
     return (
-        <div>
+        <>
             <h1 className="header">Шпионы</h1>
 
             <div className="random-option">
@@ -55,7 +55,7 @@ const Spies: React.FunctionComponent = () => {
             <div className="buttons-wizard">
                 <ButtonsWizard backButtonInfo={backButtonInfo} forwardButtonInfo={forwardButtonInfo} />
             </div>
-        </div>
+        </>
     );
 };
 

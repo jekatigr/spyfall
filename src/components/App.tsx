@@ -6,6 +6,8 @@ import Game from 'components/Game/Game';
 import { storeContext } from 'store';
 import { APP_STATES } from 'store/reducers/app';
 
+import './App.less';
+
 const App: React.FunctionComponent = () => {
     const {
         state: {
@@ -25,7 +27,7 @@ const App: React.FunctionComponent = () => {
         // console.error('TODO');
     }
 
-    return <div>{body}</div>;
+    return <div className="container">{body}</div>;
 };
 
 export default App;

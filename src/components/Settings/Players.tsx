@@ -93,7 +93,7 @@ const Players: React.FunctionComponent = () => {
     let body;
     if (isEditPlayer) {
         body = (
-            <div className="container">
+            <>
                 <Button onClick={(): void => setEditPlayer(false)} type="action">
                     Стрелочка назад
                 </Button>
@@ -127,7 +127,7 @@ const Players: React.FunctionComponent = () => {
                         </Button>
                     </div>
                 </div>
-            </div>
+            </>
         );
     } else {
         editedPlayer = '';
@@ -144,7 +144,7 @@ const Players: React.FunctionComponent = () => {
             action: (): void => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES }),
         };
         body = (
-            <div>
+            <>
                 <div className="">
                     <h1 className="header">Игроки</h1>
                     <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
@@ -189,7 +189,7 @@ const Players: React.FunctionComponent = () => {
                     </div>
                 </div>
                 <ButtonsWizard backButtonInfo={backButtonInfo} forwardButtonInfo={forwardButtonInfo} />
-            </div>
+            </>
         );
     }
 

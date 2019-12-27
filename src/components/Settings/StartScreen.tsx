@@ -13,22 +13,20 @@ const StartScreen: React.FunctionComponent = () => {
     const { dispatch } = React.useContext(storeContext);
 
     return (
-        <div className="container">
-            <div>
-                <img src={`${assetPrefix}/logo.svg`} />
-                <div className="container__bottom-buttons-block">
-                    <Button type="action" onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}>
-                        Играть
-                    </Button>
-                    <Button type="additional" onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_RULES })}>
-                        Правила игры
-                    </Button>
-                    <Button type="additional" onClick={(): void => {}}>
-                        Выйти
-                    </Button>
-                </div>
+        <>
+            <img src={`${assetPrefix}/logo.svg`} />
+            <div className="container__bottom-buttons-block">
+                <Button type="action" onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}>
+                    Играть
+                </Button>
+                <Button type="additional" onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_RULES })}>
+                    Правила игры
+                </Button>
+                <Button type="additional" onClick={(): void => {}}>
+                    Выйти
+                </Button>
             </div>
-        </div>
+        </>
     );
 };
 

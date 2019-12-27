@@ -1,34 +1,4 @@
-@import '../../../node_modules/css-reset-and-normalize/less/reset-and-normalize';
-@import '../../../node_modules/css-reset-and-normalize/less/button-reset';
-@import '../../../node_modules/css-reset-and-normalize/less/link-reset';
-@import '../fonts';
-
-@baseColor: #002539;
-
-.SFText() {
-  font-family: "SF Text", Arial, sans-serif;
-}
-
-html, body, #__next {
-  height: 100%;
-}
-
-body {
-  .SFText();
-  color: #FFFFFF;
-  margin: 0;
-}
-
-.container {
-  background-color: @baseColor;
-  min-width: 320px;
-  min-height: 100%;
-  margin: 0 auto;
-  padding: 18px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-}
+@import '../../styles/base';
 
 .header {
   font-size: 28px;

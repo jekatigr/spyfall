@@ -53,12 +53,10 @@ const Settings: React.FunctionComponent = () => {
     }
 
     return (
-        <div>
-            <div className="container">
-                {showProgressBar ? <ProgressBar dotsCount={3} step={progressBarStep} /> : ''}
-                {body}
-            </div>
-        </div>
+        <>
+            {showProgressBar ? <ProgressBar dotsCount={3} step={progressBarStep} /> : ''}
+            {body}
+        </>
     );
 };
 
