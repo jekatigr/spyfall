@@ -2,12 +2,14 @@ import * as React from 'react';
 
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 import Button from 'components/common/Button/Button';
+import Paragraph from 'components/common/Paragraph/Paragraph';
+import Header from 'components/common/Header/Header';
 
 import { storeContext } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
 import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_START_SCREEN } from 'store/reducers/settings';
 
-import './Settings.less';
+import './Players.less';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 let colorCounter = 0;
@@ -98,7 +100,7 @@ const Players: React.FunctionComponent = () => {
                     Стрелочка назад
                 </Button>
                 <div className="player-profile">
-                    <h1 className="header">Профиль игрока</h1>
+                    <Header>Профиль игрока</Header>
                     <div className="player-profile__inner">
                         <div className="player">
                             <div className={`player__image player__image_big player__image_${colors[10]}`}>
@@ -146,8 +148,8 @@ const Players: React.FunctionComponent = () => {
         body = (
             <>
                 <div className="">
-                    <h1 className="header">Игроки</h1>
-                    <p className="paragraph paragraph_light">Добавьте игроков, которые будут участвовать в игре:</p>
+                    <Header>Игроки</Header>
+                    <Paragraph weight="light">Добавьте игроков, которые будут участвовать в игре:</Paragraph>
                     <div className="players-list">
                         <div className="players-list__wrapper">
                             <div className="players-list__inner">
@@ -179,7 +181,7 @@ const Players: React.FunctionComponent = () => {
                                             >
                                                 <img src={`${assetPrefix}/edit.svg`} />
                                             </div>
-                                            <p className="player__name">{player.name}</p>
+                                            <Paragraph className="player__name">{player.name}</Paragraph>
                                         </div>
                                     </div>
                                 ))}

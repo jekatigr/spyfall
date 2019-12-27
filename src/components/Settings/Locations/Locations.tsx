@@ -1,12 +1,14 @@
 import * as React from 'react';
 
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
+import Paragraph from 'components/common/Paragraph/Paragraph';
+import Header from 'components/common/Header/Header';
 
 import { storeContext } from 'store';
 import { SET_SETTINGS_STATE_TO_SPIES } from 'store/reducers/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 
-import './Settings.less';
+import './Locations.less';
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
@@ -28,8 +30,8 @@ const Players: React.FunctionComponent = () => {
     return (
         <>
             <div>
-                <h1 className="header">Локации</h1>
-                <p className="paragraph paragraph_light">Нажмите на иконку, чтобы выбрать категории локаций:</p>
+                <Header>Локации</Header>
+                <Paragraph weight="light">Нажмите на иконку, чтобы выбрать категории локаций:</Paragraph>
                 <div className="location-category">
                     <div className="option-circle">
                         <img

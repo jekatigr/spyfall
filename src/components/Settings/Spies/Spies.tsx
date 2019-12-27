@@ -2,11 +2,12 @@ import * as React from 'react';
 
 import Switcher from 'components/common/Switcher/Switcher';
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
+import Header from 'components/common/Header/Header';
 
 import { storeContext } from 'store';
 import { SET_SETTINGS_STATE_TO_LOCATIONS, SET_SETTINGS_STATE_TO_PLAYERS } from 'store/reducers/settings';
 
-import './Settings.less';
+import './Spies.less';
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
@@ -32,7 +33,7 @@ const Spies: React.FunctionComponent = () => {
 
     return (
         <>
-            <h1 className="header">Шпионы</h1>
+            <Header>Шпионы</Header>
 
             <div className="random-option">
                 <span className="random-option__name">Случайное количество</span>
@@ -48,7 +49,7 @@ const Spies: React.FunctionComponent = () => {
                 </div>
             </div>
 
-            <h1 className="header">Настройки</h1>
+            <Header>Настройки</Header>
             <Switcher onChange={handleSwitchChange}>Шпионы знакомы</Switcher>
             <Switcher onChange={(): void => {}}>Звук</Switcher>
 

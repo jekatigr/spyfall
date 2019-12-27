@@ -5,8 +5,6 @@ import Button from 'components/common/Button/Button';
 import { storeContext } from 'store';
 import { SET_SETTINGS_STATE_TO_PLAYERS, SET_SETTINGS_STATE_RULES } from 'store/reducers/settings';
 
-import './Settings.less';
-
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const StartScreen: React.FunctionComponent = () => {

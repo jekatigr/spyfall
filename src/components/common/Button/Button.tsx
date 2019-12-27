@@ -21,7 +21,6 @@ const Button: React.FunctionComponent<Props> = ({ type, disabled, className, chi
 Button.defaultProps = {
     type: 'action',
     disabled: false,
-    className: undefined,
 };
 
 export default Button;

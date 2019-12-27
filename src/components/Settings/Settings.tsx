@@ -1,12 +1,12 @@
 import * as React from 'react';
 
 import ProgressBar from 'components/common/ProgressBar/ProgressBar';
-import Players from 'components/Settings/Players';
-import StartScreen from 'components/Settings/StartScreen';
-import Spies from 'components/Settings/Spies';
+import Players from 'components/Settings/Players/Players';
+import StartScreen from 'components/Settings/StartScreen/StartScreen';
+import Spies from 'components/Settings/Spies/Spies';
 import Rules from 'components/Settings/Rules';
-import Locations from 'components/Settings/Locations';
-import ExtraSettings from 'components/Settings/ExtraSettings';
+import Locations from 'components/Settings/Locations/Locations';
+import ExtraSettings from 'components/Settings/ExtraSettings/ExtraSettings';
 
 import { storeContext } from 'store';
 import { SETTINGS_STATES } from 'store/reducers/settings';
