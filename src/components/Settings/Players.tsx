@@ -1,13 +1,13 @@
 import * as React from 'react';
 
-import './Settings.less';
-
-import ButtonsWizard from 'components/tools/ButtonsWizard/ButtonsWizard';
+import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
+import Button from 'components/common/Button/Button';
 
 import { storeContext } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
-
 import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_START_SCREEN } from 'store/reducers/settings';
+
+import './Settings.less';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 let colorCounter = 0;
@@ -94,9 +94,9 @@ const Players: React.FunctionComponent = () => {
     if (isEditPlayer) {
         body = (
             <div className="container">
-                <button type="button" className="button button_action" onClick={(): void => setEditPlayer(false)}>
+                <Button onClick={(): void => setEditPlayer(false)} type="action">
                     Стрелочка назад
-                </button>
+                </Button>
                 <div className="player-profile">
                     <h1 className="header">Профиль игрока</h1>
                     <div className="player-profile__inner">
@@ -122,9 +122,9 @@ const Players: React.FunctionComponent = () => {
                                 <img className="player-profile__remove-icon" src={`${assetPrefix}/remove.svg`} />
                             </div>
                         )}
-                        <button type="button" className="button button_action" onClick={savePlayer}>
+                        <Button onClick={savePlayer} type="action">
                             Сохранить
-                        </button>
+                        </Button>
                     </div>
                 </div>
             </div>

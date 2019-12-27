@@ -1,10 +1,10 @@
 import * as React from 'react';
 
-import { storeContext } from 'store';
-import { APP_STATES } from 'store/reducers/app';
-
 import Settings from 'components/Settings/Settings';
 import Game from 'components/Game/Game';
+
+import { storeContext } from 'store';
+import { APP_STATES } from 'store/reducers/app';
 
 const App: React.FunctionComponent = () => {
     const {

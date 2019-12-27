@@ -1,5 +1,5 @@
 import React, { useReducer, createContext, Dispatch } from 'react';
-import rootReducer from './reducers';
+import rootReducer from 'store/reducers';
 
 const initialState = rootReducer(undefined, { type: '__INIT__' });
 

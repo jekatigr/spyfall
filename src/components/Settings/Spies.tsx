@@ -1,13 +1,12 @@
 import * as React from 'react';
 
-import './Settings.less';
+import Switcher from 'components/common/Switcher/Switcher';
+import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 
 import { storeContext } from 'store';
-
 import { SET_SETTINGS_STATE_TO_LOCATIONS, SET_SETTINGS_STATE_TO_PLAYERS } from 'store/reducers/settings';
 
-import Switcher from 'components/tools/Switcher/Switcher';
-import ButtonsWizard from 'components/tools/ButtonsWizard/ButtonsWizard';
+import './Settings.less';
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 

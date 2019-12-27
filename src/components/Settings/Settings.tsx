@@ -1,18 +1,17 @@
 import * as React from 'react';
 
-import './Settings.less';
-
-import { storeContext } from 'store';
-
-import { SETTINGS_STATES } from 'store/reducers/settings';
-
-import ProgressBar from 'components/ProgressBar';
+import ProgressBar from 'components/common/ProgressBar/ProgressBar';
 import Players from 'components/Settings/Players';
 import StartScreen from 'components/Settings/StartScreen';
 import Spies from 'components/Settings/Spies';
 import Rules from 'components/Settings/Rules';
 import Locations from 'components/Settings/Locations';
 import ExtraSettings from 'components/Settings/ExtraSettings';
+
+import { storeContext } from 'store';
+import { SETTINGS_STATES } from 'store/reducers/settings';
+
+import './Settings.less';
 
 const Settings: React.FunctionComponent = () => {
     const {

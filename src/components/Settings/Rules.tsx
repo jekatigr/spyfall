@@ -1,21 +1,20 @@
 import * as React from 'react';
 
-import './Settings.less';
+import Button from 'components/common/Button/Button';
+
 import { storeContext } from 'store';
 import { SET_SETTINGS_STATE_TO_START_SCREEN } from 'store/reducers/settings';
+
+import './Settings.less';
 
 const Rules: React.FunctionComponent = () => {
     const { dispatch } = React.useContext(storeContext);
     return (
         <div className="container">
             <div>
-                <button
-                    type="button"
-                    className="button button_action"
-                    onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN })}
-                >
+                <Button onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN })} type="action">
                     Стрелочка назад
-                </button>
+                </Button>
                 <h1 className="header">Правила</h1>
                 <p className="paragraph">Игровая партия</p>
                 <p className="paragraph paragraph_extra-light paragraph_justify">

@@ -1,10 +1,12 @@
 import * as React from 'react';
 
-import './ButtonsWizard.less';
+import TimeSettings from 'components/common/TimeSettings/TimeSettings';
+import Button from 'components/common/Button/Button';
+
 import { storeContext } from 'store';
 import { SET_SETTINGS_STATE_TO_EXTRA_SETTINGS } from 'store/reducers/settings';
 
-import TimeSettings from 'components/tools/TimeSettings/TimeSettings';
+import './ButtonsWizard.less';
 
 type backButtonInfo = {
     title: string;
@@ -27,28 +29,23 @@ const ButtonsWizard: React.FunctionComponent<Props> = ({ backButtonInfo, forward
     const { dispatch } = React.useContext(storeContext);
     return (
         <div className="buttons-wizard">
-            <TimeSettings action={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>
+            <TimeSettings onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>
                 Настройки времени
             </TimeSettings>
             <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">
-                <button
-                    type="button"
-                    className="button button_additional buttons-wizard__button"
-                    onClick={backButtonInfo.action}
-                >
+                <Button onClick={backButtonInfo.action} type="additional" className="buttons-wizard__button">
                     {backButtonInfo.title}
-                </button>
+                </Button>
             </div>
             <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_next">
-                <button
-                    type="button"
-                    className={`button button_action buttons-wizard__button ${
-                        forwardButtonInfo.enable ? '' : 'button_disabled'
-                    }`}
+                <Button
                     onClick={forwardButtonInfo.action}
+                    type="action"
+                    className="buttons-wizard__button"
+                    disabled={!forwardButtonInfo.enable}
                 >
                     {forwardButtonInfo.title}
-                </button>
+                </Button>
             </div>
         </div>
     );

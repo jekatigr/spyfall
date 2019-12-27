@@ -1,10 +1,11 @@
 import * as React from 'react';
 
-import './Settings.less';
+import Button from 'components/common/Button/Button';
 
 import { storeContext } from 'store';
-
 import { SET_SETTINGS_STATE_TO_PLAYERS, SET_SETTINGS_STATE_RULES } from 'store/reducers/settings';
+
+import './Settings.less';
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
@@ -16,23 +17,15 @@ const StartScreen: React.FunctionComponent = () => {
             <div>
                 <img src={`${assetPrefix}/logo.svg`} />
                 <div className="container__bottom-buttons-block">
-                    <button
-                        type="button"
-                        className="button button_action"
-                        onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}
-                    >
+                    <Button type="action" onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })}>
                         Играть
-                    </button>
-                    <button
-                        type="button"
-                        className="button button_additional"
-                        onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_RULES })}
-                    >
+                    </Button>
+                    <Button type="additional" onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_RULES })}>
                         Правила игры
-                    </button>
-                    <button type="button" className="button button_additional">
+                    </Button>
+                    <Button type="additional" onClick={(): void => {}}>
                         Выйти
-                    </button>
+                    </Button>
                 </div>
             </div>
         </div>

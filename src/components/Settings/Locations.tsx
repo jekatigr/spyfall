@@ -1,14 +1,12 @@
 import * as React from 'react';
 
-import './Settings.less';
-
-import ButtonsWizard from 'components/tools/ButtonsWizard/ButtonsWizard';
+import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 
 import { storeContext } from 'store';
-
 import { SET_SETTINGS_STATE_TO_SPIES } from 'store/reducers/settings';
-
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
+
+import './Settings.less';
 
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
