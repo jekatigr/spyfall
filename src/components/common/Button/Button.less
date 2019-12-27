@@ -1,0 +1,32 @@
+@import '../../../styles/base';
+
+@el: e('.button');
+
+@{el} {
+  width: 100%;
+  max-width: 370px;
+  height: 62px;
+  border-radius: 6px;
+  margin: 10px auto;
+  cursor: pointer;
+  text-align: center;
+  font-size: 23px;
+  display: block;
+
+  &_disabled {
+    pointer-events: none;
+    opacity: 0.5;
+  }
+
+  &_type-action {
+    background: rgb(2, 209, 19);
+    background: linear-gradient(180deg, #02D113 17.71%, #00A80E 100%);
+  }
+
+  &_type-additional {
+    color: #00AEE5;
+    background: @baseColor;
+    border: 3px solid #3DAEE5;
+    box-sizing: border-box;
+  }
+}

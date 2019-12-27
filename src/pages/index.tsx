@@ -1,6 +1,7 @@
 import * as React from 'react';
 import Head from 'next/head';
 import App from 'components/App';
+import { StoreProvider } from 'store';
 import prefixedAsset from 'utils/assetPrefix';
 
 const IndexPage: React.FunctionComponent = () => (
@@ -9,7 +10,9 @@ const IndexPage: React.FunctionComponent = () => (
             <title>Spyfall Game</title>
             <link rel="manifest" href={prefixedAsset('manifest.json')} />
         </Head>
-        <App />
+        <StoreProvider>
+            <App />
+        </StoreProvider>
     </>
 );
 
