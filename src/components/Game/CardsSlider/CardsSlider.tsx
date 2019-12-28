@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Card from 'components/Game/Card/Card';
+import Header from 'components/common/Header/Header';
 
 import composeClassNames from 'utils/composeClassNames';
 
@@ -13,7 +14,6 @@ type CardType = {
 
 type Props = {
     location: string;
-    locationType: 'basic' | 'custom';
     cards: CardType[];
     spies: string[];
 };
@@ -22,7 +22,7 @@ type AnimationType = 'next' | 'previous' | 'center' | undefined;
 
 const ANIMATION_DURATION_MS = 400;
 
-const CardsSlider: React.FunctionComponent<Props> = ({ location, locationType, cards, spies }) => {
+const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies }) => {
     const [currentCardIndex, setCurrentCardIndex] = React.useState(0);
     const [animationDirection, setAnimationDirection] = React.useState<AnimationType>(undefined);
     const [isCenterFlipped, setIsCenterFlipped] = React.useState<boolean>(false);
@@ -85,52 +85,53 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, locationType, c
     };
 
     return (
-        <div className="cards-slider" onClick={handleClick}>
-            <div className="cards-slider__inner">
-                {cards.map((c, index) => {
-                    const isCenter = currentCardIndex === index;
+        <>
+            <Header>{cards[currentCardIndex].name}</Header>
+            <div className="cards-slider" onClick={handleClick}>
+                <div className="cards-slider__inner">
+                    {cards.map((c, index) => {
+                        const isCenter = currentCardIndex === index;
 
-                    const isNext = currentCardIndex + 1 === index;
-                    const isSecondNext = currentCardIndex + 2 === index;
-                    const isNextHidden = index > currentCardIndex + 2;
+                        const isNext = currentCardIndex + 1 === index;
+                        const isSecondNext = currentCardIndex + 2 === index;
+                        const isNextHidden = index > currentCardIndex + 2;
 
-                    const isPrevious = currentCardIndex - 1 === index;
-                    const isSecondPrevious = index === currentCardIndex - 2;
-                    const isPreviousHidden = index < currentCardIndex - 2;
+                        const isPrevious = currentCardIndex - 1 === index;
+                        const isSecondPrevious = index === currentCardIndex - 2;
+                        const isPreviousHidden = index < currentCardIndex - 2;
 
-                    const isNextAnimation = animationDirection === 'next';
-                    // const isPreviousAnimation = animationDirection === 'previous';
+                        const isNextAnimation = animationDirection === 'next';
 
-                    const cardModifiers = {
-                        center: isCenter,
-                        flipped: isCenter && isCenterFlipped,
-                        next: isNext,
-                        'second-next': isSecondNext,
-                        previous: isPrevious,
-                        'second-previous': isSecondPrevious,
-                        hidden: isNextHidden || isPreviousHidden,
-                        'move-second-to-next': isNextAnimation && isSecondNext,
-                        'move-next-to-center': isNextAnimation && isNext,
-                        'move-center-to-previous': isNextAnimation && isCenter,
-                        'move-previous-to-second': isNextAnimation && isPrevious,
-                    };
+                        const cardModifiers = {
+                            center: isCenter,
+                            flipped: isCenter && isCenterFlipped,
+                            next: isNext,
+                            'second-next': isSecondNext,
+                            previous: isPrevious,
+                            'second-previous': isSecondPrevious,
+                            hidden: isNextHidden || isPreviousHidden,
+                            'move-second-to-next': isNextAnimation && isSecondNext,
+                            'move-next-to-center': isNextAnimation && isNext,
+                            'move-center-to-previous': isNextAnimation && isCenter,
+                            'move-previous-to-second': isNextAnimation && isPrevious,
+                        };
 
-                    const { name, isSpy } = c;
+                        const { name, isSpy } = c;
 
-                    return (
-                        <Card
-                            name={name}
-                            isSpy={isSpy}
-                            location={location}
-                            locationType={locationType}
-                            spies={spies}
-                            className={composeClassNames('cards-slider__card', cardModifiers, 'card')}
-                            key={`${c.name + index}`}
-                        />
-                    );
-                })}
+                        return (
+                            <Card
+                                name={name}
+                                isSpy={isSpy}
+                                location={location}
+                                spies={spies}
+                                className={composeClassNames('cards-slider__card', cardModifiers, 'card')}
+                                key={`${c.name + index}`}
+                            />
+                        );
+                    })}
+                </div>
             </div>
-        </div>
+        </>
     );
 };
 

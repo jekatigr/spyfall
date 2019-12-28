@@ -149,7 +149,9 @@ const Players: React.FunctionComponent = () => {
             <>
                 <div className="">
                     <Header>Игроки</Header>
-                    <Paragraph weight="light">Добавьте игроков, которые будут участвовать в игре:</Paragraph>
+                    <Paragraph weight="light" hasMargin>
+                        Добавьте игроков, которые будут участвовать в игре:
+                    </Paragraph>
                     <div className="players-list">
                         <div className="players-list__wrapper">
                             <div className="players-list__inner">
@@ -181,7 +183,9 @@ const Players: React.FunctionComponent = () => {
                                             >
                                                 <img src={`${assetPrefix}/edit.svg`} />
                                             </div>
-                                            <Paragraph className="player__name">{player.name}</Paragraph>
+                                            <Paragraph hasMargin className="player__name">
+                                                {player.name}
+                                            </Paragraph>
                                         </div>
                                     </div>
                                 ))}

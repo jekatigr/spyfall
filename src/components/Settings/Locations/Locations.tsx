@@ -31,7 +31,9 @@ const Players: React.FunctionComponent = () => {
         <>
             <div>
                 <Header>Локации</Header>
-                <Paragraph weight="light">Нажмите на иконку, чтобы выбрать категории локаций:</Paragraph>
+                <Paragraph weight="light" hasMargin>
+                    Нажмите на иконку, чтобы выбрать категории локаций:
+                </Paragraph>
                 <div className="location-category">
                     <div className="option-circle">
                         <img

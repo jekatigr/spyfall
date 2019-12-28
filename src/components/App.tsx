@@ -16,7 +16,7 @@ const cards = [
     },
     {
         name: 'Игрок 2',
-        isSpy: false,
+        isSpy: true,
     },
     {
         name: 'Игрок 3',
@@ -24,15 +24,23 @@ const cards = [
     },
     {
         name: 'Игрок 4',
-        isSpy: false,
+        isSpy: true,
     },
     {
         name: 'Игрок 5',
-        isSpy: false,
+        isSpy: true,
     },
     {
         name: 'Игрок 6',
-        isSpy: false,
+        isSpy: true,
+    },
+    {
+        name: 'Игрок 7',
+        isSpy: true,
+    },
+    {
+        name: 'Игрок 8',
+        isSpy: true,
     },
 ];
 
@@ -57,7 +65,7 @@ const App: React.FunctionComponent = () => {
 
     return (
         <div className="app-container">
-            <CardsSlider cards={cards} location="Москва" locationType="basic" spies={['Игрок 1, Игрок 3']} />
+            <CardsSlider cards={cards} location="Москва" spies={cards.filter(s => s.isSpy).map(s => s.name)} />
             {body}
         </div>
     );
