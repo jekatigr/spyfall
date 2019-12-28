@@ -14,4 +14,7 @@ module.exports = withLess({
         return config;
     },
     assetPrefix: process.env.ASSET_PREFIX,
+    env: {
+        ASSET_PREFIX: process.env.ASSET_PREFIX,
+    },
 });
