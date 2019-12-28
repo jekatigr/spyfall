@@ -1,8 +1,8 @@
 import * as React from 'react';
 
-import './ExtraSettings.less';
+import './TimeSettings.less';
 
-const ExtraSettings: React.FunctionComponent = () => (
+const TimeSettings: React.FunctionComponent = () => (
     <>
         <div className="counter">
             <span className="counter__name">Время на кон (обычный)</span>
@@ -76,4 +76,4 @@ const ExtraSettings: React.FunctionComponent = () => (
     </>
 );
 
-export default ExtraSettings;
+export default TimeSettings;

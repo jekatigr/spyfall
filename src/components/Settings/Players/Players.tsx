@@ -7,7 +7,8 @@ import Header from 'components/common/Header/Header';
 
 import { storeContext } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
-import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_START_SCREEN } from 'store/reducers/settings';
+import { SET_SETTINGS_STATE_TO_SPIES } from 'store/reducers/settings';
+import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
 
 import './Players.less';
 
@@ -137,7 +138,7 @@ const Players: React.FunctionComponent = () => {
         const backButtonInfo = {
             title: 'Назад',
             enable: true,
-            action: (): void => dispatch({ type: SET_SETTINGS_STATE_TO_START_SCREEN }),
+            action: (): void => dispatch({ type: SET_APP_STATE_TO_START_SCREEN }),
         };
 
         const forwardButtonInfo = {

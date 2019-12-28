@@ -2,11 +2,9 @@ import * as React from 'react';
 
 import ProgressBar from 'components/common/ProgressBar/ProgressBar';
 import Players from 'components/Settings/Players/Players';
-import StartScreen from 'components/Settings/StartScreen/StartScreen';
 import Spies from 'components/Settings/Spies/Spies';
-import Rules from 'components/Settings/Rules';
 import Locations from 'components/Settings/Locations/Locations';
-import ExtraSettings from 'components/Settings/ExtraSettings/ExtraSettings';
+import TimeSettings from 'components/Settings/TimeSettings/TimeSettings';
 
 import { storeContext } from 'store';
 import { SETTINGS_STATES } from 'store/reducers/settings';
@@ -24,14 +22,6 @@ const Settings: React.FunctionComponent = () => {
     let showProgressBar = true;
     let progressBarStep = 0;
     switch (settingsState) {
-        case SETTINGS_STATES.START_SCREEN:
-            showProgressBar = false;
-            body = <StartScreen />;
-            break;
-        case SETTINGS_STATES.RULES:
-            showProgressBar = false;
-            body = <Rules />;
-            break;
         case SETTINGS_STATES.PLAYERS:
             progressBarStep = 1;
             body = <Players />;
@@ -46,7 +36,7 @@ const Settings: React.FunctionComponent = () => {
             break;
         case SETTINGS_STATES.EXTRA_SETTINGS:
             showProgressBar = false;
-            body = <ExtraSettings />;
+            body = <TimeSettings />;
             break;
         default:
         // console.error('TODO');
