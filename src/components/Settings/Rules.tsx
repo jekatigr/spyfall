@@ -17,8 +17,8 @@ const Rules: React.FunctionComponent = () => {
                 Стрелочка назад
             </Button>
             <Header>Правила</Header>
-            <Paragraph>Игровая партия</Paragraph>
-            <Paragraph weight="extra-light" align="justify">
+            <Paragraph hasMargin>Игровая партия</Paragraph>
+            <Paragraph weight="extra-light" align="justify" hasMargin>
                 Игровая партия состоит из последовательности коротких раундов. В каждом раунде игроки оказываются в
                 какой-то локации, у каждого — свой статус. Один неизбежно оказывается шпионом, который не знает, где
                 находится. Его задача — разговорить других игроков, определить локацию и не разоблачить себя. Каждый

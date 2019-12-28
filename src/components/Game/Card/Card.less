@@ -1,0 +1,51 @@
+@el: e('.card');
+
+@{el} {
+  &__back {
+    position: absolute;
+    backface-visibility: hidden;
+  }
+
+  &__face {
+    position: absolute;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+  }
+
+  &__face-background {
+    position: relative;
+  }
+
+  &__face-inner {
+    position: absolute;
+    top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+  }
+
+  &__icon {
+    margin: 74px 0 30px 0;
+    position: relative;
+    left: 6px;
+  }
+
+  &__icon_small {
+    margin: 53px 0 15px 0;
+    height: 82px;
+    width: 82px;
+  }
+
+  &__text {
+    color: #000000;
+  }
+
+  &__text-cospies-label {
+    margin: 22px 0 7px 0;
+  }
+
+  &__text-cospies {
+    max-width: 210px;
+  }
+}
