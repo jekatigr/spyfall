@@ -34,7 +34,7 @@ const Settings: React.FunctionComponent = () => {
             progressBarStep = 3;
             body = <Locations />;
             break;
-        case SETTINGS_STATES.EXTRA_SETTINGS:
+        case SETTINGS_STATES.TIME_SETTINGS:
             showProgressBar = false;
             body = <TimeSettings />;
             break;

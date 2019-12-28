@@ -1,13 +1,13 @@
 export const SET_SETTINGS_STATE_TO_PLAYERS = 'SET_SETTINGS_STATE_TO_PLAYERS';
 export const SET_SETTINGS_STATE_TO_SPIES = 'SET_SETTINGS_STATE_TO_SPIES';
 export const SET_SETTINGS_STATE_TO_LOCATIONS = 'SET_SETTINGS_STATE_TO_LOCATIONS';
-export const SET_SETTINGS_STATE_TO_EXTRA_SETTINGS = 'SET_SETTINGS_STATE_TO_EXTRA_SETTINGS';
+export const SET_SETTINGS_STATE_TO_TIME_SETTINGS = 'SET_SETTINGS_STATE_TO_TIME_SETTINGS';
 
 export const SETTINGS_STATES = {
     PLAYERS: 'PLAYERS',
     SPIES: 'SPIES',
     LOCATIONS: 'LOCATIONS',
-    EXTRA_SETTINGS: 'EXTRA_SETTINGS',
+    TIME_SETTINGS: 'TIME_SETTINGS',
 };
 
 const initialState = {
@@ -31,10 +31,10 @@ export default (state = initialState, action): typeof initialState => {
                 ...state,
                 settingsState: SETTINGS_STATES.LOCATIONS,
             };
-        case SET_SETTINGS_STATE_TO_EXTRA_SETTINGS:
+        case SET_SETTINGS_STATE_TO_TIME_SETTINGS:
             return {
                 ...state,
-                settingsState: SETTINGS_STATES.EXTRA_SETTINGS,
+                settingsState: SETTINGS_STATES.TIME_SETTINGS,
             };
         default:
             return state;

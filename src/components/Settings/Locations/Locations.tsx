@@ -1,11 +1,13 @@
 import * as React from 'react';
 
+import TimeSettings from 'components/common/TimeSettings/TimeSettings';
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Header from 'components/common/Header/Header';
+import Button from 'components/common/Button/Button';
 
 import { storeContext } from 'store';
-import { SET_SETTINGS_STATE_TO_SPIES } from 'store/reducers/settings';
+import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from 'store/reducers/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 
 import './Locations.less';
@@ -14,18 +16,6 @@ const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const Players: React.FunctionComponent = () => {
     const { dispatch } = React.useContext(storeContext);
-
-    const backButtonInfo = {
-        title: 'Назад',
-        enable: true,
-        action: (): void => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES }),
-    };
-
-    const forwardButtonInfo = {
-        title: 'Вперед',
-        enable: true,
-        action: (): void => dispatch({ type: SET_APP_STATE_TO_GAME }),
-    };
 
     return (
         <>
@@ -103,7 +93,22 @@ const Players: React.FunctionComponent = () => {
                     </div>
                 </div>
             </div>
-            <ButtonsWizard backButtonInfo={backButtonInfo} forwardButtonInfo={forwardButtonInfo} />
+            <ButtonsWizard
+                previous={
+                    <Button onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })} type="additional">
+                        Назад
+                    </Button>
+                }
+                next={
+                    <Button onClick={(): void => dispatch({ type: SET_APP_STATE_TO_GAME })} type="action">
+                        Вперед
+                    </Button>
+                }
+            >
+                <TimeSettings onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_TIME_SETTINGS })}>
+                    Настройки времени
+                </TimeSettings>
+            </ButtonsWizard>
         </>
     );
 };

@@ -1,13 +1,14 @@
 import * as React from 'react';
 
-import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
-import Button from 'components/common/Button/Button';
-import Paragraph from 'components/common/Paragraph/Paragraph';
+import TimeSettings from 'components/common/TimeSettings/TimeSettings';
 import Header from 'components/common/Header/Header';
+import Paragraph from 'components/common/Paragraph/Paragraph';
+import Button from 'components/common/Button/Button';
+import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 
 import { storeContext } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
-import { SET_SETTINGS_STATE_TO_SPIES } from 'store/reducers/settings';
+import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from 'store/reducers/settings';
 import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
 
 import './Players.less';
@@ -134,18 +135,6 @@ const Players: React.FunctionComponent = () => {
         );
     } else {
         editedPlayer = '';
-
-        const backButtonInfo = {
-            title: 'Назад',
-            enable: true,
-            action: (): void => dispatch({ type: SET_APP_STATE_TO_START_SCREEN }),
-        };
-
-        const forwardButtonInfo = {
-            title: 'Вперед',
-            enable: true, // players.length >= 3,
-            action: (): void => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES }),
-        };
         body = (
             <>
                 <div className="">
@@ -195,7 +184,25 @@ const Players: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <ButtonsWizard backButtonInfo={backButtonInfo} forwardButtonInfo={forwardButtonInfo} />
+                <ButtonsWizard
+                    previous={
+                        <Button
+                            onClick={(): void => dispatch({ type: SET_APP_STATE_TO_START_SCREEN })}
+                            type="additional"
+                        >
+                            Назад
+                        </Button>
+                    }
+                    next={
+                        <Button onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })} type="action">
+                            Вперед
+                        </Button>
+                    }
+                >
+                    <TimeSettings onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_TIME_SETTINGS })}>
+                        Настройки времени
+                    </TimeSettings>
+                </ButtonsWizard>
             </>
         );
     }

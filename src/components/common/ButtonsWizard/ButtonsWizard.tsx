@@ -1,51 +1,31 @@
 import * as React from 'react';
 
-import TimeSettings from 'components/common/TimeSettings/TimeSettings';
 import Button from 'components/common/Button/Button';
-
-import { storeContext } from 'store';
-import { SET_SETTINGS_STATE_TO_EXTRA_SETTINGS } from 'store/reducers/settings';
 
 import './ButtonsWizard.less';
 
-type backButtonInfo = {
-    title: string;
-    enable: boolean;
-    action: () => void;
-};
-
-type forwardButtonInfo = {
-    title: string;
-    enable: boolean;
-    action: () => void;
-};
-
 type Props = {
-    backButtonInfo;
-    forwardButtonInfo;
+    previous: React.ReactElement<React.ComponentProps<typeof Button>>;
+    next: React.ReactElement<React.ComponentProps<typeof Button>>;
+    children?: React.ReactNode;
 };
 
-const ButtonsWizard: React.FunctionComponent<Props> = ({ backButtonInfo, forwardButtonInfo }) => {
-    const { dispatch } = React.useContext(storeContext);
+const ButtonsWizard: React.FunctionComponent<Props> = ({ next, previous, children }) => {
+    const previousClassName = previous.props.className;
+    const nextClassName = next.props.className;
+
     return (
         <div className="buttons-wizard">
-            <TimeSettings onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_EXTRA_SETTINGS })}>
-                Настройки времени
-            </TimeSettings>
+            {children}
             <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">
-                <Button onClick={backButtonInfo.action} type="additional" className="buttons-wizard__button">
-                    {backButtonInfo.title}
-                </Button>
+                {React.cloneElement(previous, {
+                    className: `buttons-wizard__button${` ${previousClassName}` || ''}`,
+                })}
             </div>
             <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_next">
-                <Button
-                    onClick={forwardButtonInfo.action}
-                    type="action"
-                    className="buttons-wizard__button"
-                    disabled={!forwardButtonInfo.enable}
-                >
-                    {forwardButtonInfo.title}
-                </Button>
+                {React.cloneElement(next, {
+                    className: `buttons-wizard__button${` ${nextClassName}` || ''}`,
+                })}
             </div>
         </div>
     );
