@@ -1,11 +1,11 @@
-import React, { useReducer, createContext, Dispatch } from 'react';
+import React, { useReducer, createContext, Dispatch, useContext } from 'react';
 import rootReducer from 'store/reducers';
 
 const initialState = rootReducer(undefined, { type: '__INIT__' });
 
+/* eslint-disable @typescript-eslint/no-explicit-any */
 const storeContext = createContext<{
     state: typeof initialState;
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
     dispatch: Dispatch<any>;
 }>({ state: initialState, dispatch: () => {} });
 
@@ -16,4 +16,20 @@ const StoreProvider = ({ children }): JSX.Element => {
     return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };
 
-export { storeContext, StoreProvider };
+type UseStoreType = {
+    state: typeof initialState;
+    dispatch(type: string, payload?: any): void;
+};
+
+const useStore = (): UseStoreType => {
+    const { state, dispatch: dispatchWrapped } = useContext(storeContext);
+
+    const dispatch = (type: string, payload?: any): void => {
+        dispatchWrapped({ type, ...payload });
+    };
+
+    return { state, dispatch };
+};
+/* eslint-enable @typescript-eslint/no-explicit-any */
+
+export { StoreProvider, useStore };

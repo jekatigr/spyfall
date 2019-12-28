@@ -6,7 +6,7 @@ import Spies from 'components/Settings/Spies/Spies';
 import Locations from 'components/Settings/Locations/Locations';
 import TimeSettings from 'components/Settings/TimeSettings/TimeSettings';
 
-import { storeContext } from 'store';
+import { useStore } from 'store';
 import { SETTINGS_STATES } from 'store/reducers/settings';
 
 import './Settings.less';
@@ -16,7 +16,7 @@ const Settings: React.FunctionComponent = () => {
         state: {
             settings: { settingsState },
         },
-    } = React.useContext(storeContext);
+    } = useStore();
 
     let body;
     let showProgressBar = true;

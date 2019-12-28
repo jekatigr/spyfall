@@ -6,7 +6,7 @@ import Paragraph from 'components/common/Paragraph/Paragraph';
 import Button from 'components/common/Button/Button';
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 
-import { storeContext } from 'store';
+import { useStore } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
 import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from 'store/reducers/settings';
 import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
@@ -39,7 +39,7 @@ const Players: React.FunctionComponent = () => {
             playersInfo: { players },
         },
         dispatch,
-    } = React.useContext(storeContext);
+    } = useStore();
 
     const [isEditPlayer, setEditPlayer] = React.useState(false);
     const [currentPlayerName, updateCurrentPlayerName] = React.useState('');
@@ -68,14 +68,14 @@ const Players: React.FunctionComponent = () => {
             colorCounter += 1;
             const updatedPlayers = players.slice();
             updatedPlayers.push({ name: currentPlayerName, color: newColor });
-            dispatch({ type: UPDATE_PLAYERS, players: updatedPlayers });
+            dispatch(UPDATE_PLAYERS, { players: updatedPlayers });
         } else {
             // Rename existing player
             const updatedPlayers = players.slice();
             for (let idx = 0; idx < players.length; ++idx) {
                 if (players[idx].name === editedPlayer) {
                     updatedPlayers[idx].name = currentPlayerName;
-                    dispatch({ type: UPDATE_PLAYERS, players: updatedPlayers });
+                    dispatch(UPDATE_PLAYERS, { players: updatedPlayers });
                 }
             }
         }
@@ -87,7 +87,7 @@ const Players: React.FunctionComponent = () => {
         for (let idx = 0; idx < players.length; ++idx) {
             if (players[idx].name === editedPlayer) {
                 updatedPlayers.splice(idx, 1);
-                dispatch({ type: UPDATE_PLAYERS, players: updatedPlayers });
+                dispatch(UPDATE_PLAYERS, { players: updatedPlayers });
                 return;
             }
         }
@@ -186,20 +186,17 @@ const Players: React.FunctionComponent = () => {
                 </div>
                 <ButtonsWizard
                     previous={
-                        <Button
-                            onClick={(): void => dispatch({ type: SET_APP_STATE_TO_START_SCREEN })}
-                            type="additional"
-                        >
+                        <Button onClick={(): void => dispatch(SET_APP_STATE_TO_START_SCREEN)} type="additional">
                             Назад
                         </Button>
                     }
                     next={
-                        <Button onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })} type="action">
+                        <Button onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_SPIES)} type="action">
                             Вперед
                         </Button>
                     }
                 >
-                    <TimeSettings onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_TIME_SETTINGS })}>
+                    <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_TIME_SETTINGS)}>
                         Настройки времени
                     </TimeSettings>
                 </ButtonsWizard>

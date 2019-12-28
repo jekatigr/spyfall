@@ -6,7 +6,7 @@ import Switcher from 'components/common/Switcher/Switcher';
 import Button from 'components/common/Button/Button';
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 
-import { storeContext } from 'store';
+import { useStore } from 'store';
 import {
     SET_SETTINGS_STATE_TO_LOCATIONS,
     SET_SETTINGS_STATE_TO_PLAYERS,
@@ -18,7 +18,7 @@ import './Spies.less';
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const Spies: React.FunctionComponent = () => {
-    const { dispatch } = React.useContext(storeContext);
+    const { dispatch } = useStore();
 
     const handleSwitchChange = (enabled: boolean): void => {
         // eslint-disable-next-line no-console
@@ -49,17 +49,17 @@ const Spies: React.FunctionComponent = () => {
 
             <ButtonsWizard
                 previous={
-                    <Button onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_PLAYERS })} type="additional">
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_PLAYERS)} type="additional">
                         Назад
                     </Button>
                 }
                 next={
-                    <Button onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_LOCATIONS })} type="action">
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_LOCATIONS)} type="action">
                         Вперед
                     </Button>
                 }
             >
-                <TimeSettings onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_TIME_SETTINGS })}>
+                <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_TIME_SETTINGS)}>
                     Настройки времени
                 </TimeSettings>
             </ButtonsWizard>

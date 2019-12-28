@@ -6,7 +6,7 @@ import Paragraph from 'components/common/Paragraph/Paragraph';
 import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
 
-import { storeContext } from 'store';
+import { useStore } from 'store';
 import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from 'store/reducers/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 
@@ -15,7 +15,7 @@ import './Locations.less';
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const Players: React.FunctionComponent = () => {
-    const { dispatch } = React.useContext(storeContext);
+    const { dispatch } = useStore();
 
     return (
         <>
@@ -95,17 +95,17 @@ const Players: React.FunctionComponent = () => {
             </div>
             <ButtonsWizard
                 previous={
-                    <Button onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_SPIES })} type="additional">
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_SPIES)} type="additional">
                         Назад
                     </Button>
                 }
                 next={
-                    <Button onClick={(): void => dispatch({ type: SET_APP_STATE_TO_GAME })} type="action">
+                    <Button onClick={(): void => dispatch(SET_APP_STATE_TO_GAME)} type="action">
                         Вперед
                     </Button>
                 }
             >
-                <TimeSettings onClick={(): void => dispatch({ type: SET_SETTINGS_STATE_TO_TIME_SETTINGS })}>
+                <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_TIME_SETTINGS)}>
                     Настройки времени
                 </TimeSettings>
             </ButtonsWizard>

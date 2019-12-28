@@ -5,7 +5,7 @@ import Rules from 'components/Rules/Rules';
 import Settings from 'components/Settings/Settings';
 import Game from 'components/Game/Game';
 
-import { storeContext } from 'store';
+import { useStore } from 'store';
 import { APP_STATES } from 'store/reducers/app';
 import './App.less';
 
@@ -14,7 +14,7 @@ const App: React.FunctionComponent = () => {
         state: {
             app: { appState },
         },
-    } = React.useContext(storeContext);
+    } = useStore();
 
     let body;
     switch (appState) {
