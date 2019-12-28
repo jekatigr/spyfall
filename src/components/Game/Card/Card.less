@@ -1,0 +1,23 @@
+@el: e('.card');
+
+@{el} {
+  &__back {
+    position: absolute;
+    backface-visibility: hidden;
+  }
+
+  &__face {
+    position: absolute;
+    transform: rotateY(180deg);
+    backface-visibility: hidden;
+  }
+
+  &__face-background {
+    position: relative;
+  }
+
+  &__face-inner {
+    position: absolute;
+    top: 0;
+  }
+}
