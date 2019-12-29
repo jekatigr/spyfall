@@ -69,7 +69,7 @@ const Locations: React.FunctionComponent = () => {
     const startGame = (): void => {
         // Select spies
         const spiesCount = playersInfo.players.length - 1; // TODO: get from state
-        const spies = [...playersInfo.players];
+        const spies = playersInfo.players.map(p => p.name);
         while (spies.length !== spiesCount) spies.splice(Math.floor(Math.random() * spies.length), 1);
         dispatch(SET_SPIES, { spies });
 
