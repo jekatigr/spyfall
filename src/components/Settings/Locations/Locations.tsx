@@ -24,7 +24,7 @@ import './Locations.less';
 
 const Locations: React.FunctionComponent = () => {
     const {
-        state: { locations, playersInfo, timeSettings },
+        state: { locations, playersInfo, timeSettings, spies },
         dispatch,
     } = useStore();
 
@@ -74,10 +74,11 @@ const Locations: React.FunctionComponent = () => {
 
     const startGame = (): void => {
         // Select spies
-        const spiesCount = playersInfo.players.length - 1; // TODO: get from state
-        const spies = playersInfo.players.map(p => p.name);
-        while (spies.length !== spiesCount) spies.splice(Math.floor(Math.random() * spies.length), 1);
-        dispatch(SET_SPIES, { spies });
+        let { spiesCount } = spies;
+        if (!spies.specificSpiesCount) spiesCount = Math.floor(Math.random() * playersInfo.players.length) + 1;
+        const gameSpies = playersInfo.players.map(p => p.name);
+        while (gameSpies.length !== spiesCount) gameSpies.splice(Math.floor(Math.random() * gameSpies.length), 1);
+        dispatch(SET_SPIES, { gameSpies });
 
         // Select location
         const allLocations = [];

@@ -92,7 +92,7 @@ export default (state = initialState, action): typeof initialState => {
         case SET_SPIES:
             return {
                 ...state,
-                spies: action.spies,
+                spies: action.gameSpies,
             };
         case SET_IDENTIFIED_PLAYERS:
             return {
