@@ -1,6 +1,7 @@
 export const SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS = 'SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS';
 export const SET_GAME_STATE_TO_ROUND = 'SET_GAME_STATE_TO_ROUND';
 export const SET_GAME_STATE_TO_DISCUSSION = 'SET_GAME_STATE_TO_DISCUSSION';
+export const SET_GAME_STATE_TO_IDENTIFY_SPIES = 'SET_GAME_STATE_TO_IDENTIFY_SPIES';
 export const SET_GAME_STATE_TO_RESULT = 'SET_GAME_STATE_TO_RESULT';
 
 export const SET_ROUND_TIME = 'SET_ROUND_TIME';
@@ -20,11 +21,11 @@ export const GAME_STATES = {
 const initialState = {
     gameState: GAME_STATES.ROLES_DISTRIBUTION,
     roundInfo: {
-        roundTime: null,
+        roundTime: 5000,
         startRound: null,
     },
     discussion: {
-        discussionTime: null,
+        discussionTime: 5000,
         startDiscussion: null,
     },
     spies: [],
@@ -48,10 +49,35 @@ export default (state = initialState, action): typeof initialState => {
                 ...state,
                 gameState: GAME_STATES.DISCUSSION,
             };
+        case SET_GAME_STATE_TO_IDENTIFY_SPIES:
+            return {
+                ...state,
+                gameState: GAME_STATES.IDENTIFY_SPIES,
+            };
         case SET_GAME_STATE_TO_RESULT:
             return {
                 ...state,
                 gameState: GAME_STATES.RESULTS,
+            };
+        case SET_ROUND_TIME:
+            return {
+                ...state,
+                roundInfo: { ...state.roundInfo, roundTime: action.time },
+            };
+        case SET_START_ROUND:
+            return {
+                ...state,
+                roundInfo: { ...state.roundInfo, startRound: action.time },
+            };
+        case SET_DISCUSSION_TIME:
+            return {
+                ...state,
+                discussion: { ...state.discussion, discussionTime: action.time },
+            };
+        case SET_START_DISCUSSION:
+            return {
+                ...state,
+                discussion: { ...state.discussion, startDiscussion: action.time },
             };
         default:
             return state;
