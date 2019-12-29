@@ -6,6 +6,8 @@ import Switcher from 'components/common/Switcher/Switcher';
 import Button from 'components/common/Button/Button';
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 
+import prefixedAsset from 'utils/assetPrefix';
+
 import { useStore } from 'store';
 import {
     SET_SETTINGS_STATE_TO_LOCATIONS,
@@ -14,8 +16,6 @@ import {
 } from 'store/reducers/settings';
 
 import './Spies.less';
-
-const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 const Spies: React.FunctionComponent = () => {
     const { dispatch } = useStore();
@@ -32,14 +32,14 @@ const Spies: React.FunctionComponent = () => {
             <div className="random-option">
                 <span className="random-option__name">Случайное количество</span>
                 <div className="option-circle random-option__inner">
-                    <img className="random-option__image_selected" src={`${assetPrefix}/dice.svg`} />
+                    <img className="random-option__image_selected" src={prefixedAsset('dice.svg')} />
                 </div>
             </div>
 
             <div className="random-option">
                 <span className="random-option__name random-option__name_muted">Случайная выключенная</span>
                 <div className="option-circle option-circle_muted random-option__inner">
-                    <img className="random-option__image_muted" src={`${assetPrefix}/dice-muted.svg`} />
+                    <img className="random-option__image_muted" src={prefixedAsset('dice-muted.svg')} />
                 </div>
             </div>
 

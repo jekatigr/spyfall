@@ -5,6 +5,7 @@ import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Button from 'components/common/Button/Button';
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
+import prefixedAsset from 'utils/assetPrefix';
 
 import { useStore } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
@@ -29,8 +30,6 @@ const colors = [
     'sky-blue',
     'blue',
 ];
-
-const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
 let editedPlayer = '';
 const Players: React.FunctionComponent = () => {
@@ -106,7 +105,7 @@ const Players: React.FunctionComponent = () => {
                     <div className="player-profile__inner">
                         <div className="player">
                             <div className={`player__image player__image_big player__image_${colors[10]}`}>
-                                <img className="player__icon player__icon_big" src={`${assetPrefix}/player.svg`} />
+                                <img className="player__icon player__icon_big" src={prefixedAsset('player.svg')} />
                             </div>
                         </div>
                         <div className="player-profile__input">
@@ -123,7 +122,7 @@ const Players: React.FunctionComponent = () => {
                         ) : (
                             <div className="player-profile__remove-player" onClick={deletePlayer}>
                                 Удалить игрока
-                                <img className="player-profile__remove-icon" src={`${assetPrefix}/remove.svg`} />
+                                <img className="player-profile__remove-icon" src={prefixedAsset('remove.svg')} />
                             </div>
                         )}
                         <Button onClick={savePlayer} type="action">
@@ -154,14 +153,14 @@ const Players: React.FunctionComponent = () => {
                                             setEditPlayer(true);
                                         }}
                                     >
-                                        <img src={`${assetPrefix}/add.svg`} />
+                                        <img src={prefixedAsset('add.svg')} />
                                     </button>
                                 </div>
                                 {players.map(player => (
                                     <div className="players-list__item" key={player.name}>
                                         <div className="player">
                                             <div className={`player__image player__image_${player.color}`}>
-                                                <img className="player__icon" src={`${assetPrefix}/player.svg`} />
+                                                <img className="player__icon" src={prefixedAsset('player.svg')} />
                                             </div>
                                             <div
                                                 className="edit player__edit"
@@ -171,7 +170,7 @@ const Players: React.FunctionComponent = () => {
                                                     setEditPlayer(true);
                                                 }}
                                             >
-                                                <img src={`${assetPrefix}/edit.svg`} />
+                                                <img src={prefixedAsset('edit.svg')} />
                                             </div>
                                             <Paragraph hasMargin className="player__name">
                                                 {player.name}
