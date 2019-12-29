@@ -1,8 +1,10 @@
+import baseLocations from 'constants/baseLocations';
+
 export const UPDATE_CUSTOM_LOCATIONS = 'UPDATE_CUSTOM_LOCATIONS';
 export const SELECT_LOCATION = 'SELECT_LOCATION';
 
 const initialState = {
-    baseLocations: { locations: ['A1', 'A2', 'A3'], name: 'Базовые', isSelected: true },
+    baseLocations: { locations: baseLocations, name: 'Базовые', isSelected: true },
     customLocations: { locations: ['Пусто!'], name: 'Кастомные', isSelected: false },
 };
 
