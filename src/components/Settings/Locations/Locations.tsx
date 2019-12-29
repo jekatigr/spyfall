@@ -11,14 +11,20 @@ import prefixedAsset from 'utils/assetPrefix';
 import { useStore } from 'store';
 import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from 'store/reducers/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
-import { SET_LOCATION, SET_SPIES } from 'store/reducers/game';
+import {
+    SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS,
+    SET_LOCATION,
+    SET_SPIES,
+    SET_ROUND_TIME,
+    SET_DISCUSSION_TIME,
+} from 'store/reducers/game';
 import { SELECT_LOCATION } from 'store/reducers/locations';
 
 import './Locations.less';
 
 const Locations: React.FunctionComponent = () => {
     const {
-        state: { locations, playersInfo },
+        state: { locations, playersInfo, timeSettings },
         dispatch,
     } = useStore();
 
@@ -80,7 +86,12 @@ const Locations: React.FunctionComponent = () => {
         const selectedLocation = allLocations[Math.floor(Math.random() * allLocations.length)];
         dispatch(SET_LOCATION, { location: selectedLocation });
 
+        // Set round durations
+        dispatch(SET_ROUND_TIME, { time: timeSettings.roundTime * 1000 * 60 });
+        dispatch(SET_DISCUSSION_TIME, { time: timeSettings.roundTime * 1000 * 60 });
+
         // Start game
+        dispatch(SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS);
         dispatch(SET_APP_STATE_TO_GAME);
     };
 

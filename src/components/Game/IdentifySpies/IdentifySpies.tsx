@@ -21,7 +21,7 @@ const IdentifySpies: React.FunctionComponent = () => {
         if (identifiedPlayers.indexOf(player.name) !== -1) {
             ret = (
                 <div>
-                    Игрок {player.name} - проверен и он {spies.indexOf(player.name) === -1 ? '' : 'не'} шпион
+                    Игрок {player.name} - проверен и он {spies.indexOf(player.name) === -1 ? 'не' : ''} шпион
                 </div>
             );
         } else {
