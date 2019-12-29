@@ -15,14 +15,20 @@ import {
     SET_SETTINGS_STATE_TO_TIME_SETTINGS,
 } from 'store/reducers/settings';
 
+import { UPDATE_SPIES_FAMILIAR } from 'store/reducers/spies';
+
 import './Spies.less';
 
 const Spies: React.FunctionComponent = () => {
-    const { dispatch } = useStore();
+    const {
+        state: { spies },
+        dispatch,
+    } = useStore();
 
     const handleSwitchChange = (enabled: boolean): void => {
         // eslint-disable-next-line no-console
         console.log(enabled);
+        dispatch(UPDATE_SPIES_FAMILIAR, !enabled);
     };
 
     return (
@@ -44,7 +50,9 @@ const Spies: React.FunctionComponent = () => {
             </div>
 
             <Header>Настройки</Header>
-            <Switcher onChange={handleSwitchChange}>Шпионы знакомы</Switcher>
+            <Switcher onChange={handleSwitchChange} enabledByDefault={spies.spiesFamiliar}>
+                Шпионы знакомы
+            </Switcher>
             <Switcher onChange={(): void => {}}>Звук</Switcher>
 
             <ButtonsWizard
