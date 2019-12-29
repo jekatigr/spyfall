@@ -13,9 +13,57 @@ import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 
 import './Locations.less';
+import { UPDATE_CUSTOM_LOCATIONS, SELECT_LOCATION } from '../../../store/reducers/locations';
 
-const Players: React.FunctionComponent = () => {
-    const { dispatch } = useStore();
+const Locations: React.FunctionComponent = () => {
+    const {
+        state: { locations },
+        dispatch,
+    } = useStore();
+
+    const getLocationCategory = (name, isSelected, selectAction, editAction) => (
+        <div className="location-category">
+            <div className={`option-circle ${isSelected ? '' : 'option-circle_muted'}`} onClick={selectAction}>
+                <img
+                    className={`option-circle__image location-category__basic-image_${
+                        isSelected ? 'selected' : 'muted'
+                    }`}
+                    src={prefixedAsset(isSelected ? 'basic.svg' : 'basic-muted.svg')}
+                />
+            </div>
+            <div className="location-category__inner">
+                <span className="location-category__name">{name}</span>
+                <div className="location-category__edit">
+                    <div className="location-category__edit-text">Редактировать категорию</div>
+                    <div className="edit location-category__edit-icon" onClick={editAction}>
+                        <img src={prefixedAsset('edit.svg')} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
+    const locationsCategoriesJSX = [];
+
+    // Base locations
+    locationsCategoriesJSX.push(
+        getLocationCategory(
+            locations.baseLocations.name,
+            locations.baseLocations.isSelected,
+            () => dispatch(SELECT_LOCATION, { name: locations.baseLocations.name }),
+            () => console.log('test2'),
+        ),
+    );
+
+    // Custom locations
+    locationsCategoriesJSX.push(
+        getLocationCategory(
+            locations.customLocations.name,
+            locations.customLocations.isSelected,
+            () => dispatch(SELECT_LOCATION, { name: locations.customLocations.name }),
+            () => console.log('test2'),
+        ),
+    );
 
     return (
         <>
@@ -24,74 +72,7 @@ const Players: React.FunctionComponent = () => {
                 <Paragraph weight="light" hasMargin>
                     Нажмите на иконку, чтобы выбрать категории локаций:
                 </Paragraph>
-                <div className="location-category">
-                    <div className="option-circle">
-                        <img
-                            className="option-circle__image location-category__basic-image_selected"
-                            src={prefixedAsset('basic.svg')}
-                        />
-                    </div>
-                    <div className="location-category__inner">
-                        <span className="location-category__name">Базовые</span>
-                        <div className="location-category__edit">
-                            <div className="location-category__edit-text">Редактировать категорию</div>
-                            <div className="edit location-category__edit-icon">
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="location-category">
-                    <div className="option-circle option-circle_muted">
-                        <img
-                            className="option-circle__image location-category__basic-image_muted"
-                            src={prefixedAsset('basic-muted.svg')}
-                        />
-                    </div>
-                    <div className="location-category__inner">
-                        <span className="location-category__name location-category__name_muted">Базовые выкл</span>
-                        <div className="location-category__edit">
-                            <div className="location-category__edit-text">Редактировать категорию</div>
-                            <div className="edit location-category__edit-icon">
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="location-category">
-                    <div className="option-circle">
-                        <img
-                            className="option-circle__image location-category__custom-image_selected"
-                            src={prefixedAsset('custom.svg')}
-                        />
-                    </div>
-                    <div className="location-category__inner">
-                        <span className="location-category__name">Кастомные</span>
-                        <div className="location-category__edit">
-                            <div className="location-category__edit-text">Редактировать категорию</div>
-                            <div className="edit location-category__edit-icon">
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="location-category">
-                    <div className="option-circle option-circle_muted">
-                        <img
-                            className="option-circle__image location-category__custom-image_muted"
-                            src={prefixedAsset('custom-muted.svg')}
-                        />
-                    </div>
-                    <div className="location-category__inner">
-                        <span className="location-category__name location-category__name_muted">Кастомные выкл</span>
-                        <div className="location-category__edit">
-                            <div className="location-category__edit-text">Редактировать категорию</div>
-                            <div className="edit location-category__edit-icon">
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {locationsCategoriesJSX}
             </div>
             <ButtonsWizard
                 previous={
@@ -113,4 +94,4 @@ const Players: React.FunctionComponent = () => {
     );
 };
 
-export default Players;
+export default Locations;
