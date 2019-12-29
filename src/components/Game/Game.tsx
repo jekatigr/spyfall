@@ -19,10 +19,10 @@ const Game: React.FunctionComponent = () => {
             body = <RolesDistribution />;
             break;
         case GAME_STATES.ROUND:
-            body = <Round isRound />;
+            body = <Round type="ROUND" />;
             break;
         case GAME_STATES.DISCUSSION:
-            body = <Round isRound={false} />;
+            body = <Round type="DISCUSSION" />;
             break;
         case GAME_STATES.IDENTIFY_SPIES:
             body = <> Идентефикация </>;

@@ -11,11 +11,13 @@ import {
     SET_START_DISCUSSION,
 } from 'store/reducers/game';
 
+const ROUND_TYPE = 'ROUND';
+
 type Props = {
-    isRound: boolean;
+    type: 'ROUND' | 'DISCUSSION';
 };
 
-const Round: React.FunctionComponent<Props> = ({ isRound }) => {
+const Round: React.FunctionComponent<Props> = ({ type }) => {
     const {
         state: { game },
         dispatch,
@@ -33,7 +35,7 @@ const Round: React.FunctionComponent<Props> = ({ isRound }) => {
     });
 
     const finishAction = (): void => {
-        if (isRound) {
+        if (type === ROUND_TYPE) {
             dispatch(SET_GAME_STATE_TO_DISCUSSION);
             dispatch(SET_START_DISCUSSION, { time: Date.now() });
         } else {
@@ -42,16 +44,16 @@ const Round: React.FunctionComponent<Props> = ({ isRound }) => {
     };
 
     let timeLeft = game.discussion.discussionTime - (Date.now() - game.discussion.startDiscussion);
-    if (isRound) timeLeft = game.roundInfo.roundTime - (Date.now() - game.roundInfo.startRound);
+    if (type === ROUND_TYPE) timeLeft = game.roundInfo.roundTime - (Date.now() - game.roundInfo.startRound);
 
     return (
         <>
-            <Header>{isRound ? 'Кон' : 'Обсуждение'}</Header>
+            <Header>{type === ROUND_TYPE ? 'Кон' : 'Обсуждение'}</Header>
             {timeLeft < 0 ? (
                 <>
-                    <Paragraph> {isRound ? 'Раунд завершён!' : 'Обсуждение завершено!'} </Paragraph>
+                    <Paragraph> {type === ROUND_TYPE ? 'Раунд завершён!' : 'Обсуждение завершено!'} </Paragraph>
                     <Button onClick={finishAction} type="action">
-                        {isRound ? 'Начать обсуждение' : 'Выбрать шпиона'}
+                        {type === ROUND_TYPE ? 'Начать обсуждение' : 'Выбрать шпиона'}
                     </Button>
                 </>
             ) : (
