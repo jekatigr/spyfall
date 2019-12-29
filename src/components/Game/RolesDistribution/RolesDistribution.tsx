@@ -8,27 +8,11 @@ import CardsSlider from 'components/Game/CardsSlider/CardsSlider';
 import { useStore } from 'store';
 import { SET_GAME_STATE_TO_ROUND, SET_START_ROUND } from 'store/reducers/game';
 
-const cards = [
-    {
-        name: 'Игрок 1',
-        isSpy: true,
-    },
-    {
-        name: 'Игрок 2',
-        isSpy: false,
-    },
-    {
-        name: 'Игрок 3',
-        isSpy: false,
-    },
-    {
-        name: 'Игрок 4',
-        isSpy: true,
-    },
-];
-
 const Rules: React.FunctionComponent = () => {
-    const { dispatch } = useStore();
+    const {
+        state: { game, playersInfo },
+        dispatch,
+    } = useStore();
 
     const [isRolesDistributed, setRolesDistributed] = React.useState(false);
 
@@ -36,6 +20,10 @@ const Rules: React.FunctionComponent = () => {
         dispatch(SET_START_ROUND, { time: Date.now() });
         dispatch(SET_GAME_STATE_TO_ROUND);
     };
+
+    const cards = playersInfo.players.map(player => {
+        return { name: player.name, isSpy: game.spies.indexOf(player.name) !== -1 };
+    });
 
     return (
         <>
@@ -50,7 +38,7 @@ const Rules: React.FunctionComponent = () => {
             ) : (
                 <CardsSlider
                     cards={cards}
-                    location="Москва"
+                    location={game.location}
                     spies={cards.filter(s => s.isSpy).map(s => s.name)}
                     onFinish={(): void => setRolesDistributed(true)}
                 />

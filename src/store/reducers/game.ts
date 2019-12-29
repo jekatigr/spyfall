@@ -10,6 +10,9 @@ export const SET_START_ROUND = 'SET_START_ROUND';
 export const SET_DISCUSSION_TIME = 'SET_DISCUSSION_TIME';
 export const SET_START_DISCUSSION = 'SET_START_DISCUSSION';
 
+export const SET_LOCATION = 'SET_LOCATION';
+export const SET_SPIES = 'SET_SPIES';
+
 export const GAME_STATES = {
     ROLES_DISTRIBUTION: 'ROLES_DISTRIBUTION',
     ROUND: 'ROUND',
@@ -78,6 +81,16 @@ export default (state = initialState, action): typeof initialState => {
             return {
                 ...state,
                 discussion: { ...state.discussion, startDiscussion: action.time },
+            };
+        case SET_LOCATION:
+            return {
+                ...state,
+                location: action.location,
+            };
+        case SET_SPIES:
+            return {
+                ...state,
+                spies: action.spies,
             };
         default:
             return state;

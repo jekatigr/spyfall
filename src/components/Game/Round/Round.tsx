@@ -53,7 +53,7 @@ const Round: React.FunctionComponent<Props> = ({ type }) => {
                 <>
                     <Paragraph> {type === ROUND_TYPE ? 'Раунд завершён!' : 'Обсуждение завершено!'} </Paragraph>
                     <Button onClick={finishAction} type="action">
-                        {type === ROUND_TYPE ? 'Начать обсуждение' : 'Выбрать шпиона'}
+                        {type === ROUND_TYPE ? 'Начать обсуждение' : 'Угадать шпионов'}
                     </Button>
                 </>
             ) : (

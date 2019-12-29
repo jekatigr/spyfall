@@ -11,13 +11,14 @@ import prefixedAsset from 'utils/assetPrefix';
 import { useStore } from 'store';
 import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from 'store/reducers/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
+import { SET_LOCATION, SET_SPIES } from 'store/reducers/game';
+import { SELECT_LOCATION } from 'store/reducers/locations';
 
 import './Locations.less';
-import { SELECT_LOCATION } from '../../../store/reducers/locations';
 
 const Locations: React.FunctionComponent = () => {
     const {
-        state: { locations },
+        state: { locations, playersInfo },
         dispatch,
     } = useStore();
 
@@ -65,6 +66,24 @@ const Locations: React.FunctionComponent = () => {
         ),
     );
 
+    const startGame = (): void => {
+        // Select spies
+        const spiesCount = playersInfo.players.length - 1; // TODO: get from state
+        const spies = [...playersInfo.players];
+        while (spies.length !== spiesCount) spies.splice(Math.floor(Math.random() * spies.length), 1);
+        dispatch(SET_SPIES, { spies });
+
+        // Select location
+        const allLocations = [];
+        if (locations.baseLocations.isSelected) allLocations.push(...locations.baseLocations.locations);
+        if (locations.customLocations.isSelected) allLocations.push(...locations.customLocations.locations);
+        const selectedLocation = allLocations[Math.floor(Math.random() * allLocations.length)];
+        dispatch(SET_LOCATION, { location: selectedLocation });
+
+        // Start game
+        dispatch(SET_APP_STATE_TO_GAME);
+    };
+
     return (
         <>
             <div>
@@ -81,7 +100,7 @@ const Locations: React.FunctionComponent = () => {
                     </Button>
                 }
                 next={
-                    <Button onClick={(): void => dispatch(SET_APP_STATE_TO_GAME)} type="action">
+                    <Button onClick={startGame} type="action">
                         Вперед
                     </Button>
                 }
