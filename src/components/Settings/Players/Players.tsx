@@ -190,7 +190,11 @@ const Players: React.FunctionComponent = () => {
                         </Button>
                     }
                     next={
-                        <Button onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_SPIES)} type="action">
+                        <Button
+                            onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_SPIES)}
+                            type="action"
+                            disabled={players.length <= 2}
+                        >
                             Вперед
                         </Button>
                     }

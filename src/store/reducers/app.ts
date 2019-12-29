@@ -12,6 +12,7 @@ export const APP_STATES = {
 
 const initialState = {
     appState: APP_STATES.START_SCREEN,
+    // appState: APP_STATES.GAME,
 };
 
 export default (state = initialState, action): typeof initialState => {

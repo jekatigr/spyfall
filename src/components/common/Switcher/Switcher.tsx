@@ -4,11 +4,12 @@ import './Switcher.less';
 
 type Props = {
     children: React.ReactNode;
+    enabledByDefault?: boolean;
     onChange: (enabled: boolean) => void;
 };
 
-const Switcher: React.FunctionComponent<Props> = ({ children, onChange }) => {
-    const [enabled, setEnabled] = React.useState(false);
+const Switcher: React.FunctionComponent<Props> = ({ children, enabledByDefault = false, onChange }) => {
+    const [enabled, setEnabled] = React.useState(enabledByDefault);
 
     const handleChange = (): void => {
         setEnabled(!enabled);

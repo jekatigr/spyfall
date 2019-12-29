@@ -11,11 +11,90 @@ import prefixedAsset from 'utils/assetPrefix';
 import { useStore } from 'store';
 import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from 'store/reducers/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
+import {
+    SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS,
+    SET_LOCATION,
+    SET_SPIES,
+    SET_ROUND_TIME,
+    SET_DISCUSSION_TIME,
+} from 'store/reducers/game';
+import { SELECT_LOCATION } from 'store/reducers/locations';
 
 import './Locations.less';
 
-const Players: React.FunctionComponent = () => {
-    const { dispatch } = useStore();
+const Locations: React.FunctionComponent = () => {
+    const {
+        state: { locations, playersInfo, timeSettings, spies },
+        dispatch,
+    } = useStore();
+
+    const getLocationCategory = (name, isSelected, selectAction, editAction): JSX.Element => (
+        <div className="location-category">
+            <div className={`option-circle ${isSelected ? '' : 'option-circle_muted'}`} onClick={selectAction}>
+                <img
+                    className={`option-circle__image location-category__basic-image_${
+                        isSelected ? 'selected' : 'muted'
+                    }`}
+                    src={prefixedAsset(isSelected ? 'basic.svg' : 'basic-muted.svg')}
+                />
+            </div>
+            <div className="location-category__inner">
+                <span className="location-category__name">{name}</span>
+                <div className="location-category__edit">
+                    <div className="location-category__edit-text">Редактировать категорию</div>
+                    <div className="edit location-category__edit-icon" onClick={editAction}>
+                        <img src={prefixedAsset('edit.svg')} />
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+
+    const locationsCategoriesJSX = [];
+
+    // Base locations
+    locationsCategoriesJSX.push(
+        getLocationCategory(
+            locations.baseLocations.name,
+            locations.baseLocations.isSelected,
+            () => dispatch(SELECT_LOCATION, { name: locations.baseLocations.name }),
+            () => {},
+        ),
+    );
+
+    // Custom locations
+    locationsCategoriesJSX.push(
+        getLocationCategory(
+            locations.customLocations.name,
+            locations.customLocations.isSelected,
+            () => dispatch(SELECT_LOCATION, { name: locations.customLocations.name }),
+            () => {},
+        ),
+    );
+
+    const startGame = (): void => {
+        // Select spies
+        let { spiesCount } = spies;
+        if (!spies.specificSpiesCount) spiesCount = Math.floor(Math.random() * playersInfo.players.length) + 1;
+        const gameSpies = playersInfo.players.map(p => p.name);
+        while (gameSpies.length !== spiesCount) gameSpies.splice(Math.floor(Math.random() * gameSpies.length), 1);
+        dispatch(SET_SPIES, { gameSpies });
+
+        // Select location
+        const allLocations = [];
+        if (locations.baseLocations.isSelected) allLocations.push(...locations.baseLocations.locations);
+        if (locations.customLocations.isSelected) allLocations.push(...locations.customLocations.locations);
+        const selectedLocation = allLocations[Math.floor(Math.random() * allLocations.length)];
+        dispatch(SET_LOCATION, { location: selectedLocation });
+
+        // Set round durations
+        dispatch(SET_ROUND_TIME, { time: timeSettings.roundTime * 1000 * 60 });
+        dispatch(SET_DISCUSSION_TIME, { time: timeSettings.roundTime * 1000 * 60 });
+
+        // Start game
+        dispatch(SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS);
+        dispatch(SET_APP_STATE_TO_GAME);
+    };
 
     return (
         <>
@@ -24,74 +103,7 @@ const Players: React.FunctionComponent = () => {
                 <Paragraph weight="light" hasMargin>
                     Нажмите на иконку, чтобы выбрать категории локаций:
                 </Paragraph>
-                <div className="location-category">
-                    <div className="option-circle">
-                        <img
-                            className="option-circle__image location-category__basic-image_selected"
-                            src={prefixedAsset('basic.svg')}
-                        />
-                    </div>
-                    <div className="location-category__inner">
-                        <span className="location-category__name">Базовые</span>
-                        <div className="location-category__edit">
-                            <div className="location-category__edit-text">Редактировать категорию</div>
-                            <div className="edit location-category__edit-icon">
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="location-category">
-                    <div className="option-circle option-circle_muted">
-                        <img
-                            className="option-circle__image location-category__basic-image_muted"
-                            src={prefixedAsset('basic-muted.svg')}
-                        />
-                    </div>
-                    <div className="location-category__inner">
-                        <span className="location-category__name location-category__name_muted">Базовые выкл</span>
-                        <div className="location-category__edit">
-                            <div className="location-category__edit-text">Редактировать категорию</div>
-                            <div className="edit location-category__edit-icon">
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="location-category">
-                    <div className="option-circle">
-                        <img
-                            className="option-circle__image location-category__custom-image_selected"
-                            src={prefixedAsset('custom.svg')}
-                        />
-                    </div>
-                    <div className="location-category__inner">
-                        <span className="location-category__name">Кастомные</span>
-                        <div className="location-category__edit">
-                            <div className="location-category__edit-text">Редактировать категорию</div>
-                            <div className="edit location-category__edit-icon">
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div className="location-category">
-                    <div className="option-circle option-circle_muted">
-                        <img
-                            className="option-circle__image location-category__custom-image_muted"
-                            src={prefixedAsset('custom-muted.svg')}
-                        />
-                    </div>
-                    <div className="location-category__inner">
-                        <span className="location-category__name location-category__name_muted">Кастомные выкл</span>
-                        <div className="location-category__edit">
-                            <div className="location-category__edit-text">Редактировать категорию</div>
-                            <div className="edit location-category__edit-icon">
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                {locationsCategoriesJSX}
             </div>
             <ButtonsWizard
                 previous={
@@ -100,7 +112,7 @@ const Players: React.FunctionComponent = () => {
                     </Button>
                 }
                 next={
-                    <Button onClick={(): void => dispatch(SET_APP_STATE_TO_GAME)} type="action">
+                    <Button onClick={startGame} type="action">
                         Вперед
                     </Button>
                 }
@@ -113,4 +125,4 @@ const Players: React.FunctionComponent = () => {
     );
 };
 
-export default Players;
+export default Locations;
