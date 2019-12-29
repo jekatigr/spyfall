@@ -12,6 +12,7 @@ export const SET_START_DISCUSSION = 'SET_START_DISCUSSION';
 
 export const SET_LOCATION = 'SET_LOCATION';
 export const SET_SPIES = 'SET_SPIES';
+export const SET_IDENTIFIED_PLAYERS = 'SET_IDENTIFIED_PLAYERS';
 
 export const GAME_STATES = {
     ROLES_DISTRIBUTION: 'ROLES_DISTRIBUTION',
@@ -33,6 +34,7 @@ const initialState = {
     },
     spies: [],
     location: '',
+    identifiedPlayers: [],
 };
 
 export default (state = initialState, action): typeof initialState => {
@@ -91,6 +93,11 @@ export default (state = initialState, action): typeof initialState => {
             return {
                 ...state,
                 spies: action.spies,
+            };
+        case SET_IDENTIFIED_PLAYERS:
+            return {
+                ...state,
+                identifiedPlayers: action.identifiedPlayers,
             };
         default:
             return state;

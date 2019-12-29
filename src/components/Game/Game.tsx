@@ -2,6 +2,7 @@ import * as React from 'react';
 
 import RolesDistribution from 'components/Game/RolesDistribution/RolesDistribution';
 import Round from 'components/Game/Round/Round';
+import IdentifySpies from 'components/Game/IdentifySpies/IdentifySpies';
 
 import { useStore } from '../../store';
 import { GAME_STATES } from '../../store/reducers/game';
@@ -25,7 +26,7 @@ const Game: React.FunctionComponent = () => {
             body = <Round type="DISCUSSION" />;
             break;
         case GAME_STATES.IDENTIFY_SPIES:
-            body = <> Идентефикация </>;
+            body = <IdentifySpies />;
             break;
         case GAME_STATES.RESULTS:
             body = <> Результаты </>;
