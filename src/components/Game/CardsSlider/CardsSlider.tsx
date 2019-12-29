@@ -16,13 +16,14 @@ type Props = {
     location: string;
     cards: CardType[];
     spies: string[];
+    onFinish: () => void;
 };
 
 type AnimationType = 'next' | 'previous' | 'center' | undefined;
 
 const ANIMATION_DURATION_MS = 400;
 
-const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies }) => {
+const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, onFinish }) => {
     const [currentCardIndex, setCurrentCardIndex] = React.useState(0);
     const [animationDirection, setAnimationDirection] = React.useState<AnimationType>(undefined);
     const [isCenterFlipped, setIsCenterFlipped] = React.useState<boolean>(false);
@@ -83,6 +84,11 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies })
             setIsCenterFlipped(newIsCenterFlipped);
         }
     };
+
+    if (currentCardIndex >= cards.length) {
+        onFinish();
+        return <></>;
+    }
 
     return (
         <>

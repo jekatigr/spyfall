@@ -9,12 +9,16 @@ export const SET_START_ROUND = 'SET_START_ROUND';
 export const SET_DISCUSSION_TIME = 'SET_DISCUSSION_TIME';
 export const SET_START_DISCUSSION = 'SET_START_DISCUSSION';
 
-const GAME_STATES = {
+export const GAME_STATES = {
     ROLES_DISTRIBUTION: 'ROLES_DISTRIBUTION',
     ROUND: 'ROUND',
     DISCUSSION: 'DISCUSSION',
     IDENTIFY_SPIES: 'IDENTIFY_SPIES',
     RESULTS: 'RESULTS',
+};
+
+const initialState = {
+    gameState: GAME_STATES.ROLES_DISTRIBUTION,
     roundInfo: {
         roundTime: null,
         startRound: null,
@@ -23,10 +27,8 @@ const GAME_STATES = {
         discussionTime: null,
         startDiscussion: null,
     },
-};
-
-const initialState = {
-    game: GAME_STATES.ROLES_DISTRIBUTION,
+    spies: [],
+    location: '',
 };
 
 export default (state = initialState, action): typeof initialState => {
@@ -34,22 +36,22 @@ export default (state = initialState, action): typeof initialState => {
         case SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS:
             return {
                 ...state,
-                game: GAME_STATES.ROLES_DISTRIBUTION,
+                gameState: GAME_STATES.ROLES_DISTRIBUTION,
             };
         case SET_GAME_STATE_TO_ROUND:
             return {
                 ...state,
-                game: GAME_STATES.ROUND,
+                gameState: GAME_STATES.ROUND,
             };
         case SET_GAME_STATE_TO_DISCUSSION:
             return {
                 ...state,
-                game: GAME_STATES.DISCUSSION,
+                gameState: GAME_STATES.DISCUSSION,
             };
         case SET_GAME_STATE_TO_RESULT:
             return {
                 ...state,
-                game: GAME_STATES.RESULTS,
+                gameState: GAME_STATES.RESULTS,
             };
         default:
             return state;

@@ -13,7 +13,7 @@ import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 
 import './Locations.less';
-import { UPDATE_CUSTOM_LOCATIONS, SELECT_LOCATION } from '../../../store/reducers/locations';
+import { SELECT_LOCATION } from '../../../store/reducers/locations';
 
 const Locations: React.FunctionComponent = () => {
     const {
@@ -21,7 +21,7 @@ const Locations: React.FunctionComponent = () => {
         dispatch,
     } = useStore();
 
-    const getLocationCategory = (name, isSelected, selectAction, editAction) => (
+    const getLocationCategory = (name, isSelected, selectAction, editAction): JSX.Element => (
         <div className="location-category">
             <div className={`option-circle ${isSelected ? '' : 'option-circle_muted'}`} onClick={selectAction}>
                 <img
@@ -51,7 +51,7 @@ const Locations: React.FunctionComponent = () => {
             locations.baseLocations.name,
             locations.baseLocations.isSelected,
             () => dispatch(SELECT_LOCATION, { name: locations.baseLocations.name }),
-            () => console.log('test2'),
+            () => {},
         ),
     );
 
@@ -61,7 +61,7 @@ const Locations: React.FunctionComponent = () => {
             locations.customLocations.name,
             locations.customLocations.isSelected,
             () => dispatch(SELECT_LOCATION, { name: locations.customLocations.name }),
-            () => console.log('test2'),
+            () => {},
         ),
     );
 

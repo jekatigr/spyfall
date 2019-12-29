@@ -1,44 +1,39 @@
 import * as React from 'react';
 
-import CardsSlider from 'components/Game/CardsSlider/CardsSlider';
+import RolesDistribution from 'components/Game/RolesDistribution/RolesDistribution';
 
-const cards = [
-    {
-        name: 'Игрок 1',
-        isSpy: true,
-    },
-    {
-        name: 'Игрок 2',
-        isSpy: true,
-    },
-    {
-        name: 'Игрок 3',
-        isSpy: true,
-    },
-    {
-        name: 'Игрок 4',
-        isSpy: true,
-    },
-    {
-        name: 'Игрок 5',
-        isSpy: true,
-    },
-    {
-        name: 'Игрок 6',
-        isSpy: true,
-    },
-    {
-        name: 'Игрок 7',
-        isSpy: true,
-    },
-    {
-        name: 'Игрок 8',
-        isSpy: true,
-    },
-];
+import { useStore } from '../../store';
+import { GAME_STATES } from '../../store/reducers/game';
 
-const Game: React.FunctionComponent = () => (
-    <CardsSlider cards={cards} location="Москва" spies={cards.filter(s => s.isSpy).map(s => s.name)} />
-);
+const Game: React.FunctionComponent = () => {
+    const {
+        state: {
+            game: { gameState },
+        },
+    } = useStore();
+
+    let body;
+    switch (gameState) {
+        case GAME_STATES.ROLES_DISTRIBUTION:
+            body = <RolesDistribution />;
+            break;
+        case GAME_STATES.ROUND:
+            body = <> Раунд </>;
+            break;
+        case GAME_STATES.DISCUSSION:
+            body = <> Дискуссия </>;
+            break;
+        case GAME_STATES.IDENTIFY_SPIES:
+            body = <> Идентефикация </>;
+            break;
+        case GAME_STATES.RESULTS:
+            body = <> Результаты </>;
+            break;
+        default:
+        // console.error('TODO');
+    }
+
+    return <div className="app-container">{body}</div>;
+};
 
 export default Game;
