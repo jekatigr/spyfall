@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import TimeSettings from 'components/common/TimeSettings/TimeSettings';
+import AdditionalSettings from 'components/common/AdditionalSettings/AdditionalSettings';
 import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Button from 'components/common/Button/Button';
@@ -201,9 +201,9 @@ const Players: React.FunctionComponent = () => {
                         </Button>
                     }
                 >
-                    <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_TIME_SETTINGS)}>
+                    <AdditionalSettings onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_TIME_SETTINGS)}>
                         Настройки времени
-                    </TimeSettings>
+                    </AdditionalSettings>
                 </ButtonsWizard>
             </>
         );

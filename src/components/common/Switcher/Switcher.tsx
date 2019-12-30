@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { block } from 'bem-cn';
 
 import './Switcher.less';
 
@@ -8,6 +9,7 @@ type Props = {
     onChange: (enabled: boolean) => void;
 };
 
+const b = block('switcher');
 const Switcher: React.FunctionComponent<Props> = ({ children, enabledByDefault = false, onChange }) => {
     const [enabled, setEnabled] = React.useState(enabledByDefault);
 
@@ -17,10 +19,10 @@ const Switcher: React.FunctionComponent<Props> = ({ children, enabledByDefault =
     };
 
     return (
-        <div className="switcher" onClick={handleChange}>
-            <div className="switcher__label">{children}</div>
-            <div className={`switcher__inner${enabled ? ' switcher__inner_enabled' : ''}`}>
-                <div className={`switcher__switch${enabled ? ' switcher__switch_enabled' : ''}`} />
+        <div className={b({ enabled })} onClick={handleChange}>
+            <div className={b('label')}>{children}</div>
+            <div className={b('inner')}>
+                <div className={b('switch')} />
             </div>
         </div>
     );
