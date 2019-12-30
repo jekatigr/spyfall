@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { block } from 'bem-cn';
 
 import AdditionalSettings from 'components/common/AdditionalSettings/AdditionalSettings';
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
@@ -22,57 +23,22 @@ import { SELECT_LOCATION } from 'store/reducers/settings/locations';
 
 import './Locations.less';
 
+const b = block('location-category');
 const Locations: React.FunctionComponent = () => {
     const {
         state: {
-            settings: { locations, playersInfo, timeSettings, spies },
+            settings: {
+                locations: {
+                    baseLocations: { isSelected: basicSelected, name: basicName, locations: basicLocations },
+                    customLocations: { isSelected: customSelected, name: customName, locations: customLocations },
+                },
+                playersInfo,
+                timeSettings,
+                spies,
+            },
         },
         dispatch,
     } = useStore();
-
-    const getLocationCategory = (name, isSelected, selectAction, editAction): JSX.Element => (
-        <div className="location-category">
-            <div className={`option-circle ${isSelected ? '' : 'option-circle_muted'}`} onClick={selectAction}>
-                <img
-                    className={`option-circle__image location-category__basic-image_${
-                        isSelected ? 'selected' : 'muted'
-                    }`}
-                    src={prefixedAsset(isSelected ? 'basic.svg' : 'basic-muted.svg')}
-                />
-            </div>
-            <div className="location-category__inner">
-                <span className="location-category__name">{name}</span>
-                <div className="location-category__edit">
-                    <div className="location-category__edit-text">Редактировать категорию</div>
-                    <div className="edit location-category__edit-icon" onClick={editAction}>
-                        <img src={prefixedAsset('edit.svg')} />
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
-
-    const locationsCategoriesJSX = [];
-
-    // Base locations
-    locationsCategoriesJSX.push(
-        getLocationCategory(
-            locations.baseLocations.name,
-            locations.baseLocations.isSelected,
-            () => dispatch(SELECT_LOCATION, { name: locations.baseLocations.name }),
-            () => {},
-        ),
-    );
-
-    // Custom locations
-    locationsCategoriesJSX.push(
-        getLocationCategory(
-            locations.customLocations.name,
-            locations.customLocations.isSelected,
-            () => dispatch(SELECT_LOCATION, { name: locations.customLocations.name }),
-            () => {},
-        ),
-    );
 
     const startGame = (): void => {
         // Select spies
@@ -84,8 +50,8 @@ const Locations: React.FunctionComponent = () => {
 
         // Select location
         const allLocations = [];
-        if (locations.baseLocations.isSelected) allLocations.push(...locations.baseLocations.locations);
-        if (locations.customLocations.isSelected) allLocations.push(...locations.customLocations.locations);
+        if (basicSelected) allLocations.push(...basicLocations);
+        if (customSelected) allLocations.push(...customLocations);
         const selectedLocation = allLocations[Math.floor(Math.random() * allLocations.length)];
         dispatch(SET_LOCATION, { location: selectedLocation });
 
@@ -105,7 +71,40 @@ const Locations: React.FunctionComponent = () => {
                 <Paragraph weight="light" hasMargin>
                     Нажмите на иконку, чтобы выбрать категории локаций:
                 </Paragraph>
-                {locationsCategoriesJSX}
+                <div className={b({ muted: !basicSelected })}>
+                    <div className={b('circle')} onClick={(): void => dispatch(SELECT_LOCATION, { name: basicName })}>
+                        <img
+                            className={b('basic-image')}
+                            src={prefixedAsset(basicSelected ? 'basic.svg' : 'basic-muted.svg')}
+                        />
+                    </div>
+                    <div className={b('inner')}>
+                        <span className={b('name')}>{basicName}</span>
+                        <div className={b('edit')}>
+                            <div className={b('edit-text')}>Редактировать категорию</div>
+                            <div className={b('edit-icon').mix('edit')}>
+                                <img src={prefixedAsset('edit.svg')} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div className={b({ muted: !customSelected })}>
+                    <div className={b('circle')} onClick={(): void => dispatch(SELECT_LOCATION, { name: customName })}>
+                        <img
+                            className={b('custom-image')}
+                            src={prefixedAsset(customSelected ? 'custom.svg' : 'custom-muted.svg')}
+                        />
+                    </div>
+                    <div className={b('inner')}>
+                        <span className={b('name')}>{customName}</span>
+                        <div className={b('edit')}>
+                            <div className={b('edit-text')}>Редактировать категорию</div>
+                            <div className={b('edit-icon').mix('edit')}>
+                                <img src={prefixedAsset('edit.svg')} />
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
             <ButtonsWizard
                 previous={
