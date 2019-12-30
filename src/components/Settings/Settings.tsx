@@ -1,7 +1,8 @@
 import * as React from 'react';
 
 import ProgressBar from 'components/common/ProgressBar/ProgressBar';
-import Players from 'components/Settings/Players/Players';
+import PlayersList from 'components/Settings/PlayersList/PlayersList';
+import PlayerProfile from 'components/Settings/PlayerProfile/PlayerProfile';
 import Spies from 'components/Settings/Spies/Spies';
 import Locations from 'components/Settings/Locations/Locations';
 import TimeSettings from 'components/Settings/TimeSettings/TimeSettings';
@@ -22,9 +23,13 @@ const Settings: React.FunctionComponent = () => {
     let showProgressBar = true;
     let progressBarStep = 0;
     switch (phase) {
-        case SETTINGS_PHASES.PLAYERS:
+        case SETTINGS_PHASES.PLAYERS_LIST:
             progressBarStep = 1;
-            body = <Players />;
+            body = <PlayersList />;
+            break;
+        case SETTINGS_PHASES.PLAYER_PROFILE:
+            showProgressBar = false;
+            body = <PlayerProfile />;
             break;
         case SETTINGS_PHASES.SPIES:
             progressBarStep = 2;

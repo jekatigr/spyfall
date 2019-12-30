@@ -11,7 +11,7 @@ import Counter from 'components/common/Counter/Counter';
 import { useStore } from 'store';
 import {
     SET_SETTINGS_PHASE_TO_LOCATIONS,
-    SET_SETTINGS_PHASE_TO_PLAYERS,
+    SET_SETTINGS_PHASE_TO_PLAYERS_LIST,
     SET_SETTINGS_PHASE_TO_TIME_SETTINGS,
 } from 'store/reducers/settings/settings';
 
@@ -66,7 +66,7 @@ const Spies: React.FunctionComponent = () => {
 
             <ButtonsWizard
                 previous={
-                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_PLAYERS)} type="additional">
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_PLAYERS_LIST)} type="additional">
                         Назад
                     </Button>
                 }
