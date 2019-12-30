@@ -15,7 +15,7 @@ import {
     SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS,
     SET_LOCATION,
     SET_SPIES,
-    SET_ROUND_TIME,
+    SET_QUESTIONS_TIME,
     SET_DISCUSSION_TIME,
 } from 'store/reducers/game';
 import { SELECT_LOCATION } from 'store/reducers/locations';
@@ -88,7 +88,7 @@ const Locations: React.FunctionComponent = () => {
         dispatch(SET_LOCATION, { location: selectedLocation });
 
         // Set round durations
-        dispatch(SET_ROUND_TIME, { time: timeSettings.roundTime * 1000 * 60 });
+        dispatch(SET_QUESTIONS_TIME, { time: timeSettings.roundTime * 1000 * 60 });
         dispatch(SET_DISCUSSION_TIME, { time: timeSettings.roundTime * 1000 * 60 });
 
         // Start game

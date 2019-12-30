@@ -6,7 +6,7 @@ import Button from 'components/common/Button/Button';
 import CardsSlider from 'components/Game/CardsSlider/CardsSlider';
 
 import { useStore } from 'store';
-import { SET_GAME_STATE_TO_ROUND, SET_START_ROUND } from 'store/reducers/game';
+import { SET_GAME_STATE_TO_QUESTIONS, SET_START_QUESTIONS } from 'store/reducers/game';
 
 const Rules: React.FunctionComponent = () => {
     const {
@@ -17,8 +17,8 @@ const Rules: React.FunctionComponent = () => {
     const [isRolesDistributed, setRolesDistributed] = React.useState(false);
 
     const startGame = (): void => {
-        dispatch(SET_START_ROUND, { time: Date.now() });
-        dispatch(SET_GAME_STATE_TO_ROUND);
+        dispatch(SET_START_QUESTIONS, { time: Date.now() });
+        dispatch(SET_GAME_STATE_TO_QUESTIONS);
     };
 
     const cards = playersInfo.players.map(player => {

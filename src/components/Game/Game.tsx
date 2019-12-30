@@ -5,8 +5,8 @@ import Round from 'components/Game/Round/Round';
 import IdentifySpies from 'components/Game/IdentifySpies/IdentifySpies';
 import Results from 'components/Game/Results/Results';
 
-import { useStore } from '../../store';
-import { GAME_STATES } from '../../store/reducers/game';
+import { useStore } from 'store';
+import { GAME_STATES } from 'store/reducers/game';
 
 const Game: React.FunctionComponent = () => {
     const {
@@ -20,11 +20,11 @@ const Game: React.FunctionComponent = () => {
         case GAME_STATES.ROLES_DISTRIBUTION:
             body = <RolesDistribution />;
             break;
-        case GAME_STATES.ROUND:
-            body = <Round type="ROUND" />;
+        case GAME_STATES.QUESTIONS:
+            body = <Round phase="QUESTIONS" />;
             break;
         case GAME_STATES.DISCUSSION:
-            body = <Round type="DISCUSSION" />;
+            body = <Round phase="DISCUSSION" />;
             break;
         case GAME_STATES.IDENTIFY_SPIES:
             body = <IdentifySpies />;
@@ -36,7 +36,7 @@ const Game: React.FunctionComponent = () => {
         // console.error('TODO');
     }
 
-    return <div className="app-container">{body}</div>;
+    return body;
 };
 
 export default Game;
