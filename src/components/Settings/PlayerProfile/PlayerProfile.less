@@ -1,121 +1,37 @@
 @import '../../../styles/base';
 
-.player-profile__inner {
-  text-align: center;
-  padding-top: 34px;
-}
+@el: e('.player-profile');
 
-.player-profile__input {
-  margin-top: 47px;
-}
+@{el} {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 
-.player {
-  position: relative;
-}
-
-.player__image {
-  height: 90px;
-  width: 90px;
-  background-color: #00AEE5;
-  box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15);
-  border: 4px solid #FFFFFF;
-  border-radius: 50%;
-  display: inline-block;
-  cursor: pointer;
-  text-align: center;
-  overflow: hidden;
-}
-
-.player__image_big {
-  height: 140px;
-  width: 140px;
-  border: 5px solid #FFFFFF;
-  cursor: default;
-}
-
-.player__icon {
-  position: relative;
-  top: 14px;
-}
-
-.player__icon_big {
-  top: 23px;
-  width: 92px;
-}
-
-.player__image_coral {
-  background-color: #F50057;
-}
-
-.player__image_wine {
-  background-color: #750029;
-}
-
-.player__image_pink {
-  background-color: #F74A86;
-}
-
-.player__image_purple {
-  background-color: #752340;
-}
-
-.player__image_raspberry {
-  background-color: #C20044;
-}
-
-.player__image_green {
-  background-color: #00A80E;
-}
-
-.player__image_acid-green {
-  background-color: #00F515;
-}
-
-.player__image_light-green {
-  background-color: #6BF63E;
-}
-
-.player__image_yellow {
-  background-color: #F7E419;
-}
-
-.player__image_sky-blue {
-  background-color: #00AEE5;
-}
-
-.player__image_blue {
-  background-color: #139FC2;
-}
-
-.player__image_dark-blue {
-  background-color: #0888A8;
-}
-
-.input-text {
-  background-color: @baseColor;
-  outline: none;
-  border-top: 0;
-  border-left: 0;
-  border-right: 0;
-  border-bottom: 1px solid white;
-  color: white;
-  width: 100%;
-  max-width: 370px;
-  font-size: 18px;
-  padding-bottom: 10px;
-}
-
-.player-profile__remove-player {
-  margin-top: 60px;
-  font-size: 18px;
-  font-weight: 500;
-  line-height: 21px;
-  cursor: pointer;
-  &:hover {
-    text-decoration: underline;
+  &__inner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
-}
 
-.player-profile__remove-icon {
-  margin-left: 9px;
+  &__input {
+    margin-top: 47px;
+  }
+
+  &__remove-player {
+    margin-bottom: 31px;
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 21px;
+    cursor: pointer;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+
+  &__remove-icon {
+    margin-left: 9px;
+  }
 }

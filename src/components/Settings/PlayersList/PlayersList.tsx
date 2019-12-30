@@ -1,5 +1,7 @@
 import * as React from 'react';
+import { block } from 'bem-cn';
 
+import Player from 'components/common/Player/Player';
 import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Button from 'components/common/Button/Button';
@@ -31,6 +33,7 @@ const colors = [
     'blue',
 ];
 
+const b = block('players');
 const PlayersList: React.FunctionComponent = () => {
     const {
         state: {
@@ -52,43 +55,34 @@ const PlayersList: React.FunctionComponent = () => {
 
     const hacks = [];
     for (let i = 0; i < MAX_PLAYERS_IN_ROW - 1; i++) {
-        hacks.push(<div key={i} className="empty-hack-for-flexbox-space-between-last-line-problem" />);
+        hacks.push(<div key={i} className={b('hack')} />);
     }
 
     return (
         <>
-            <div className="">
+            <div className={b()}>
                 <Header>Игроки</Header>
                 <Paragraph weight="light" hasMargin>
                     Добавьте игроков, которые будут участвовать в игре:
                 </Paragraph>
-                <div className="players-list">
-                    <div className="players-list__wrapper">
-                        <div className="players-list__inner">
-                            <div className="players-list__item">
-                                <button type="button" className="add-player-button" onClick={createPlayer}>
+                <div className={b('list')}>
+                    <div className={b('list-wrapper')}>
+                        <div className={b('list-inner')}>
+                            <div className={b('list-item')}>
+                                <button type="button" className={b('add-player-button')} onClick={createPlayer}>
                                     <img src={prefixedAsset('add.svg')} />
                                 </button>
                             </div>
-                            {players.map((player, index) => (
-                                <div className="players-list__item" key={player.name}>
-                                    <div
-                                        className="player"
+                            {players.map(({ name, color }, index) => (
+                                <div className={b('list-item')} key={name}>
+                                    <Player
+                                        name={name}
+                                        color={color}
                                         onClick={(): void => {
                                             dispatch(SET_SETTINGS_PHASE_TO_PLAYER_PROFILE);
                                             dispatch(SET_CURRENT_PLAYER_PROFILE, { currentProfile: index });
                                         }}
-                                    >
-                                        <div className={`player__image player__image_${player.color}`}>
-                                            <img className="player__icon" src={prefixedAsset('player.svg')} />
-                                        </div>
-                                        <div className="edit player__edit">
-                                            <img src={prefixedAsset('edit.svg')} />
-                                        </div>
-                                        <Paragraph hasMargin classNames="player__name">
-                                            {player.name}
-                                        </Paragraph>
-                                    </div>
+                                    />
                                 </div>
                             ))}
                             {hacks}

@@ -5,6 +5,7 @@ import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
+import Edit from 'components/common/Edit/Edit';
 
 import prefixedAsset from 'utils/assetPrefix';
 
@@ -81,9 +82,7 @@ const Locations: React.FunctionComponent = () => {
                         <span className={b('name')}>{basicName}</span>
                         <div className={b('edit')}>
                             <div className={b('edit-text')}>Редактировать категорию</div>
-                            <div className={b('edit-icon').mix('edit')}>
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
+                            <Edit classNames={b('edit-icon')} />
                         </div>
                     </div>
                 </div>
@@ -98,9 +97,7 @@ const Locations: React.FunctionComponent = () => {
                         <span className={b('name')}>{customName}</span>
                         <div className={b('edit')}>
                             <div className={b('edit-text')}>Редактировать категорию</div>
-                            <div className={b('edit-icon').mix('edit')}>
-                                <img src={prefixedAsset('edit.svg')} />
-                            </div>
+                            <Edit classNames={b('edit-icon')} />
                         </div>
                     </div>
                 </div>

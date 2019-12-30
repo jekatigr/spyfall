@@ -1,6 +1,9 @@
 import * as React from 'react';
+import { block } from 'bem-cn';
 
+import Player from 'components/common/Player/Player';
 import Header from 'components/common/Header/Header';
+import TextField from 'components/common/TextField/TextField';
 import Button from 'components/common/Button/Button';
 import prefixedAsset from 'utils/assetPrefix';
 
@@ -10,6 +13,7 @@ import { SET_SETTINGS_PHASE_TO_PLAYERS_LIST } from 'store/reducers/settings/sett
 
 import './PlayerProfile.less';
 
+const b = block('player-profile');
 const PlayerProfile: React.FunctionComponent = () => {
     const {
         state: {
@@ -20,7 +24,8 @@ const PlayerProfile: React.FunctionComponent = () => {
         dispatch,
     } = useStore();
 
-    const [playerName, setPlayerName] = React.useState(players[currentProfile].name);
+    const { name, color } = players[currentProfile];
+    const [playerName, setPlayerName] = React.useState(name);
 
     const savePlayer = (): void => {
         // Check for name duplications
@@ -50,36 +55,25 @@ const PlayerProfile: React.FunctionComponent = () => {
     };
 
     return (
-        <>
-            <div className="player-profile">
-                <Header>Профиль игрока</Header>
-                <div className="player-profile__inner">
-                    <div className="player">
-                        <div
-                            className={`player__image player__image_big player__image_${players[currentProfile].color}`}
-                        >
-                            <img className="player__icon player__icon_big" src={prefixedAsset('player.svg')} />
-                        </div>
-                    </div>
-                    <div className="player-profile__input">
-                        <input
-                            className="input-text"
-                            type="text"
-                            placeholder="Введите имя игрока"
-                            value={playerName}
-                            onChange={(e): void => setPlayerName(e.target.value)}
-                        />
-                    </div>
-                    <div className="player-profile__remove-player" onClick={deletePlayer}>
-                        Удалить игрока
-                        <img className="player-profile__remove-icon" src={prefixedAsset('remove.svg')} />
-                    </div>
-                    <Button onClick={savePlayer} type="action">
-                        Сохранить
-                    </Button>
-                </div>
+        <div className={b()}>
+            <Header>Профиль игрока</Header>
+            <div className={b('inner')}>
+                <Player color={color} big />
+                <TextField
+                    value={playerName}
+                    classNames={b('input')}
+                    placeholder="Введите имя игрока"
+                    onChange={setPlayerName}
+                />
             </div>
-        </>
+            <div className={b('remove-player')} onClick={deletePlayer}>
+                Удалить игрока
+                <img className={b('remove-icon')} src={prefixedAsset('remove.svg')} />
+            </div>
+            <Button onClick={savePlayer} type="action">
+                Сохранить
+            </Button>
+        </div>
     );
 };
 

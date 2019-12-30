@@ -10,7 +10,7 @@ import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
 const Rules: React.FunctionComponent = () => {
     const { dispatch } = useStore();
     return (
-        <>
+        <div>
             <Navigation type="back" onClick={(): void => dispatch(SET_APP_STATE_TO_START_SCREEN)} />
             <Header>Правила</Header>
             <Paragraph hasMargin>Игровая партия</Paragraph>
@@ -22,7 +22,7 @@ const Rules: React.FunctionComponent = () => {
                 поэтому не является шпионом. Наблюдательность, собранность, выдержка, хитрость — в этой игре пригодится
                 пригодится всё. Будьте начеку!
             </Paragraph>
-        </>
+        </div>
     );
 };
 

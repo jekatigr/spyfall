@@ -1,0 +1,92 @@
+@import '../../../styles/base';
+
+@el: e('.player');
+
+@{el} {
+  position: relative;
+
+  &__image {
+    height: 90px;
+    width: 90px;
+    background-color: #00AEE5;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15);
+    border: 4px solid #FFFFFF;
+    border-radius: 50%;
+    display: inline-block;
+    cursor: pointer;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  &_big &__image {
+    height: 140px;
+    width: 140px;
+    border: 5px solid #FFFFFF;
+    cursor: default;
+  }
+
+  &__icon {
+    position: relative;
+    top: 14px;
+  }
+
+  &_big &__icon {
+    top: 23px;
+    width: 92px;
+  }
+
+  &__edit {
+    text-align: left;
+    position: absolute;
+    top: 1px;
+    right: -10px;
+  }
+
+  &__image_coral {
+    background-color: #F50057;
+  }
+
+  &__image_wine {
+    background-color: #750029;
+  }
+
+  &__image_pink {
+    background-color: #F74A86;
+  }
+
+  &__image_purple {
+    background-color: #752340;
+  }
+
+  &__image_raspberry {
+    background-color: #C20044;
+  }
+
+  &__image_green {
+    background-color: #00A80E;
+  }
+
+  &__image_acid-green {
+    background-color: #00F515;
+  }
+
+  &__image_light-green {
+    background-color: #6BF63E;
+  }
+
+  &__image_yellow {
+    background-color: #F7E419;
+  }
+
+  &__image_sky-blue {
+    background-color: #00AEE5;
+  }
+
+  &__image_blue {
+    background-color: #139FC2;
+  }
+
+  &__image_dark-blue {
+    background-color: #0888A8;
+  }
+}
