@@ -1,0 +1,94 @@
+@import '../../../styles/base';
+
+@el: e('.controllers');
+
+@{el} {
+  width: 280px;
+  margin: 0 auto;
+
+  &__controller {
+    background: #00AEE5;
+    display: inline-block;
+    width: 50%;
+    padding: 7px;
+    height: 64px;
+    cursor: pointer;
+  }
+
+  &__controller_muted {
+    background: #86929b;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &__controller_minus {
+    border-radius: 64px 0 0 64px;
+  }
+
+  &__controller_plus {
+    text-align: right;
+    border-radius: 0 64px 64px 0;
+  }
+
+  &__controller-inner {
+    display: inline-block;
+    width: 50px;
+    height: 50px;
+    border: 3px solid #FFFFFF;
+    border-radius: 50px;
+    box-shadow: 2px 4px 6px rgba(0, 0, 0, 0.15), inset 2px 4px 6px rgba(0, 0, 0, 0.15);
+  }
+
+  &__controller_minus &__controller-inner {
+    &:after {
+      content: " ";
+      position: relative;
+      display: block;
+      background-color: #FFFFFF;
+      border-radius: 1.5px;
+      height: 3px;
+      width: 18px;
+      top: calc(50% - 1.5px);
+      left: calc(50% - 9px);
+    }
+  }
+
+  &__controller_plus &__controller-inner {
+    &:before {
+      content: " ";
+      position: relative;
+      display: block;
+      background-color: #FFFFFF;
+      border-radius: 1.5px;
+      height: 3px;
+      width: 18px;
+      top: calc(50% - 1.5px);
+      left: calc(50% - 9px);
+    }
+
+    &:after {
+      content: " ";
+      position: relative;
+      display: block;
+      background-color: #FFFFFF;
+      border-radius: 1.5px;
+      height: 18px;
+      width: 3px;
+      top: 10px;
+      left: calc(50% - 1.5px);
+    }
+  }
+
+  &__controller_muted &__controller-inner {
+    border: 3px solid @baseColor;
+    box-shadow: none;
+
+    &:after {
+      background-color: @baseColor;
+    }
+
+    &:before {
+      background-color: @baseColor;
+    }
+  }
+}

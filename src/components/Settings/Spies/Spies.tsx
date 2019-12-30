@@ -54,8 +54,8 @@ const Spies: React.FunctionComponent = () => {
                 disabled={!spies.specificSpiesCount}
                 onClickMinus={(): void => dispatch(REDUCE_SPIES_COUNT)}
                 onClickPlus={(): void => dispatch(INCREASE_SPIES_COUNT)}
-                topLimit={playersInfo.players.length}
-                bottomLimit={1}
+                max={playersInfo.players.length}
+                min={1}
                 onClick={(): void => dispatch(SELECT_SPECIFIC_SPIES_COUNT)}
             />
             <Header>Настройки</Header>

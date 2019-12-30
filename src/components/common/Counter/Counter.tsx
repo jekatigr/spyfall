@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { block } from 'bem-cn';
 
-import Controllers from 'components/common/Controllers/Controllers';
+import Controllers from 'components/common/Counter/Controllers';
 
 import './Counter.less';
 
@@ -11,11 +12,12 @@ type Props = {
     disabled?: boolean;
     onClickMinus: () => void;
     onClickPlus: () => void;
-    topLimit: number;
-    bottomLimit: number;
+    max: number;
+    min: number;
     onClick?: () => void;
 };
 
+const b = block('counter');
 const Counter: React.FunctionComponent<Props> = ({
     name,
     count,
@@ -23,20 +25,22 @@ const Counter: React.FunctionComponent<Props> = ({
     disabled,
     onClickMinus,
     onClickPlus,
-    topLimit,
-    bottomLimit,
+    max,
+    min,
     onClick = (): void => {},
 }) => (
-    <div className="counter" onClick={onClick}>
-        <span className={`counter__name ${disabled ? 'counter__name_muted' : ''}`}>{name}</span>
-        <div className="counter__inner">
-            <div className="counter__controllers controllers">
-                <Controllers type="minus" onClick={onClickMinus} muted={count <= bottomLimit} />
-                <Controllers type="plus" onClick={onClickPlus} muted={count >= topLimit} />
-            </div>
-            <div className={`counter__display counter-display ${disabled ? 'counter-display_muted' : ''}`}>
-                <div className="counter-display__time">{`${count < 10 ? '0' : ''}${count}`}</div>
-                {units ? <div className="counter-display__units">{units}</div> : ''}
+    <div className={b({ muted: disabled })} onClick={onClick}>
+        <span className={b('name')}>{name}</span>
+        <div className={b('inner')}>
+            <Controllers
+                minusDisabled={disabled || count <= min}
+                plusDisabled={disabled || count >= max}
+                onMinusClick={onClickMinus}
+                onPlusClick={onClickPlus}
+            />
+            <div className={b('display')}>
+                <div className={b('display-time')}>{`${count < 10 ? '0' : ''}${count}`}</div>
+                {units && <div className={b('display-units')}>{units}</div>}
             </div>
         </div>
     </div>

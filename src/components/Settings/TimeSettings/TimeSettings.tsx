@@ -29,8 +29,8 @@ const TimeSettings: React.FunctionComponent = () => {
                 disabled={false}
                 onClickMinus={(): void => dispatch(REDUCE_ROUND_TIME)}
                 onClickPlus={(): void => dispatch(INCREASE_ROUND_TIME)}
-                topLimit={100}
-                bottomLimit={1}
+                min={1}
+                max={100}
             />
             <Counter
                 name="Время на обсуждение"
@@ -39,8 +39,8 @@ const TimeSettings: React.FunctionComponent = () => {
                 disabled={false}
                 onClickMinus={(): void => dispatch(REDUCE_DISCUSSION_TIME)}
                 onClickPlus={(): void => dispatch(INCREASE_DISCUSSION_TIME)}
-                topLimit={100}
-                bottomLimit={1}
+                min={1}
+                max={100}
             />
         </>
     );
