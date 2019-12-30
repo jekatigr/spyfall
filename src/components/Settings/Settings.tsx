@@ -11,8 +11,6 @@ import Navigation from 'components/common/Navigation/Navigation';
 import { useStore } from 'store';
 import { SET_SETTINGS_PHASE_TO_PLAYERS_LIST, SETTINGS_PHASES } from 'store/reducers/settings/settings';
 
-import './Settings.less';
-
 const Settings: React.FunctionComponent = () => {
     const {
         state: {
