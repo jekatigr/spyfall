@@ -45,7 +45,7 @@ const Spies: React.FunctionComponent = () => {
 
             <RandomOption
                 name="Случайное число шпионов"
-                muted={spies.specificSpiesCount}
+                disabled={spies.specificSpiesCount}
                 onClick={(): void => dispatch(SELECT_RANDOM_SPIES_COUNT)}
             />
             <Counter

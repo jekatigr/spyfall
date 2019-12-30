@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { block } from 'bem-cn';
 
 import './ProgressBar.less';
 
@@ -10,6 +11,7 @@ type Props = {
 const NEXT_STEP_ANIMATION_DURATION = 0.5; // in seconds
 const CIRCLE_DIAMETER = 17; // in pixels
 
+const b = block('progress-bar');
 const ProgressBar: React.FunctionComponent<Props> = ({ dotsCount, step }) => {
     const progressbarNode = React.useRef(null);
 
@@ -25,9 +27,9 @@ const ProgressBar: React.FunctionComponent<Props> = ({ dotsCount, step }) => {
     const dots = [];
     for (let i = 0; i < dotsCount; i++) {
         dots.push(
-            <div className="progress-bar__circle" key={i}>
+            <div className={b('circle')} key={i}>
                 <div
-                    className={`progress-bar__circle__inner${step > i ? ' progress-bar__circle__inner_show' : ''}`}
+                    className={b('circle-inner', { show: step > i })}
                     style={{
                         animationDuration: `${circleAnimationDuration}s`,
                         animationDelay: `${step > 1 ? NEXT_STEP_ANIMATION_DURATION : 0}s`,
@@ -40,11 +42,11 @@ const ProgressBar: React.FunctionComponent<Props> = ({ dotsCount, step }) => {
     const pathPosition = Math.ceil((100 / (dotsCount - 1)) * (step - 1));
 
     return (
-        <div className="progress-bar" ref={progressbarNode}>
+        <div className={b()} ref={progressbarNode}>
             {dots}
-            <div className="progress-bar__path">
+            <div className={b('path')}>
                 <div
-                    className="progress-bar__path__inner"
+                    className={b('path-inner')}
                     style={{
                         transform: `translateX(${pathPosition}%)`,
                         transition: `${NEXT_STEP_ANIMATION_DURATION}s`,
