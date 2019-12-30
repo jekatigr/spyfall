@@ -13,7 +13,7 @@ const IdentifySpies: React.FunctionComponent = () => {
             settings: {
                 playersInfo: { players },
             },
-            game: { spies, identifiedPlayers },
+            game: { identifiedPlayers },
         },
         dispatch,
     } = useStore();
@@ -22,8 +22,14 @@ const IdentifySpies: React.FunctionComponent = () => {
         let ret;
         if (identifiedPlayers.indexOf(player.name) !== -1) {
             ret = (
-                <div>
-                    Игрок {player.name} - проверен и он {spies.indexOf(player.name) === -1 ? 'не' : ''} шпион
+                <div
+                    onClick={(): void =>
+                        dispatch(SET_IDENTIFIED_PLAYERS, {
+                            identifiedPlayers: identifiedPlayers.filter(e => e !== player.name),
+                        })
+                    }
+                >
+                    Игрок {player.name} - под подозрением
                 </div>
             );
         } else {
@@ -44,7 +50,11 @@ const IdentifySpies: React.FunctionComponent = () => {
         <>
             <Header> Угадать шпионов </Header>
             {playersJSX}
-            <Button onClick={(): void => dispatch(SET_GAME_PHASE_TO_RESULTS)} type="action">
+            <Button
+                onClick={(): void => dispatch(SET_GAME_PHASE_TO_RESULTS)}
+                type="action"
+                disabled={identifiedPlayers.length === 0}
+            >
                 Узнать результат
             </Button>
         </>

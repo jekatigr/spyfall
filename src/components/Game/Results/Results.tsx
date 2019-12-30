@@ -15,7 +15,7 @@ const RESULT = {
     L2: 2, // Identified: part of spies and no peaceful citizens
     L3: 3, // Identified: part of spies and peaceful citizens
     L4: 4, // Identified: no spies and peaceful citizens
-    L5: 5, // Identified: no spies and peaceful citizens
+    L5: 5, // Identified: no spies and no peaceful citizens
 };
 
 const Results: React.FunctionComponent = () => {
@@ -51,18 +51,24 @@ const Results: React.FunctionComponent = () => {
     let resultJSX;
     switch (result) {
         case RESULT.W:
-            resultJSX = <Paragraph> Поздравляем! Ни одному шпиону не удалось скрыться! </Paragraph>;
+            resultJSX = <Paragraph>Поздравляем! Ни одному шпиону не удалось скрыться!</Paragraph>;
             break;
         case RESULT.L1:
-        case RESULT.L5:
-            resultJSX = <Paragraph> Так вообще бывает? </Paragraph>;
+            resultJSX = <Paragraph>Плохо! Вы раскрыли всех шпионов и не шпионов тоже раскрыли!</Paragraph>;
             break;
         case RESULT.L2:
+            resultJSX = <Paragraph>Вы раскрыли только часть шпионов, остальные скрылись в ночи!</Paragraph>;
+            break;
         case RESULT.L3:
-            resultJSX = <Paragraph> Вы раскрыли только часть шпионов, остальные скрылись в ночи! </Paragraph>;
+            resultJSX = (
+                <Paragraph>Вы раскрыли только часть шпионов (и не шпионов тоже), остальные скрылись в ночи!</Paragraph>
+            );
             break;
         case RESULT.L4:
-            resultJSX = <Paragraph> Шпионы оказались умнее - вы не раскрыли ни одного из них! </Paragraph>;
+            resultJSX = <Paragraph>Шпионы оказались умнее - вы не раскрыли ни одного из них!</Paragraph>;
+            break;
+        case RESULT.L5:
+            resultJSX = <Paragraph>Такого не должно было произойти!</Paragraph>;
             break;
         default:
     }
