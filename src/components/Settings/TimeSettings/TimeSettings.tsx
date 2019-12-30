@@ -1,8 +1,13 @@
 import * as React from 'react';
 
 import Counter from 'components/common/Counter/Counter';
+import Button from 'components/common/Button/Button';
+import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
+import Header from 'components/common/Header/Header';
+import Switcher from 'components/common/Switcher/Switcher';
 
 import { useStore } from 'store';
+import { SET_SETTINGS_PHASE_TO_LOCATIONS, SET_SETTINGS_PHASE_TO_SPIES } from 'store/reducers/settings/settings';
 import {
     INCREASE_ROUND_TIME,
     REDUCE_ROUND_TIME,
@@ -22,8 +27,10 @@ const TimeSettings: React.FunctionComponent = () => {
 
     return (
         <>
+            <Header>Время</Header>
+            <Switcher onChange={(): void => {}}>Звук</Switcher>
             <Counter
-                name="Время на кон"
+                name="Длительность кона"
                 count={timeSettings.roundTime}
                 units="мин"
                 disabled={false}
@@ -33,7 +40,7 @@ const TimeSettings: React.FunctionComponent = () => {
                 max={100}
             />
             <Counter
-                name="Время на обсуждение"
+                name="Длительность обсуждения"
                 count={timeSettings.discussionTime}
                 units="мин"
                 disabled={false}
@@ -41,6 +48,18 @@ const TimeSettings: React.FunctionComponent = () => {
                 onClickPlus={(): void => dispatch(INCREASE_DISCUSSION_TIME)}
                 min={1}
                 max={100}
+            />
+            <ButtonsWizard
+                previous={
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_SPIES)} type="additional">
+                        Назад
+                    </Button>
+                }
+                next={
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_LOCATIONS)} type="action">
+                        Вперед
+                    </Button>
+                }
             />
         </>
     );

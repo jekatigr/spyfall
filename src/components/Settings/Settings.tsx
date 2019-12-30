@@ -6,9 +6,10 @@ import PlayerProfile from 'components/Settings/PlayerProfile/PlayerProfile';
 import Spies from 'components/Settings/Spies/Spies';
 import Locations from 'components/Settings/Locations/Locations';
 import TimeSettings from 'components/Settings/TimeSettings/TimeSettings';
+import Navigation from 'components/common/Navigation/Navigation';
 
 import { useStore } from 'store';
-import { SETTINGS_PHASES } from 'store/reducers/settings/settings';
+import { SET_SETTINGS_PHASE_TO_PLAYERS_LIST, SETTINGS_PHASES } from 'store/reducers/settings/settings';
 
 import './Settings.less';
 
@@ -17,10 +18,11 @@ const Settings: React.FunctionComponent = () => {
         state: {
             settings: { phase },
         },
+        dispatch,
     } = useStore();
 
     let body;
-    let showProgressBar = true;
+    let secondaryScreen = false;
     let progressBarStep = 0;
     switch (phase) {
         case SETTINGS_PHASES.PLAYERS_LIST:
@@ -28,20 +30,20 @@ const Settings: React.FunctionComponent = () => {
             body = <PlayersList />;
             break;
         case SETTINGS_PHASES.PLAYER_PROFILE:
-            showProgressBar = false;
+            secondaryScreen = true;
             body = <PlayerProfile />;
             break;
         case SETTINGS_PHASES.SPIES:
             progressBarStep = 2;
             body = <Spies />;
             break;
-        case SETTINGS_PHASES.LOCATIONS:
-            progressBarStep = 3;
-            body = <Locations />;
-            break;
         case SETTINGS_PHASES.TIME_SETTINGS:
-            showProgressBar = false;
+            progressBarStep = 3;
             body = <TimeSettings />;
+            break;
+        case SETTINGS_PHASES.LOCATIONS:
+            progressBarStep = 4;
+            body = <Locations />;
             break;
         default:
         // console.error('TODO');
@@ -49,7 +51,12 @@ const Settings: React.FunctionComponent = () => {
 
     return (
         <>
-            {showProgressBar ? <ProgressBar dotsCount={3} step={progressBarStep} /> : ''}
+            {secondaryScreen ? (
+                <Navigation type="back" onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_PLAYERS_LIST)} />
+            ) : (
+                <Navigation type="menu" />
+            )}
+            {!secondaryScreen ? <ProgressBar dotsCount={4} step={progressBarStep} /> : ''}
             {body}
         </>
     );

@@ -51,9 +51,6 @@ const PlayerProfile: React.FunctionComponent = () => {
 
     return (
         <>
-            <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_PLAYERS_LIST)} type="action">
-                Стрелочка назад
-            </Button>
             <div className="player-profile">
                 <Header>Профиль игрока</Header>
                 <div className="player-profile__inner">

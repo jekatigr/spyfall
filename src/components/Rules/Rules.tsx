@@ -1,6 +1,6 @@
 import * as React from 'react';
 
-import Button from 'components/common/Button/Button';
+import Navigation from 'components/common/Navigation/Navigation';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Header from 'components/common/Header/Header';
 
@@ -11,9 +11,7 @@ const Rules: React.FunctionComponent = () => {
     const { dispatch } = useStore();
     return (
         <>
-            <Button onClick={(): void => dispatch(SET_APP_STATE_TO_START_SCREEN)} type="action">
-                Стрелочка назад
-            </Button>
+            <Navigation type="back" onClick={(): void => dispatch(SET_APP_STATE_TO_START_SCREEN)} />
             <Header>Правила</Header>
             <Paragraph hasMargin>Игровая партия</Paragraph>
             <Paragraph weight="extra-light" align="justify" hasMargin>

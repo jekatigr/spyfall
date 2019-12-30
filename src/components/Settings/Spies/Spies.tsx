@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import AdditionalSettings from 'components/common/AdditionalSettings/AdditionalSettings';
 import Header from 'components/common/Header/Header';
 import Switcher from 'components/common/Switcher/Switcher';
 import Button from 'components/common/Button/Button';
@@ -10,7 +9,6 @@ import Counter from 'components/common/Counter/Counter';
 
 import { useStore } from 'store';
 import {
-    SET_SETTINGS_PHASE_TO_LOCATIONS,
     SET_SETTINGS_PHASE_TO_PLAYERS_LIST,
     SET_SETTINGS_PHASE_TO_TIME_SETTINGS,
 } from 'store/reducers/settings/settings';
@@ -58,11 +56,10 @@ const Spies: React.FunctionComponent = () => {
                 min={1}
                 onClick={(): void => dispatch(SELECT_SPECIFIC_SPIES_COUNT)}
             />
-            <Header>Настройки</Header>
+
             <Switcher onChange={handleSwitchChange} enabledByDefault={spies.spiesFamiliar}>
                 Шпионы знакомы
             </Switcher>
-            <Switcher onChange={(): void => {}}>Звук</Switcher>
 
             <ButtonsWizard
                 previous={
@@ -71,15 +68,11 @@ const Spies: React.FunctionComponent = () => {
                     </Button>
                 }
                 next={
-                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_LOCATIONS)} type="action">
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_TIME_SETTINGS)} type="action">
                         Вперед
                     </Button>
                 }
-            >
-                <AdditionalSettings onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_TIME_SETTINGS)}>
-                    Настройки времени
-                </AdditionalSettings>
-            </ButtonsWizard>
+            />
         </>
     );
 };

@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { block } from 'bem-cn';
 
-import AdditionalSettings from 'components/common/AdditionalSettings/AdditionalSettings';
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Header from 'components/common/Header/Header';
@@ -10,7 +9,7 @@ import Button from 'components/common/Button/Button';
 import prefixedAsset from 'utils/assetPrefix';
 
 import { useStore } from 'store';
-import { SET_SETTINGS_PHASE_TO_SPIES, SET_SETTINGS_PHASE_TO_TIME_SETTINGS } from 'store/reducers/settings/settings';
+import { SET_SETTINGS_PHASE_TO_SPIES } from 'store/reducers/settings/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 import {
     SET_GAME_PHASE_TO_ROLES_DISTRIBUTIONS,
@@ -117,11 +116,7 @@ const Locations: React.FunctionComponent = () => {
                         Вперед
                     </Button>
                 }
-            >
-                <AdditionalSettings onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_TIME_SETTINGS)}>
-                    Настройки времени
-                </AdditionalSettings>
-            </ButtonsWizard>
+            />
         </>
     );
 };
