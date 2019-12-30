@@ -13,9 +13,11 @@ type Props = {
 
 const b = block('button');
 const Button: React.FunctionComponent<Props> = ({ type, disabled, classNames, children, onClick }) => (
-    <button type="button" className={b({ type, disabled }).mix(classNames)} onClick={onClick}>
-        {children}
-    </button>
+    <div className={b({}).mix(classNames)}>
+        <button type="button" className={b('inner', { type, disabled })} onClick={onClick}>
+            {children}
+        </button>
+    </div>
 );
 
 Button.defaultProps = {
