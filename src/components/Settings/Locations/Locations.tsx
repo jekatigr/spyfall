@@ -12,7 +12,7 @@ import { useStore } from 'store';
 import { SET_SETTINGS_PHASE_TO_SPIES, SET_SETTINGS_PHASE_TO_TIME_SETTINGS } from 'store/reducers/settings/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 import {
-    SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS,
+    SET_GAME_PHASE_TO_ROLES_DISTRIBUTIONS,
     SET_LOCATION,
     SET_SPIES,
     SET_QUESTIONS_TIME,
@@ -94,7 +94,7 @@ const Locations: React.FunctionComponent = () => {
         dispatch(SET_DISCUSSION_TIME, { time: timeSettings.roundTime * 1000 * 60 });
 
         // Start game
-        dispatch(SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS);
+        dispatch(SET_GAME_PHASE_TO_ROLES_DISTRIBUTIONS);
         dispatch(SET_APP_STATE_TO_GAME);
     };
 

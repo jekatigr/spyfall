@@ -6,8 +6,8 @@ import Button from 'components/common/Button/Button';
 
 import { useStore } from 'store';
 import {
-    SET_GAME_STATE_TO_DISCUSSION,
-    SET_GAME_STATE_TO_IDENTIFY_SPIES,
+    SET_GAME_PHASE_TO_DISCUSSION,
+    SET_GAME_PHASE_TO_IDENTIFY_SPIES,
     SET_START_DISCUSSION,
 } from 'store/reducers/game';
 
@@ -36,15 +36,15 @@ const Round: React.FunctionComponent<Props> = ({ phase }) => {
 
     const finishAction = (): void => {
         if (phase === ROUND_PHASE) {
-            dispatch(SET_GAME_STATE_TO_DISCUSSION);
+            dispatch(SET_GAME_PHASE_TO_DISCUSSION);
             dispatch(SET_START_DISCUSSION, { time: Date.now() });
         } else {
-            dispatch(SET_GAME_STATE_TO_IDENTIFY_SPIES);
+            dispatch(SET_GAME_PHASE_TO_IDENTIFY_SPIES);
         }
     };
 
     let timeLeft = game.discussion.discussionTime - (Date.now() - game.discussion.startDiscussion);
-    if (phase === ROUND_PHASE) timeLeft = game.roundInfo.roundTime - (Date.now() - game.roundInfo.startRound);
+    if (phase === ROUND_PHASE) timeLeft = game.questions.questionsTime - (Date.now() - game.questions.startQuestions);
 
     return (
         <>

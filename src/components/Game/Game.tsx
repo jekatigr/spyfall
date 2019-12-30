@@ -6,30 +6,30 @@ import IdentifySpies from 'components/Game/IdentifySpies/IdentifySpies';
 import Results from 'components/Game/Results/Results';
 
 import { useStore } from 'store';
-import { GAME_STATES } from 'store/reducers/game';
+import { GAME_PHASES } from 'store/reducers/game';
 
 const Game: React.FunctionComponent = () => {
     const {
         state: {
-            game: { gameState },
+            game: { phase },
         },
     } = useStore();
 
     let body;
-    switch (gameState) {
-        case GAME_STATES.ROLES_DISTRIBUTION:
+    switch (phase) {
+        case GAME_PHASES.ROLES_DISTRIBUTION:
             body = <RolesDistribution />;
             break;
-        case GAME_STATES.QUESTIONS:
+        case GAME_PHASES.QUESTIONS:
             body = <Round phase="QUESTIONS" />;
             break;
-        case GAME_STATES.DISCUSSION:
+        case GAME_PHASES.DISCUSSION:
             body = <Round phase="DISCUSSION" />;
             break;
-        case GAME_STATES.IDENTIFY_SPIES:
+        case GAME_PHASES.IDENTIFY_SPIES:
             body = <IdentifySpies />;
             break;
-        case GAME_STATES.RESULTS:
+        case GAME_PHASES.RESULTS:
             body = <Results />;
             break;
         default:

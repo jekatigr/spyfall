@@ -3,7 +3,7 @@ import * as React from 'react';
 import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
 
-import { SET_IDENTIFIED_PLAYERS, SET_GAME_STATE_TO_RESULT } from 'store/reducers/game';
+import { SET_IDENTIFIED_PLAYERS, SET_GAME_PHASE_TO_RESULTS } from 'store/reducers/game';
 
 import { useStore } from 'store';
 
@@ -44,7 +44,7 @@ const IdentifySpies: React.FunctionComponent = () => {
         <>
             <Header> Угадать шпионов </Header>
             {playersJSX}
-            <Button onClick={(): void => dispatch(SET_GAME_STATE_TO_RESULT)} type="action">
+            <Button onClick={(): void => dispatch(SET_GAME_PHASE_TO_RESULTS)} type="action">
                 Узнать результат
             </Button>
         </>
