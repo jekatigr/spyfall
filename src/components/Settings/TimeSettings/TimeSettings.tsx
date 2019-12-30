@@ -8,13 +8,15 @@ import {
     REDUCE_ROUND_TIME,
     INCREASE_DISCUSSION_TIME,
     REDUCE_DISCUSSION_TIME,
-} from 'store/reducers/timeSettings';
+} from 'store/reducers/settings/timeSettings';
 
 import './TimeSettings.less';
 
 const TimeSettings: React.FunctionComponent = () => {
     const {
-        state: { timeSettings },
+        state: {
+            settings: { timeSettings },
+        },
         dispatch,
     } = useStore();
 

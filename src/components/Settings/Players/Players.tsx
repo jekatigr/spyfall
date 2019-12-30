@@ -8,8 +8,8 @@ import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 import prefixedAsset from 'utils/assetPrefix';
 
 import { useStore } from 'store';
-import { UPDATE_PLAYERS } from 'store/reducers/playersInfo';
-import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from 'store/reducers/settings';
+import { UPDATE_PLAYERS } from 'store/reducers/settings/playersInfo';
+import { SET_SETTINGS_PHASE_TO_SPIES, SET_SETTINGS_PHASE_TO_TIME_SETTINGS } from 'store/reducers/settings/settings';
 import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
 
 import './Players.less';
@@ -35,7 +35,9 @@ let editedPlayer = '';
 const Players: React.FunctionComponent = () => {
     const {
         state: {
-            playersInfo: { players },
+            settings: {
+                playersInfo: { players },
+            },
         },
         dispatch,
     } = useStore();
@@ -191,7 +193,7 @@ const Players: React.FunctionComponent = () => {
                     }
                     next={
                         <Button
-                            onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_SPIES)}
+                            onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_SPIES)}
                             type="action"
                             disabled={players.length <= 2}
                         >
@@ -199,7 +201,7 @@ const Players: React.FunctionComponent = () => {
                         </Button>
                     }
                 >
-                    <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_TIME_SETTINGS)}>
+                    <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_TIME_SETTINGS)}>
                         Настройки времени
                     </TimeSettings>
                 </ButtonsWizard>

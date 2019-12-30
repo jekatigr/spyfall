@@ -9,7 +9,7 @@ import Button from 'components/common/Button/Button';
 import prefixedAsset from 'utils/assetPrefix';
 
 import { useStore } from 'store';
-import { SET_SETTINGS_STATE_TO_SPIES, SET_SETTINGS_STATE_TO_TIME_SETTINGS } from 'store/reducers/settings';
+import { SET_SETTINGS_PHASE_TO_SPIES, SET_SETTINGS_PHASE_TO_TIME_SETTINGS } from 'store/reducers/settings/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 import {
     SET_GAME_STATE_TO_ROLES_DISTRIBUTIONS,
@@ -18,13 +18,15 @@ import {
     SET_QUESTIONS_TIME,
     SET_DISCUSSION_TIME,
 } from 'store/reducers/game';
-import { SELECT_LOCATION } from 'store/reducers/locations';
+import { SELECT_LOCATION } from 'store/reducers/settings/locations';
 
 import './Locations.less';
 
 const Locations: React.FunctionComponent = () => {
     const {
-        state: { locations, playersInfo, timeSettings, spies },
+        state: {
+            settings: { locations, playersInfo, timeSettings, spies },
+        },
         dispatch,
     } = useStore();
 
@@ -107,7 +109,7 @@ const Locations: React.FunctionComponent = () => {
             </div>
             <ButtonsWizard
                 previous={
-                    <Button onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_SPIES)} type="additional">
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_SPIES)} type="additional">
                         Назад
                     </Button>
                 }
@@ -117,7 +119,7 @@ const Locations: React.FunctionComponent = () => {
                     </Button>
                 }
             >
-                <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_TIME_SETTINGS)}>
+                <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_TIME_SETTINGS)}>
                     Настройки времени
                 </TimeSettings>
             </ButtonsWizard>

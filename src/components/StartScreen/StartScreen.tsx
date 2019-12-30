@@ -5,7 +5,7 @@ import Button from 'components/common/Button/Button';
 import prefixedAsset from 'utils/assetPrefix';
 
 import { useStore } from 'store';
-import { SET_SETTINGS_STATE_TO_PLAYERS } from 'store/reducers/settings';
+import { SET_SETTINGS_PHASE_TO_PLAYERS } from 'store/reducers/settings/settings';
 import { SET_APP_STATE_TO_RULES, SET_APP_STATE_TO_SETTINGS } from 'store/reducers/app';
 
 const StartScreen: React.FunctionComponent = () => {
@@ -13,7 +13,7 @@ const StartScreen: React.FunctionComponent = () => {
 
     const handlePlayClick = (): void => {
         dispatch(SET_APP_STATE_TO_SETTINGS);
-        dispatch(SET_SETTINGS_STATE_TO_PLAYERS);
+        dispatch(SET_SETTINGS_PHASE_TO_PLAYERS);
     };
 
     return (

@@ -10,7 +10,10 @@ import { SET_GAME_STATE_TO_QUESTIONS, SET_START_QUESTIONS } from 'store/reducers
 
 const Rules: React.FunctionComponent = () => {
     const {
-        state: { game, playersInfo },
+        state: {
+            game,
+            settings: { playersInfo },
+        },
         dispatch,
     } = useStore();
 

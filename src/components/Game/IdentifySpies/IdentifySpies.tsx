@@ -10,7 +10,9 @@ import { useStore } from 'store';
 const IdentifySpies: React.FunctionComponent = () => {
     const {
         state: {
-            playersInfo: { players },
+            settings: {
+                playersInfo: { players },
+            },
             game: { spies, identifiedPlayers },
         },
         dispatch,

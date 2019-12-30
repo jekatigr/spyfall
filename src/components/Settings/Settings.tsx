@@ -7,34 +7,34 @@ import Locations from 'components/Settings/Locations/Locations';
 import TimeSettings from 'components/Settings/TimeSettings/TimeSettings';
 
 import { useStore } from 'store';
-import { SETTINGS_STATES } from 'store/reducers/settings';
+import { SETTINGS_PHASES } from 'store/reducers/settings/settings';
 
 import './Settings.less';
 
 const Settings: React.FunctionComponent = () => {
     const {
         state: {
-            settings: { settingsState },
+            settings: { phase },
         },
     } = useStore();
 
     let body;
     let showProgressBar = true;
     let progressBarStep = 0;
-    switch (settingsState) {
-        case SETTINGS_STATES.PLAYERS:
+    switch (phase) {
+        case SETTINGS_PHASES.PLAYERS:
             progressBarStep = 1;
             body = <Players />;
             break;
-        case SETTINGS_STATES.SPIES:
+        case SETTINGS_PHASES.SPIES:
             progressBarStep = 2;
             body = <Spies />;
             break;
-        case SETTINGS_STATES.LOCATIONS:
+        case SETTINGS_PHASES.LOCATIONS:
             progressBarStep = 3;
             body = <Locations />;
             break;
-        case SETTINGS_STATES.TIME_SETTINGS:
+        case SETTINGS_PHASES.TIME_SETTINGS:
             showProgressBar = false;
             body = <TimeSettings />;
             break;

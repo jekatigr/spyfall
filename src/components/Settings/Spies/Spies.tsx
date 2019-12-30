@@ -10,10 +10,10 @@ import Counter from 'components/common/Counter/Counter';
 
 import { useStore } from 'store';
 import {
-    SET_SETTINGS_STATE_TO_LOCATIONS,
-    SET_SETTINGS_STATE_TO_PLAYERS,
-    SET_SETTINGS_STATE_TO_TIME_SETTINGS,
-} from 'store/reducers/settings';
+    SET_SETTINGS_PHASE_TO_LOCATIONS,
+    SET_SETTINGS_PHASE_TO_PLAYERS,
+    SET_SETTINGS_PHASE_TO_TIME_SETTINGS,
+} from 'store/reducers/settings/settings';
 
 import {
     UPDATE_SPIES_FAMILIAR,
@@ -21,13 +21,15 @@ import {
     REDUCE_SPIES_COUNT,
     SELECT_RANDOM_SPIES_COUNT,
     SELECT_SPECIFIC_SPIES_COUNT,
-} from 'store/reducers/spies';
+} from 'store/reducers/settings/spies';
 
 import './Spies.less';
 
 const Spies: React.FunctionComponent = () => {
     const {
-        state: { spies, playersInfo },
+        state: {
+            settings: { spies, playersInfo },
+        },
         dispatch,
     } = useStore();
 
@@ -64,17 +66,17 @@ const Spies: React.FunctionComponent = () => {
 
             <ButtonsWizard
                 previous={
-                    <Button onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_PLAYERS)} type="additional">
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_PLAYERS)} type="additional">
                         Назад
                     </Button>
                 }
                 next={
-                    <Button onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_LOCATIONS)} type="action">
+                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_LOCATIONS)} type="action">
                         Вперед
                     </Button>
                 }
             >
-                <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_STATE_TO_TIME_SETTINGS)}>
+                <TimeSettings onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_TIME_SETTINGS)}>
                     Настройки времени
                 </TimeSettings>
             </ButtonsWizard>
