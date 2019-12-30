@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { block } from 'bem-cn';
 
 import Header from 'components/common/Header/Header';
 import Switcher from 'components/common/Switcher/Switcher';
@@ -23,6 +24,7 @@ import {
 
 import './Spies.less';
 
+const b = block('spies');
 const Spies: React.FunctionComponent = () => {
     const {
         state: {
@@ -38,28 +40,30 @@ const Spies: React.FunctionComponent = () => {
     };
 
     return (
-        <>
+        <div className={b()}>
             <Header>Шпионы</Header>
 
-            <RandomOption
-                name="Случайное число шпионов"
-                disabled={spies.specificSpiesCount}
-                onClick={(): void => dispatch(SELECT_RANDOM_SPIES_COUNT)}
-            />
-            <Counter
-                name="Установить число шпионов"
-                count={spies.spiesCount}
-                disabled={!spies.specificSpiesCount}
-                onClickMinus={(): void => dispatch(REDUCE_SPIES_COUNT)}
-                onClickPlus={(): void => dispatch(INCREASE_SPIES_COUNT)}
-                max={playersInfo.players.length}
-                min={1}
-                onClick={(): void => dispatch(SELECT_SPECIFIC_SPIES_COUNT)}
-            />
+            <div className={b('inner')}>
+                <RandomOption
+                    name="Случайное число шпионов"
+                    disabled={spies.specificSpiesCount}
+                    onClick={(): void => dispatch(SELECT_RANDOM_SPIES_COUNT)}
+                />
+                <Counter
+                    name="Установить число шпионов"
+                    count={spies.spiesCount}
+                    disabled={!spies.specificSpiesCount}
+                    onClickMinus={(): void => dispatch(REDUCE_SPIES_COUNT)}
+                    onClickPlus={(): void => dispatch(INCREASE_SPIES_COUNT)}
+                    max={playersInfo.players.length}
+                    min={1}
+                    onClick={(): void => dispatch(SELECT_SPECIFIC_SPIES_COUNT)}
+                />
 
-            <Switcher onChange={handleSwitchChange} enabledByDefault={spies.spiesFamiliar}>
-                Шпионы знакомы
-            </Switcher>
+                <Switcher onChange={handleSwitchChange} enabledByDefault={spies.spiesFamiliar}>
+                    Шпионы знакомы
+                </Switcher>
+            </div>
 
             <ButtonsWizard
                 previous={
@@ -73,7 +77,7 @@ const Spies: React.FunctionComponent = () => {
                     </Button>
                 }
             />
-        </>
+        </div>
     );
 };
 

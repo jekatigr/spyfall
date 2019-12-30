@@ -64,20 +64,20 @@ const Locations: React.FunctionComponent = () => {
     };
 
     return (
-        <>
-            <div>
-                <Header>Локации</Header>
+        <div className={b()}>
+            <Header>Локации</Header>
+            <div className={b('inner')}>
                 <Paragraph weight="light" hasMargin>
                     Нажмите на иконку, чтобы выбрать категории локаций:
                 </Paragraph>
-                <div className={b({ muted: !basicSelected })}>
+                <div className={b('block', { muted: !basicSelected })}>
                     <div className={b('circle')} onClick={(): void => dispatch(SELECT_LOCATION, { name: basicName })}>
                         <img
                             className={b('basic-image')}
                             src={prefixedAsset(basicSelected ? 'basic.svg' : 'basic-muted.svg')}
                         />
                     </div>
-                    <div className={b('inner')}>
+                    <div className={b('block-inner')}>
                         <span className={b('name')}>{basicName}</span>
                         <div className={b('edit')}>
                             <div className={b('edit-text')}>Редактировать категорию</div>
@@ -87,14 +87,14 @@ const Locations: React.FunctionComponent = () => {
                         </div>
                     </div>
                 </div>
-                <div className={b({ muted: !customSelected })}>
+                <div className={b('block', { muted: !customSelected })}>
                     <div className={b('circle')} onClick={(): void => dispatch(SELECT_LOCATION, { name: customName })}>
                         <img
                             className={b('custom-image')}
                             src={prefixedAsset(customSelected ? 'custom.svg' : 'custom-muted.svg')}
                         />
                     </div>
-                    <div className={b('inner')}>
+                    <div className={b('block-inner')}>
                         <span className={b('name')}>{customName}</span>
                         <div className={b('edit')}>
                             <div className={b('edit-text')}>Редактировать категорию</div>
@@ -117,7 +117,7 @@ const Locations: React.FunctionComponent = () => {
                     </Button>
                 }
             />
-        </>
+        </div>
     );
 };
 
