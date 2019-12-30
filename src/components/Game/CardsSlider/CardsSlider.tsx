@@ -1,9 +1,8 @@
 import * as React from 'react';
+import { block } from 'bem-cn';
 
 import Card from 'components/Game/Card/Card';
 import Header from 'components/common/Header/Header';
-
-import composeClassNames from 'utils/composeClassNames';
 
 import './CardsSlider.less';
 
@@ -23,6 +22,7 @@ type AnimationType = 'next' | 'previous' | 'center' | undefined;
 
 const ANIMATION_DURATION_MS = 400;
 
+const b = block('cards-slider');
 const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, onFinish }) => {
     const [currentCardIndex, setCurrentCardIndex] = React.useState(0);
     const [animationDirection, setAnimationDirection] = React.useState<AnimationType>(undefined);
@@ -130,7 +130,7 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, o
                                 isSpy={isSpy}
                                 location={location}
                                 spies={spies}
-                                className={composeClassNames('cards-slider__card', cardModifiers, 'card')}
+                                className={b('card', cardModifiers)}
                                 key={`${c.name + index}`}
                             />
                         );

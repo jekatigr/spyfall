@@ -1,9 +1,9 @@
 import * as React from 'react';
+import { block } from 'bem-cn';
 
 import Paragraph from 'components/common/Paragraph/Paragraph';
 
 import prefixedAsset from 'utils/assetPrefix';
-import composeClassNames from 'utils/composeClassNames';
 
 import './Card.less';
 
@@ -15,22 +15,23 @@ type Props = {
     className?: string;
 };
 
+const b = block('card');
 const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, className }) => {
     return (
-        <div className={composeClassNames('card', {}, className)}>
-            <div className="card__face">
-                <img className="card__face-background" src={prefixedAsset('card-face.svg')} />
-                <div className="card__face-inner">
+        <div className={b.mix(className)}>
+            <div className={b('face')}>
+                <img className={b('face-background')} src={prefixedAsset('card-face.svg')} />
+                <div className={b('face-inner')}>
                     {isSpy ? (
                         <>
                             <img
-                                className={`card__icon${spies.length > 1 ? ' card__icon_small' : ''}`}
+                                className={b('icon', { small: spies.length > 1 })}
                                 src={prefixedAsset('circle-spy.svg')}
                             />
-                            <Paragraph weight="bold" align="center" className="card__text">
+                            <Paragraph weight="bold" align="center" classNames={b('text')}>
                                 Вы - шпион
                             </Paragraph>
-                            <Paragraph weight="light" align="center" className="card__text">
+                            <Paragraph weight="light" align="center" classNames={b('text')}>
                                 будьте скрытным и внимательным!
                             </Paragraph>
                             {spies.length > 1 ? (
@@ -38,11 +39,11 @@ const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, cl
                                     <Paragraph
                                         weight="light"
                                         align="center"
-                                        className="card__text card__text-cospies-label"
+                                        classNames={[b('text'), b('text-cospies-label')]}
                                     >
                                         На вашей стороне:
                                     </Paragraph>
-                                    <Paragraph weight="bold" align="center" className="card__text card__text-cospies">
+                                    <Paragraph weight="bold" align="center" classNames={[b('text'), b('text-cospies')]}>
                                         {spies.filter(s => s !== name).join(', ')}
                                     </Paragraph>
                                 </>
@@ -50,8 +51,8 @@ const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, cl
                         </>
                     ) : (
                         <>
-                            <img className="card__icon" src={prefixedAsset('circle-location.svg')} />
-                            <Paragraph weight="medium" align="center" className="card__text" hasMargin>
+                            <img className={b('icon')} src={prefixedAsset('circle-location.svg')} />
+                            <Paragraph weight="medium" align="center" classNames={b('text')} hasMargin>
                                 {location}
                             </Paragraph>
                         </>
@@ -59,7 +60,7 @@ const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, cl
                 </div>
             </div>
 
-            <img className="card__back" src={prefixedAsset('card-back.svg')} />
+            <img className={b('back')} src={prefixedAsset('card-back.svg')} />
         </div>
     );
 };

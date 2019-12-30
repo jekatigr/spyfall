@@ -11,20 +11,30 @@ type Props = {
 };
 
 const ButtonsWizard: React.FunctionComponent<Props> = ({ next, previous, children }) => {
-    const previousClassName = previous.props.className;
-    const nextClassName = next.props.className;
+    const {
+        props: { classNames: previousClassNames = [] },
+    } = previous;
+    const {
+        props: { classNames: nextClassNames = [] },
+    } = next;
+
+    const newPreviousClassNames = typeof previousClassNames === 'string' ? [previousClassNames] : previousClassNames;
+    const newNextClassNames = typeof nextClassNames === 'string' ? [nextClassNames] : nextClassNames;
+
+    newPreviousClassNames.push('buttons-wizard__button');
+    newNextClassNames.push('buttons-wizard__button');
 
     return (
         <div className="buttons-wizard">
             {children}
             <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_previous">
                 {React.cloneElement(previous, {
-                    className: `buttons-wizard__button${` ${previousClassName}` || ''}`,
+                    classNames: newPreviousClassNames,
                 })}
             </div>
             <div className="buttons-wizard__button-wrapper buttons-wizard__button-wrapper_next">
                 {React.cloneElement(next, {
-                    className: `buttons-wizard__button${` ${nextClassName}` || ''}`,
+                    classNames: newNextClassNames,
                 })}
             </div>
         </div>

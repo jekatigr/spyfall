@@ -174,7 +174,7 @@ const Players: React.FunctionComponent = () => {
                                             >
                                                 <img src={prefixedAsset('edit.svg')} />
                                             </div>
-                                            <Paragraph hasMargin className="player__name">
+                                            <Paragraph hasMargin classNames="player__name">
                                                 {player.name}
                                             </Paragraph>
                                         </div>
@@ -195,7 +195,7 @@ const Players: React.FunctionComponent = () => {
                         <Button
                             onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_SPIES)}
                             type="action"
-                            disabled={players.length <= 2}
+                            disabled={players.length < 0}
                         >
                             Вперед
                         </Button>

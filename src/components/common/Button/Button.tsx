@@ -1,19 +1,19 @@
 import * as React from 'react';
-
-import composeClassNames from 'utils/composeClassNames';
+import { block } from 'bem-cn';
 
 import './Button.less';
 
 type Props = {
     type?: 'action' | 'additional';
-    className?: string;
+    classNames?: string | string[];
     disabled?: boolean;
     children: React.ReactNode;
     onClick: () => void;
 };
 
-const Button: React.FunctionComponent<Props> = ({ type, disabled, className, children, onClick }) => (
-    <button type="button" className={composeClassNames('button', { type, disabled }, className)} onClick={onClick}>
+const b = block('button');
+const Button: React.FunctionComponent<Props> = ({ type, disabled, classNames, children, onClick }) => (
+    <button type="button" className={b({ type, disabled }).mix(classNames)} onClick={onClick}>
         {children}
     </button>
 );

@@ -1,6 +1,5 @@
 import * as React from 'react';
-
-import composeClassNames from 'utils/composeClassNames';
+import { block } from 'bem-cn';
 
 import './Paragraph.less';
 
@@ -8,12 +7,13 @@ type Props = {
     weight?: 'extra-light' | 'light' | 'medium' | 'bold';
     align?: 'center' | 'justify';
     hasMargin?: boolean;
-    className?: string;
+    classNames?: string | string[];
     children: React.ReactNode;
 };
 
-const Paragraph: React.FunctionComponent<Props> = ({ weight, align, hasMargin, className, children }) => (
-    <p className={composeClassNames('paragraph', { weight, align, 'has-margin': hasMargin }, className)}>{children}</p>
+const b = block('paragraph');
+const Paragraph: React.FunctionComponent<Props> = ({ weight, align, hasMargin, classNames, children }) => (
+    <p className={b({ weight, align, 'has-margin': hasMargin }).mix(classNames)}>{children}</p>
 );
 
 Paragraph.defaultProps = {
