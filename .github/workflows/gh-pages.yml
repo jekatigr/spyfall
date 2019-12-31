@@ -8,10 +8,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v1
 
-    - name: Install, Lint and Build
+    - name: Install, Check and Build
       run: |
         yarn install --frozen-lockfile
         yarn run lint
+        yarn run typecheck
         yarn run build
         yarn run export
       env:

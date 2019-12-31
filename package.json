@@ -12,11 +12,12 @@
     "start": "next start",
     "export": "next export",
     "lint": "eslint --ext .ts,.tsx src --max-warnings 0",
-    "pre-commit": "tsc --noEmit -p . && yarn run lint"
+    "typecheck": "tsc --noEmit -p .",
+    "pre-commit": "yarn typecheck && yarn lint"
   },
   "husky": {
     "hooks": {
-      "pre-commit": "yarn run lint"
+      "pre-commit": "yarn pre-commit"
     }
   },
   "dependencies": {

@@ -1,16 +1,24 @@
 import baseLocations from 'constants/baseLocations';
 
+export const UPDATE_BASIC_LOCATIONS = 'UPDATE_BASIC_LOCATIONS';
 export const UPDATE_CUSTOM_LOCATIONS = 'UPDATE_CUSTOM_LOCATIONS';
 export const SELECT_LOCATION = 'SELECT_LOCATION';
 
+const baseLocationsObj = baseLocations.map(l => ({ name: l, isSelected: true }));
+
 const initialState = {
-    baseLocations: { locations: baseLocations, name: 'Базовые', isSelected: true },
-    customLocations: { locations: ['Пусто!'], name: 'Кастомные', isSelected: false },
+    baseLocations: { locations: baseLocationsObj, name: 'Базовые', isSelected: true },
+    customLocations: { locations: [], name: 'Кастомные', isSelected: false },
 };
 
 export default (state = initialState, action): typeof initialState => {
     let newState;
     switch (action.type) {
+        case UPDATE_BASIC_LOCATIONS:
+            return {
+                ...state,
+                baseLocations: { ...state.baseLocations, locations: action.locations },
+            };
         case UPDATE_CUSTOM_LOCATIONS:
             return {
                 ...state,

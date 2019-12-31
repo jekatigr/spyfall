@@ -10,7 +10,11 @@ import Edit from 'components/common/Edit/Edit';
 import prefixedAsset from 'utils/assetPrefix';
 
 import { useStore } from 'store';
-import { SET_SETTINGS_PHASE_TO_TIME_SETTINGS } from 'store/reducers/settings/settings';
+import {
+    SET_SETTINGS_PHASE_TO_EDIT_BASIC_LOCATIONS,
+    SET_SETTINGS_PHASE_TO_EDIT_CUSTOM_LOCATIONS,
+    SET_SETTINGS_PHASE_TO_TIME_SETTINGS,
+} from 'store/reducers/settings/settings';
 import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
 import {
     SET_GAME_PHASE_TO_ROLES_DISTRIBUTIONS,
@@ -50,7 +54,7 @@ const Locations: React.FunctionComponent = () => {
 
         // Select location
         const allLocations = [];
-        if (basicSelected) allLocations.push(...basicLocations);
+        if (basicSelected) allLocations.push(...basicLocations.filter(l => l.isSelected).map(l => l.name));
         if (customSelected) allLocations.push(...customLocations);
         const selectedLocation = allLocations[Math.floor(Math.random() * allLocations.length)];
         dispatch(SET_LOCATION, { location: selectedLocation });
@@ -80,7 +84,10 @@ const Locations: React.FunctionComponent = () => {
                     </div>
                     <div className={b('block-inner')}>
                         <span className={b('name')}>{basicName}</span>
-                        <div className={b('edit')}>
+                        <div
+                            className={b('edit')}
+                            onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_EDIT_BASIC_LOCATIONS)}
+                        >
                             <div className={b('edit-text')}>Редактировать категорию</div>
                             <Edit classNames={b('edit-icon')} />
                         </div>
@@ -95,7 +102,10 @@ const Locations: React.FunctionComponent = () => {
                     </div>
                     <div className={b('block-inner')}>
                         <span className={b('name')}>{customName}</span>
-                        <div className={b('edit')}>
+                        <div
+                            className={b('edit')}
+                            onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_EDIT_CUSTOM_LOCATIONS)}
+                        >
                             <div className={b('edit-text')}>Редактировать категорию</div>
                             <Edit classNames={b('edit-icon')} />
                         </div>
