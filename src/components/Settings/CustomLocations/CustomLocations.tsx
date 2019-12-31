@@ -42,13 +42,12 @@ const CustomLocations: React.FunctionComponent = () => {
 
     const handleKeyPressed = (e: React.KeyboardEvent): void => {
         if (e.charCode === 13) {
-            const newLocations = [
-                ...locations,
-                {
-                    name: newLocation,
-                    isSelected: true,
-                },
-            ];
+            const newLocationsSplitted = newLocation.split(',').map(l => ({
+                name: l,
+                isSelected: true,
+            }));
+
+            const newLocations = [...locations, ...newLocationsSplitted];
 
             dispatch(UPDATE_CUSTOM_LOCATIONS, {
                 locations: newLocations,
