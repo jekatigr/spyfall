@@ -4,6 +4,7 @@ import ProgressBar from 'components/common/ProgressBar/ProgressBar';
 import PlayersList from 'components/Settings/PlayersList/PlayersList';
 import PlayerProfile from 'components/Settings/PlayerProfile/PlayerProfile';
 import BasicLocations from 'components/Settings/BasicLocations/BasicLocations';
+import CustomLocations from 'components/Settings/CustomLocations/CustomLocations';
 import Spies from 'components/Settings/Spies/Spies';
 import Locations from 'components/Settings/Locations/Locations';
 import TimeSettings from 'components/Settings/TimeSettings/TimeSettings';
@@ -58,7 +59,7 @@ const Settings: React.FunctionComponent = () => {
         case SETTINGS_PHASES.EDIT_CUSTOM_LOCATIONS:
             secondaryScreen = true;
             backButtonAction = SET_SETTINGS_PHASE_TO_LOCATIONS;
-            body = 'edit custom locations';
+            body = <CustomLocations />;
             break;
         default:
         // console.error('TODO');

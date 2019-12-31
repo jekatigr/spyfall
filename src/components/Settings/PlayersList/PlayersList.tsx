@@ -100,7 +100,7 @@ const PlayersList: React.FunctionComponent = () => {
                     <Button
                         onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_SPIES)}
                         type="action"
-                        disabled={players.length < 0}
+                        disabled={players.length < 3}
                     >
                         Вперед
                     </Button>

@@ -62,7 +62,7 @@ const PlayerProfile: React.FunctionComponent = () => {
                 <TextField
                     value={playerName}
                     classNames={b('input')}
-                    placeholder="Введите имя игрока"
+                    placeholder="Введите имя игрока..."
                     onChange={setPlayerName}
                 />
             </div>

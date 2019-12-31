@@ -55,7 +55,7 @@ const Locations: React.FunctionComponent = () => {
         // Select location
         const allLocations = [];
         if (basicSelected) allLocations.push(...basicLocations.filter(l => l.isSelected).map(l => l.name));
-        if (customSelected) allLocations.push(...customLocations);
+        if (customSelected) allLocations.push(...customLocations.filter(l => l.isSelected).map(l => l.name));
         const selectedLocation = allLocations[Math.floor(Math.random() * allLocations.length)];
         dispatch(SET_LOCATION, { location: selectedLocation });
 

@@ -1,0 +1,46 @@
+@import (reference) '../../../styles/base';
+
+@el: e('.custom-locations');
+
+@{el} {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  &__inner {
+    flex-grow: 1;
+  }
+
+  &__list {
+    margin: 0 -18px;
+    padding: 5px 0 30px;
+  }
+
+  &__list-item {
+    border-bottom: 1px solid #002539;
+    padding: 24px 18px;
+    font-weight: 500;
+    font-size: 18px;
+    display: flex;
+    justify-content: space-between;
+  }
+
+  &__list-item_checked {
+    background-color: #00AEE5;
+    border-bottom: 1px solid #002539;
+    padding: 24px 18px;
+    color: #002539;
+  }
+
+  &__remove-icon {
+    width: 18px;
+    height: 18px;
+    margin-right: 3px;
+  }
+
+  &__input {
+    margin: 0 auto;
+    display: block;
+  }
+}
