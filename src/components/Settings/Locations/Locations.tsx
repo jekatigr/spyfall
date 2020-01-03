@@ -61,7 +61,7 @@ const Locations: React.FunctionComponent = () => {
 
         // Set round durations
         dispatch(SET_QUESTIONS_TIME, { time: timeSettings.roundTime * 1000 * 60 });
-        dispatch(SET_DISCUSSION_TIME, { time: timeSettings.roundTime * 1000 * 60 });
+        dispatch(SET_DISCUSSION_TIME, { time: timeSettings.discussionTime * 1000 * 60 });
 
         // Start game
         dispatch(SET_GAME_PHASE_TO_ROLES_DISTRIBUTIONS);

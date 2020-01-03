@@ -38,7 +38,7 @@ export default (state = initialState, action): typeof initialState => {
         case UPDATE_SPIES_FAMILIAR:
             return {
                 ...state,
-                spiesCount: action.count,
+                spiesFamiliar: !state.spiesFamiliar,
             };
         default:
             return state;
