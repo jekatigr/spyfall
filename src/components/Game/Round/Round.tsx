@@ -46,7 +46,7 @@ const Round: React.FunctionComponent<Props> = ({ phase }) => {
     };
 
     const changeTime = (gamePhase, delta): void => {
-        // phase === QUESTIONS by default
+        // gamePhase === QUESTIONS by default
         let currentTime = game.discussion.discussionTime;
         let action = SET_DISCUSSION_TIME;
         if (gamePhase === QUESTIONS_PHASE) {
