@@ -5,7 +5,9 @@ import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import TextField from 'components/common/TextField/TextField';
-import prefixedAsset from 'utils/assetPrefix';
+
+import CheckIcon from 'icons/check.svg?sprite';
+import RemoveIcon from 'icons/remove.svg?sprite';
 
 import { useStore } from 'store';
 import { SET_SETTINGS_PHASE_TO_LOCATIONS } from 'store/reducers/settings/settings';
@@ -90,11 +92,10 @@ const CustomLocations: React.FunctionComponent = () => {
                             >
                                 {name}
                                 {isSelected ? (
-                                    <img src={prefixedAsset('check.svg')} />
+                                    <CheckIcon className={b('check-icon')} />
                                 ) : (
-                                    <img
+                                    <RemoveIcon
                                         className={b('remove-icon')}
-                                        src={prefixedAsset('remove.svg')}
                                         onClick={(e: React.MouseEvent<HTMLImageElement>): void => handleRemove(e, name)}
                                     />
                                 )}

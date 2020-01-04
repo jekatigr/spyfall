@@ -3,7 +3,10 @@ import { block } from 'bem-cn';
 
 import Paragraph from 'components/common/Paragraph/Paragraph';
 
-import prefixedAsset from 'utils/assetPrefix';
+import CardFace from 'icons/card-face.svg?sprite';
+import CardBack from 'icons/card-back.svg?sprite';
+import SpyIcon from 'icons/circle-spy.svg?sprite';
+import LocationIcon from 'icons/circle-location.svg?sprite';
 
 import './Card.less';
 
@@ -20,14 +23,11 @@ const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, cl
     return (
         <div className={b.mix(className)}>
             <div className={b('face')}>
-                <img className={b('face-background')} src={prefixedAsset('card-face.svg')} />
+                <CardFace className={b('face-background')} />
                 <div className={b('face-inner')}>
                     {isSpy ? (
                         <>
-                            <img
-                                className={b('icon', { small: spies.length > 1 })}
-                                src={prefixedAsset('circle-spy.svg')}
-                            />
+                            <SpyIcon className={b('icon', { small: spies.length > 1 })} />
                             <Paragraph weight="bold" align="center" classNames={b('text')}>
                                 Вы - шпион
                             </Paragraph>
@@ -51,7 +51,7 @@ const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, cl
                         </>
                     ) : (
                         <>
-                            <img className={b('icon')} src={prefixedAsset('circle-location.svg')} />
+                            <LocationIcon className={b('icon')} />
                             <Paragraph weight="medium" align="center" classNames={b('text')} hasMargin>
                                 {location}
                             </Paragraph>
@@ -59,8 +59,7 @@ const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, cl
                     )}
                 </div>
             </div>
-
-            <img className={b('back')} src={prefixedAsset('card-back.svg')} />
+            <CardBack className={b('back')} />
         </div>
     );
 };

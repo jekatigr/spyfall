@@ -1,7 +1,8 @@
 const path = require('path');
 const withLess = require('@zeit/next-less');
+const withOptimizedImages = require('next-optimized-images');
 
-module.exports = withLess({
+module.exports = withOptimizedImages(withLess({
     webpack(config, options) {
         config.resolve = {
             ...config.resolve,
@@ -13,8 +14,8 @@ module.exports = withLess({
         };
         return config;
     },
-    assetPrefix: process.env.ASSET_PREFIX,
+    assetPrefix: process.env.ASSET_PREFIX || '',
     env: {
-        ASSET_PREFIX: process.env.ASSET_PREFIX,
+        ASSET_PREFIX: process.env.ASSET_PREFIX || '',
     },
-});
+}));

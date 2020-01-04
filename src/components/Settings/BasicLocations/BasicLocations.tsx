@@ -4,7 +4,8 @@ import { block } from 'bem-cn';
 import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
 import Paragraph from 'components/common/Paragraph/Paragraph';
-import prefixedAsset from 'utils/assetPrefix';
+
+import CheckIcon from 'icons/check.svg?sprite';
 
 import { useStore } from 'store';
 import { SET_SETTINGS_PHASE_TO_LOCATIONS } from 'store/reducers/settings/settings';
@@ -61,7 +62,7 @@ const BasicLocations: React.FunctionComponent = () => {
                                 key={location.name}
                             >
                                 {location.name}
-                                <img src={prefixedAsset('check.svg')} />
+                                <CheckIcon className={b('check-icon')} />
                             </div>
                         );
                     })}

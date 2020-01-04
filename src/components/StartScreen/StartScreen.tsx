@@ -3,11 +3,11 @@ import { block } from 'bem-cn';
 
 import Button from 'components/common/Button/Button';
 
-import prefixedAsset from 'utils/assetPrefix';
-
 import { useStore } from 'store';
 import { SET_SETTINGS_PHASE_TO_PLAYERS_LIST } from 'store/reducers/settings/settings';
 import { SET_APP_STATE_TO_RULES, SET_APP_STATE_TO_SETTINGS } from 'store/reducers/app';
+
+import Logo from 'icons/logo.svg?sprite';
 
 import './StartScreen.less';
 
@@ -22,7 +22,7 @@ const StartScreen: React.FunctionComponent = () => {
 
     return (
         <div className={b()}>
-            <img src={prefixedAsset('logo.svg')} />
+            <Logo className={b('logo')} />
             <div className={b('buttons')}>
                 <Button type="action" onClick={handlePlayClick}>
                     Играть

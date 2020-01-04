@@ -1,8 +1,10 @@
 import * as React from 'react';
 import { block } from 'bem-cn';
 
+import DiceMutedIcon from 'icons/dice-muted.svg?sprite';
+import DiceIcon from 'icons/dice.svg?sprite';
+
 import './RandomOption.less';
-import prefixedAsset from 'utils/assetPrefix';
 
 type Props = {
     name: string;
@@ -16,7 +18,7 @@ const RandomOption: React.FunctionComponent<Props> = ({ name, disabled, onClick 
         <div className={b({ muted: disabled })} onClick={onClick}>
             <span className={b('name')}>{name}</span>
             <div className={b('inner')}>
-                <img className={b('image')} src={prefixedAsset(disabled ? 'dice-muted.svg' : 'dice.svg')} />
+                {disabled ? <DiceMutedIcon className={b('icon')} /> : <DiceIcon className={b('icon')} />}
             </div>
         </div>
     );
