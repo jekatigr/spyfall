@@ -1,5 +1,7 @@
-import React, { useReducer, createContext, Dispatch, useContext } from 'react';
+import React, { useEffect, useReducer, createContext, Dispatch, useContext } from 'react';
 import rootReducer from 'store/reducers';
+
+const DEV_MODE = process.env.NODE_ENV === 'development';
 
 const initialState = rootReducer(undefined, { type: '__INIT__' });
 
@@ -13,6 +15,14 @@ const { Provider } = storeContext;
 
 const StoreProvider = ({ children }): JSX.Element => {
     const [state, dispatch] = useReducer(rootReducer, initialState);
+
+    useEffect(() => {
+        if (DEV_MODE) {
+            // eslint-disable-next-line no-console
+            console.log('State: ', state);
+        }
+    }, [state]);
+
     return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };
 
@@ -25,7 +35,12 @@ const useStore = (): UseStoreType => {
     const { state, dispatch: dispatchWrapped } = useContext(storeContext);
 
     const dispatch = (type: string, payload?: any): void => {
-        dispatchWrapped({ type, ...payload });
+        const action = { type, ...payload };
+        if (DEV_MODE) {
+            // eslint-disable-next-line no-console
+            console.log('Action: ', action);
+        }
+        dispatchWrapped(action);
     };
 
     return { state, dispatch };
