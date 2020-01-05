@@ -52,17 +52,17 @@ const BasicLocations: React.FunctionComponent = () => {
                     Выберите локации, которые будут участвовать в игре:
                 </Paragraph>
                 <div className={b('list')}>
-                    {basicLocations.map(location => {
+                    {basicLocations.map(({ name, isSelected }) => {
                         return (
                             <div
-                                className={b('list-item', { checked: location.isSelected })}
+                                className={b('list-item', { checked: isSelected })}
                                 onClick={(): void => {
-                                    handleCheck(location.name);
+                                    handleCheck(name);
                                 }}
-                                key={location.name}
+                                key={name}
                             >
-                                {location.name}
-                                <CheckIcon className={b('check-icon')} />
+                                {name}
+                                {isSelected ? <CheckIcon className={b('check-icon')} /> : null}
                             </div>
                         );
                     })}
