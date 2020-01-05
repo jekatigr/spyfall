@@ -9,6 +9,7 @@ import Spies from 'components/Settings/Spies/Spies';
 import Locations from 'components/Settings/Locations/Locations';
 import TimeSettings from 'components/Settings/TimeSettings/TimeSettings';
 import Navigation from 'components/common/Navigation/Navigation';
+import getMenuItems from 'utils/getMenuItems';
 
 import { useStore } from 'store';
 import {
@@ -70,7 +71,7 @@ const Settings: React.FunctionComponent = () => {
             {secondaryScreen ? (
                 <Navigation type="back" onClick={(): void => dispatch(backButtonAction)} />
             ) : (
-                <Navigation type="menu" />
+                <Navigation menuItems={getMenuItems(dispatch)} />
             )}
             {!secondaryScreen ? <ProgressBar dotsCount={4} step={progressBarStep} /> : ''}
             {body}
