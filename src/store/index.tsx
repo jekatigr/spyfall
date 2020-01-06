@@ -3,7 +3,8 @@ import rootReducer from 'store/reducers';
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 
-const initialState = rootReducer(undefined, { type: '__INIT__' });
+const { savedState = null } = process.browser ? window.localStorage : {};
+const initialState = rootReducer(JSON.parse(savedState) || undefined, { type: '__INIT__' });
 
 /* eslint-disable @typescript-eslint/no-explicit-any */
 const storeContext = createContext<{
@@ -17,6 +18,10 @@ const StoreProvider = ({ children }): JSX.Element => {
     const [state, dispatch] = useReducer(rootReducer, initialState);
 
     useEffect(() => {
+        if (process.browser) {
+            window.localStorage.savedState = JSON.stringify(state);
+        }
+
         if (DEV_MODE) {
             // eslint-disable-next-line no-console
             console.log('State: ', state);
