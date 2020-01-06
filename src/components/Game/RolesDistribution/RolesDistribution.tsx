@@ -1,6 +1,5 @@
 import * as React from 'react';
 
-import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Button from 'components/common/Button/Button';
 import CardsSlider from 'components/Game/CardsSlider/CardsSlider';
@@ -30,10 +29,9 @@ const Rules: React.FunctionComponent = () => {
 
     return (
         <>
-            <Header>Распределение ролей</Header>
             {isRolesDistributed ? (
                 <>
-                    <Paragraph> Роли распределены! </Paragraph>
+                    <Paragraph>Роли распределены!</Paragraph>
                     <Button onClick={startGame} type="action">
                         Начать игру!
                     </Button>
