@@ -5,6 +5,7 @@ import RolesDistribution from 'components/Game/RolesDistribution/RolesDistributi
 import Round from 'components/Game/Round/Round';
 import IdentifySpies from 'components/Game/IdentifySpies/IdentifySpies';
 import Results from 'components/Game/Results/Results';
+import getMenuItems from 'utils/getMenuItems';
 
 import { useStore } from 'store';
 import { GAME_PHASES } from 'store/reducers/game';
@@ -14,6 +15,7 @@ const Game: React.FunctionComponent = () => {
         state: {
             game: { phase },
         },
+        dispatch,
     } = useStore();
 
     let body;
@@ -39,7 +41,7 @@ const Game: React.FunctionComponent = () => {
 
     return (
         <>
-            <Navigation type="menu" />
+            <Navigation type="menu" menuItems={getMenuItems(dispatch)} />
             {body}
         </>
     );
