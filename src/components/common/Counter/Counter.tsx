@@ -14,6 +14,7 @@ type Props = {
     onClickPlus: () => void;
     max: number;
     min: number;
+    interactive?: boolean;
     onClick?: () => void;
 };
 
@@ -27,6 +28,7 @@ const Counter: React.FunctionComponent<Props> = ({
     onClickPlus,
     max,
     min,
+    interactive,
     onClick = (): void => {},
 }) => (
     <div className={b({ muted: disabled })} onClick={onClick}>
@@ -38,12 +40,16 @@ const Counter: React.FunctionComponent<Props> = ({
                 onMinusClick={onClickMinus}
                 onPlusClick={onClickPlus}
             />
-            <div className={b('display')}>
+            <div className={b('display', { interactive })}>
                 <div className={b('display-time')}>{`${count < 10 ? '0' : ''}${count}`}</div>
                 {units && <div className={b('display-units')}>{units}</div>}
             </div>
         </div>
     </div>
 );
+
+Counter.defaultProps = {
+    interactive: false,
+};
 
 export default Counter;

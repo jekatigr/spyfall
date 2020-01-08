@@ -57,6 +57,7 @@ const Spies: React.FunctionComponent = () => {
                     onClickPlus={(): void => dispatch(INCREASE_SPIES_COUNT)}
                     max={playersInfo.players.length}
                     min={1}
+                    interactive
                     onClick={(): void => dispatch(SELECT_SPECIFIC_SPIES_COUNT)}
                 />
 
