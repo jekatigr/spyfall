@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { block } from 'bem-cn';
 
-import prefixedAsset from 'utils/assetPrefix';
+import EditIcon from 'icons/edit.svg?sprite';
 
 import './Edit.less';
 
@@ -13,7 +13,7 @@ type Props = {
 const b = block('edit');
 const Edit: React.FunctionComponent<Props> = ({ classNames, onClick }) => (
     <div className={b({}).mix(classNames)} onClick={onClick}>
-        <img src={prefixedAsset('edit.svg')} />
+        <EditIcon className={b('icon')} />
     </div>
 );
 

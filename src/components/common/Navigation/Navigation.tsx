@@ -1,7 +1,8 @@
 import * as React from 'react';
 import { block } from 'bem-cn';
 
-import prefixedAsset from 'utils/assetPrefix';
+import BackIcon from 'icons/back.svg?sprite';
+import MenuIcon from 'icons/menu.svg?sprite';
 
 import './Navigation.less';
 
@@ -18,7 +19,7 @@ const Navigation: React.FunctionComponent<Props> = ({ type, onClick }) => {
         }
     };
 
-    const icon = type === 'back' ? <img src={prefixedAsset('back.svg')} /> : <img src={prefixedAsset('menu.svg')} />;
+    const icon = type === 'back' ? <BackIcon className={b('back')} /> : <MenuIcon className={b('menu')} />;
 
     return (
         <div className={b()} onClick={handleClick}>

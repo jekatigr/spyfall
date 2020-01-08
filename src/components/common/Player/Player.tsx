@@ -4,7 +4,7 @@ import { block } from 'bem-cn';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Edit from 'components/common/Edit/Edit';
 
-import prefixedAsset from 'utils/assetPrefix';
+import PlayerIcon from 'icons/player.svg?sprite';
 
 import './Player.less';
 
@@ -38,7 +38,7 @@ const Player: React.FunctionComponent<Props> = ({ name, color, big, onClick }) =
     return (
         <div className={b({ big })} onClick={handleClick}>
             <div className={b('image', { [color]: true })}>
-                <img className={b('icon')} src={prefixedAsset('player.svg')} />
+                <PlayerIcon className={b('icon')} />
             </div>
             {!big ? (
                 <>

@@ -6,7 +6,8 @@ import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Button from 'components/common/Button/Button';
 import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
-import prefixedAsset from 'utils/assetPrefix';
+
+import AddIcon from 'icons/add.svg?sprite';
 
 import { useStore } from 'store';
 import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
@@ -70,7 +71,7 @@ const PlayersList: React.FunctionComponent = () => {
                         <div className={b('list-inner')}>
                             <div className={b('list-item')}>
                                 <button type="button" className={b('add-player-button')} onClick={createPlayer}>
-                                    <img src={prefixedAsset('add.svg')} />
+                                    <AddIcon className={b('add-player-button-icon')} />
                                 </button>
                             </div>
                             {players.map(({ name, color }, index) => (

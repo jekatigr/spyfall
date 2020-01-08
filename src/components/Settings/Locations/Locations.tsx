@@ -7,7 +7,10 @@ import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
 import Edit from 'components/common/Edit/Edit';
 
-import prefixedAsset from 'utils/assetPrefix';
+import BasicIcon from 'icons/basic.svg?sprite';
+import BasicMutedIcon from 'icons/basic-muted.svg?sprite';
+import CustomIcon from 'icons/custom.svg?sprite';
+import CustomMutedIcon from 'icons/custom-muted.svg?sprite';
 
 import { useStore } from 'store';
 import {
@@ -77,10 +80,11 @@ const Locations: React.FunctionComponent = () => {
                 </Paragraph>
                 <div className={b('block', { muted: !basicSelected })}>
                     <div className={b('circle')} onClick={(): void => dispatch(SELECT_LOCATION, { name: basicName })}>
-                        <img
-                            className={b('basic-image')}
-                            src={prefixedAsset(basicSelected ? 'basic.svg' : 'basic-muted.svg')}
-                        />
+                        {basicSelected ? (
+                            <BasicIcon className={b('basic-icon')} />
+                        ) : (
+                            <BasicMutedIcon className={b('basic-icon')} />
+                        )}
                     </div>
                     <div className={b('block-inner')}>
                         <span className={b('name')}>{basicName}</span>
@@ -95,10 +99,11 @@ const Locations: React.FunctionComponent = () => {
                 </div>
                 <div className={b('block', { muted: !customSelected })}>
                     <div className={b('circle')} onClick={(): void => dispatch(SELECT_LOCATION, { name: customName })}>
-                        <img
-                            className={b('custom-image')}
-                            src={prefixedAsset(customSelected ? 'custom.svg' : 'custom-muted.svg')}
-                        />
+                        {customSelected ? (
+                            <CustomIcon className={b('custom-icon')} />
+                        ) : (
+                            <CustomMutedIcon className={b('custom-icon')} />
+                        )}
                     </div>
                     <div className={b('block-inner')}>
                         <span className={b('name')}>{customName}</span>

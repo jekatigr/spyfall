@@ -5,7 +5,8 @@ import Player from 'components/common/Player/Player';
 import Header from 'components/common/Header/Header';
 import TextField from 'components/common/TextField/TextField';
 import Button from 'components/common/Button/Button';
-import prefixedAsset from 'utils/assetPrefix';
+
+import RemoveIcon from 'icons/remove.svg?sprite';
 
 import { useStore } from 'store';
 import { UPDATE_PLAYERS } from 'store/reducers/settings/playersInfo';
@@ -68,7 +69,7 @@ const PlayerProfile: React.FunctionComponent = () => {
             </div>
             <div className={b('remove-player')} onClick={deletePlayer}>
                 Удалить игрока
-                <img className={b('remove-icon')} src={prefixedAsset('remove.svg')} />
+                <RemoveIcon className={b('remove-icon')} />
             </div>
             <Button onClick={savePlayer} type="action">
                 Сохранить

@@ -24,11 +24,14 @@
     "@zeit/next-less": "^1.0.1",
     "bem-cn": "^3.0.1",
     "css-reset-and-normalize": "^2.1.0",
+    "imagemin-svgo": "^7.0.0",
     "less": "^3.10.3",
     "next": "^9.1.4",
+    "next-optimized-images": "^2.5.4",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
-    "redux": "^4.0.5"
+    "redux": "^4.0.5",
+    "svg-sprite-loader": "4.1.2"
   },
   "devDependencies": {
     "@types/node": "^12.12.14",
@@ -40,6 +43,7 @@
     "eslint": "^6.7.2",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-prettier": "^6.7.0",
+    "eslint-import-resolver-typescript": "^2.0.0",
     "eslint-plugin-import": "^2.18.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
     "eslint-plugin-prettier": "^3.1.2",
