@@ -1,5 +1,6 @@
 import * as React from 'react';
 
+import Navigation from 'components/common/Navigation/Navigation';
 import RolesDistribution from 'components/Game/RolesDistribution/RolesDistribution';
 import Round from 'components/Game/Round/Round';
 import IdentifySpies from 'components/Game/IdentifySpies/IdentifySpies';
@@ -36,7 +37,12 @@ const Game: React.FunctionComponent = () => {
         // console.error('TODO');
     }
 
-    return body;
+    return (
+        <>
+            <Navigation type="menu" />
+            {body}
+        </>
+    );
 };
 
 export default Game;

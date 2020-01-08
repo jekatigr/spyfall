@@ -3,6 +3,7 @@ import { block } from 'bem-cn';
 
 import Card from 'components/Game/Card/Card';
 import Header from 'components/common/Header/Header';
+import Paragraph from 'components/common/Paragraph/Paragraph';
 
 import './CardsSlider.less';
 
@@ -29,8 +30,9 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, o
     const [isCenterFlipped, setIsCenterFlipped] = React.useState<boolean>(false);
 
     React.useEffect(() => {
+        let timeoutId;
         if (animationDirection) {
-            setTimeout(() => {
+            timeoutId = setTimeout(() => {
                 let newCurrentCardIndex = currentCardIndex;
                 switch (animationDirection) {
                     case 'next': {
@@ -49,6 +51,9 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, o
                 setAnimationDirection(undefined);
             }, ANIMATION_DURATION_MS);
         }
+        return (): void => {
+            clearTimeout(timeoutId);
+        };
     }, [animationDirection]);
 
     const handleClick = (e): void => {
@@ -91,10 +96,10 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, o
     }
 
     return (
-        <>
-            <Header>{cards[currentCardIndex].name}</Header>
-            <div className="cards-slider" onClick={handleClick}>
-                <div className="cards-slider__inner">
+        <div className={b()}>
+            <Header classNames={b('player-name')}>{cards[currentCardIndex].name}</Header>
+            <div className={b('roller')} onClick={handleClick}>
+                <div className={b('roller-inner')}>
                     {cards.map((c, index) => {
                         const isCenter = currentCardIndex === index;
 
@@ -137,7 +142,10 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, o
                     })}
                 </div>
             </div>
-        </>
+            <Paragraph weight="light" align="center" hasMargin classNames={b('notice')}>
+                Нажмите на карту, чтобы перевернуть ее
+            </Paragraph>
+        </div>
     );
 };
 

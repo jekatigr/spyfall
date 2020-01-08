@@ -3,11 +3,22 @@
 @el: e('.cards-slider');
 
 @{el} {
-  width: 339px;
-  height: 346px;
-  margin: 0 auto;
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 
-  &__inner {
+  &__player-name {
+    margin: 0;
+  }
+
+  &__roller {
+    width: 339px;
+    height: 346px;
+    margin: 0 auto;
+  }
+
+  &__roller-inner {
     margin: 0 -18px;
     position: relative;
     height: 100%;
@@ -128,5 +139,9 @@
         filter: brightness(0.2);
       }
     }
+  }
+
+  &__notice {
+    margin-bottom: 71px;
   }
 }

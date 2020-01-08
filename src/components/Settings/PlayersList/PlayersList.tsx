@@ -9,6 +9,8 @@ import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 
 import AddIcon from 'icons/add.svg?sprite';
 
+import { ColorsType } from 'components/common/Player/types';
+
 import { useStore } from 'store';
 import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
 import { SET_SETTINGS_PHASE_TO_PLAYER_PROFILE, SET_SETTINGS_PHASE_TO_SPIES } from 'store/reducers/settings/settings';
@@ -19,7 +21,7 @@ import './PlayersList.less';
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 
 let colorCounter = 0;
-const colors = [
+const colors: ColorsType[] = [
     'coral',
     'green',
     'wine',
