@@ -4,6 +4,7 @@ import { block } from 'bem-cn';
 import MenuItem from 'components/common/Navigation/types';
 import BackIcon from 'icons/back.svg?sprite';
 import MenuIcon from 'icons/menu.svg?sprite';
+import RemoveIcon from 'icons/remove.svg?sprite';
 
 import './Navigation.less';
 
@@ -33,7 +34,7 @@ const Navigation: React.FunctionComponent<Props> = ({ type, menuItems, onClick }
         <div className={b('menu')}>
             <div className={b('menu-background')} />
             <div className={b('menu-inner')}>
-                <img className={b('menu-close')} src={prefixedAsset('remove.svg')} />
+                <RemoveIcon className={b('menu-close')} />
                 {menuItems.map(({ title, onClick: onItemClick }) => (
                     <div className={b('menu-item')} onClick={onItemClick} key={title}>
                         {title}
