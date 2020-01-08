@@ -43,7 +43,7 @@ const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, cl
                                     >
                                         На вашей стороне:
                                     </Paragraph>
-                                    <Paragraph weight="bold" align="center" classNames={[b('text')]}>
+                                    <Paragraph weight="bold" align="center" classNames={b('text')}>
                                         {spies.filter(s => s !== name).join(', ')}
                                     </Paragraph>
                                 </>
