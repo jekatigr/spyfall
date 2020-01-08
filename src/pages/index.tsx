@@ -9,6 +9,7 @@ const IndexPage: React.FunctionComponent = () => (
         <Head>
             <title>Spyfall Game</title>
             <link rel="manifest" href={prefixedAsset('manifest.json')} />
+            <link rel="icon" type="image/png" href={prefixedAsset('favicon.png')} />
         </Head>
         <StoreProvider>
             <App />
