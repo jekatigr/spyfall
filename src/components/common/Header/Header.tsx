@@ -10,7 +10,7 @@ type Props = {
 
 const b = block('header');
 const Header: React.FunctionComponent<Props> = ({ classNames, children }) => (
-    <h1 className={b({}).mix(classNames)}>{children}</h1>
+    <h1 className={b.mix(classNames)}>{children}</h1>
 );
 
 export default Header;
