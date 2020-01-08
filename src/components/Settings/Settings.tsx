@@ -32,11 +32,11 @@ const Settings: React.FunctionComponent = () => {
     switch (phase) {
         case SETTINGS_PHASES.PLAYERS_LIST:
             progressBarStep = 1;
-            backButtonAction = SET_SETTINGS_PHASE_TO_PLAYERS_LIST;
             body = <PlayersList />;
             break;
         case SETTINGS_PHASES.PLAYER_PROFILE:
             secondaryScreen = true;
+            backButtonAction = SET_SETTINGS_PHASE_TO_PLAYERS_LIST;
             body = <PlayerProfile />;
             break;
         case SETTINGS_PHASES.SPIES:
