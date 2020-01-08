@@ -83,4 +83,8 @@ module.exports =  {
             "eslint-import-resolver-typescript": true
         }
     },
+    env: {
+        "browser": true,
+        "node": true
+    }
 };

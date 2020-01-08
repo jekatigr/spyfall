@@ -1,8 +1,11 @@
 import * as React from 'react';
 import Head from 'next/head';
-import App from 'components/App';
+import dynamic from 'next/dynamic';
+
 import { StoreProvider } from 'store';
 import prefixedAsset from 'utils/assetPrefix';
+
+const App = dynamic(() => import('components/App'), { ssr: false });
 
 const IndexPage: React.FunctionComponent = () => (
     <>
