@@ -97,7 +97,7 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, o
 
     return (
         <div className={b()}>
-            <Header classNames={b('player-name')}>{cards[currentCardIndex].name}</Header>
+            <Header>{cards[currentCardIndex].name}</Header>
             <div className={b('roller')} onClick={handleClick}>
                 <div className={b('roller-inner')}>
                     {cards.map((c, index) => {
