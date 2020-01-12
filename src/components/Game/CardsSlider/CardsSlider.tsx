@@ -4,6 +4,7 @@ import { block } from 'bem-cn';
 import Card from 'components/Game/Card/Card';
 import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
+import useEventListener from 'utils/useEventListener';
 
 import './CardsSlider.less';
 
@@ -28,6 +29,42 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, o
     const [currentCardIndex, setCurrentCardIndex] = React.useState(0);
     const [animationDirection, setAnimationDirection] = React.useState<AnimationType>(undefined);
     const [isCenterFlipped, setIsCenterFlipped] = React.useState<boolean>(false);
+    const xDown = React.useRef<number>(-1);
+
+    const handleTouchStart = (e): void => {
+        const firstTouch = e.touches[0];
+        if (firstTouch) {
+            xDown.current = firstTouch.clientX;
+        }
+    };
+
+    const handleTouchEnd = (e): void => {
+        const firstTouch = e.changedTouches[0];
+        if (firstTouch) {
+            const diff = xDown.current - firstTouch.clientX;
+            if (Math.abs(diff) > 40) {
+                let newAnimationDirection;
+                switch (true) {
+                    case diff > 0: {
+                        newAnimationDirection = 'next';
+                        break;
+                    }
+                    case diff < 0: {
+                        newAnimationDirection = 'previous';
+                        break;
+                    }
+                    default:
+                        break;
+                }
+
+                setIsCenterFlipped(false);
+                setAnimationDirection(newAnimationDirection);
+            }
+        }
+    };
+
+    useEventListener('touchstart', handleTouchStart);
+    useEventListener('touchend', handleTouchEnd);
 
     React.useEffect(() => {
         let timeoutId;
@@ -95,6 +132,35 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, o
         return <></>;
     }
 
+    const getNotice = (): React.ReactElement => {
+        let text;
+
+        switch (true) {
+            case !animationDirection && isCenterFlipped && currentCardIndex === cards.length - 1: {
+                text = 'Сдвиньте карту влево чтобы начать игру';
+                break;
+            }
+            case !animationDirection && !isCenterFlipped: {
+                text = 'Нажмите на карту, чтобы перевернуть ее';
+                break;
+            }
+            case !animationDirection && isCenterFlipped: {
+                text = 'Сдвиньте карту влево и передайте ход следующему игроку';
+                break;
+            }
+            default: {
+                text = '';
+                break;
+            }
+        }
+
+        return (
+            <Paragraph weight="light" align="center" hasMargin classNames={b('notice')}>
+                {text}
+            </Paragraph>
+        );
+    };
+
     return (
         <div className={b()}>
             <Header classNames={b('player-name')}>{cards[currentCardIndex].name}</Header>
@@ -142,9 +208,7 @@ const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, o
                     })}
                 </div>
             </div>
-            <Paragraph weight="light" align="center" hasMargin classNames={b('notice')}>
-                Нажмите на карту, чтобы перевернуть ее
-            </Paragraph>
+            {getNotice()}
         </div>
     );
 };
