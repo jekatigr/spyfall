@@ -3,6 +3,7 @@ import * as React from 'react';
 import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Button from 'components/common/Button/Button';
+import Timer from 'components/common/Timer/Timer';
 
 import { useStore } from 'store';
 import {
@@ -57,7 +58,10 @@ const Round: React.FunctionComponent<Props> = ({ phase }) => {
                     </Button>
                 </>
             ) : (
-                <Paragraph> {`Таймер: ${Math.round(timeLeft / 1000)}`} </Paragraph>
+                <>
+                    <Timer duration={game.questions.questionsTime} startTimestamp={game.questions.startQuestions} />
+                    <Paragraph> {`Таймер: ${Math.round(timeLeft / 1000)}`} </Paragraph>
+                </>
             )}
         </>
     );
