@@ -1,0 +1,132 @@
+@import (reference) '../../../styles/base';
+
+@el: e('.timer');
+
+@barWidth: 12px;
+@barColor: #02D113;
+
+@{el} {
+  height: 280px;
+  width: 280px;
+  margin: 0 auto;
+  position: relative;
+
+  &__hand {
+    display: inline-block;
+    height: 100%;
+    width: 50%;
+    overflow: hidden;
+  }
+
+  &__hand-internal {
+    --initialRotation: 45deg;
+
+    display: inline-block;
+    height: 100%;
+    width: 200%;
+    border-style: solid;
+    border-width: @barWidth;
+    border-radius: 50%;
+    transform: rotate(45deg);
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+  }
+
+  &__hand-internal_right {
+    position: relative;
+    left: -100%;
+    border-top-color: @barColor;
+    border-right-color: @barColor;
+    animation-name: right-spin;
+  }
+
+  &__hand-internal_left {
+    border-left-color: @barColor;
+    border-bottom-color: @barColor;
+    animation-name: left-spin;
+  }
+
+  &__top-background-circle {
+    height: @barWidth;
+    width: @barWidth;
+    background-color: @barColor;
+    border-radius: 12px;
+    position: absolute;
+    left: calc(50% - @barWidth / 2);
+    z-index: 1;
+  }
+
+  &__orbit {
+    --initialRotation: 0deg;
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    animation-fill-mode: forwards;
+    animation-timing-function: linear;
+    animation-name: orbit-spin;
+  }
+
+  &__orbit-circle {
+    height: calc(@barWidth * 2);
+    width: calc(@barWidth * 2);
+    background-color: @barColor;
+    box-shadow: 2px 4px 3px rgba(0, 0, 0, 0.25);
+    border-radius: 50%;
+    margin: calc(-@barWidth / 2) auto 0;
+  }
+
+  &__time-container {
+    position: absolute;
+    top: calc(50% - 30px);
+    left: 0;
+    width: 100%;
+    font-weight: 500;
+    font-size: 60px;
+    display: flex;
+    justify-content: center;
+  }
+
+  &__time-minutes {
+    width: 50%;
+    text-align: right;
+  }
+  &__time-seconds {
+    width: 50%;
+  }
+
+  &__time-separator {
+    margin-bottom: 13px;
+    align-self: center;
+    line-height: 44px;
+  }
+}
+
+@keyframes right-spin {
+  0% {
+    transform: rotate(var(--initialRotation));
+  }
+  100% {
+    transform: rotate(225.1deg);
+  }
+}
+
+@keyframes left-spin {
+  0% {
+    transform: rotate(var(--initialRotation));
+  }
+  100% {
+    transform: rotate(225deg);
+  }
+}
+
+@keyframes orbit-spin {
+  0% {
+    transform: rotate(var(--initialRotation));
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
