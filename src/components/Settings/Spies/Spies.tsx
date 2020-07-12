@@ -36,7 +36,7 @@ const Spies: React.FC = () => {
     const handleSwitchChange = (enabled: boolean): void => {
         // eslint-disable-next-line no-console
         console.log(enabled);
-        dispatch(UPDATE_SPIES_FAMILIAR, !enabled);
+        dispatch(UPDATE_SPIES_FAMILIAR, { spiesFamiliar: enabled });
     };
 
     return (
@@ -60,7 +60,6 @@ const Spies: React.FC = () => {
                     interactive
                     onClick={(): void => dispatch(SELECT_SPECIFIC_SPIES_COUNT)}
                 />
-
                 <Switcher onChange={handleSwitchChange} enabledByDefault={spies.spiesFamiliar}>
                     Шпионы знакомы
                 </Switcher>

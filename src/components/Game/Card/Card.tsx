@@ -15,11 +15,12 @@ type Props = {
     isSpy: boolean;
     location: string;
     spies?: string[];
+    isSpiesFamiliar: boolean;
     className?: string;
 };
 
 const b = block('card');
-const Card: React.FC<Props> = ({ name, isSpy, location, spies = [], className }) => {
+const Card: React.FC<Props> = ({ name, isSpy, location, spies = [], isSpiesFamiliar, className }) => {
     return (
         <div className={b.mix(className)}>
             <div className={b('face')}>
@@ -27,14 +28,14 @@ const Card: React.FC<Props> = ({ name, isSpy, location, spies = [], className })
                 <div className={b('face-inner')}>
                     {isSpy ? (
                         <>
-                            <SpyIcon className={b('icon', { small: spies.length > 1 })} />
+                            <SpyIcon className={b('icon', { small: isSpiesFamiliar && spies.length > 1 })} />
                             <Paragraph weight="bold" align="center" classNames={b('text')}>
                                 Вы - шпион
                             </Paragraph>
                             <Paragraph weight="light" align="center" classNames={b('text')}>
                                 будьте скрытным и внимательным!
                             </Paragraph>
-                            {spies.length > 1 ? (
+                            {isSpiesFamiliar && spies.length > 1 ? (
                                 <>
                                     <Paragraph
                                         weight="light"

@@ -14,7 +14,7 @@ const Switcher: React.FC<Props> = ({ children, enabledByDefault = false, onChang
 
     const handleChange = (): void => {
         setEnabled(!enabled);
-        onChange(enabled);
+        onChange(!enabled);
     };
 
     return (

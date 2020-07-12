@@ -17,6 +17,7 @@ type Props = {
     location: string;
     cards: CardType[];
     spies: string[];
+    isSpiesFamiliar: boolean;
     onFinish: () => void;
 };
 
@@ -25,7 +26,7 @@ type AnimationType = 'next' | 'previous' | 'center' | undefined;
 const ANIMATION_DURATION_MS = 400;
 
 const b = block('cards-slider');
-const CardsSlider: React.FC<Props> = ({ location, cards, spies, onFinish }) => {
+const CardsSlider: React.FC<Props> = ({ location, cards, spies, isSpiesFamiliar, onFinish }) => {
     const [currentCardIndex, setCurrentCardIndex] = React.useState(0);
     const [animationDirection, setAnimationDirection] = React.useState<AnimationType>(undefined);
     const [isCenterFlipped, setIsCenterFlipped] = React.useState<boolean>(false);
@@ -201,6 +202,7 @@ const CardsSlider: React.FC<Props> = ({ location, cards, spies, onFinish }) => {
                                 isSpy={isSpy}
                                 location={location}
                                 spies={spies}
+                                isSpiesFamiliar={isSpiesFamiliar}
                                 className={b('card', cardModifiers)}
                                 key={`${c.name + index}`}
                             />

@@ -11,7 +11,10 @@ const Rules: React.FC = () => {
     const {
         state: {
             game,
-            settings: { playersInfo },
+            settings: {
+                playersInfo,
+                spies: { spiesFamiliar },
+            },
         },
         dispatch,
     } = useStore();
@@ -41,6 +44,7 @@ const Rules: React.FC = () => {
                     cards={cards}
                     location={game.location}
                     spies={cards.filter(s => s.isSpy).map(s => s.name)}
+                    isSpiesFamiliar={spiesFamiliar}
                     onFinish={(): void => setRolesDistributed(true)}
                 />
             )}
