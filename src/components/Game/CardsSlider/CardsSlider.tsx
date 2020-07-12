@@ -85,8 +85,18 @@ const CardsSlider: React.FC<Props> = ({ location, cards, spies, isSpiesFamiliar,
                         break;
                 }
 
-                setCurrentCardIndex(newCurrentCardIndex);
                 setAnimationDirection(undefined);
+
+                if (newCurrentCardIndex < 0) {
+                    return;
+                }
+
+                if (newCurrentCardIndex >= cards.length) {
+                    onFinish();
+                    return;
+                }
+
+                setCurrentCardIndex(newCurrentCardIndex);
             }, ANIMATION_DURATION_MS);
         }
         return (): void => {
@@ -127,11 +137,6 @@ const CardsSlider: React.FC<Props> = ({ location, cards, spies, isSpiesFamiliar,
             setIsCenterFlipped(newIsCenterFlipped);
         }
     };
-
-    if (currentCardIndex >= cards.length) {
-        onFinish();
-        return <></>;
-    }
 
     const getNotice = (): React.ReactElement => {
         let text;
