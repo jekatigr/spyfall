@@ -11,7 +11,7 @@ type Props = {
 };
 
 const b = block('controllers');
-const Controllers: React.FunctionComponent<Props> = ({ minusDisabled, plusDisabled, onMinusClick, onPlusClick }) => {
+const Controllers: React.FC<Props> = ({ minusDisabled, plusDisabled, onMinusClick, onPlusClick }) => {
     return (
         <div className={b()}>
             <div className={b('controller', { minus: true, muted: minusDisabled })} onClick={onMinusClick}>

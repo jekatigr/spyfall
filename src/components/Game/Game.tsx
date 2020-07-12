@@ -10,7 +10,7 @@ import getMenuItems from 'utils/getMenuItems';
 import { useStore } from 'store';
 import { GAME_PHASES } from 'store/reducers/game';
 
-const Game: React.FunctionComponent = () => {
+const Game: React.FC = () => {
     const {
         state: {
             game: { phase },

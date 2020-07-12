@@ -12,7 +12,7 @@ const NEXT_STEP_ANIMATION_DURATION = 0.5; // in seconds
 const CIRCLE_DIAMETER = 17; // in pixels
 
 const b = block('progress-bar');
-const ProgressBar: React.FunctionComponent<Props> = ({ dotsCount, step }) => {
+const ProgressBar: React.FC<Props> = ({ dotsCount = 3, step = 0 }) => {
     const progressbarNode = React.useRef(null);
 
     const [circleAnimationDuration, setCircleAnimationDuration] = React.useState(0);
@@ -56,11 +56,6 @@ const ProgressBar: React.FunctionComponent<Props> = ({ dotsCount, step }) => {
             </div>
         </div>
     );
-};
-
-ProgressBar.defaultProps = {
-    dotsCount: 3,
-    step: 2,
 };
 
 export default ProgressBar;

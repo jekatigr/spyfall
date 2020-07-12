@@ -7,7 +7,7 @@ import { SET_IDENTIFIED_PLAYERS, SET_GAME_PHASE_TO_RESULTS } from 'store/reducer
 
 import { useStore } from 'store';
 
-const IdentifySpies: React.FunctionComponent = () => {
+const IdentifySpies: React.FC = () => {
     const {
         state: {
             settings: {

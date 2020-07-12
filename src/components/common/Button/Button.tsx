@@ -7,22 +7,16 @@ type Props = {
     type?: 'action' | 'additional';
     classNames?: string | string[];
     disabled?: boolean;
-    children: React.ReactNode;
     onClick: () => void;
 };
 
 const b = block('button');
-const Button: React.FunctionComponent<Props> = ({ type, disabled, classNames, children, onClick }) => (
+const Button: React.FC<Props> = ({ type = 'action', disabled = false, classNames, children, onClick }) => (
     <div className={b({}).mix(classNames)}>
         <button type="button" className={b('inner', { type, disabled })} onClick={onClick}>
             {children}
         </button>
     </div>
 );
-
-Button.defaultProps = {
-    type: 'action',
-    disabled: false,
-};
 
 export default Button;

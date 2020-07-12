@@ -19,7 +19,7 @@ import {
 import './TimeSettings.less';
 
 const b = block('time-settings');
-const TimeSettings: React.FunctionComponent = () => {
+const TimeSettings: React.FC = () => {
     const {
         state: {
             settings: { timeSettings },

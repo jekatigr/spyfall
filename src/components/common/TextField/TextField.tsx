@@ -12,7 +12,7 @@ type Props = {
 };
 
 const b = block('text-field');
-const TextField: React.FunctionComponent<Props> = ({ value, placeholder, classNames, onChange, onKeyPressed }) => (
+const TextField: React.FC<Props> = ({ value, placeholder, classNames, onChange, onKeyPressed }) => (
     <input
         className={b({}).mix(classNames)}
         type="text"

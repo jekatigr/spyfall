@@ -15,7 +15,7 @@ type Props = {
 };
 
 const b = block('navigation');
-const Navigation: React.FunctionComponent<Props> = ({ type, menuItems, onClick }) => {
+const Navigation: React.FC<Props> = ({ type = 'menu', menuItems = [], onClick }) => {
     const [menuOpened, setMenuOpened] = React.useState(false);
 
     const isMenu = type === 'menu';
@@ -52,11 +52,6 @@ const Navigation: React.FunctionComponent<Props> = ({ type, menuItems, onClick }
             {isMenu && menuOpened ? renderMenuPopup() : null}
         </div>
     );
-};
-
-Navigation.defaultProps = {
-    type: 'menu',
-    menuItems: [],
 };
 
 export default Navigation;

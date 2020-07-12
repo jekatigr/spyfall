@@ -11,7 +11,7 @@ type Props = {
 };
 
 const b = block('edit');
-const Edit: React.FunctionComponent<Props> = ({ classNames, onClick }) => (
+const Edit: React.FC<Props> = ({ classNames, onClick }) => (
     <div className={b({}).mix(classNames)} onClick={onClick}>
         <EditIcon className={b('icon')} />
     </div>

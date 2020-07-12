@@ -18,7 +18,7 @@ const RESULT = {
     L5: 5, // Identified: no spies and no peaceful citizens
 };
 
-const Results: React.FunctionComponent = () => {
+const Results: React.FC = () => {
     const {
         state: {
             game: { identifiedPlayers, spies },

@@ -15,7 +15,7 @@ import { SET_SETTINGS_PHASE_TO_PLAYERS_LIST } from 'store/reducers/settings/sett
 import './PlayerProfile.less';
 
 const b = block('player-profile');
-const PlayerProfile: React.FunctionComponent = () => {
+const PlayerProfile: React.FC = () => {
     const {
         state: {
             settings: {

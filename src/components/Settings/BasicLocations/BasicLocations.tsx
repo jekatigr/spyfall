@@ -14,7 +14,7 @@ import { UPDATE_BASIC_LOCATIONS } from 'store/reducers/settings/locations';
 import './BasicLocations.less';
 
 const b = block('basic-locations');
-const BasicLocations: React.FunctionComponent = () => {
+const BasicLocations: React.FC = () => {
     const {
         state: {
             settings: {

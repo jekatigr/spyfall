@@ -9,7 +9,7 @@ import { useStore } from 'store';
 import { APP_STATES } from 'store/reducers/app';
 import './App.less';
 
-const App: React.FunctionComponent = () => {
+const App: React.FC = () => {
     const {
         state: {
             app: { appState },

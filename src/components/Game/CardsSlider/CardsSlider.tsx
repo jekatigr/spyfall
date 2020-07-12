@@ -25,7 +25,7 @@ type AnimationType = 'next' | 'previous' | 'center' | undefined;
 const ANIMATION_DURATION_MS = 400;
 
 const b = block('cards-slider');
-const CardsSlider: React.FunctionComponent<Props> = ({ location, cards, spies, onFinish }) => {
+const CardsSlider: React.FC<Props> = ({ location, cards, spies, onFinish }) => {
     const [currentCardIndex, setCurrentCardIndex] = React.useState(0);
     const [animationDirection, setAnimationDirection] = React.useState<AnimationType>(undefined);
     const [isCenterFlipped, setIsCenterFlipped] = React.useState<boolean>(false);

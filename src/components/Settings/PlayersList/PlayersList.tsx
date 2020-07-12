@@ -37,7 +37,7 @@ const colors: ColorsType[] = [
 ];
 
 const b = block('players');
-const PlayersList: React.FunctionComponent = () => {
+const PlayersList: React.FC = () => {
     const {
         state: {
             settings: {

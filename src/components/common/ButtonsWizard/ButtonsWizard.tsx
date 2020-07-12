@@ -7,10 +7,9 @@ import './ButtonsWizard.less';
 type Props = {
     previous: React.ReactElement<React.ComponentProps<typeof Button>>;
     next: React.ReactElement<React.ComponentProps<typeof Button>>;
-    children?: React.ReactNode;
 };
 
-const ButtonsWizard: React.FunctionComponent<Props> = ({ next, previous, children }) => {
+const ButtonsWizard: React.FC<Props> = ({ next, previous, children }) => {
     const {
         props: { classNames: previousClassNames = [] },
     } = previous;

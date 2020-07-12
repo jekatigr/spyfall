@@ -13,7 +13,7 @@ type Props = {
 };
 
 const b = block('random-option');
-const RandomOption: React.FunctionComponent<Props> = ({ name, disabled, onClick }) => {
+const RandomOption: React.FC<Props> = ({ name, disabled, onClick }) => {
     return (
         <div className={b({ muted: disabled })} onClick={onClick}>
             <span className={b('name')}>{name}</span>

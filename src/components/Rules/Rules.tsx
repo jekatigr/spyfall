@@ -7,7 +7,7 @@ import Header from 'components/common/Header/Header';
 import { useStore } from 'store';
 import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
 
-const Rules: React.FunctionComponent = () => {
+const Rules: React.FC = () => {
     const { dispatch } = useStore();
     return (
         <div>

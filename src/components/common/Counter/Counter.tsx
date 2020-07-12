@@ -19,7 +19,7 @@ type Props = {
 };
 
 const b = block('counter');
-const Counter: React.FunctionComponent<Props> = ({
+const Counter: React.FC<Props> = ({
     name,
     count,
     units,
@@ -28,7 +28,7 @@ const Counter: React.FunctionComponent<Props> = ({
     onClickPlus,
     max,
     min,
-    interactive,
+    interactive = false,
     onClick = (): void => {},
 }) => (
     <div className={b({ muted: disabled })} onClick={onClick}>
@@ -47,9 +47,5 @@ const Counter: React.FunctionComponent<Props> = ({
         </div>
     </div>
 );
-
-Counter.defaultProps = {
-    interactive: false,
-};
 
 export default Counter;

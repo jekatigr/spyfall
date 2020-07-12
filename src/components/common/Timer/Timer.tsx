@@ -9,7 +9,7 @@ type Props = {
 };
 
 const b = block('timer');
-const Timer: React.FunctionComponent<Props> = ({ startTimestamp, duration }) => {
+const Timer: React.FC<Props> = ({ startTimestamp, duration }) => {
     const leftRef = React.useRef(null);
     const rightRef = React.useRef(null);
     const orbitRef = React.useRef(null);

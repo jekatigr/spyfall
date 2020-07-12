@@ -16,7 +16,7 @@ import { UPDATE_CUSTOM_LOCATIONS } from 'store/reducers/settings/locations';
 import './CustomLocations.less';
 
 const b = block('custom-locations');
-const CustomLocations: React.FunctionComponent = () => {
+const CustomLocations: React.FC = () => {
     const {
         state: {
             settings: {

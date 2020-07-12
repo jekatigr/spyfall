@@ -25,7 +25,7 @@ import {
 import './Spies.less';
 
 const b = block('spies');
-const Spies: React.FunctionComponent = () => {
+const Spies: React.FC = () => {
     const {
         state: {
             settings: { spies, playersInfo },

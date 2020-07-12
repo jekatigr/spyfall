@@ -28,7 +28,7 @@ type Props = {
 };
 
 const b = block('player');
-const Player: React.FunctionComponent<Props> = ({ name, color, big, onClick }) => {
+const Player: React.FC<Props> = ({ name, color = 'blue', big = false, onClick }) => {
     const handleClick = (): void => {
         if (onClick) {
             onClick();
@@ -50,11 +50,6 @@ const Player: React.FunctionComponent<Props> = ({ name, color, big, onClick }) =
             ) : null}
         </div>
     );
-};
-
-Player.defaultProps = {
-    color: 'blue',
-    big: false,
 };
 
 export default Player;

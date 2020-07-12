@@ -18,7 +18,7 @@ import {
     SETTINGS_PHASES,
 } from 'store/reducers/settings/settings';
 
-const Settings: React.FunctionComponent = () => {
+const Settings: React.FC = () => {
     const {
         state: {
             settings: { phase },

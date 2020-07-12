@@ -7,7 +7,7 @@ import prefixedAsset from 'utils/assetPrefix';
 
 const App = dynamic(() => import('components/App'), { ssr: false });
 
-const IndexPage: React.FunctionComponent = () => (
+const IndexPage: React.FC = () => (
     <>
         <Head>
             <title>Spyfall Game</title>

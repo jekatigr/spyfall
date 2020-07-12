@@ -12,7 +12,7 @@ import Logo from 'icons/logo.svg?sprite';
 import './StartScreen.less';
 
 const b = block('start-screen');
-const StartScreen: React.FunctionComponent = () => {
+const StartScreen: React.FC = () => {
     const { dispatch } = useStore();
 
     const handlePlayClick = (): void => {

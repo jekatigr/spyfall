@@ -7,7 +7,7 @@ import CardsSlider from 'components/Game/CardsSlider/CardsSlider';
 import { useStore } from 'store';
 import { SET_GAME_PHASE_TO_QUESTIONS, SET_START_QUESTIONS } from 'store/reducers/game';
 
-const Rules: React.FunctionComponent = () => {
+const Rules: React.FC = () => {
     const {
         state: {
             game,

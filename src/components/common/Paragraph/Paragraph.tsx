@@ -8,16 +8,11 @@ type Props = {
     align?: 'center' | 'justify';
     hasMargin?: boolean;
     classNames?: string | string[];
-    children: React.ReactNode;
 };
 
 const b = block('paragraph');
-const Paragraph: React.FunctionComponent<Props> = ({ weight, align, hasMargin, classNames, children }) => (
+const Paragraph: React.FC<Props> = ({ weight, align, hasMargin = false, classNames, children }) => (
     <p className={b({ weight, align, 'has-margin': hasMargin }).mix(classNames)}>{children}</p>
 );
-
-Paragraph.defaultProps = {
-    hasMargin: false,
-};
 
 export default Paragraph;

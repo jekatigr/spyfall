@@ -31,7 +31,7 @@ import { SELECT_LOCATION } from 'store/reducers/settings/locations';
 import './Locations.less';
 
 const b = block('location-category');
-const Locations: React.FunctionComponent = () => {
+const Locations: React.FC = () => {
     const {
         state: {
             settings: {

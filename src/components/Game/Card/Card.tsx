@@ -19,7 +19,7 @@ type Props = {
 };
 
 const b = block('card');
-const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, className }) => {
+const Card: React.FC<Props> = ({ name, isSpy, location, spies = [], className }) => {
     return (
         <div className={b.mix(className)}>
             <div className={b('face')}>
@@ -62,10 +62,6 @@ const Card: React.FunctionComponent<Props> = ({ name, isSpy, location, spies, cl
             <CardBack className={b('back')} />
         </div>
     );
-};
-
-Card.defaultProps = {
-    spies: [],
 };
 
 export default Card;
