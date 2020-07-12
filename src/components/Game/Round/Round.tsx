@@ -20,27 +20,20 @@ type Props = {
 
 const Round: React.FC<Props> = ({ phase }) => {
     const {
-        state: {
-            game: {
-                questions: { questionsTime, startQuestions },
-                discussion: { discussionTime, startDiscussion },
-            },
-        },
+        state: { game },
         dispatch,
     } = useStore();
 
-    const [isStarted, setIsStarted] = React.useState(true);
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [date, setDate] = React.useState(Date.now);
 
     React.useEffect(() => {
-        let timeLeft = discussionTime - (Date.now() - startDiscussion);
-        if (phase === ROUND_PHASE) timeLeft = questionsTime - (Date.now() - startQuestions);
-
-        const interval = setInterval(() => setIsStarted(false), timeLeft);
+        const interval = setInterval(() => setDate(Date.now()), 1000);
 
         return (): void => {
             clearInterval(interval);
         };
-    }, [questionsTime, startQuestions, discussionTime, startDiscussion]);
+    });
 
     const finishAction = (): void => {
         if (phase === ROUND_PHASE) {
@@ -51,10 +44,13 @@ const Round: React.FC<Props> = ({ phase }) => {
         }
     };
 
+    let timeLeft = game.discussion.discussionTime - (Date.now() - game.discussion.startDiscussion);
+    if (phase === ROUND_PHASE) timeLeft = game.questions.questionsTime - (Date.now() - game.questions.startQuestions);
+
     return (
         <>
             <Header>{phase === ROUND_PHASE ? 'Кон' : 'Обсуждение'}</Header>
-            {!isStarted ? (
+            {timeLeft < 0 ? (
                 <>
                     <Paragraph> {phase === ROUND_PHASE ? 'Раунд завершён!' : 'Обсуждение завершено!'} </Paragraph>
                     <Button onClick={finishAction} type="action">
@@ -63,11 +59,8 @@ const Round: React.FC<Props> = ({ phase }) => {
                 </>
             ) : (
                 <>
-                    {phase === ROUND_PHASE ? (
-                        <Timer duration={questionsTime} startTimestamp={startQuestions} />
-                    ) : (
-                        <Timer duration={discussionTime} startTimestamp={startDiscussion} />
-                    )}
+                    <Timer duration={game.questions.questionsTime} startTimestamp={game.questions.startQuestions} />
+                    <Paragraph> {`Таймер: ${Math.round(timeLeft / 1000)}`} </Paragraph>
                 </>
             )}
         </>
