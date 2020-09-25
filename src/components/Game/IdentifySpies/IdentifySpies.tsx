@@ -2,9 +2,9 @@ import * as React from 'react';
 
 import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
+import Paragraph from 'components/common/Paragraph/Paragraph';
 
 import { SET_IDENTIFIED_PLAYERS, SET_GAME_PHASE_TO_RESULTS } from 'store/reducers/game';
-
 import { useStore } from 'store';
 
 const IdentifySpies: React.FC = () => {
@@ -48,7 +48,8 @@ const IdentifySpies: React.FC = () => {
 
     return (
         <>
-            <Header> Угадать шпионов </Header>
+            <Header>Угадать шпионов</Header>
+            <Paragraph weight="light">Выберите иконки предполагаемых шпионов:</Paragraph>
             {playersJSX}
             <Button
                 onClick={(): void => dispatch(SET_GAME_PHASE_TO_RESULTS)}
