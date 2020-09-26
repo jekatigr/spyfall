@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { block } from 'bem-cn';
 
-import Card from 'components/Game/Card/Card';
+import Card from 'components/Card/Card';
 import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import useEventListener from 'utils/useEventListener';

@@ -2,7 +2,7 @@ import * as React from 'react';
 import block from 'bem-cn';
 
 import Button from 'components/common/Button/Button';
-import CardsSlider from 'components/Game/CardsSlider/CardsSlider';
+import CardsSlider from 'components/CardsSlider/CardsSlider';
 
 import { useStore } from 'store';
 import { setScreen } from 'store/screen/actions';

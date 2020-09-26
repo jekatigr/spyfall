@@ -3,11 +3,11 @@ import * as React from 'react';
 import StartScreen from 'components/StartScreen/StartScreen';
 import Rules from 'components/Rules/Rules';
 import Settings from 'components/Settings/Settings';
-import RolesDistribution from 'components/Game/RolesDistribution/RolesDistribution';
-import Questions from 'components/Game/Questions/Questions';
-import Discussion from 'components/Game/Discussion/Discussion';
-import IdentifySpies from 'components/Game/IdentifySpies/IdentifySpies';
-import Results from 'components/Game/Results/Results';
+import RolesDistribution from 'components/RolesDistribution/RolesDistribution';
+import Questions from 'components/Questions/Questions';
+import Discussion from 'components/Discussion/Discussion';
+import IdentifySpies from 'components/IdentifySpies/IdentifySpies';
+import Results from 'components/Results/Results';
 
 import { useStore } from 'store';
 import { SCREENS } from 'store/screen/constants';

@@ -4,30 +4,32 @@ import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 
-import { SET_IDENTIFIED_PLAYERS, SET_GAME_PHASE_TO_RESULTS } from 'store/reducers/game';
 import { useStore } from 'store';
+import { setScreen } from 'store/screen/actions';
+import { SCREENS } from 'store/screen/constants';
 
 const IdentifySpies: React.FC = () => {
     const {
         state: {
             players: { list },
-            game: { identifiedPlayers },
         },
         dispatch,
     } = useStore();
+    const identifiedPlayers = [];
 
     const playersJSX = list.map(player => {
         let ret;
         if (identifiedPlayers.indexOf(player.name) !== -1) {
             ret = (
                 <div
-                    onClick={(): void =>
-                        dispatch({
-                            type: SET_IDENTIFIED_PLAYERS,
-                            payload: {
-                                identifiedPlayers: identifiedPlayers.filter(e => e !== player.name),
-                            },
-                        })
+                    onClick={
+                        (): void => {}
+                        // dispatch({
+                        //     type: SET_IDENTIFIED_PLAYERS,
+                        //     payload: {
+                        //         identifiedPlayers: identifiedPlayers.filter(e => e !== player.name),
+                        //     },
+                        // })
                     }
                 >
                     Игрок {player.name} - под подозрением
@@ -36,12 +38,12 @@ const IdentifySpies: React.FC = () => {
         } else {
             ret = (
                 <div
-                    onClick={(): void =>
-                        dispatch({
-                            type: SET_IDENTIFIED_PLAYERS,
-                            payload: { identifiedPlayers: [...identifiedPlayers, player.name] },
-                        })
-                    }
+                // onClick={(): void =>
+                //     dispatch({
+                //         type: SET_IDENTIFIED_PLAYERS,
+                //         payload: { identifiedPlayers: [...identifiedPlayers, player.name] },
+                //     })
+                // }
                 >
                     Игрок {player.name} - не проверен
                 </div>
@@ -56,7 +58,7 @@ const IdentifySpies: React.FC = () => {
             <Paragraph weight="light">Выберите иконки предполагаемых шпионов:</Paragraph>
             {playersJSX}
             <Button
-                onClick={(): void => dispatch({ type: SET_GAME_PHASE_TO_RESULTS })}
+                onClick={(): void => dispatch(setScreen(SCREENS.RESULTS))}
                 type="action"
                 disabled={identifiedPlayers.length === 0}
             >

@@ -4,10 +4,10 @@ import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
 
 // import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
-import { SET_IDENTIFIED_PLAYERS } from 'store/reducers/game';
+// import { SET_IDENTIFIED_PLAYERS } from 'store/reducers/game';
 
 import { useStore } from 'store';
-import Paragraph from '../../common/Paragraph/Paragraph';
+import Paragraph from '../common/Paragraph/Paragraph';
 
 const RESULT = {
     W: 0, // Identified: all spies and no peaceful citizens
@@ -19,12 +19,11 @@ const RESULT = {
 };
 
 const Results: React.FC = () => {
-    const {
-        state: {
-            game: { identifiedPlayers, spies },
-        },
-        dispatch,
-    } = useStore();
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { state, dispatch } = useStore();
+
+    const identifiedPlayers = [];
+    const spies = [];
 
     const [showSpies, setShowSpies] = React.useState(false);
 
@@ -74,7 +73,7 @@ const Results: React.FC = () => {
     }
 
     const startNewGame = (): void => {
-        dispatch({ type: SET_IDENTIFIED_PLAYERS, payload: { identifiedPlayers: [] } });
+        // dispatch({ type: SET_IDENTIFIED_PLAYERS, payload: { identifiedPlayers: [] } });
         // dispatch({ type: SET_APP_STATE_TO_START_SCREEN });
     };
 
