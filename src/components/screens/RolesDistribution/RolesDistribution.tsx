@@ -37,14 +37,14 @@ const RolesDistribution: React.FC = () => {
     };
 
     return (
-        <>
+        <div className={b()}>
             {isRolesDistributed ? (
-                <>
+                <div className={b('before-start')}>
                     <BeforeStartIcon className={b('before-start-icon')} />
                     <Button onClick={startGame} type="action">
                         Начать игру!
                     </Button>
-                </>
+                </div>
             ) : (
                 <CardsSlider
                     cards={list}
@@ -54,7 +54,7 @@ const RolesDistribution: React.FC = () => {
                     onFinish={handleRolesDistributed}
                 />
             )}
-        </>
+        </div>
     );
 };
 

@@ -1,8 +1,19 @@
 @el: e('.roles-distribution');
 
 @{el} {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  &__before-start {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
   &__before-start-icon {
     max-width: 339px;
-    margin: 0 auto;
+    flex-grow: 1;
+    align-self: center;
   }
 }
