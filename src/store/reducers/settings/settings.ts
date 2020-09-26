@@ -1,7 +1,4 @@
 import combineReducers from 'combine-reducers';
-import locations from 'store/reducers/settings/locations';
-import playersInfo from 'store/reducers/settings/playersInfo';
-import timeSettings from 'store/reducers/settings/timeSettings';
 
 export const SET_SETTINGS_PHASE_TO_PLAYERS_LIST = 'SET_SETTINGS_PHASE_TO_PLAYERS_LIST';
 export const SET_SETTINGS_PHASE_TO_PLAYER_PROFILE = 'SET_SETTINGS_PHASE_TO_PLAYER_PROFILE';
@@ -46,7 +43,4 @@ const settingsReducer = (state = initialState, action): typeof initialState => {
 
 export default combineReducers({
     phase: settingsReducer,
-    locations,
-    playersInfo,
-    timeSettings,
 });

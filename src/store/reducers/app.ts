@@ -14,7 +14,7 @@ const initialState = {
     appState: APP_STATES.START_SCREEN,
 };
 
-export default (state = initialState, action): typeof initialState => {
+const appReducer = (state = initialState, action): typeof initialState => {
     switch (action.type) {
         case SET_APP_STATE_TO_START_SCREEN:
             return {
@@ -40,3 +40,5 @@ export default (state = initialState, action): typeof initialState => {
             return state;
     }
 };
+
+export default appReducer;

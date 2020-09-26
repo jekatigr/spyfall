@@ -10,15 +10,13 @@ import { useStore } from 'store';
 const IdentifySpies: React.FC = () => {
     const {
         state: {
-            settings: {
-                playersInfo: { players },
-            },
+            players: { list },
             game: { identifiedPlayers },
         },
         dispatch,
     } = useStore();
 
-    const playersJSX = players.map(player => {
+    const playersJSX = list.map(player => {
         let ret;
         if (identifiedPlayers.indexOf(player.name) !== -1) {
             ret = (

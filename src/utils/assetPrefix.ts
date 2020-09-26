@@ -1,3 +1,5 @@
 const assetPrefix = process.env.ASSET_PREFIX ? process.env.ASSET_PREFIX : '';
 
-export default (assetPath: string): string => `${assetPrefix}/${assetPath}`;
+const assetPrefixUtil = (assetPath: string): string => `${assetPrefix}/${assetPath}`;
+
+export default assetPrefixUtil;

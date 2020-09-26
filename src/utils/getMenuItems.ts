@@ -3,7 +3,7 @@ import { setScreen, setSettingsScreen } from 'store/screen/actions';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export default function(dispatch: any): MenuItem[] {
+const getMenuItems = (dispatch: any): MenuItem[] => {
     return [
         {
             title: 'Новая игра',
@@ -24,4 +24,6 @@ export default function(dispatch: any): MenuItem[] {
             },
         },
     ];
-}
+};
+
+export default getMenuItems;
