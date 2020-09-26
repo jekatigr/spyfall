@@ -37,10 +37,10 @@ const Round: React.FC<Props> = ({ phase }) => {
 
     const finishAction = (): void => {
         if (phase === ROUND_PHASE) {
-            dispatch(SET_GAME_PHASE_TO_DISCUSSION);
-            dispatch(SET_START_DISCUSSION, { time: Date.now() });
+            dispatch({ type: SET_GAME_PHASE_TO_DISCUSSION });
+            dispatch({ type: SET_START_DISCUSSION, payload: { time: Date.now() } });
         } else {
-            dispatch(SET_GAME_PHASE_TO_IDENTIFY_SPIES);
+            dispatch({ type: SET_GAME_PHASE_TO_IDENTIFY_SPIES });
         }
     };
 

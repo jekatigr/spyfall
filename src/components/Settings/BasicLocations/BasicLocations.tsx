@@ -8,8 +8,9 @@ import Paragraph from 'components/common/Paragraph/Paragraph';
 import CheckIcon from 'icons/check.svg?sprite';
 
 import { useStore } from 'store';
-import { SET_SETTINGS_PHASE_TO_LOCATIONS } from 'store/reducers/settings/settings';
-import { UPDATE_BASIC_LOCATIONS } from 'store/reducers/settings/locations';
+import { setSettingsScreen } from 'store/screen/actions';
+import { SETTINGS_SCREENS } from 'store/screen/constants';
+import { updateBasicLocations } from 'store/locations/actions';
 
 import './BasicLocations.less';
 
@@ -17,31 +18,33 @@ const b = block('basic-locations');
 const BasicLocations: React.FC = () => {
     const {
         state: {
-            settings: {
-                locations: {
-                    baseLocations: { locations: basicLocations },
-                },
+            locations: {
+                basic: { list: basicLocations },
             },
         },
         dispatch,
     } = useStore();
 
-    const [locations, setLocations] = React.useState(basicLocations || []);
+    const [locations, setLocations] = React.useState(basicLocations);
 
-    const handleCheck = (locationName: string): void => {
-        const newLocations = [...locations];
-        for (let i = 0; i < locations.length; i++) {
-            if (locations[i].name === locationName) {
-                locations[i].isSelected = !locations[i].isSelected;
-                break;
+    const handleCheck = (locationName: string) => (): void => {
+        const newLocations = locations.map(l => {
+            if (l.name === locationName) {
+                return {
+                    ...l,
+                    isActive: !l.isActive,
+                };
             }
-        }
+
+            return l;
+        });
+
         setLocations(newLocations);
     };
 
     const saveLocations = (): void => {
-        dispatch(UPDATE_BASIC_LOCATIONS, { locations });
-        dispatch(SET_SETTINGS_PHASE_TO_LOCATIONS);
+        dispatch(updateBasicLocations(locations));
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.LOCATIONS));
     };
 
     return (
@@ -52,20 +55,12 @@ const BasicLocations: React.FC = () => {
                     Выберите локации, которые будут участвовать в игре:
                 </Paragraph>
                 <div className={b('list')}>
-                    {basicLocations.map(({ name, isSelected }) => {
-                        return (
-                            <div
-                                className={b('list-item', { checked: isSelected })}
-                                onClick={(): void => {
-                                    handleCheck(name);
-                                }}
-                                key={name}
-                            >
-                                {name}
-                                {isSelected ? <CheckIcon className={b('check-icon')} /> : null}
-                            </div>
-                        );
-                    })}
+                    {locations.map(({ name, isActive }) => (
+                        <div className={b('list-item', { checked: isActive })} onClick={handleCheck(name)} key={name}>
+                            {name}
+                            {isActive && <CheckIcon className={b('check-icon')} />}
+                        </div>
+                    ))}
                 </div>
             </div>
             <Button onClick={saveLocations} type="action">

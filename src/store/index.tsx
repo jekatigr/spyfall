@@ -33,14 +33,13 @@ const StoreProvider = ({ children }): JSX.Element => {
 
 type UseStoreType = {
     state: typeof initialState;
-    dispatch(type: string, payload?: any): void;
+    dispatch(action: { type: any; payload?: any }): void;
 };
 
 const useStore = (): UseStoreType => {
     const { state, dispatch: dispatchWrapped } = useContext(storeContext);
 
-    const dispatch = (type: string, payload?: any): void => {
-        const action = { type, ...payload };
+    const dispatch = (action: { type: string; payload?: any }): void => {
         if (DEV_MODE) {
             // eslint-disable-next-line no-console
             console.log('Action: ', action);

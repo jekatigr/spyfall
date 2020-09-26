@@ -24,8 +24,11 @@ const IdentifySpies: React.FC = () => {
             ret = (
                 <div
                     onClick={(): void =>
-                        dispatch(SET_IDENTIFIED_PLAYERS, {
-                            identifiedPlayers: identifiedPlayers.filter(e => e !== player.name),
+                        dispatch({
+                            type: SET_IDENTIFIED_PLAYERS,
+                            payload: {
+                                identifiedPlayers: identifiedPlayers.filter(e => e !== player.name),
+                            },
                         })
                     }
                 >
@@ -36,7 +39,10 @@ const IdentifySpies: React.FC = () => {
             ret = (
                 <div
                     onClick={(): void =>
-                        dispatch(SET_IDENTIFIED_PLAYERS, { identifiedPlayers: [...identifiedPlayers, player.name] })
+                        dispatch({
+                            type: SET_IDENTIFIED_PLAYERS,
+                            payload: { identifiedPlayers: [...identifiedPlayers, player.name] },
+                        })
                     }
                 >
                     Игрок {player.name} - не проверен
@@ -52,7 +58,7 @@ const IdentifySpies: React.FC = () => {
             <Paragraph weight="light">Выберите иконки предполагаемых шпионов:</Paragraph>
             {playersJSX}
             <Button
-                onClick={(): void => dispatch(SET_GAME_PHASE_TO_RESULTS)}
+                onClick={(): void => dispatch({ type: SET_GAME_PHASE_TO_RESULTS })}
                 type="action"
                 disabled={identifiedPlayers.length === 0}
             >

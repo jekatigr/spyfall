@@ -9,8 +9,9 @@ import Button from 'components/common/Button/Button';
 import RemoveIcon from 'icons/remove.svg?sprite';
 
 import { useStore } from 'store';
-import { UPDATE_PLAYERS } from 'store/reducers/settings/playersInfo';
-import { SET_SETTINGS_PHASE_TO_PLAYERS_LIST } from 'store/reducers/settings/settings';
+import { removePlayer, setPlayerName } from 'store/players/actions';
+import { setSettingsScreen } from 'store/screen/actions';
+import { SETTINGS_SCREENS } from 'store/screen/constants';
 
 import './PlayerProfile.less';
 
@@ -18,41 +19,32 @@ const b = block('player-profile');
 const PlayerProfile: React.FC = () => {
     const {
         state: {
-            settings: {
-                playersInfo: { currentProfile, players },
-            },
+            screen: { editUserId },
+            players: { list },
         },
         dispatch,
     } = useStore();
 
-    const { name, color } = players[currentProfile];
-    const [playerName, setPlayerName] = React.useState(name);
+    const { id, name, color } = list.find(p => p.id === editUserId);
+    const [playerName, setName] = React.useState(name);
 
-    const savePlayer = (): void => {
-        // Check for name duplications
-        for (let idx = 0; idx < players.length; ++idx) {
-            if (players[idx].name === playerName) {
-                // TODO: show some message 1
-                return;
-            }
-            if (playerName === '') {
-                // TODO: show some message 2
-                return;
-            }
+    const isSaveButtonEnabled = React.useMemo(() => {
+        const playerNameTrimmed = playerName.trim();
+        if (!playerNameTrimmed) {
+            return false;
         }
 
-        // Rename existing player
-        const updatedPlayers = players.slice();
-        updatedPlayers[currentProfile].name = playerName;
-        dispatch(UPDATE_PLAYERS, { players: updatedPlayers });
-        dispatch(SET_SETTINGS_PHASE_TO_PLAYERS_LIST);
+        return !list.some(p => p.name === playerNameTrimmed);
+    }, [playerName, list]);
+
+    const savePlayer = (): void => {
+        dispatch(setPlayerName(id, playerName.trim()));
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.PLAYERS));
     };
 
     const deletePlayer = (): void => {
-        const updatedPlayers = [...players];
-        updatedPlayers.splice(currentProfile, 1);
-        dispatch(UPDATE_PLAYERS, { players: updatedPlayers });
-        dispatch(SET_SETTINGS_PHASE_TO_PLAYERS_LIST);
+        dispatch(removePlayer(id));
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.PLAYERS));
     };
 
     return (
@@ -64,14 +56,14 @@ const PlayerProfile: React.FC = () => {
                     value={playerName}
                     classNames={b('input')}
                     placeholder="Введите имя игрока..."
-                    onChange={setPlayerName}
+                    onChange={setName}
                 />
             </div>
             <div className={b('remove-player')} onClick={deletePlayer}>
                 Удалить игрока
                 <RemoveIcon className={b('remove-icon')} />
             </div>
-            <Button onClick={savePlayer} type="action">
+            <Button onClick={savePlayer} type="action" disabled={!isSaveButtonEnabled}>
                 Сохранить
             </Button>
         </div>

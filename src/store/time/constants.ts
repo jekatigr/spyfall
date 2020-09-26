@@ -1,0 +1,3 @@
+export const SET_QUESTIONS = 'TIME / SET_QUESTIONS';
+export const SET_DISCUSSION = 'TIME / SET_DISCUSSION';
+export const TOGGLE_SOUND = 'TIME / TOGGLE_SOUND';

@@ -10,67 +10,67 @@ import CheckIcon from 'icons/check.svg?sprite';
 import RemoveIcon from 'icons/remove.svg?sprite';
 
 import { useStore } from 'store';
-import { SET_SETTINGS_PHASE_TO_LOCATIONS } from 'store/reducers/settings/settings';
-import { UPDATE_CUSTOM_LOCATIONS } from 'store/reducers/settings/locations';
 
 import './CustomLocations.less';
+import { updateCustomLocations } from 'store/locations/actions';
+import { setSettingsScreen } from 'store/screen/actions';
+import { SETTINGS_SCREENS } from 'store/screen/constants';
 
 const b = block('custom-locations');
 const CustomLocations: React.FC = () => {
     const {
         state: {
-            settings: {
-                locations: {
-                    customLocations: { locations: customLocations },
-                },
+            locations: {
+                custom: { list: customLocations },
             },
         },
         dispatch,
     } = useStore();
 
-    const [locations, setLocations] = React.useState(customLocations || []);
+    const [locations, setLocations] = React.useState(customLocations);
     const [newLocation, setNewLocation] = React.useState('');
 
-    const handleCheck = (locationName: string): void => {
-        const newLocations = [...locations];
-        for (let i = 0; i < locations.length; i++) {
-            if (locations[i].name === locationName) {
-                locations[i].isSelected = !locations[i].isSelected;
-                break;
+    const handleCheck = (locationName: string) => (): void => {
+        const newLocations = locations.map(l => {
+            if (l.name === locationName) {
+                return {
+                    ...l,
+                    isActive: !l.isActive,
+                };
             }
-        }
+
+            return l;
+        });
+
         setLocations(newLocations);
     };
 
     const handleKeyPressed = (e: React.KeyboardEvent): void => {
         if (e.charCode === 13) {
-            const newLocationsSplitted = newLocation.split(',').map(l => ({
+            const newLocationsSeparated = newLocation.split(',').map(l => ({
                 name: l,
-                isSelected: true,
+                isActive: true,
             }));
 
-            const newLocations = [...locations, ...newLocationsSplitted];
+            const newLocations = [...locations, ...newLocationsSeparated];
 
-            dispatch(UPDATE_CUSTOM_LOCATIONS, {
-                locations: newLocations,
-            });
+            dispatch(updateCustomLocations(newLocations));
             setLocations(newLocations);
             setNewLocation('');
         }
     };
 
-    const saveLocations = (): void => {
-        dispatch(UPDATE_CUSTOM_LOCATIONS, { locations });
-        dispatch(SET_SETTINGS_PHASE_TO_LOCATIONS);
-    };
-
-    const handleRemove = (e: React.MouseEvent, locationName: string): void => {
+    const handleRemove = (locationName: string) => (e: React.MouseEvent): void => {
         e.stopPropagation();
         const newLocations = locations.filter(l => l.name !== locationName);
-        dispatch(UPDATE_CUSTOM_LOCATIONS, {
-            locations: newLocations,
-        });
+
+        dispatch(updateCustomLocations(newLocations));
         setLocations(newLocations);
+    };
+
+    const saveLocations = (): void => {
+        dispatch(updateCustomLocations(locations));
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.LOCATIONS));
     };
 
     return (
@@ -81,27 +81,16 @@ const CustomLocations: React.FC = () => {
                     Введите локации, которые будут участвовать в игре:
                 </Paragraph>
                 <div className={b('list')}>
-                    {customLocations.map(({ name, isSelected }) => {
-                        return (
-                            <div
-                                className={b('list-item', { checked: isSelected })}
-                                onClick={(): void => {
-                                    handleCheck(name);
-                                }}
-                                key={name}
-                            >
-                                {name}
-                                {isSelected ? (
-                                    <CheckIcon className={b('check-icon')} />
-                                ) : (
-                                    <RemoveIcon
-                                        className={b('remove-icon')}
-                                        onClick={(e: React.MouseEvent<HTMLImageElement>): void => handleRemove(e, name)}
-                                    />
-                                )}
-                            </div>
-                        );
-                    })}
+                    {locations.map(({ name, isActive }) => (
+                        <div className={b('list-item', { checked: isActive })} onClick={handleCheck(name)} key={name}>
+                            {name}
+                            {isActive ? (
+                                <CheckIcon className={b('check-icon')} />
+                            ) : (
+                                <RemoveIcon className={b('remove-icon')} onClick={handleRemove(name)} />
+                            )}
+                        </div>
+                    ))}
                 </div>
                 <TextField
                     value={newLocation}

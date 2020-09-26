@@ -5,13 +5,19 @@ import Paragraph from 'components/common/Paragraph/Paragraph';
 import Header from 'components/common/Header/Header';
 
 import { useStore } from 'store';
-import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
+import { setScreen } from 'store/screen/actions';
+import { SCREENS } from 'store/screen/constants';
 
 const Rules: React.FC = () => {
     const { dispatch } = useStore();
+
+    const handleBackClick = (): void => {
+        dispatch(setScreen(SCREENS.START_SCREEN));
+    };
+
     return (
         <div>
-            <Navigation type="back" onClick={(): void => dispatch(SET_APP_STATE_TO_START_SCREEN)} />
+            <Navigation type="back" onClick={handleBackClick} />
             <Header>Правила</Header>
             <Paragraph hasMargin>Игровая партия</Paragraph>
             <Paragraph weight="extra-light" align="justify" hasMargin>

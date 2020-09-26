@@ -3,35 +3,52 @@ import * as React from 'react';
 import StartScreen from 'components/StartScreen/StartScreen';
 import Rules from 'components/Rules/Rules';
 import Settings from 'components/Settings/Settings';
-import Game from 'components/Game/Game';
+import RolesDistribution from 'components/Game/RolesDistribution/RolesDistribution';
+import Round from 'components/Game/Round/Round';
+import IdentifySpies from 'components/Game/IdentifySpies/IdentifySpies';
+import Results from 'components/Game/Results/Results';
 
 import { useStore } from 'store';
-import { APP_STATES } from 'store/reducers/app';
+import { SCREENS } from 'store/screen/constants';
+
 import './App.less';
 
 const App: React.FC = () => {
     const {
         state: {
-            app: { appState },
+            screen: { current },
         },
     } = useStore();
 
     let body;
-    switch (appState) {
-        case APP_STATES.START_SCREEN:
+    switch (current) {
+        case SCREENS.START_SCREEN:
             body = <StartScreen />;
             break;
-        case APP_STATES.RULES:
+        case SCREENS.RULES:
             body = <Rules />;
             break;
-        case APP_STATES.SETTINGS:
+        case SCREENS.SETTINGS:
             body = <Settings />;
             break;
-        case APP_STATES.GAME:
-            body = <Game />;
+        case SCREENS.ROLES_DISTRIBUTION:
+            body = <RolesDistribution />;
+            break;
+        case SCREENS.QUESTIONS:
+            body = <Round phase="QUESTIONS" />;
+            break;
+        case SCREENS.DISCUSSION:
+            body = <Round phase="DISCUSSION" />;
+            break;
+        case SCREENS.IDENTIFY_SPIES:
+            body = <IdentifySpies />;
+            break;
+        case SCREENS.RESULTS:
+            body = <Results />;
             break;
         default:
-        // console.error('TODO');
+            body = <StartScreen />;
+            break;
     }
 
     return <div className="app-container">{body}</div>;

@@ -8,13 +8,9 @@ import Header from 'components/common/Header/Header';
 import Switcher from 'components/common/Switcher/Switcher';
 
 import { useStore } from 'store';
-import { SET_SETTINGS_PHASE_TO_LOCATIONS, SET_SETTINGS_PHASE_TO_SPIES } from 'store/reducers/settings/settings';
-import {
-    INCREASE_ROUND_TIME,
-    REDUCE_ROUND_TIME,
-    INCREASE_DISCUSSION_TIME,
-    REDUCE_DISCUSSION_TIME,
-} from 'store/reducers/settings/timeSettings';
+import { setSettingsScreen } from 'store/screen/actions';
+import { SETTINGS_SCREENS } from 'store/screen/constants';
+import { setDiscussionTime, setQuestionsTime, toggleSound } from 'store/time/actions';
 
 import './TimeSettings.less';
 
@@ -22,45 +18,75 @@ const b = block('time-settings');
 const TimeSettings: React.FC = () => {
     const {
         state: {
-            settings: { timeSettings },
+            time: { questions, discussion, sound },
         },
         dispatch,
     } = useStore();
+
+    const handleSoundToggle = (): void => {
+        dispatch(toggleSound());
+    };
+
+    const handleIncreaseQuestionsTimeClick = (): void => {
+        dispatch(setQuestionsTime(questions + 1));
+    };
+
+    const handleDecreaseQuestionsTimeClick = (): void => {
+        dispatch(setQuestionsTime(questions - 1));
+    };
+
+    const handleIncreaseDiscussionTimeClick = (): void => {
+        dispatch(setDiscussionTime(discussion + 1));
+    };
+
+    const handleDecreaseDiscussionTimeClick = (): void => {
+        dispatch(setDiscussionTime(discussion - 1));
+    };
+
+    const handleBackClick = (): void => {
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.SPIES));
+    };
+
+    const handleForwardClick = (): void => {
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.LOCATIONS));
+    };
 
     return (
         <div className={b()}>
             <Header>Время</Header>
             <div className={b('inner')}>
-                <Switcher onChange={(): void => {}}>Звук по окончании</Switcher>
+                <Switcher onChange={handleSoundToggle} enabledByDefault={sound}>
+                    Звук по окончании
+                </Switcher>
                 <Counter
                     name="Длительность кона"
-                    count={timeSettings.roundTime}
+                    count={questions}
                     units="мин"
                     disabled={false}
-                    onClickMinus={(): void => dispatch(REDUCE_ROUND_TIME)}
-                    onClickPlus={(): void => dispatch(INCREASE_ROUND_TIME)}
+                    onClickMinus={handleDecreaseQuestionsTimeClick}
+                    onClickPlus={handleIncreaseQuestionsTimeClick}
                     min={1}
                     max={100}
                 />
                 <Counter
                     name="Длительность обсуждения"
-                    count={timeSettings.discussionTime}
+                    count={discussion}
                     units="мин"
                     disabled={false}
-                    onClickMinus={(): void => dispatch(REDUCE_DISCUSSION_TIME)}
-                    onClickPlus={(): void => dispatch(INCREASE_DISCUSSION_TIME)}
+                    onClickMinus={handleDecreaseDiscussionTimeClick}
+                    onClickPlus={handleIncreaseDiscussionTimeClick}
                     min={1}
                     max={100}
                 />
             </div>
             <ButtonsWizard
                 previous={
-                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_SPIES)} type="additional">
+                    <Button onClick={handleBackClick} type="additional">
                         Назад
                     </Button>
                 }
                 next={
-                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_LOCATIONS)} type="action">
+                    <Button onClick={handleForwardClick} type="action">
                         Вперед
                     </Button>
                 }

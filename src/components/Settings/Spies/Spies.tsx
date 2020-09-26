@@ -9,18 +9,9 @@ import RandomOption from 'components/common/RandomOption/RandomOption';
 import Counter from 'components/common/Counter/Counter';
 
 import { useStore } from 'store';
-import {
-    SET_SETTINGS_PHASE_TO_PLAYERS_LIST,
-    SET_SETTINGS_PHASE_TO_TIME_SETTINGS,
-} from 'store/reducers/settings/settings';
-
-import {
-    UPDATE_SPIES_FAMILIAR,
-    INCREASE_SPIES_COUNT,
-    REDUCE_SPIES_COUNT,
-    SELECT_RANDOM_SPIES_COUNT,
-    SELECT_SPECIFIC_SPIES_COUNT,
-} from 'store/reducers/settings/spies';
+import { setSpiesCount, setSpiesRandom, setSpiesSpecific, toggleSpiesFamiliar } from 'store/spies/actions';
+import { setSettingsScreen } from 'store/screen/actions';
+import { SETTINGS_SCREENS } from 'store/screen/constants';
 
 import './Spies.less';
 
@@ -28,15 +19,42 @@ const b = block('spies');
 const Spies: React.FC = () => {
     const {
         state: {
-            settings: { spies, playersInfo },
+            players: { list: playerList },
+            spies: { count, isRandom, isFamiliar },
         },
         dispatch,
     } = useStore();
 
-    const handleSwitchChange = (enabled: boolean): void => {
-        // eslint-disable-next-line no-console
-        console.log(enabled);
-        dispatch(UPDATE_SPIES_FAMILIAR, { spiesFamiliar: enabled });
+    const handleRandomClick = (): void => {
+        if (!isRandom) {
+            dispatch(setSpiesRandom());
+        }
+    };
+
+    const handleSpecificCountClick = (): void => {
+        if (isRandom) {
+            dispatch(setSpiesSpecific());
+        }
+    };
+
+    const handleFamiliarToggle = (): void => {
+        dispatch(toggleSpiesFamiliar());
+    };
+
+    const handleIncreaseCountClick = (): void => {
+        dispatch(setSpiesCount(count + 1));
+    };
+
+    const handleDecreaseCountClick = (): void => {
+        dispatch(setSpiesCount(count - 1));
+    };
+
+    const handleBackClick = (): void => {
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.PLAYERS));
+    };
+
+    const handleForwardClick = (): void => {
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.TIME));
     };
 
     return (
@@ -44,35 +62,30 @@ const Spies: React.FC = () => {
             <Header>Шпионы</Header>
 
             <div className={b('inner')}>
-                <RandomOption
-                    name="Случайное число шпионов"
-                    disabled={spies.specificSpiesCount}
-                    onClick={(): void => dispatch(SELECT_RANDOM_SPIES_COUNT)}
-                />
+                <RandomOption name="Случайное число шпионов" disabled={!isRandom} onClick={handleRandomClick} />
                 <Counter
                     name="Установить число шпионов"
-                    count={spies.spiesCount}
-                    disabled={!spies.specificSpiesCount}
-                    onClickMinus={(): void => dispatch(REDUCE_SPIES_COUNT)}
-                    onClickPlus={(): void => dispatch(INCREASE_SPIES_COUNT)}
-                    max={playersInfo.players.length}
+                    count={count}
+                    disabled={isRandom}
+                    onClickMinus={handleDecreaseCountClick}
+                    onClickPlus={handleIncreaseCountClick}
+                    max={playerList.length}
                     min={1}
                     interactive
-                    onClick={(): void => dispatch(SELECT_SPECIFIC_SPIES_COUNT)}
+                    onClick={handleSpecificCountClick}
                 />
-                <Switcher onChange={handleSwitchChange} enabledByDefault={spies.spiesFamiliar}>
+                <Switcher onChange={handleFamiliarToggle} enabledByDefault={isFamiliar}>
                     Шпионы знакомы
                 </Switcher>
             </div>
-
             <ButtonsWizard
                 previous={
-                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_PLAYERS_LIST)} type="additional">
+                    <Button onClick={handleBackClick} type="additional">
                         Назад
                     </Button>
                 }
                 next={
-                    <Button onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_TIME_SETTINGS)} type="action">
+                    <Button onClick={handleForwardClick} type="action">
                         Вперед
                     </Button>
                 }

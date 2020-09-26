@@ -4,8 +4,8 @@ import { block } from 'bem-cn';
 import Button from 'components/common/Button/Button';
 
 import { useStore } from 'store';
-import { SET_SETTINGS_PHASE_TO_PLAYERS_LIST } from 'store/reducers/settings/settings';
-import { SET_APP_STATE_TO_RULES, SET_APP_STATE_TO_SETTINGS } from 'store/reducers/app';
+import { setScreen, setSettingsScreen } from 'store/screen/actions';
+import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 
 import Logo from 'icons/logo.svg?sprite';
 
@@ -16,8 +16,11 @@ const StartScreen: React.FC = () => {
     const { dispatch } = useStore();
 
     const handlePlayClick = (): void => {
-        dispatch(SET_APP_STATE_TO_SETTINGS);
-        dispatch(SET_SETTINGS_PHASE_TO_PLAYERS_LIST);
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.PLAYERS));
+    };
+
+    const handleShowRules = (): void => {
+        dispatch(setScreen(SCREENS.RULES));
     };
 
     return (
@@ -27,7 +30,7 @@ const StartScreen: React.FC = () => {
                 <Button type="action" onClick={handlePlayClick}>
                     Играть
                 </Button>
-                <Button type="additional" onClick={(): void => dispatch(SET_APP_STATE_TO_RULES)}>
+                <Button type="additional" onClick={handleShowRules}>
                     Правила игры
                 </Button>
             </div>

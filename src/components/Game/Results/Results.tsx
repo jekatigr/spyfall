@@ -3,7 +3,7 @@ import * as React from 'react';
 import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
 
-import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
+// import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
 import { SET_IDENTIFIED_PLAYERS } from 'store/reducers/game';
 
 import { useStore } from 'store';
@@ -74,8 +74,8 @@ const Results: React.FC = () => {
     }
 
     const startNewGame = (): void => {
-        dispatch(SET_IDENTIFIED_PLAYERS, { identifiedPlayers: [] });
-        dispatch(SET_APP_STATE_TO_START_SCREEN);
+        dispatch({ type: SET_IDENTIFIED_PLAYERS, payload: { identifiedPlayers: [] } });
+        // dispatch({ type: SET_APP_STATE_TO_START_SCREEN });
     };
 
     let bodyJSX = [

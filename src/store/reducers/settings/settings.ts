@@ -1,5 +1,4 @@
-import { combineReducers } from 'redux';
-import spies from 'store/reducers/settings/spies';
+import combineReducers from 'combine-reducers';
 import locations from 'store/reducers/settings/locations';
 import playersInfo from 'store/reducers/settings/playersInfo';
 import timeSettings from 'store/reducers/settings/timeSettings';
@@ -47,7 +46,6 @@ const settingsReducer = (state = initialState, action): typeof initialState => {
 
 export default combineReducers({
     phase: settingsReducer,
-    spies,
     locations,
     playersInfo,
     timeSettings,

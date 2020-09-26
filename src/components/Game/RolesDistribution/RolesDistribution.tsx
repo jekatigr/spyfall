@@ -16,10 +16,8 @@ const RolesDistribution: React.FC = () => {
     const {
         state: {
             game,
-            settings: {
-                playersInfo,
-                spies: { spiesFamiliar },
-            },
+            spies: { isFamiliar },
+            settings: { playersInfo },
         },
         dispatch,
     } = useStore();
@@ -27,8 +25,8 @@ const RolesDistribution: React.FC = () => {
     const [isRolesDistributed, setRolesDistributed] = React.useState(false);
 
     const startGame = (): void => {
-        dispatch(SET_START_QUESTIONS, { time: Date.now() });
-        dispatch(SET_GAME_PHASE_TO_QUESTIONS);
+        dispatch({ type: SET_START_QUESTIONS, payload: { time: Date.now() } });
+        dispatch({ type: SET_GAME_PHASE_TO_QUESTIONS });
     };
 
     const cards = playersInfo.players.map(player => {
@@ -49,7 +47,7 @@ const RolesDistribution: React.FC = () => {
                     cards={cards}
                     location={game.location}
                     spies={cards.filter(s => s.isSpy).map(s => s.name)}
-                    isSpiesFamiliar={spiesFamiliar}
+                    isSpiesFamiliar={isFamiliar}
                     onFinish={(): void => setRolesDistributed(true)}
                 />
             )}

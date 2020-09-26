@@ -12,16 +12,13 @@ import Navigation from 'components/common/Navigation/Navigation';
 import getMenuItems from 'utils/getMenuItems';
 
 import { useStore } from 'store';
-import {
-    SET_SETTINGS_PHASE_TO_LOCATIONS,
-    SET_SETTINGS_PHASE_TO_PLAYERS_LIST,
-    SETTINGS_PHASES,
-} from 'store/reducers/settings/settings';
+import { SETTINGS_SCREENS } from 'store/screen/constants';
+import { setSettingsScreen } from 'store/screen/actions';
 
 const Settings: React.FC = () => {
     const {
         state: {
-            settings: { phase },
+            screen: { settings },
         },
         dispatch,
     } = useStore();
@@ -30,40 +27,42 @@ const Settings: React.FC = () => {
     let secondaryScreen = false;
     let progressBarStep = 0;
     let backButtonAction;
-    switch (phase) {
-        case SETTINGS_PHASES.PLAYERS_LIST:
+    switch (settings) {
+        case SETTINGS_SCREENS.PLAYERS:
             progressBarStep = 1;
             body = <PlayersList />;
             break;
-        case SETTINGS_PHASES.PLAYER_PROFILE:
+        case SETTINGS_SCREENS.PLAYER_PROFILE:
             secondaryScreen = true;
-            backButtonAction = SET_SETTINGS_PHASE_TO_PLAYERS_LIST;
+            backButtonAction = setSettingsScreen(SETTINGS_SCREENS.PLAYERS);
             body = <PlayerProfile />;
             break;
-        case SETTINGS_PHASES.SPIES:
+        case SETTINGS_SCREENS.SPIES:
             progressBarStep = 2;
             body = <Spies />;
             break;
-        case SETTINGS_PHASES.TIME_SETTINGS:
+        case SETTINGS_SCREENS.TIME:
             progressBarStep = 3;
             body = <TimeSettings />;
             break;
-        case SETTINGS_PHASES.LOCATIONS:
+        case SETTINGS_SCREENS.LOCATIONS:
             progressBarStep = 4;
             body = <Locations />;
             break;
-        case SETTINGS_PHASES.EDIT_BASIC_LOCATIONS:
+        case SETTINGS_SCREENS.BASIC_LOCATIONS:
             secondaryScreen = true;
-            backButtonAction = SET_SETTINGS_PHASE_TO_LOCATIONS;
+            backButtonAction = setSettingsScreen(SETTINGS_SCREENS.LOCATIONS);
             body = <BasicLocations />;
             break;
-        case SETTINGS_PHASES.EDIT_CUSTOM_LOCATIONS:
+        case SETTINGS_SCREENS.CUSTOM_LOCATIONS:
             secondaryScreen = true;
-            backButtonAction = SET_SETTINGS_PHASE_TO_LOCATIONS;
+            backButtonAction = setSettingsScreen(SETTINGS_SCREENS.LOCATIONS);
             body = <CustomLocations />;
             break;
         default:
-        // console.error('TODO');
+            progressBarStep = 1;
+            body = <PlayersList />;
+            break;
     }
 
     return (

@@ -9,51 +9,42 @@ import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 
 import AddIcon from 'icons/add.svg?sprite';
 
-import { ColorsType } from 'components/common/Player/types';
-
 import { useStore } from 'store';
-import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
-import { SET_SETTINGS_PHASE_TO_PLAYER_PROFILE, SET_SETTINGS_PHASE_TO_SPIES } from 'store/reducers/settings/settings';
-import { SET_CURRENT_PLAYER_PROFILE, UPDATE_PLAYERS } from 'store/reducers/settings/playersInfo';
+import { setPlayerProfileScreen, setScreen, setSettingsScreen } from 'store/screen/actions';
+import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
+import { PLAYER_COLORS } from 'store/players/types';
+import { addPlayer } from 'store/players/actions';
 
 import './PlayersList.less';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 
-let colorCounter = 0;
-const colors: ColorsType[] = [
-    'coral',
-    'green',
-    'wine',
-    'dark-blue',
-    'pink',
-    'yellow',
-    'purple',
-    'raspberry',
-    'acid-green',
-    'light-green',
-    'sky-blue',
-    'blue',
-];
-
 const b = block('players');
 const PlayersList: React.FC = () => {
     const {
         state: {
-            settings: {
-                playersInfo: { players },
-            },
+            players: { list: playersList },
         },
         dispatch,
     } = useStore();
 
     const createPlayer = (): void => {
-        const playerName = `Игрок ${players.length + 1}`;
-        const newColor = colors[colorCounter % colors.length];
-        colorCounter += 1;
-        const updatedPlayers = players.slice();
-        updatedPlayers.push({ name: playerName, color: newColor });
-        dispatch(UPDATE_PLAYERS, { players: updatedPlayers });
+        const id = Date.now();
+        const playerName = `Игрок ${playersList.length + 1}`;
+        const newColor = PLAYER_COLORS[playersList.length % PLAYER_COLORS.length];
+        dispatch(addPlayer({ id, name: playerName, color: newColor }));
+    };
+
+    const handleBackClick = (): void => {
+        setScreen(SCREENS.START_SCREEN);
+    };
+
+    const handleForwardClick = (): void => {
+        dispatch(setSettingsScreen(SETTINGS_SCREENS.SPIES));
+    };
+
+    const handleEditProfileClick = (playerId: number) => (): void => {
+        dispatch(setPlayerProfileScreen(playerId));
     };
 
     const hacks = [];
@@ -76,16 +67,9 @@ const PlayersList: React.FC = () => {
                                     <AddIcon className={b('add-player-button-icon')} />
                                 </button>
                             </div>
-                            {players.map(({ name, color }, index) => (
-                                <div className={b('list-item')} key={name}>
-                                    <Player
-                                        name={name}
-                                        color={color}
-                                        onClick={(): void => {
-                                            dispatch(SET_SETTINGS_PHASE_TO_PLAYER_PROFILE);
-                                            dispatch(SET_CURRENT_PLAYER_PROFILE, { currentProfile: index });
-                                        }}
-                                    />
+                            {playersList.map(({ id, name, color }) => (
+                                <div className={b('list-item')} key={id}>
+                                    <Player name={name} color={color} onClick={handleEditProfileClick(id)} />
                                 </div>
                             ))}
                             {hacks}
@@ -95,16 +79,12 @@ const PlayersList: React.FC = () => {
             </div>
             <ButtonsWizard
                 previous={
-                    <Button onClick={(): void => dispatch(SET_APP_STATE_TO_START_SCREEN)} type="additional">
+                    <Button onClick={handleBackClick} type="additional">
                         Назад
                     </Button>
                 }
                 next={
-                    <Button
-                        onClick={(): void => dispatch(SET_SETTINGS_PHASE_TO_SPIES)}
-                        type="action"
-                        disabled={players.length < 3}
-                    >
+                    <Button onClick={handleForwardClick} type="action" disabled={playersList.length < 3}>
                         Вперед
                     </Button>
                 }

@@ -1,0 +1,4 @@
+export const SET_COUNT = 'SPIES / SET_COUNT';
+export const SET_RANDOM = 'SPIES / SET_RANDOM';
+export const SET_SPECIFIC = 'SPIES / SET_SPECIFIC';
+export const TOGGLE_FAMILIAR = 'SPIES / TOGGLE_FAMILIAR';
