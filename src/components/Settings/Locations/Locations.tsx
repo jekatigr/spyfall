@@ -12,18 +12,10 @@ import BasicMutedIcon from 'icons/basic-muted.svg?sprite';
 import CustomIcon from 'icons/custom.svg?sprite';
 import CustomMutedIcon from 'icons/custom-muted.svg?sprite';
 
+import useGame from 'hooks/useGame';
 import { useStore } from 'store';
-import { SET_APP_STATE_TO_GAME } from 'store/reducers/app';
-import {
-    SET_GAME_PHASE_TO_ROLES_DISTRIBUTIONS,
-    SET_LOCATION,
-    SET_SPIES,
-    SET_QUESTIONS_TIME,
-    SET_DISCUSSION_TIME,
-} from 'store/reducers/game';
-
-import { setSettingsScreen, setBasicLocationsScreen, setCustomLocationsScreen } from 'store/screen/actions';
-import { SETTINGS_SCREENS } from 'store/screen/constants';
+import { setSettingsScreen, setBasicLocationsScreen, setCustomLocationsScreen, setScreen } from 'store/screen/actions';
+import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 import { toggleBasicLocations, toggleCustomLocations } from 'store/locations/actions';
 
 import './Locations.less';
@@ -32,8 +24,6 @@ const b = block('location-category');
 const Locations: React.FC = () => {
     const {
         state: {
-            spies,
-            settings: { playersInfo, timeSettings },
             locations: {
                 basic: { isActive: isBasicActive, list: basicLocations },
                 custom: { isActive: isCustomActive, list: customLocations },
@@ -41,6 +31,12 @@ const Locations: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const { setLocationAndSpies } = useGame();
+
+    const handleStartGame = (): void => {
+        setLocationAndSpies();
+        dispatch(setScreen(SCREENS.ROLES_DISTRIBUTION));
+    };
 
     const isStartGameButtonEnabled = React.useMemo<boolean>(() => {
         if (!isBasicActive && !isCustomActive) {
@@ -78,30 +74,6 @@ const Locations: React.FC = () => {
 
     const handleEditCustomClick = (): void => {
         dispatch(setCustomLocationsScreen());
-    };
-
-    const startGame = (): void => {
-        // Select spies
-        let { count: spiesCount } = spies;
-        if (spies.isRandom) spiesCount = Math.floor(Math.random() * playersInfo.players.length) + 1;
-        const gameSpies = playersInfo.players.map(p => p.name);
-        while (gameSpies.length !== spiesCount) gameSpies.splice(Math.floor(Math.random() * gameSpies.length), 1);
-        dispatch({ type: SET_SPIES, payload: { gameSpies } });
-
-        // Select location
-        const allLocations = [];
-        if (isBasicActive) allLocations.push(...basicLocations.filter(l => l.isActive).map(l => l.name));
-        if (isCustomActive) allLocations.push(...customLocations.filter(l => l.isActive).map(l => l.name));
-        const selectedLocation = allLocations[Math.floor(Math.random() * allLocations.length)];
-        dispatch({ type: SET_LOCATION, payload: { location: selectedLocation } });
-
-        // Set round durations
-        dispatch({ type: SET_QUESTIONS_TIME, payload: { time: timeSettings.roundTime * 1000 * 60 } });
-        dispatch({ type: SET_DISCUSSION_TIME, payload: { time: timeSettings.roundTime * 1000 * 60 } });
-
-        // Start game
-        dispatch({ type: SET_GAME_PHASE_TO_ROLES_DISTRIBUTIONS });
-        dispatch({ type: SET_APP_STATE_TO_GAME });
     };
 
     return (
@@ -151,7 +123,7 @@ const Locations: React.FC = () => {
                     </Button>
                 }
                 next={
-                    <Button onClick={startGame} type="action" disabled={!isStartGameButtonEnabled}>
+                    <Button onClick={handleStartGame} type="action" disabled={!isStartGameButtonEnabled}>
                         Играть
                     </Button>
                 }

@@ -2,7 +2,8 @@ import * as React from 'react';
 
 import Navigation from 'components/common/Navigation/Navigation';
 import RolesDistribution from 'components/Game/RolesDistribution/RolesDistribution';
-import Round from 'components/Game/Round/Round';
+import Questions from 'components/Game/Questions/Questions';
+import Discussion from 'components/Game/Discussion/Discussion';
 import IdentifySpies from 'components/Game/IdentifySpies/IdentifySpies';
 import Results from 'components/Game/Results/Results';
 import getMenuItems from 'utils/getMenuItems';
@@ -24,10 +25,10 @@ const Game: React.FC = () => {
             body = <RolesDistribution />;
             break;
         case GAME_PHASES.QUESTIONS:
-            body = <Round phase="QUESTIONS" />;
+            body = <Questions />;
             break;
         case GAME_PHASES.DISCUSSION:
-            body = <Round phase="DISCUSSION" />;
+            body = <Discussion />;
             break;
         case GAME_PHASES.IDENTIFY_SPIES:
             body = <IdentifySpies />;

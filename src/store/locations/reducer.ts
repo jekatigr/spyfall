@@ -3,7 +3,7 @@ import { Reducer } from 'combine-reducers';
 import buildInBasicLocations from 'constants/baseLocations';
 
 import { LocationsStateType, LocationsActionsType } from './types';
-import { TOGGLE_BASIC, TOGGLE_CUSTOM, UPDATE_BASIC, UPDATE_CUSTOM } from './constants';
+import { SET_LOCATION_FOR_GAME, TOGGLE_BASIC, TOGGLE_CUSTOM, UPDATE_BASIC, UPDATE_CUSTOM } from './constants';
 
 const initialState = {
     basic: {
@@ -14,6 +14,7 @@ const initialState = {
         isActive: false,
         list: [],
     },
+    locationForGame: '',
 };
 
 const screenReducer: Reducer<LocationsStateType, LocationsActionsType> = (
@@ -52,6 +53,11 @@ const screenReducer: Reducer<LocationsStateType, LocationsActionsType> = (
                     ...state.custom,
                     list: action.payload,
                 },
+            };
+        case SET_LOCATION_FOR_GAME:
+            return {
+                ...state,
+                locationForGame: action.payload,
             };
         default:
             return state;

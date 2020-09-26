@@ -4,7 +4,8 @@ import StartScreen from 'components/StartScreen/StartScreen';
 import Rules from 'components/Rules/Rules';
 import Settings from 'components/Settings/Settings';
 import RolesDistribution from 'components/Game/RolesDistribution/RolesDistribution';
-import Round from 'components/Game/Round/Round';
+import Questions from 'components/Game/Questions/Questions';
+import Discussion from 'components/Game/Discussion/Discussion';
 import IdentifySpies from 'components/Game/IdentifySpies/IdentifySpies';
 import Results from 'components/Game/Results/Results';
 
@@ -35,10 +36,10 @@ const App: React.FC = () => {
             body = <RolesDistribution />;
             break;
         case SCREENS.QUESTIONS:
-            body = <Round phase="QUESTIONS" />;
+            body = <Questions />;
             break;
         case SCREENS.DISCUSSION:
-            body = <Round phase="DISCUSSION" />;
+            body = <Discussion />;
             break;
         case SCREENS.IDENTIFY_SPIES:
             body = <IdentifySpies />;

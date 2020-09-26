@@ -16,4 +16,5 @@ type LocationsList = {
 export type LocationsStateType = {
     basic: LocationsList;
     custom: LocationsList;
+    locationForGame: string;
 };

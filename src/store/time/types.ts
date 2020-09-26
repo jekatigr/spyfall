@@ -4,7 +4,13 @@ import * as actions from './actions';
 export type TimeActionsType = ReturnType<InferValueTypes<typeof actions>>;
 
 export type TimeStateType = {
-    questions: number;
-    discussion: number;
+    questions: {
+        limit: number;
+        start: number;
+    };
+    discussion: {
+        limit: number;
+        start: number;
+    };
     sound: boolean;
 };

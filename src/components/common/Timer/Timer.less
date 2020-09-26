@@ -4,6 +4,7 @@
 
 @barWidth: 12px;
 @barColor: #02D113;
+@barColorEnd: #F74A86;
 
 @{el} {
   height: 280px;
@@ -44,6 +45,10 @@
     border-left-color: @barColor;
     border-bottom-color: @barColor;
     animation-name: left-spin;
+  }
+
+  &__hand-internal_time-up {
+    border-color: @barColorEnd;
   }
 
   &__top-background-circle {

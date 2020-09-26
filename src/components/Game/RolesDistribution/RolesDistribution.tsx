@@ -5,7 +5,9 @@ import Button from 'components/common/Button/Button';
 import CardsSlider from 'components/Game/CardsSlider/CardsSlider';
 
 import { useStore } from 'store';
-import { SET_GAME_PHASE_TO_QUESTIONS, SET_START_QUESTIONS } from 'store/reducers/game';
+import { setScreen } from 'store/screen/actions';
+import { SCREENS } from 'store/screen/constants';
+import { setQuestionsTimeStart } from 'store/time/actions';
 
 import BeforeStartIcon from 'icons/before-start.svg?sprite';
 
@@ -15,23 +17,24 @@ const b = block('roles-distribution');
 const RolesDistribution: React.FC = () => {
     const {
         state: {
-            game,
+            locations: { locationForGame },
+            players: { list },
             spies: { isFamiliar },
-            settings: { playersInfo },
         },
         dispatch,
     } = useStore();
 
     const [isRolesDistributed, setRolesDistributed] = React.useState(false);
+    const spies = React.useMemo(() => list.filter(p => p.isSpy).map(p => p.name), [list]);
 
     const startGame = (): void => {
-        dispatch({ type: SET_START_QUESTIONS, payload: { time: Date.now() } });
-        dispatch({ type: SET_GAME_PHASE_TO_QUESTIONS });
+        dispatch(setQuestionsTimeStart(Date.now()));
+        dispatch(setScreen(SCREENS.QUESTIONS));
     };
 
-    const cards = playersInfo.players.map(player => {
-        return { name: player.name, isSpy: game.spies.indexOf(player.name) !== -1 };
-    });
+    const handleRolesDistributed = (): void => {
+        setRolesDistributed(true);
+    };
 
     return (
         <>
@@ -44,11 +47,11 @@ const RolesDistribution: React.FC = () => {
                 </>
             ) : (
                 <CardsSlider
-                    cards={cards}
-                    location={game.location}
-                    spies={cards.filter(s => s.isSpy).map(s => s.name)}
+                    cards={list}
+                    location={locationForGame}
+                    spies={spies}
                     isSpiesFamiliar={isFamiliar}
-                    onFinish={(): void => setRolesDistributed(true)}
+                    onFinish={handleRolesDistributed}
                 />
             )}
         </>

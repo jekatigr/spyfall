@@ -10,7 +10,7 @@ import Switcher from 'components/common/Switcher/Switcher';
 import { useStore } from 'store';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
-import { setDiscussionTime, setQuestionsTime, toggleSound } from 'store/time/actions';
+import { setQuestionsTimeLimit, setDiscussionTimeLimit, toggleSound } from 'store/time/actions';
 
 import './TimeSettings.less';
 
@@ -18,7 +18,11 @@ const b = block('time-settings');
 const TimeSettings: React.FC = () => {
     const {
         state: {
-            time: { questions, discussion, sound },
+            time: {
+                questions: { limit: questionsLimit },
+                discussion: { limit: discussionLimit },
+                sound,
+            },
         },
         dispatch,
     } = useStore();
@@ -28,19 +32,19 @@ const TimeSettings: React.FC = () => {
     };
 
     const handleIncreaseQuestionsTimeClick = (): void => {
-        dispatch(setQuestionsTime(questions + 1));
+        dispatch(setQuestionsTimeLimit(questionsLimit + 1));
     };
 
     const handleDecreaseQuestionsTimeClick = (): void => {
-        dispatch(setQuestionsTime(questions - 1));
+        dispatch(setQuestionsTimeLimit(questionsLimit - 1));
     };
 
     const handleIncreaseDiscussionTimeClick = (): void => {
-        dispatch(setDiscussionTime(discussion + 1));
+        dispatch(setDiscussionTimeLimit(discussionLimit + 1));
     };
 
     const handleDecreaseDiscussionTimeClick = (): void => {
-        dispatch(setDiscussionTime(discussion - 1));
+        dispatch(setDiscussionTimeLimit(discussionLimit - 1));
     };
 
     const handleBackClick = (): void => {
@@ -60,7 +64,7 @@ const TimeSettings: React.FC = () => {
                 </Switcher>
                 <Counter
                     name="Длительность кона"
-                    count={questions}
+                    count={questionsLimit}
                     units="мин"
                     disabled={false}
                     onClickMinus={handleDecreaseQuestionsTimeClick}
@@ -70,7 +74,7 @@ const TimeSettings: React.FC = () => {
                 />
                 <Counter
                     name="Длительность обсуждения"
-                    count={discussion}
+                    count={discussionLimit}
                     units="мин"
                     disabled={false}
                     onClickMinus={handleDecreaseDiscussionTimeClick}

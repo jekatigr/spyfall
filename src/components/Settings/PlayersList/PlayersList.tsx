@@ -32,11 +32,11 @@ const PlayersList: React.FC = () => {
         const id = Date.now();
         const playerName = `Игрок ${playersList.length + 1}`;
         const newColor = PLAYER_COLORS[playersList.length % PLAYER_COLORS.length];
-        dispatch(addPlayer({ id, name: playerName, color: newColor }));
+        dispatch(addPlayer({ id, name: playerName, color: newColor, isSpy: false }));
     };
 
     const handleBackClick = (): void => {
-        setScreen(SCREENS.START_SCREEN);
+        dispatch(setScreen(SCREENS.START_SCREEN));
     };
 
     const handleForwardClick = (): void => {

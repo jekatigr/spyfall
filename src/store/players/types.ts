@@ -35,6 +35,7 @@ export type Player = {
     id: number;
     name: string;
     color: PlayerColor;
+    isSpy: boolean;
 };
 
 export type PlayersActionsType = ReturnType<InferValueTypes<typeof actions>>;
