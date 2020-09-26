@@ -1,10 +1,10 @@
 import * as React from 'react';
 
 import ProgressBar from 'components/common/ProgressBar/ProgressBar';
-import PlayersList from 'components/Settings/PlayersList/PlayersList';
-import Spies from 'components/Settings/Spies/Spies';
-import Locations from 'components/Settings/Locations/Locations';
-import TimeSettings from 'components/Settings/TimeSettings/TimeSettings';
+import PlayersList from 'components/screens/Settings/PlayersList/PlayersList';
+import Spies from 'components/screens/Settings/Spies/Spies';
+import Locations from 'components/screens/Settings/Locations/Locations';
+import TimeSettings from 'components/screens/Settings/TimeSettings/TimeSettings';
 
 import { useStore } from 'store';
 import { SETTINGS_SCREENS } from 'store/screen/constants';

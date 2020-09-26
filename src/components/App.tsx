@@ -1,17 +1,17 @@
 import * as React from 'react';
 
 import Navigation from 'components/common/Navigation/Navigation';
-import StartScreen from 'components/StartScreen/StartScreen';
-import Rules from 'components/Rules/Rules';
-import Settings from 'components/Settings/Settings';
-import PlayerProfile from 'components/Settings/PlayerProfile/PlayerProfile';
-import BasicLocations from 'components/Settings/BasicLocations/BasicLocations';
-import CustomLocations from 'components/Settings/CustomLocations/CustomLocations';
-import RolesDistribution from 'components/RolesDistribution/RolesDistribution';
-import Questions from 'components/Questions/Questions';
-import Discussion from 'components/Discussion/Discussion';
-import IdentifySpies from 'components/IdentifySpies/IdentifySpies';
-import Results from 'components/Results/Results';
+import StartScreen from 'components/screens/StartScreen/StartScreen';
+import Rules from 'components/screens/Rules/Rules';
+import Settings from 'components/screens/Settings/Settings';
+import PlayerProfile from 'components/screens/PlayerProfile/PlayerProfile';
+import BasicLocations from 'components/screens/BasicLocations/BasicLocations';
+import CustomLocations from 'components/screens/CustomLocations/CustomLocations';
+import RolesDistribution from 'components/screens/RolesDistribution/RolesDistribution';
+import Questions from 'components/screens/Questions/Questions';
+import Discussion from 'components/screens/Discussion/Discussion';
+import IdentifySpies from 'components/screens/IdentifySpies/IdentifySpies';
+import Results from 'components/screens/Results/Results';
 import getMenuItems from 'utils/getMenuItems';
 
 import { useStore } from 'store';

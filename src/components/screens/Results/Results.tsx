@@ -7,7 +7,7 @@ import Button from 'components/common/Button/Button';
 // import { SET_IDENTIFIED_PLAYERS } from 'store/reducers/game';
 
 import { useStore } from 'store';
-import Paragraph from '../common/Paragraph/Paragraph';
+import Paragraph from '../../common/Paragraph/Paragraph';
 
 const RESULT = {
     W: 0, // Identified: all spies and no peaceful citizens
