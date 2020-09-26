@@ -10,11 +10,11 @@ import CheckIcon from 'icons/check.svg?sprite';
 import RemoveIcon from 'icons/remove.svg?sprite';
 
 import { useStore } from 'store';
-
-import './CustomLocations.less';
 import { updateCustomLocations } from 'store/locations/actions';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
+
+import './CustomLocations.less';
 
 const b = block('custom-locations');
 const CustomLocations: React.FC = () => {

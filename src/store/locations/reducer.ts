@@ -1,14 +1,18 @@
 import { Reducer } from 'combine-reducers';
-
-import buildInBasicLocations from 'constants/baseLocations';
-
 import { LocationsStateType, LocationsActionsType } from './types';
-import { SET_LOCATION_FOR_GAME, TOGGLE_BASIC, TOGGLE_CUSTOM, UPDATE_BASIC, UPDATE_CUSTOM } from './constants';
+import {
+    SET_LOCATION_FOR_GAME,
+    TOGGLE_BASIC,
+    TOGGLE_CUSTOM,
+    UPDATE_BASIC,
+    UPDATE_CUSTOM,
+    BUILD_IN_LOCATIONS,
+} from './constants';
 
 const initialState = {
     basic: {
         isActive: true,
-        list: buildInBasicLocations.map(l => ({ name: l, isActive: true })),
+        list: BUILD_IN_LOCATIONS.map(l => ({ name: l, isActive: true })),
     },
     custom: {
         isActive: false,

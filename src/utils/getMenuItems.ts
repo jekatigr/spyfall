@@ -1,9 +1,10 @@
+import { Dispatch } from 'react';
 import MenuItem from 'components/common/Navigation/types';
 import { setScreen, setSettingsScreen } from 'store/screen/actions';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
+import { CombinedActionsType } from 'store/types';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const getMenuItems = (dispatch: any): MenuItem[] => {
+const getMenuItems = (dispatch: Dispatch<CombinedActionsType>): MenuItem[] => {
     return [
         {
             title: 'Новая игра',

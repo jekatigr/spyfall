@@ -36,21 +36,18 @@ const screenReducer: Reducer<ScreenStateType, ScreenActionsType> = (
         case SET_PLAYER_PROFILE_SCREEN:
             return {
                 ...state,
-                current: SCREENS.SETTINGS,
-                settings: SETTINGS_SCREENS.PLAYER_PROFILE,
+                current: SCREENS.PLAYER_PROFILE,
                 editUserId: action.payload,
             };
         case SET_BASIC_LOCATIONS_SCREEN:
             return {
                 ...state,
-                current: SCREENS.SETTINGS,
-                settings: SETTINGS_SCREENS.BASIC_LOCATIONS,
+                current: SCREENS.BASIC_LOCATIONS,
             };
         case SET_CUSTOM_LOCATIONS_SCREEN:
             return {
                 ...state,
-                current: SCREENS.SETTINGS,
-                settings: SETTINGS_SCREENS.CUSTOM_LOCATIONS,
+                current: SCREENS.CUSTOM_LOCATIONS,
             };
         default:
             return state;

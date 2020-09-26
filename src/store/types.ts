@@ -15,8 +15,6 @@ export type StateType = {
     locations: LocationsStateType;
 };
 
-type allActions = ScreenActionsType;
-
 export type CombinedActionsType =
     | ScreenActionsType
     | PlayersActionsType

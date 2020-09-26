@@ -20,49 +20,47 @@ type Props = {
 };
 
 const b = block('card');
-const Card: React.FC<Props> = ({ name, isSpy, location, spies = [], isSpiesFamiliar, className }) => {
-    return (
-        <div className={b.mix(className)}>
-            <div className={b('face')}>
-                <CardFace className={b('face-background')} />
-                <div className={b('face-inner')}>
-                    {isSpy ? (
-                        <>
-                            <SpyIcon className={b('icon', { small: isSpiesFamiliar && spies.length > 1 })} />
-                            <Paragraph weight="bold" align="center" classNames={b('text')}>
-                                Вы - шпион
-                            </Paragraph>
-                            <Paragraph weight="light" align="center" classNames={b('text')}>
-                                будьте скрытным и внимательным!
-                            </Paragraph>
-                            {isSpiesFamiliar && spies.length > 1 ? (
-                                <>
-                                    <Paragraph
-                                        weight="light"
-                                        align="center"
-                                        classNames={[b('text'), b('text-cospies-label')]}
-                                    >
-                                        На вашей стороне:
-                                    </Paragraph>
-                                    <Paragraph weight="bold" align="center" classNames={b('text')}>
-                                        {spies.filter(s => s !== name).join(', ')}
-                                    </Paragraph>
-                                </>
-                            ) : null}
-                        </>
-                    ) : (
-                        <>
-                            <LocationIcon className={b('icon')} />
-                            <Paragraph weight="medium" align="center" classNames={b('text')} hasMargin>
-                                {location}
-                            </Paragraph>
-                        </>
-                    )}
-                </div>
+const Card: React.FC<Props> = ({ name, isSpy, location, spies = [], isSpiesFamiliar, className }) => (
+    <div className={b.mix(className)}>
+        <div className={b('face')}>
+            <CardFace className={b('face-background')} />
+            <div className={b('face-inner')}>
+                {isSpy ? (
+                    <>
+                        <SpyIcon className={b('icon', { small: isSpiesFamiliar && spies.length > 1 })} />
+                        <Paragraph weight="bold" align="center" classNames={b('text')}>
+                            Вы - шпион
+                        </Paragraph>
+                        <Paragraph weight="light" align="center" classNames={b('text')}>
+                            будьте скрытным и внимательным!
+                        </Paragraph>
+                        {isSpiesFamiliar && spies.length > 1 ? (
+                            <>
+                                <Paragraph
+                                    weight="light"
+                                    align="center"
+                                    classNames={[b('text'), b('text-cospies-label')]}
+                                >
+                                    На вашей стороне:
+                                </Paragraph>
+                                <Paragraph weight="bold" align="center" classNames={b('text')}>
+                                    {spies.filter(s => s !== name).join(', ')}
+                                </Paragraph>
+                            </>
+                        ) : null}
+                    </>
+                ) : (
+                    <>
+                        <LocationIcon className={b('icon')} />
+                        <Paragraph weight="medium" align="center" classNames={b('text')} hasMargin>
+                            {location}
+                        </Paragraph>
+                    </>
+                )}
             </div>
-            <CardBack className={b('back')} />
         </div>
-    );
-};
+        <CardBack className={b('back')} />
+    </div>
+);
 
 export default Card;

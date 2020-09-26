@@ -1,16 +1,13 @@
-import React, { useEffect, useReducer, createContext, Dispatch, useContext } from 'react';
+import React, { useEffect, useReducer, createContext, useContext } from 'react';
 import rootReducer from 'store/rootReducer';
-import { CombinedActionsType, ContextType, StateType } from 'store/types';
+import { CombinedActionsType, ContextType } from 'store/types';
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 
 const { savedState = null } = process.browser ? window.localStorage : {};
 const initialState = rootReducer(JSON.parse(savedState) || undefined, { type: '__INIT__' });
 
-const storeContext = createContext<{
-    state: StateType;
-    dispatch: Dispatch<CombinedActionsType>;
-}>({ state: initialState, dispatch: () => {} });
+const storeContext = createContext<ContextType>({ state: initialState, dispatch: () => {} });
 
 const { Provider } = storeContext;
 
