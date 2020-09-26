@@ -2,6 +2,7 @@ import * as React from 'react';
 import { block } from 'bem-cn';
 
 import Player from 'components/common/Player/Player';
+import PlayersList from 'components/common/PlayersList/PlayersList';
 import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Button from 'components/common/Button/Button';
@@ -16,8 +17,6 @@ import { PLAYER_COLORS } from 'store/players/types';
 import { addPlayer } from 'store/players/actions';
 
 import './Players.less';
-
-const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 
 const b = block('players');
 const Players: React.FC = () => {
@@ -47,11 +46,6 @@ const Players: React.FC = () => {
         dispatch(setPlayerProfileScreen(playerId));
     };
 
-    const hacks = [];
-    for (let i = 0; i < MAX_PLAYERS_IN_ROW - 1; i++) {
-        hacks.push(<div key={i} className={b('hack')} />);
-    }
-
     return (
         <>
             <div className={b()}>
@@ -59,23 +53,14 @@ const Players: React.FC = () => {
                 <Paragraph weight="light" hasMargin>
                     Добавьте игроков, которые будут участвовать в игре:
                 </Paragraph>
-                <div className={b('list')}>
-                    <div className={b('list-wrapper')}>
-                        <div className={b('list-inner')}>
-                            <div className={b('list-item')}>
-                                <button type="button" className={b('add-player-button')} onClick={createPlayer}>
-                                    <AddIcon className={b('add-player-button-icon')} />
-                                </button>
-                            </div>
-                            {playersList.map(({ id, name, color }) => (
-                                <div className={b('list-item')} key={id}>
-                                    <Player name={name} color={color} onClick={handleEditProfileClick(id)} />
-                                </div>
-                            ))}
-                            {hacks}
-                        </div>
-                    </div>
-                </div>
+                <PlayersList>
+                    <button type="button" className={b('add-player-button')} onClick={createPlayer}>
+                        <AddIcon className={b('add-player-button-icon')} />
+                    </button>
+                    {playersList.map(({ id, name, color }) => (
+                        <Player key={id} name={name} color={color} onClick={handleEditProfileClick(id)} />
+                    ))}
+                </PlayersList>
             </div>
             <ButtonsWizard
                 previous={
