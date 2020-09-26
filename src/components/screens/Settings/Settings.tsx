@@ -1,7 +1,7 @@
 import * as React from 'react';
 
 import ProgressBar from 'components/common/ProgressBar/ProgressBar';
-import PlayersList from 'components/screens/Settings/PlayersList/PlayersList';
+import Players from 'components/screens/Settings/Players/Players';
 import Spies from 'components/screens/Settings/Spies/Spies';
 import Locations from 'components/screens/Settings/Locations/Locations';
 import TimeSettings from 'components/screens/Settings/TimeSettings/TimeSettings';
@@ -31,7 +31,7 @@ const Settings: React.FC = () => {
     return (
         <>
             <ProgressBar dotsCount={4} step={PROGRESS_BAR_STEPS[settings]} />
-            {isPlayersScreen && <PlayersList />}
+            {isPlayersScreen && <Players />}
             {isSpiesScreen && <Spies />}
             {isTimeScreen && <TimeSettings />}
             {isLocationsScreen && <Locations />}

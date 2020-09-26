@@ -15,12 +15,12 @@ import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 import { PLAYER_COLORS } from 'store/players/types';
 import { addPlayer } from 'store/players/actions';
 
-import './PlayersList.less';
+import './Players.less';
 
 const MAX_PLAYERS_IN_ROW = 6; // 107 px per player, 650 - max-width for container
 
 const b = block('players');
-const PlayersList: React.FC = () => {
+const Players: React.FC = () => {
     const {
         state: {
             players: { list: playersList },
@@ -93,4 +93,4 @@ const PlayersList: React.FC = () => {
     );
 };
 
-export default PlayersList;
+export default Players;

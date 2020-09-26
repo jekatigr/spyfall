@@ -4,25 +4,15 @@ import { block } from 'bem-cn';
 import Paragraph from 'components/common/Paragraph/Paragraph';
 import Edit from 'components/common/Edit/Edit';
 
+import { PlayerColor } from 'store/players/types';
+
 import PlayerIcon from 'icons/player.svg?sprite';
 
 import './Player.less';
 
 type Props = {
     name?: string;
-    color?:
-        | 'coral'
-        | 'green'
-        | 'wine'
-        | 'dark-blue'
-        | 'pink'
-        | 'yellow'
-        | 'purple'
-        | 'raspberry'
-        | 'acid-green'
-        | 'light-green'
-        | 'sky-blue'
-        | 'blue';
+    color?: PlayerColor;
     big?: boolean;
     onClick?: () => void;
 };
