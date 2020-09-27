@@ -40,7 +40,7 @@ const IdentifySpies: React.FC = () => {
                     <Player
                         key={id}
                         name={name}
-                        color={color}
+                        color={isUnderSuspicion ? 'pink' : color}
                         isMuted={!isUnderSuspicion}
                         icon={isUnderSuspicion ? 'spy' : 'player'}
                         onClick={handlePlayerClick(id)}

@@ -51,7 +51,7 @@ const PlayerProfile: React.FC = () => {
         <div className={b()}>
             <Header>Профиль игрока</Header>
             <div className={b('inner')}>
-                <Player color={color} big />
+                <Player color={color} size="medium" />
                 <TextField
                     value={playerName}
                     classNames={b('input')}

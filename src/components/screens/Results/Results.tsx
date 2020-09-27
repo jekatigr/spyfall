@@ -1,104 +1,120 @@
 import * as React from 'react';
+import block from 'bem-cn';
 
 import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
-
-// import { SET_APP_STATE_TO_START_SCREEN } from 'store/reducers/app';
-// import { SET_IDENTIFIED_PLAYERS } from 'store/reducers/game';
+import Paragraph from 'components/common/Paragraph/Paragraph';
+import Player from 'components/common/Player/Player';
+import PlayersList from 'components/common/PlayersList/PlayersList';
 
 import { useStore } from 'store';
-import Paragraph from '../../common/Paragraph/Paragraph';
+import { setScreen } from 'store/screen/actions';
+import { SCREENS } from 'store/screen/constants';
 
-const RESULT = {
-    W: 0, // Identified: all spies and no peaceful citizens
-    L1: 1, // Identified: all spies and peaceful citizens
-    L2: 2, // Identified: part of spies and no peaceful citizens
-    L3: 3, // Identified: part of spies and peaceful citizens
-    L4: 4, // Identified: no spies and peaceful citizens
-    L5: 5, // Identified: no spies and no peaceful citizens
-};
+import HandcuffsIcon from 'icons/handcuffs.svg?sprite';
+import LighterIcon from 'icons/lighter.svg?sprite';
+import BrainHatIcon from 'icons/brain-hat.svg?sprite';
 
+import './Results.less';
+
+const b = block('results');
 const Results: React.FC = () => {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const { state, dispatch } = useStore();
-
-    const identifiedPlayers = [];
-    const spies = [];
+    const {
+        state: {
+            players: { list },
+        },
+        dispatch,
+    } = useStore();
 
     const [showSpies, setShowSpies] = React.useState(false);
 
-    let peacefulCitizenDied = false;
-    let oneSpyIdentified = false;
-    identifiedPlayers.forEach(identifiedPlayer => {
-        if (spies.indexOf(identifiedPlayer) === -1) peacefulCitizenDied = true;
-        else oneSpyIdentified = true;
-    });
-
-    let allSpiesIdentified = true;
-    spies.forEach(spy => {
-        if (identifiedPlayers.indexOf(spy) === -1) allSpiesIdentified = false;
-    });
-
-    let result = RESULT.W;
-    if (!oneSpyIdentified && !peacefulCitizenDied) result = RESULT.L5;
-    if (!oneSpyIdentified && peacefulCitizenDied) result = RESULT.L4;
-    if (oneSpyIdentified && peacefulCitizenDied) result = RESULT.L3;
-    if (oneSpyIdentified && !peacefulCitizenDied) result = RESULT.L2;
-    if (allSpiesIdentified && peacefulCitizenDied) result = RESULT.L1;
-    if (allSpiesIdentified && !peacefulCitizenDied) result = RESULT.W;
-
-    let resultJSX;
-    switch (result) {
-        case RESULT.W:
-            resultJSX = <Paragraph>Поздравляем! Ни одному шпиону не удалось скрыться!</Paragraph>;
-            break;
-        case RESULT.L1:
-            resultJSX = <Paragraph>Плохо! Вы раскрыли всех шпионов и не шпионов тоже раскрыли!</Paragraph>;
-            break;
-        case RESULT.L2:
-            resultJSX = <Paragraph>Вы раскрыли только часть шпионов, остальные скрылись в ночи!</Paragraph>;
-            break;
-        case RESULT.L3:
-            resultJSX = (
-                <Paragraph>Вы раскрыли только часть шпионов (и не шпионов тоже), остальные скрылись в ночи!</Paragraph>
-            );
-            break;
-        case RESULT.L4:
-            resultJSX = <Paragraph>Шпионы оказались умнее - вы не раскрыли ни одного из них!</Paragraph>;
-            break;
-        case RESULT.L5:
-            resultJSX = <Paragraph>Такого не должно было произойти!</Paragraph>;
-            break;
-        default:
-    }
+    const isCompleteWin = React.useMemo(() => list.every(p => !p.isSpy || (p.isSpy && p.isUnderSuspicion)), [list]);
+    const isPartialWin = React.useMemo(() => !isCompleteWin && list.some(p => p.isSpy && p.isUnderSuspicion), [
+        list,
+        isCompleteWin,
+    ]);
+    const isLose = React.useMemo(
+        () => !isCompleteWin && !isPartialWin && list.every(p => !p.isSpy || (p.isSpy && !p.isUnderSuspicion)),
+        [list, isCompleteWin, isPartialWin],
+    );
 
     const startNewGame = (): void => {
-        // dispatch({ type: SET_IDENTIFIED_PLAYERS, payload: { identifiedPlayers: [] } });
-        // dispatch({ type: SET_APP_STATE_TO_START_SCREEN });
+        dispatch(setScreen(SCREENS.START_SCREEN));
     };
 
-    let bodyJSX = [
+    const handleShowSpiesClicked = (): void => {
+        setShowSpies(true);
+    };
+
+    const renderResult = (): JSX.Element => (
         <>
-            {resultJSX}
-            {result !== RESULT.W ? (
-                <Button onClick={(): void => setShowSpies(true)} type="additional">
+            <Header>Результат</Header>
+            {isCompleteWin && (
+                <>
+                    <Paragraph weight="light">Поздравляем! Ни одному шпиону не удалось скрыться!</Paragraph>
+                    <HandcuffsIcon className={b('icon', { handcuffs: true })} />
+                </>
+            )}
+            {isPartialWin && (
+                <>
+                    <Paragraph weight="light">
+                        Вы раскрыли только нескольких шпионов, остальные скрылись в ночи!
+                    </Paragraph>
+                    <LighterIcon className={b('icon', { lighter: true })} />
+                </>
+            )}
+            {isLose && (
+                <>
+                    <Paragraph weight="light">Шпионы оказались умнее – вы не раскрыли ни одного из них!</Paragraph>
+                    <BrainHatIcon className={b('icon', { 'brain-hat': true })} />
+                </>
+            )}
+            {!isCompleteWin && (
+                <Button onClick={handleShowSpiesClicked} type="additional">
                     Раскрыть шпионов
                 </Button>
-            ) : (
-                ''
             )}
-        </>,
-    ];
-    if (showSpies) bodyJSX = spies.map(spy => <Paragraph key={spy}> ШПИОН - {spy} </Paragraph>);
+        </>
+    );
+
+    const renderSpies = (): JSX.Element => {
+        const spies = list.filter(p => p.isSpy);
+
+        return (
+            <>
+                <Header>Раскрыть шпионов</Header>
+                {spies.length === 1 && (
+                    <div className={b('players', { center: true, one: true })}>
+                        <Player name={spies[0].name} size="big" color="pink" icon="spy" />
+                    </div>
+                )}
+                {spies.length === 2 && (
+                    <div className={b('players', { center: true, two: true })}>
+                        <div className={b('first-player')}>
+                            <Player name={spies[0].name} size="medium" color="pink" icon="spy" />
+                        </div>
+                        <Player name={spies[1].name} size="medium" color="pink" icon="spy" />
+                    </div>
+                )}
+                {spies.length > 2 && (
+                    <PlayersList className={b('players')}>
+                        {spies.map(({ id, name }) => (
+                            <Player key={id} name={name} color="pink" icon="spy" />
+                        ))}
+                    </PlayersList>
+                )}
+            </>
+        );
+    };
 
     return (
-        <>
-            <Header> {showSpies ? 'Результат' : 'Раскрыть шпионов'} </Header>
-            {bodyJSX}
+        <div className={b()}>
+            {!showSpies && renderResult()}
+            {showSpies && renderSpies()}
             <Button onClick={startNewGame} type="action">
                 Начать новую игру
             </Button>
-        </>
+        </div>
     );
 };
 

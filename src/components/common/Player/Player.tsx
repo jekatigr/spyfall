@@ -14,7 +14,7 @@ import './Player.less';
 type Props = {
     name?: string;
     color?: PlayerColor;
-    big?: boolean;
+    size?: 'big' | 'medium' | 'small';
     isMuted?: boolean;
     hasEditButton?: boolean;
     icon?: 'player' | 'spy';
@@ -25,7 +25,7 @@ const b = block('player');
 const Player: React.FC<Props> = ({
     name,
     color = 'blue',
-    big = false,
+    size = 'small',
     isMuted = false,
     hasEditButton = false,
     icon = 'player',
@@ -38,17 +38,11 @@ const Player: React.FC<Props> = ({
     };
 
     return (
-        <div className={b({ big, 'is-muted': isMuted })} onClick={handleClick}>
-            {icon === 'player' && (
-                <div className={b('image', { [color]: true })}>
-                    <PlayerIcon className={b('icon')} />
-                </div>
-            )}
-            {icon === 'spy' && (
-                <div className={b('image', { pink: true })}>
-                    <SpyIcon />
-                </div>
-            )}
+        <div className={b({ size, 'is-muted': isMuted })} onClick={handleClick}>
+            <div className={b('image', { [color]: true, 'is-interactive': !!onClick })}>
+                {icon === 'player' && <PlayerIcon className={b('icon')} />}
+                {icon === 'spy' && <SpyIcon />}
+            </div>
             {hasEditButton && <Edit classNames={b('edit')} />}
             {name && (
                 <Paragraph hasMargin classNames={b('name')}>

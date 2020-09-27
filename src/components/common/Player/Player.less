@@ -13,9 +13,12 @@
     border: 4px solid #FFFFFF;
     border-radius: 50%;
     display: inline-block;
-    cursor: pointer;
     text-align: center;
     overflow: hidden;
+  }
+
+  &__image_is-interactive {
+    cursor: pointer;
   }
 
   &__icon {
@@ -25,12 +28,11 @@
     width: 59px;
   }
 
-  &_big {
+  &_size_medium {
     @{el}__image {
       height: 140px;
       width: 140px;
       border: 5px solid #FFFFFF;
-      cursor: default;
     }
 
     @{el}__icon {
@@ -40,11 +42,33 @@
     }
   }
 
+  &_size_big {
+    @{el}__image {
+      height: 160px;
+      width: 160px;
+      border: 5px solid #FFFFFF;
+    }
+
+    @{el}__icon {
+      top: 23px;
+      height: 150px;
+      width: 92px;
+    }
+  }
+
+  &_is-muted {
+    opacity: 0.4;
+  }
+
   &__edit {
     text-align: left;
     position: absolute;
     top: 1px;
     right: -10px;
+  }
+
+  &__name {
+    text-align: center;
   }
 
   &__image_coral {
@@ -93,9 +117,5 @@
 
   &__image_dark-blue {
     background-color: #0888A8;
-  }
-
-  &_is-muted {
-    opacity: 0.4;
   }
 }
