@@ -18,6 +18,7 @@ const b = block('time-settings');
 const TimeSettings: React.FC = () => {
     const {
         state: {
+            players: { list },
             time: {
                 questions: { limit: questionsLimit },
                 discussion: { limit: discussionLimit },
@@ -70,7 +71,7 @@ const TimeSettings: React.FC = () => {
                     onClickMinus={handleDecreaseQuestionsTimeClick}
                     onClickPlus={handleIncreaseQuestionsTimeClick}
                     min={1}
-                    max={100}
+                    max={Math.max(100, list.length)}
                 />
                 <Counter
                     name="Длительность обсуждения"
@@ -80,7 +81,7 @@ const TimeSettings: React.FC = () => {
                     onClickMinus={handleDecreaseDiscussionTimeClick}
                     onClickPlus={handleIncreaseDiscussionTimeClick}
                     min={1}
-                    max={100}
+                    max={Math.max(100, list.length)}
                 />
             </div>
             <ButtonsWizard

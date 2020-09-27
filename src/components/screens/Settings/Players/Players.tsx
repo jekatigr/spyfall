@@ -15,6 +15,7 @@ import { setPlayerProfileScreen, setScreen, setSettingsScreen } from 'store/scre
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 import { PLAYER_COLORS } from 'store/players/types';
 import { addPlayer } from 'store/players/actions';
+import { setDiscussionTimeLimit, setQuestionsTimeLimit } from 'store/time/actions';
 
 import './Players.less';
 
@@ -32,6 +33,8 @@ const Players: React.FC = () => {
         const playerName = `Игрок ${playersList.length + 1}`;
         const newColor = PLAYER_COLORS[playersList.length % PLAYER_COLORS.length];
         dispatch(addPlayer({ id, name: playerName, color: newColor, isSpy: false, isUnderSuspicion: false }));
+        dispatch(setQuestionsTimeLimit(playersList.length + 1));
+        dispatch(setDiscussionTimeLimit(Math.floor((playersList.length + 1) / 2) + 1));
     };
 
     const handleBackClick = (): void => {

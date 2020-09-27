@@ -47,7 +47,7 @@ const IdentifySpies: React.FC = () => {
                     />
                 ))}
             </PlayersList>
-            <Button onClick={handleShowResultsClick} type="action">
+            <Button onClick={handleShowResultsClick} type="action" disabled={!list.some(p => p.isUnderSuspicion)}>
                 Узнать результат
             </Button>
         </>

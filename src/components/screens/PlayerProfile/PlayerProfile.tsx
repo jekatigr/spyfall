@@ -12,6 +12,7 @@ import { useStore } from 'store';
 import { removePlayer, setPlayerName } from 'store/players/actions';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
+import { setDiscussionTimeLimit, setQuestionsTimeLimit } from 'store/time/actions';
 
 import './PlayerProfile.less';
 
@@ -44,6 +45,8 @@ const PlayerProfile: React.FC = () => {
 
     const deletePlayer = (): void => {
         dispatch(removePlayer(id));
+        dispatch(setQuestionsTimeLimit(list.length - 1));
+        dispatch(setDiscussionTimeLimit(Math.floor((list.length - 1) / 2) + 1));
         dispatch(setSettingsScreen(SETTINGS_SCREENS.PLAYERS));
     };
 

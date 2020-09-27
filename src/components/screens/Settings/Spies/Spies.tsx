@@ -25,6 +25,12 @@ const Spies: React.FC = () => {
         dispatch,
     } = useStore();
 
+    React.useEffect(() => {
+        if (count > playerList.length) {
+            dispatch(setSpiesCount(playerList.length));
+        }
+    }, [playerList, count, dispatch]);
+
     const handleRandomClick = (): void => {
         if (!isRandom) {
             dispatch(setSpiesRandom());
