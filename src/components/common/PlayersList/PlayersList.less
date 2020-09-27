@@ -1,0 +1,31 @@
+@import (reference) '../../../styles/base';
+
+@el: e('.players-list');
+
+@{el} {
+  text-align: center;
+
+  &__wrapper {
+    display: inline-block;
+  }
+
+  &__inner {
+    max-width: 650px;
+    margin: 19px -17px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  &__item {
+    text-align: center;
+    margin: 14.5px;
+  }
+
+  &__hack {
+    height: 0;
+    width: 90px;
+    visibility: hidden;
+    margin: 0 14.5px;
+  }
+}

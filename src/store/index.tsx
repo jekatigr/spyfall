@@ -1,16 +1,13 @@
-import React, { useEffect, useReducer, createContext, Dispatch, useContext } from 'react';
-import rootReducer from 'store/reducers';
+import React, { useEffect, useReducer, createContext, useContext } from 'react';
+import rootReducer from 'store/rootReducer';
+import { CombinedActionsType, ContextType } from 'store/types';
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 
 const { savedState = null } = process.browser ? window.localStorage : {};
 const initialState = rootReducer(JSON.parse(savedState) || undefined, { type: '__INIT__' });
 
-/* eslint-disable @typescript-eslint/no-explicit-any */
-const storeContext = createContext<{
-    state: typeof initialState;
-    dispatch: Dispatch<any>;
-}>({ state: initialState, dispatch: () => {} });
+const storeContext = createContext<ContextType>({ state: initialState, dispatch: () => {} });
 
 const { Provider } = storeContext;
 
@@ -31,16 +28,10 @@ const StoreProvider = ({ children }): JSX.Element => {
     return <Provider value={{ state, dispatch }}>{children}</Provider>;
 };
 
-type UseStoreType = {
-    state: typeof initialState;
-    dispatch(type: string, payload?: any): void;
-};
-
-const useStore = (): UseStoreType => {
+const useStore = (): ContextType => {
     const { state, dispatch: dispatchWrapped } = useContext(storeContext);
 
-    const dispatch = (type: string, payload?: any): void => {
-        const action = { type, ...payload };
+    const dispatch = (action: CombinedActionsType): void => {
         if (DEV_MODE) {
             // eslint-disable-next-line no-console
             console.log('Action: ', action);
@@ -50,6 +41,5 @@ const useStore = (): UseStoreType => {
 
     return { state, dispatch };
 };
-/* eslint-enable @typescript-eslint/no-explicit-any */
 
 export { StoreProvider, useStore };

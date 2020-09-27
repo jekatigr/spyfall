@@ -1,0 +1,50 @@
+@import (reference) '../../../styles/base';
+
+@el: e('.results');
+
+@{el} {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+
+  &__icon {
+    flex-grow: 1;
+    align-self: center;
+    margin: 60px 0;
+  }
+
+  &__icon_handcuffs {
+    max-width: 306px;
+  }
+
+  &__icon_lighter {
+    max-width: 190px;
+  }
+
+  &__icon_brain-hat {
+    max-width: 295px;
+  }
+
+  &__players {
+    flex-grow: 1;
+  }
+
+  &__players_center {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  &__players_one {
+    margin-bottom: 50px;
+  }
+
+  &__players_two {
+    margin-bottom: 25px;
+  }
+
+  &__first-player {
+    margin-bottom: 47px;
+  }
+}

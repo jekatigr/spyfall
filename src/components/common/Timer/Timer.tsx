@@ -5,19 +5,66 @@ import './Timer.less';
 
 type Props = {
     startTimestamp: number;
-    duration: number;
+    fullDuration: number; // in milliseconds
+    onTimeUp: () => void;
 };
 
 const b = block('timer');
-const Timer: React.FC<Props> = ({ startTimestamp, duration }) => {
+const Timer: React.FC<Props> = ({ startTimestamp, fullDuration, onTimeUp }) => {
     const leftRef = React.useRef(null);
     const rightRef = React.useRef(null);
     const orbitRef = React.useRef(null);
 
+    const [timeUp, setTimeUp] = React.useState(false);
+    const [{ minutes, seconds }, setDisplayTime] = React.useState({ minutes: '00', seconds: '00' });
+
+    const handleTimeUp = (): void => {
+        onTimeUp();
+        setTimeUp(true);
+    };
+
+    const setDisplayTimeCallback = React.useCallback(
+        (timeLeft: number) => {
+            const m = Math.floor(timeLeft / 60000);
+            const s = Math.floor((timeLeft % 60000) / 1000);
+
+            setDisplayTime({
+                minutes: m < 10 ? `0${m}` : `${m}`,
+                seconds: s < 10 ? `0${s}` : `${s}`,
+            });
+        },
+        [setDisplayTime],
+    );
+
+    React.useEffect(() => {
+        const timeLeft = fullDuration - (Date.now() - startTimestamp);
+
+        let timerId;
+        if (timeLeft > 0) {
+            setDisplayTimeCallback(timeLeft);
+            timerId = setInterval(() => {
+                const intervalTimeLeft = fullDuration - (Date.now() - startTimestamp);
+
+                if (intervalTimeLeft > 0) {
+                    setDisplayTimeCallback(intervalTimeLeft);
+                } else {
+                    clearInterval(timerId);
+                    handleTimeUp();
+                }
+            }, 1000);
+        } else {
+            handleTimeUp();
+        }
+
+        return (): void => {
+            clearInterval(timerId);
+        };
+    }, [startTimestamp, fullDuration]);
+
     React.useLayoutEffect(() => {
         const timePassed = Date.now() - startTimestamp;
-        const initialProgress = timePassed / duration;
-        const half = duration / 2000;
+        const initialProgress = timePassed / fullDuration;
+        const half = fullDuration / 2000;
         if (initialProgress < 0.5) {
             const rightAnimationDuration = half * (1 - initialProgress * 2);
             rightRef.current.style.setProperty('animation-duration', `${rightAnimationDuration}s`);
@@ -30,29 +77,27 @@ const Timer: React.FC<Props> = ({ startTimestamp, duration }) => {
         }
 
         orbitRef.current.style.setProperty('--initialRotation', `${360 * initialProgress}deg`);
-        orbitRef.current.style.setProperty('animation-duration', `${(duration * (1 - initialProgress)) / 1000}s`);
+        orbitRef.current.style.setProperty('animation-duration', `${(fullDuration * (1 - initialProgress)) / 1000}s`);
     }, []);
-
-    const timeLeft = duration - (Date.now() - startTimestamp);
-    const m = Math.floor(timeLeft / 60000);
-    const s = +((timeLeft % 60000) / 1000).toFixed(0);
 
     return (
         <div className={b()}>
-            <div className={b('top-background-circle')} />
+            {!timeUp && <div className={b('top-background-circle')} />}
             <div className={b('hand')}>
-                <span className={b('hand-internal', { left: true })} ref={leftRef} />
+                <span className={b('hand-internal', { left: true, 'time-up': timeUp })} ref={leftRef} />
             </div>
             <div className={b('hand')}>
-                <span className={b('hand-internal', { right: true })} ref={rightRef} />
+                <span className={b('hand-internal', { right: true, 'time-up': timeUp })} ref={rightRef} />
             </div>
-            <div className={b('orbit')} ref={orbitRef}>
-                <div className={b('orbit-circle')} />
-            </div>
+            {!timeUp && (
+                <div className={b('orbit')} ref={orbitRef}>
+                    <div className={b('orbit-circle')} />
+                </div>
+            )}
             <div className={b('time-container')}>
-                <span className={b('time-minutes')}>{m < 10 ? `0${m}` : m}</span>
+                <span className={b('time-minutes')}>{minutes}</span>
                 <span className={b('time-separator')}>:</span>
-                <span className={b('time-seconds')}>{s < 10 ? `0${s}` : s}</span>
+                <span className={b('time-seconds')}>{seconds}</span>
             </div>
         </div>
     );
