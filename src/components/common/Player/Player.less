@@ -18,13 +18,6 @@
     overflow: hidden;
   }
 
-  &_big &__image {
-    height: 140px;
-    width: 140px;
-    border: 5px solid #FFFFFF;
-    cursor: default;
-  }
-
   &__icon {
     position: relative;
     top: 14px;
@@ -32,10 +25,19 @@
     width: 59px;
   }
 
-  &_big &__icon {
-    top: 23px;
-    height: 150px;
-    width: 92px;
+  &_big {
+    @{el}__image {
+      height: 140px;
+      width: 140px;
+      border: 5px solid #FFFFFF;
+      cursor: default;
+    }
+
+    @{el}__icon {
+      top: 23px;
+      height: 150px;
+      width: 92px;
+    }
   }
 
   &__edit {
@@ -91,5 +93,9 @@
 
   &__image_dark-blue {
     background-color: #0888A8;
+  }
+
+  &_is-muted {
+    opacity: 0.4;
   }
 }

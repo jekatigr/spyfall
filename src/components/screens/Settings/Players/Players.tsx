@@ -31,7 +31,7 @@ const Players: React.FC = () => {
         const id = Date.now();
         const playerName = `Игрок ${playersList.length + 1}`;
         const newColor = PLAYER_COLORS[playersList.length % PLAYER_COLORS.length];
-        dispatch(addPlayer({ id, name: playerName, color: newColor, isSpy: false }));
+        dispatch(addPlayer({ id, name: playerName, color: newColor, isSpy: false, isUnderSuspicion: false }));
     };
 
     const handleBackClick = (): void => {
@@ -58,7 +58,7 @@ const Players: React.FC = () => {
                         <AddIcon className={b('add-player-button-icon')} />
                     </button>
                     {playersList.map(({ id, name, color }) => (
-                        <Player key={id} name={name} color={color} onClick={handleEditProfileClick(id)} />
+                        <Player key={id} name={name} color={color} onClick={handleEditProfileClick(id)} hasEditButton />
                     ))}
                 </PlayersList>
             </div>

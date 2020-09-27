@@ -11,8 +11,12 @@ for (let i = 0; i < MAX_PLAYERS_IN_ROW - 1; i++) {
     hacks.push(<div key={i} className={b('hack')} />);
 }
 
-const PlayersList: React.FC = ({ children }) => (
-    <div className={b()}>
+type Props = {
+    className?: string;
+};
+
+const PlayersList: React.FC<Props> = ({ className, children }) => (
+    <div className={b.mix(className)}>
         <div className={b('wrapper')}>
             <div className={b('inner')}>
                 {React.Children.map(children, child => (
