@@ -7,7 +7,7 @@ import Paragraph from 'components/common/Paragraph/Paragraph';
 import Player from 'components/common/Player/Player';
 
 import PlayersList from 'components/common/PlayersList/PlayersList';
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setScreen } from 'store/screen/actions';
 import { SCREENS } from 'store/screen/constants';
 import { toggleUnderSuspicion } from 'store/players/actions';

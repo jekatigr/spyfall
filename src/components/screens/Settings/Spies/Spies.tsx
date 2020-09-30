@@ -8,7 +8,7 @@ import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 import RandomOption from 'components/common/RandomOption/RandomOption';
 import Counter from 'components/common/Counter/Counter';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setSpiesCount, setSpiesRandom, setSpiesSpecific, toggleSpiesFamiliar } from 'store/spies/actions';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';

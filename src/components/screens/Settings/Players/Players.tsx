@@ -10,7 +10,7 @@ import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 
 import AddIcon from 'icons/add.svg?sprite';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setPlayerProfileScreen, setScreen, setSettingsScreen } from 'store/screen/actions';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 import { PLAYER_COLORS } from 'store/players/types';

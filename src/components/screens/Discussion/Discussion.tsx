@@ -5,7 +5,7 @@ import Header from 'components/common/Header/Header';
 import Button from 'components/common/Button/Button';
 import Timer from 'components/common/Timer/Timer';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setScreen } from 'store/screen/actions';
 import { SCREENS } from 'store/screen/constants';
 

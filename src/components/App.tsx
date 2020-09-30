@@ -14,7 +14,7 @@ import IdentifySpies from 'components/screens/IdentifySpies/IdentifySpies';
 import Results from 'components/screens/Results/Results';
 import getMenuItems from 'utils/getMenuItems';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 import { setScreen, setSettingsScreen } from 'store/screen/actions';
 

@@ -3,7 +3,7 @@ import { block } from 'bem-cn';
 
 import Button from 'components/common/Button/Button';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setScreen, setSettingsScreen } from 'store/screen/actions';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 

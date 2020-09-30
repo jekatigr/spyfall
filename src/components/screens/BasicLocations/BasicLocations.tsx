@@ -7,7 +7,7 @@ import Paragraph from 'components/common/Paragraph/Paragraph';
 
 import CheckIcon from 'icons/check.svg?sprite';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
 import { updateBasicLocations } from 'store/locations/actions';

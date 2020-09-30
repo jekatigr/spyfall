@@ -13,7 +13,7 @@ import CustomIcon from 'icons/custom.svg?sprite';
 import CustomMutedIcon from 'icons/custom-muted.svg?sprite';
 
 import useGame from 'hooks/useGame';
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setSettingsScreen, setBasicLocationsScreen, setCustomLocationsScreen, setScreen } from 'store/screen/actions';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 import { toggleBasicLocations, toggleCustomLocations } from 'store/locations/actions';

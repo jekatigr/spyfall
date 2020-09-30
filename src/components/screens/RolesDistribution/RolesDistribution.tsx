@@ -4,7 +4,7 @@ import block from 'bem-cn';
 import Button from 'components/common/Button/Button';
 import CardsSlider from 'components/common/CardsSlider/CardsSlider';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setScreen } from 'store/screen/actions';
 import { SCREENS } from 'store/screen/constants';
 import { setQuestionsTimeStart } from 'store/time/actions';

@@ -8,7 +8,7 @@ import Button from 'components/common/Button/Button';
 
 import RemoveIcon from 'icons/remove.svg?sprite';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { removePlayer, setPlayerName } from 'store/players/actions';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';

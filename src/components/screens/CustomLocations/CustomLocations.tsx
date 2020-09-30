@@ -9,7 +9,7 @@ import TextField from 'components/common/TextField/TextField';
 import CheckIcon from 'icons/check.svg?sprite';
 import RemoveIcon from 'icons/remove.svg?sprite';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { updateCustomLocations } from 'store/locations/actions';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';

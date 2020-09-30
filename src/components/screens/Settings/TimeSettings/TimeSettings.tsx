@@ -7,7 +7,7 @@ import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 import Header from 'components/common/Header/Header';
 import Switcher from 'components/common/Switcher/Switcher';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
 import { setQuestionsTimeLimit, setDiscussionTimeLimit, toggleSound } from 'store/time/actions';
