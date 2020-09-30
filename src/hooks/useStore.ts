@@ -1,10 +1,10 @@
 import { useContext } from 'react';
 import { storeContext } from 'store';
-import { CombinedActionsType, ContextType } from 'store/types';
+import { CombinedActionsType, StoreType } from 'store/types';
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 
-const useStore = (): ContextType => {
+const useStore = (): StoreType => {
     const { state, dispatch: dispatchWrapped } = useContext(storeContext);
 
     const dispatch = (action: CombinedActionsType): void => {

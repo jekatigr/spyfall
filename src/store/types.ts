@@ -1,9 +1,11 @@
 import { Dispatch } from 'react';
+import * as Rosetta from 'rosetta';
 import { ScreenStateType, ScreenActionsType } from 'store/screen/types';
 import { PlayersStateType, PlayersActionsType } from 'store/players/types';
 import { SpiesStateType, SpiesActionsType } from 'store/spies/types';
 import { TimeStateType, TimeActionsType } from 'store/time/types';
 import { LocationsStateType, LocationsActionsType } from 'store/locations/types';
+import { LanguageStateType, LanguageActionsType } from 'store/language/types';
 
 export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
 
@@ -13,6 +15,7 @@ export type StateType = {
     spies: SpiesStateType;
     time: TimeStateType;
     locations: LocationsStateType;
+    language: LanguageStateType;
 };
 
 export type CombinedActionsType =
@@ -20,9 +23,15 @@ export type CombinedActionsType =
     | PlayersActionsType
     | SpiesActionsType
     | TimeActionsType
-    | LocationsActionsType;
+    | LocationsActionsType
+    | LanguageActionsType;
 
-export type ContextType = {
+export type StoreType = {
     state: StateType;
     dispatch: Dispatch<CombinedActionsType>;
+};
+
+export type ContextType = StoreType & {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    i18n: Rosetta.Rosetta<any>;
 };
