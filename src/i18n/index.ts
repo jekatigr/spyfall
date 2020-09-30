@@ -1,20 +1,10 @@
 import rosetta from 'rosetta';
+import en from './en';
+import ru from './ru';
 
 const i18n = rosetta({
-    en: {
-        startScreen: {
-            play: 'Play',
-            rules: 'Rules',
-            language: 'Language',
-        },
-    },
-    ru: {
-        startScreen: {
-            play: 'Играть',
-            rules: 'Правила',
-            language: 'Язык',
-        },
-    },
+    en,
+    ru,
 });
 
 export default i18n;
