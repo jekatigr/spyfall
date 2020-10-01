@@ -18,6 +18,12 @@ type Props = {
     cards: CardType[];
     spies: string[];
     isSpiesFamiliar: boolean;
+    swipeCardNoticeText: string;
+    flipCardNoticeText: string;
+    swipeLastCardNoticeText: string;
+    spyText: string;
+    spySubtitleText: string;
+    familiarNoticeText: string;
     onFinish: () => void;
 };
 
@@ -26,7 +32,19 @@ type AnimationType = 'next' | 'previous' | 'center' | undefined;
 const ANIMATION_DURATION_MS = 400;
 
 const b = block('cards-slider');
-const CardsSlider: React.FC<Props> = ({ location, cards, spies, isSpiesFamiliar, onFinish }) => {
+const CardsSlider: React.FC<Props> = ({
+    location,
+    cards,
+    spies,
+    isSpiesFamiliar,
+    swipeCardNoticeText,
+    flipCardNoticeText,
+    swipeLastCardNoticeText,
+    spyText,
+    spySubtitleText,
+    familiarNoticeText,
+    onFinish,
+}) => {
     const [currentCardIndex, setCurrentCardIndex] = React.useState(0);
     const [animationDirection, setAnimationDirection] = React.useState<AnimationType>(undefined);
     const [isCenterFlipped, setIsCenterFlipped] = React.useState<boolean>(false);
@@ -143,15 +161,15 @@ const CardsSlider: React.FC<Props> = ({ location, cards, spies, isSpiesFamiliar,
 
         switch (true) {
             case !animationDirection && isCenterFlipped && currentCardIndex === cards.length - 1: {
-                text = 'Сдвиньте карту влево чтобы начать игру';
+                text = swipeLastCardNoticeText;
                 break;
             }
             case !animationDirection && !isCenterFlipped: {
-                text = 'Нажмите на карту, чтобы перевернуть ее';
+                text = flipCardNoticeText;
                 break;
             }
             case !animationDirection && isCenterFlipped: {
-                text = 'Сдвиньте карту влево и передайте ход следующему игроку';
+                text = swipeCardNoticeText;
                 break;
             }
             default: {
@@ -206,6 +224,9 @@ const CardsSlider: React.FC<Props> = ({ location, cards, spies, isSpiesFamiliar,
                                 name={name}
                                 isSpy={isSpy}
                                 location={location}
+                                spyText={spyText}
+                                spySubtitleText={spySubtitleText}
+                                familiarNoticeText={familiarNoticeText}
                                 spies={spies}
                                 isSpiesFamiliar={isSpiesFamiliar}
                                 className={b('card', cardModifiers)}

@@ -14,13 +14,26 @@ type Props = {
     name: string;
     isSpy: boolean;
     location: string;
+    spyText: string;
+    spySubtitleText: string;
+    familiarNoticeText: string;
     spies?: string[];
-    isSpiesFamiliar: boolean;
+    isSpiesFamiliar?: boolean;
     className?: string;
 };
 
 const b = block('card');
-const Card: React.FC<Props> = ({ name, isSpy, location, spies = [], isSpiesFamiliar, className }) => (
+const Card: React.FC<Props> = ({
+    name,
+    isSpy,
+    location,
+    spyText,
+    spySubtitleText,
+    familiarNoticeText,
+    spies = [],
+    isSpiesFamiliar = false,
+    className,
+}) => (
     <div className={b.mix(className)}>
         <div className={b('face')}>
             <CardFace className={b('face-background')} />
@@ -29,10 +42,10 @@ const Card: React.FC<Props> = ({ name, isSpy, location, spies = [], isSpiesFamil
                     <>
                         <SpyIcon className={b('icon', { small: isSpiesFamiliar && spies.length > 1 })} />
                         <Paragraph weight="bold" align="center" classNames={b('text')}>
-                            Вы - шпион
+                            {spyText}
                         </Paragraph>
                         <Paragraph weight="light" align="center" classNames={b('text')}>
-                            будьте скрытным и внимательным!
+                            {spySubtitleText}
                         </Paragraph>
                         {isSpiesFamiliar && spies.length > 1 ? (
                             <>
@@ -41,7 +54,7 @@ const Card: React.FC<Props> = ({ name, isSpy, location, spies = [], isSpiesFamil
                                     align="center"
                                     classNames={[b('text'), b('text-cospies-label')]}
                                 >
-                                    На вашей стороне:
+                                    {familiarNoticeText}
                                 </Paragraph>
                                 <Paragraph weight="bold" align="center" classNames={b('text')}>
                                     {spies.filter(s => s !== name).join(', ')}

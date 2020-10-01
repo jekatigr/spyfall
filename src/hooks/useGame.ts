@@ -1,4 +1,4 @@
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { setSpies } from 'store/players/actions';
 import { setLocationForGame } from 'store/locations/actions';
 import { Location } from 'store/locations/types';

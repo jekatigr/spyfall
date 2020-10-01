@@ -1,13 +1,17 @@
-import React, { useEffect, useReducer, createContext, useContext } from 'react';
+import React, { useEffect, useReducer, createContext } from 'react';
 import rootReducer from 'store/rootReducer';
-import { CombinedActionsType, ContextType } from 'store/types';
+import i18n from 'i18n';
+import { ContextType } from 'store/types';
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 
 const { savedState = null } = process.browser ? window.localStorage : {};
 const initialState = rootReducer(JSON.parse(savedState) || undefined, { type: '__INIT__' });
 
-const storeContext = createContext<ContextType>({ state: initialState, dispatch: () => {} });
+const initialLocale = initialState.language;
+i18n.locale(initialLocale);
+
+const storeContext = createContext<ContextType>({ state: initialState, i18n, dispatch: () => {} });
 
 const { Provider } = storeContext;
 
@@ -25,21 +29,7 @@ const StoreProvider = ({ children }): JSX.Element => {
         }
     }, [state]);
 
-    return <Provider value={{ state, dispatch }}>{children}</Provider>;
+    return <Provider value={{ state, dispatch, i18n }}>{children}</Provider>;
 };
 
-const useStore = (): ContextType => {
-    const { state, dispatch: dispatchWrapped } = useContext(storeContext);
-
-    const dispatch = (action: CombinedActionsType): void => {
-        if (DEV_MODE) {
-            // eslint-disable-next-line no-console
-            console.log('Action: ', action);
-        }
-        dispatchWrapped(action);
-    };
-
-    return { state, dispatch };
-};
-
-export { StoreProvider, useStore };
+export { StoreProvider, storeContext };

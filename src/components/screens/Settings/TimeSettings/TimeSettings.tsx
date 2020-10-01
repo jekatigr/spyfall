@@ -7,7 +7,8 @@ import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 import Header from 'components/common/Header/Header';
 import Switcher from 'components/common/Switcher/Switcher';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
 import { setQuestionsTimeLimit, setDiscussionTimeLimit, toggleSound } from 'store/time/actions';
@@ -27,6 +28,7 @@ const TimeSettings: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const handleSoundToggle = (): void => {
         dispatch(toggleSound());
@@ -58,15 +60,15 @@ const TimeSettings: React.FC = () => {
 
     return (
         <div className={b()}>
-            <Header>Время</Header>
+            <Header>{text('settings.time.title')}</Header>
             <div className={b('inner')}>
                 <Switcher onChange={handleSoundToggle} enabledByDefault={sound}>
-                    Звук по окончании
+                    {text('settings.time.sound_after_time_up')}
                 </Switcher>
                 <Counter
-                    name="Длительность кона"
+                    name={text('settings.time.questions_time_limit')}
                     count={questionsLimit}
-                    units="мин"
+                    units={text('settings.time.time_unit')}
                     disabled={false}
                     onClickMinus={handleDecreaseQuestionsTimeClick}
                     onClickPlus={handleIncreaseQuestionsTimeClick}
@@ -74,9 +76,9 @@ const TimeSettings: React.FC = () => {
                     max={Math.max(100, list.length)}
                 />
                 <Counter
-                    name="Длительность обсуждения"
+                    name={text('settings.time.discussion_time_limit')}
                     count={discussionLimit}
-                    units="мин"
+                    units={text('settings.time.time_unit')}
                     disabled={false}
                     onClickMinus={handleDecreaseDiscussionTimeClick}
                     onClickPlus={handleIncreaseDiscussionTimeClick}
@@ -87,12 +89,12 @@ const TimeSettings: React.FC = () => {
             <ButtonsWizard
                 previous={
                     <Button onClick={handleBackClick} type="additional">
-                        Назад
+                        {text('settings.buttonsWizard.previous')}
                     </Button>
                 }
                 next={
                     <Button onClick={handleForwardClick} type="action">
-                        Вперед
+                        {text('settings.buttonsWizard.next')}
                     </Button>
                 }
             />

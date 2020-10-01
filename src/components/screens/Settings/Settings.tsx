@@ -6,7 +6,7 @@ import Spies from 'components/screens/Settings/Spies/Spies';
 import Locations from 'components/screens/Settings/Locations/Locations';
 import TimeSettings from 'components/screens/Settings/TimeSettings/TimeSettings';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
 
 const PROGRESS_BAR_STEPS = {

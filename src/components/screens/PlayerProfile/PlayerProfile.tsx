@@ -8,7 +8,8 @@ import Button from 'components/common/Button/Button';
 
 import RemoveIcon from 'icons/remove.svg?sprite';
 
-import { useStore } from 'store';
+import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { removePlayer, setPlayerName } from 'store/players/actions';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
@@ -25,6 +26,7 @@ const PlayerProfile: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const { id, name, color } = list.find(p => p.id === editUserId);
     const [playerName, setName] = React.useState(name);
@@ -52,22 +54,22 @@ const PlayerProfile: React.FC = () => {
 
     return (
         <div className={b()}>
-            <Header>Профиль игрока</Header>
+            <Header>{text('playerProfile.title')}</Header>
             <div className={b('inner')}>
                 <Player color={color} size="medium" />
                 <TextField
                     value={playerName}
                     classNames={b('input')}
-                    placeholder="Введите имя игрока..."
+                    placeholder={text('playerProfile.type_player_name')}
                     onChange={setName}
                 />
             </div>
             <div className={b('remove-player')} onClick={deletePlayer}>
-                Удалить игрока
+                {text('playerProfile.remove_player')}
                 <RemoveIcon className={b('remove-icon')} />
             </div>
             <Button onClick={savePlayer} type="action" disabled={!isSaveButtonEnabled}>
-                Сохранить
+                {text('playerProfile.save')}
             </Button>
         </div>
     );
