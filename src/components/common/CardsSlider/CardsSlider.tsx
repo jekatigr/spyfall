@@ -161,7 +161,7 @@ const CardsSlider: React.FC<Props> = ({
 
         switch (true) {
             case !animationDirection && isCenterFlipped && currentCardIndex === cards.length - 1: {
-                text = swipeLastCardNoticeText; // 'Сдвиньте карту влево чтобы начать игру';
+                text = swipeLastCardNoticeText;
                 break;
             }
             case !animationDirection && !isCenterFlipped: {
