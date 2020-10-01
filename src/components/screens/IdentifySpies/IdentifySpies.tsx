@@ -13,6 +13,7 @@ import { SCREENS } from 'store/screen/constants';
 import { toggleUnderSuspicion } from 'store/players/actions';
 
 import './IdentifySpies.less';
+import useI18n from 'hooks/useI18n';
 
 const b = block('identify-spies');
 const IdentifySpies: React.FC = () => {
@@ -22,6 +23,7 @@ const IdentifySpies: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const handlePlayerClick = (playerId: number) => (): void => {
         dispatch(toggleUnderSuspicion(playerId));
@@ -33,8 +35,8 @@ const IdentifySpies: React.FC = () => {
 
     return (
         <>
-            <Header>Угадать шпионов</Header>
-            <Paragraph weight="light">Выберите иконки предполагаемых шпионов:</Paragraph>
+            <Header>{text('identifySpies.title')}</Header>
+            <Paragraph weight="light">{text('identifySpies.choose_spies_icons')}</Paragraph>
             <PlayersList className={b('players')}>
                 {list.map(({ id, name, color, isUnderSuspicion }) => (
                     <Player
@@ -48,7 +50,7 @@ const IdentifySpies: React.FC = () => {
                 ))}
             </PlayersList>
             <Button onClick={handleShowResultsClick} type="action" disabled={!list.some(p => p.isUnderSuspicion)}>
-                Узнать результат
+                {text('identifySpies.show_results')}
             </Button>
         </>
     );

@@ -8,6 +8,7 @@ import Player from 'components/common/Player/Player';
 import PlayersList from 'components/common/PlayersList/PlayersList';
 
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { setScreen } from 'store/screen/actions';
 import { SCREENS } from 'store/screen/constants';
 
@@ -25,6 +26,7 @@ const Results: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const [showSpies, setShowSpies] = React.useState(false);
 
@@ -48,30 +50,28 @@ const Results: React.FC = () => {
 
     const renderResult = (): JSX.Element => (
         <>
-            <Header>Результат</Header>
+            <Header>{text('results.title')}</Header>
             {isCompleteWin && (
                 <>
-                    <Paragraph weight="light">Поздравляем! Ни одному шпиону не удалось скрыться!</Paragraph>
+                    <Paragraph weight="light">{text('results.congrats_all_spies_catched')}</Paragraph>
                     <HandcuffsIcon className={b('icon', { handcuffs: true })} />
                 </>
             )}
             {isPartialWin && (
                 <>
-                    <Paragraph weight="light">
-                        Вы раскрыли только нескольких шпионов, остальные скрылись в ночи!
-                    </Paragraph>
+                    <Paragraph weight="light">{text('results.you_identified_only_part_of_spies')}</Paragraph>
                     <LighterIcon className={b('icon', { lighter: true })} />
                 </>
             )}
             {isLose && (
                 <>
-                    <Paragraph weight="light">Шпионы оказались умнее – вы не раскрыли ни одного из них!</Paragraph>
+                    <Paragraph weight="light">{text('results.none_of_spies_was_catched')}</Paragraph>
                     <BrainHatIcon className={b('icon', { 'brain-hat': true })} />
                 </>
             )}
             {!isCompleteWin && (
                 <Button onClick={handleShowSpiesClicked} type="additional">
-                    Раскрыть шпионов
+                    {text('results.show_spies')}
                 </Button>
             )}
         </>
@@ -82,7 +82,7 @@ const Results: React.FC = () => {
 
         return (
             <>
-                <Header>Раскрыть шпионов</Header>
+                <Header>{text('results.title_show_spies')}</Header>
                 {spies.length === 1 && (
                     <div className={b('players', { center: true, one: true })}>
                         <Player name={spies[0].name} size="big" color="pink" icon="spy" />
@@ -112,7 +112,7 @@ const Results: React.FC = () => {
             {!showSpies && renderResult()}
             {showSpies && renderSpies()}
             <Button onClick={startNewGame} type="action">
-                Начать новую игру
+                {text('results.start_new_game')}
             </Button>
         </div>
     );

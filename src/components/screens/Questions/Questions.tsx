@@ -6,6 +6,7 @@ import Button from 'components/common/Button/Button';
 import Timer from 'components/common/Timer/Timer';
 
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { setDiscussionTimeStart } from 'store/time/actions';
 import { setScreen } from 'store/screen/actions';
 import { SCREENS } from 'store/screen/constants';
@@ -22,6 +23,7 @@ const Questions: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const [timeUp, setTimeUp] = React.useState(false);
 
@@ -36,13 +38,13 @@ const Questions: React.FC = () => {
 
     return (
         <div className={b()}>
-            <Header>Кон</Header>
+            <Header>{text('questions.title')}</Header>
             <div className={b('timer', { 'has-margin': !timeUp })}>
                 <Timer fullDuration={limit * 1000 * 60} startTimestamp={start} onTimeUp={handleTimeUp} />
             </div>
             {timeUp && (
                 <Button onClick={handleStartDiscussionClick} type="action">
-                    Начать обсуждение
+                    {text('questions.start_discussion')}
                 </Button>
             )}
         </div>
