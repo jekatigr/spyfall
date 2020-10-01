@@ -11,6 +11,7 @@ import ButtonsWizard from 'components/common/ButtonsWizard/ButtonsWizard';
 import AddIcon from 'icons/add.svg?sprite';
 
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { setPlayerProfileScreen, setScreen, setSettingsScreen } from 'store/screen/actions';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 import { PLAYER_COLORS } from 'store/players/types';
@@ -27,10 +28,11 @@ const Players: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const createPlayer = (): void => {
         const id = Date.now();
-        const playerName = `Игрок ${playersList.length + 1}`;
+        const playerName = `${text('settings.players.new_player_name_prefix')} ${playersList.length + 1}`;
         const newColor = PLAYER_COLORS[playersList.length % PLAYER_COLORS.length];
         dispatch(addPlayer({ id, name: playerName, color: newColor, isSpy: false, isUnderSuspicion: false }));
         dispatch(setQuestionsTimeLimit(playersList.length + 1));
@@ -52,9 +54,9 @@ const Players: React.FC = () => {
     return (
         <>
             <div className={b()}>
-                <Header>Игроки</Header>
+                <Header>{text('settings.players.title')}</Header>
                 <Paragraph weight="light" hasMargin>
-                    Добавьте игроков, которые будут участвовать в игре:
+                    {text('settings.players.add_players')}
                 </Paragraph>
                 <PlayersList>
                     <button type="button" className={b('add-player-button')} onClick={createPlayer}>
@@ -68,12 +70,12 @@ const Players: React.FC = () => {
             <ButtonsWizard
                 previous={
                     <Button onClick={handleBackClick} type="additional">
-                        Назад
+                        {text('settings.buttonsWizard.previous')}
                     </Button>
                 }
                 next={
                     <Button onClick={handleForwardClick} type="action" disabled={playersList.length < 3}>
-                        Вперед
+                        {text('settings.buttonsWizard.next')}
                     </Button>
                 }
             />

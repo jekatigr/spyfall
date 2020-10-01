@@ -9,6 +9,7 @@ import RandomOption from 'components/common/RandomOption/RandomOption';
 import Counter from 'components/common/Counter/Counter';
 
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { setSpiesCount, setSpiesRandom, setSpiesSpecific, toggleSpiesFamiliar } from 'store/spies/actions';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
@@ -24,6 +25,7 @@ const Spies: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     React.useEffect(() => {
         if (count > playerList.length) {
@@ -65,12 +67,16 @@ const Spies: React.FC = () => {
 
     return (
         <div className={b()}>
-            <Header>Шпионы</Header>
+            <Header>{text('settings.spies.title')}</Header>
 
             <div className={b('inner')}>
-                <RandomOption name="Случайное число шпионов" disabled={!isRandom} onClick={handleRandomClick} />
+                <RandomOption
+                    name={text('settings.spies.random_count_of_spies')}
+                    disabled={!isRandom}
+                    onClick={handleRandomClick}
+                />
                 <Counter
-                    name="Установить число шпионов"
+                    name={text('settings.spies.set_specific_count_of_spies')}
                     count={count}
                     disabled={isRandom}
                     onClickMinus={handleDecreaseCountClick}
@@ -81,18 +87,18 @@ const Spies: React.FC = () => {
                     onClick={handleSpecificCountClick}
                 />
                 <Switcher onChange={handleFamiliarToggle} enabledByDefault={isFamiliar}>
-                    Шпионы знакомы
+                    {text('settings.spies.is_spies_familiar')}
                 </Switcher>
             </div>
             <ButtonsWizard
                 previous={
                     <Button onClick={handleBackClick} type="additional">
-                        Назад
+                        {text('settings.buttonsWizard.previous')}
                     </Button>
                 }
                 next={
                     <Button onClick={handleForwardClick} type="action">
-                        Вперед
+                        {text('settings.buttonsWizard.next')}
                     </Button>
                 }
             />

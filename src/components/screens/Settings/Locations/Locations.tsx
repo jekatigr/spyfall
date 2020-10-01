@@ -14,6 +14,7 @@ import CustomMutedIcon from 'icons/custom-muted.svg?sprite';
 
 import useGame from 'hooks/useGame';
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { setSettingsScreen, setBasicLocationsScreen, setCustomLocationsScreen, setScreen } from 'store/screen/actions';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 import { toggleBasicLocations, toggleCustomLocations } from 'store/locations/actions';
@@ -31,6 +32,7 @@ const Locations: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
     const { setLocationAndSpies } = useGame();
 
     const handleStartGame = (): void => {
@@ -78,10 +80,10 @@ const Locations: React.FC = () => {
 
     return (
         <div className={b()}>
-            <Header>Локации</Header>
+            <Header>{text('settings.locations.title')}</Header>
             <div className={b('inner')}>
                 <Paragraph weight="light" hasMargin>
-                    Нажмите на иконку, чтобы выбрать категории локаций:
+                    {text('settings.locations.press_icon_to_enable_location_category')}
                 </Paragraph>
                 <div className={b('block', { muted: !isBasicActive })}>
                     <div className={b('circle')} onClick={handleToggleBasicClick}>
@@ -92,9 +94,9 @@ const Locations: React.FC = () => {
                         )}
                     </div>
                     <div className={b('block-inner')}>
-                        <span className={b('name')}>Базовые</span>
+                        <span className={b('name')}>{text('settings.locations.basic_locations_title')}</span>
                         <div className={b('edit')} onClick={handleEditBasicClick}>
-                            <div className={b('edit-text')}>Редактировать категорию</div>
+                            <div className={b('edit-text')}>{text('settings.locations.edit_category')}</div>
                             <Edit classNames={b('edit-icon')} />
                         </div>
                     </div>
@@ -108,9 +110,9 @@ const Locations: React.FC = () => {
                         )}
                     </div>
                     <div className={b('block-inner')}>
-                        <span className={b('name')}>Кастомные</span>
+                        <span className={b('name')}>{text('settings.locations.custom_locations_title')}</span>
                         <div className={b('edit')} onClick={handleEditCustomClick}>
-                            <div className={b('edit-text')}>Редактировать категорию</div>
+                            <div className={b('edit-text')}>{text('settings.locations.edit_category')}</div>
                             <Edit classNames={b('edit-icon')} />
                         </div>
                     </div>
@@ -119,12 +121,12 @@ const Locations: React.FC = () => {
             <ButtonsWizard
                 previous={
                     <Button onClick={handleBackClick} type="additional">
-                        Назад
+                        {text('settings.buttonsWizard.previous')}
                     </Button>
                 }
                 next={
                     <Button onClick={handleStartGame} type="action" disabled={!isStartGameButtonEnabled}>
-                        Играть
+                        {text('settings.locations.start_game')}
                     </Button>
                 }
             />

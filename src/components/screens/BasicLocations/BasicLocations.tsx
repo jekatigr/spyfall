@@ -8,6 +8,7 @@ import Paragraph from 'components/common/Paragraph/Paragraph';
 import CheckIcon from 'icons/check.svg?sprite';
 
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
 import { updateBasicLocations } from 'store/locations/actions';
@@ -24,6 +25,7 @@ const BasicLocations: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const [locations, setLocations] = React.useState(basicLocations);
 
@@ -49,10 +51,10 @@ const BasicLocations: React.FC = () => {
 
     return (
         <div className={b()}>
-            <Header>Базовые локации</Header>
+            <Header>{text('basicLocations.title')}</Header>
             <div className={b('inner')}>
                 <Paragraph weight="light" hasMargin>
-                    Выберите локации, которые будут участвовать в игре:
+                    {text('basicLocations.choose_locations')}
                 </Paragraph>
                 <div className={b('list')}>
                     {locations.map(({ name, isActive }) => (
@@ -64,7 +66,7 @@ const BasicLocations: React.FC = () => {
                 </div>
             </div>
             <Button onClick={saveLocations} type="action">
-                Сохранить
+                {text('basicLocations.save')}
             </Button>
         </div>
     );

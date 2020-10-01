@@ -10,6 +10,7 @@ import CheckIcon from 'icons/check.svg?sprite';
 import RemoveIcon from 'icons/remove.svg?sprite';
 
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { updateCustomLocations } from 'store/locations/actions';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
@@ -26,6 +27,7 @@ const CustomLocations: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const [locations, setLocations] = React.useState(customLocations);
     const [newLocation, setNewLocation] = React.useState('');
@@ -75,10 +77,10 @@ const CustomLocations: React.FC = () => {
 
     return (
         <div className={b()}>
-            <Header>Кастомные локации</Header>
+            <Header>{text('customLocations.title')}</Header>
             <div className={b('inner')}>
                 <Paragraph weight="light" hasMargin>
-                    Введите локации, которые будут участвовать в игре:
+                    {text('customLocations.type_locations')}
                 </Paragraph>
                 <div className={b('list')}>
                     {locations.map(({ name, isActive }) => (
@@ -94,14 +96,14 @@ const CustomLocations: React.FC = () => {
                 </div>
                 <TextField
                     value={newLocation}
-                    placeholder="Введите название и нажмите Enter..."
+                    placeholder={text('customLocations.type_location_name_and_press_enter')}
                     classNames={b('input')}
                     onChange={setNewLocation}
                     onKeyPressed={handleKeyPressed}
                 />
             </div>
             <Button onClick={saveLocations} type="action">
-                Сохранить
+                {text('customLocations.save')}
             </Button>
         </div>
     );
