@@ -15,6 +15,7 @@ import IdentifySpies from 'components/screens/IdentifySpies/IdentifySpies';
 import Results from 'components/screens/Results/Results';
 
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
 import { setScreen, setSettingsScreen, setPreviousScreen } from 'store/screen/actions';
 
@@ -34,6 +35,7 @@ const App: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const hasMenu = React.useMemo(() => current !== SCREENS.START_SCREEN, [current]);
     const hasSandwich = React.useMemo(() => hasMenu && !SCREENS_WITH_BACK_BUTTON.includes(current), [current]);
@@ -54,25 +56,25 @@ const App: React.FC = () => {
     const menuItems = React.useMemo(
         (): MenuItem[] => [
             {
-                title: 'Новая игра',
+                title: text('menu.new_game'),
                 onClick: (): void => {
                     dispatch(setSettingsScreen(SETTINGS_SCREENS.PLAYERS));
                 },
             },
             {
-                title: 'Как играть',
+                title: text('menu.how_to_play'),
                 onClick: (): void => {
                     dispatch(setScreen(SCREENS.RULES));
                 },
             },
             {
-                title: 'Выйти из игры',
+                title: text('menu.exit'),
                 onClick: (): void => {
                     dispatch(setScreen(SCREENS.START_SCREEN));
                 },
             },
         ],
-        [dispatch],
+        [dispatch, text],
     );
 
     const handleBackClick = React.useCallback(() => {

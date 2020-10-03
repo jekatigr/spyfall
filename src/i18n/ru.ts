@@ -1,5 +1,10 @@
 /* eslint-disable @typescript-eslint/camelcase */
 export default {
+    menu: {
+        new_game: 'Новая игра',
+        how_to_play: 'Как играть',
+        exit: 'Выйти из игры',
+    },
     startScreen: {
         play: 'Играть',
         rules: 'Правила',

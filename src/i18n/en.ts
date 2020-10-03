@@ -1,11 +1,15 @@
 /* eslint-disable @typescript-eslint/camelcase */
 export default {
+    menu: {
+        new_game: 'New game',
+        how_to_play: 'How to play',
+        exit: 'Exit',
+    },
     startScreen: {
         play: 'Play',
         rules: 'Rules',
         language: 'Language',
     },
-
     rules: {
         title: 'Rules',
         game_round: 'Game round',
