@@ -1,12 +1,15 @@
-import React, { useEffect, useReducer, createContext } from 'react';
-import rootReducer from 'store/rootReducer';
+import React, { createContext, useEffect, useReducer } from 'react';
+import rootReducer, { SCHEMA_VERSION } from 'store/rootReducer';
 import i18n from 'i18n';
 import { ContextType } from 'store/types';
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
 
 const { savedState = null } = process.browser ? window.localStorage : {};
-const initialState = rootReducer(JSON.parse(savedState) || undefined, { type: '__INIT__' });
+const savedStateParsed = JSON.parse(savedState);
+const { schemaVersion, ...savedStatePure } = savedStateParsed || {};
+const savedStateDefenced = savedStateParsed && schemaVersion === SCHEMA_VERSION ? savedStatePure : undefined;
+const initialState = rootReducer(savedStateDefenced, { type: '__INIT__' });
 
 const initialLocale = initialState.language;
 i18n.locale(initialLocale);
@@ -20,7 +23,7 @@ const StoreProvider = ({ children }): JSX.Element => {
 
     useEffect(() => {
         if (process.browser) {
-            window.localStorage.savedState = JSON.stringify(state);
+            window.localStorage.savedState = JSON.stringify({ schemaVersion: SCHEMA_VERSION, ...state });
         }
 
         if (DEV_MODE) {
