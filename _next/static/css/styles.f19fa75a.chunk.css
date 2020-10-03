@@ -842,6 +842,10 @@
 }
 
 .text-field {
+  width: 100%;
+}
+.text-field__input {
+  width: 100%;
   background-color: #002539;
   outline: none;
   border-top: 0;
@@ -849,10 +853,16 @@
   border-right: 0;
   border-bottom: 1px solid white;
   color: white;
-  width: 100%;
-  max-width: 370px;
   font-size: 18px;
   padding-bottom: 10px;
+  margin-bottom: 26px;
+}
+.text-field__input_error {
+  margin-bottom: 10px;
+}
+.text-field__error {
+  text-align: center;
+  color: #F50057;
 }
 
 .player-profile {
@@ -867,6 +877,8 @@
           align-items: center;
 }
 .player-profile__inner {
+  width: 100%;
+  max-width: 289px;
   -webkit-box-flex: 1;
           flex-grow: 1;
   display: -webkit-box;
