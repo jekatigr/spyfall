@@ -12,6 +12,7 @@ import useI18n from 'hooks/useI18n';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
 import { updateBasicLocations } from 'store/locations/actions';
+import { BASIC_LOCATIONS_COUNT } from 'store/locations/types';
 
 import './BasicLocations.less';
 
@@ -20,33 +21,44 @@ const BasicLocations: React.FC = () => {
     const {
         state: {
             locations: {
-                basic: { list: basicLocations },
+                basic: { selected },
             },
         },
         dispatch,
     } = useStore();
     const text = useI18n();
 
-    const [locations, setLocations] = React.useState(basicLocations);
+    const [locations, setLocations] = React.useState(selected);
 
-    const handleCheck = (locationName: string) => (): void => {
-        const newLocations = locations.map(l => {
-            if (l.name === locationName) {
-                return {
-                    ...l,
-                    isActive: !l.isActive,
-                };
-            }
-
-            return l;
-        });
-
-        setLocations(newLocations);
+    const handleClick = (locationIndex: number) => (): void => {
+        let newLocationsIndexes;
+        if (locations.includes(locationIndex)) {
+            newLocationsIndexes = locations.filter(i => i !== locationIndex);
+        } else {
+            newLocationsIndexes = [...locations, locationIndex].sort();
+        }
+        setLocations(newLocationsIndexes);
     };
 
     const saveLocations = (): void => {
         dispatch(updateBasicLocations(locations));
         dispatch(setSettingsScreen(SETTINGS_SCREENS.LOCATIONS));
+    };
+
+    const renderLocationsList = (): JSX.Element[] => {
+        const items = [];
+
+        for (let i = 0; i < BASIC_LOCATIONS_COUNT; i++) {
+            const isActive = locations.includes(i);
+            items.push(
+                <div className={b('list-item', { checked: isActive })} onClick={handleClick(i)} key={i}>
+                    {text(['basicLocations', 'list', i])}
+                    {isActive && <CheckIcon className={b('check-icon')} />}
+                </div>,
+            );
+        }
+
+        return items;
     };
 
     return (
@@ -56,14 +68,7 @@ const BasicLocations: React.FC = () => {
                 <Paragraph weight="light" hasMargin>
                     {text('basicLocations.choose_locations')}
                 </Paragraph>
-                <div className={b('list')}>
-                    {locations.map(({ name, isActive }) => (
-                        <div className={b('list-item', { checked: isActive })} onClick={handleCheck(name)} key={name}>
-                            {name}
-                            {isActive && <CheckIcon className={b('check-icon')} />}
-                        </div>
-                    ))}
-                </div>
+                <div className={b('list')}>{renderLocationsList()}</div>
             </div>
             <Button onClick={saveLocations} type="action">
                 {text('basicLocations.save')}

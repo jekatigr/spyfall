@@ -1,7 +1,7 @@
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { setSpies } from 'store/players/actions';
 import { setLocationForGame } from 'store/locations/actions';
-import { Location } from 'store/locations/types';
 
 type UseGameType = {
     setLocationAndSpies: () => void;
@@ -13,12 +13,13 @@ const useGame = (): UseGameType => {
             spies: { count, isRandom },
             players: { list },
             locations: {
-                basic: { isActive: isBasicActive, list: basicLocations },
+                basic: { isActive: isBasicActive, selected: basicLocations },
                 custom: { isActive: isCustomActive, list: customLocations },
             },
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const setLocationAndSpies = (): void => {
         // Select spies
@@ -33,19 +34,19 @@ const useGame = (): UseGameType => {
         }
 
         // Select location
-        const allLocations: Location[] = [];
+        const allLocations: string[] = [];
         if (isBasicActive) {
-            allLocations.push(...basicLocations.filter(l => l.isActive));
+            allLocations.push(...basicLocations.map(index => text(['basicLocations', 'list', index])));
         }
         if (isCustomActive) {
-            allLocations.push(...customLocations.filter(l => l.isActive));
+            allLocations.push(...customLocations.filter(l => l.isActive).map(l => l.name));
         }
 
         const index = Math.floor(Math.random() * allLocations.length);
         const selectedLocation = allLocations[index];
 
         dispatch(setSpies(playersIds));
-        dispatch(setLocationForGame(selectedLocation.name));
+        dispatch(setLocationForGame(selectedLocation));
     };
 
     return { setLocationAndSpies };

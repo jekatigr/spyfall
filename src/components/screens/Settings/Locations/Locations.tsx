@@ -26,7 +26,7 @@ const Locations: React.FC = () => {
     const {
         state: {
             locations: {
-                basic: { isActive: isBasicActive, list: basicLocations },
+                basic: { isActive: isBasicActive, selected: basicLocations },
                 custom: { isActive: isCustomActive, list: customLocations },
             },
         },
@@ -45,7 +45,7 @@ const Locations: React.FC = () => {
             return false;
         }
 
-        const hasBasicActive = basicLocations.some(l => l.isActive);
+        const hasBasicActive = Object.values(basicLocations).some(l => l);
         if (isBasicActive && hasBasicActive) {
             return true;
         }
