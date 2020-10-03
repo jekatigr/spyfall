@@ -7,5 +7,7 @@ export type ScreenActionsType = ReturnType<InferValueTypes<typeof actions>>;
 export type ScreenStateType = {
     current: SCREENS;
     settings: SETTINGS_SCREENS;
+    previous: SCREENS;
+    previousSettings: SETTINGS_SCREENS;
     editUserId: number;
 };
