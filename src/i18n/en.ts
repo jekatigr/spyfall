@@ -13,12 +13,12 @@ export default {
     rules: {
         title: 'Rules',
         game_round: 'Game round',
-        text: `A game is a sequence of short rounds. In each round players find themselves in 
-        a certain location and each one has its own status. At least 
-        one player turns out to be a spy who doesn't know anything about the location. 
-        His task is determining the location due to questions and answers between participants and not to reveal himself. 
-        Each peaceful player for his part tries to make it clear to "friends" that he isn't a spy.
-        Observation, concentration, endurance, cunning — everything will come in handy in this game. Watch your back!`,
+        texts: [
+            'A game is a sequence of short rounds. In each round players find themselves in a certain location and each one has its own status.',
+            "At least one player turns out to be a spy who doesn't know anything about the location. His task is determining the location due to questions and answers between participants and not to reveal himself.",
+            'Each peaceful player for his part tries to make it clear to "friends" that he isn\'t a spy.',
+            'Observation, concentration, endurance, cunning — everything will come in handy in this game. Watch your back!',
+        ],
     },
     settings: {
         buttonsWizard: {
