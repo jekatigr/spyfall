@@ -55,6 +55,8 @@ export default {
     playerProfile: {
         title: 'Профиль игрока',
         type_player_name: 'Введите имя игрока...',
+        player_with_same_name_already_exist: 'Игрок к таким именем уже есть!',
+        name_cannot_be_empty: 'Имя не может быть пустым!',
         remove_player: 'Удалить игрока',
         save: 'Сохранить',
     },

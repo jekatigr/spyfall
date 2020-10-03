@@ -30,15 +30,15 @@ const PlayerProfile: React.FC = () => {
 
     const { id, name, color } = list.find(p => p.id === editUserId);
     const [playerName, setName] = React.useState(name);
+    const [hasSamePlayerError, setHasSamePlayerError] = React.useState(false);
+    const [hasEmptyNameError, setHasEmptyNameError] = React.useState(false);
 
-    const isSaveButtonEnabled = React.useMemo(() => {
-        const playerNameTrimmed = playerName.trim();
-        if (!playerNameTrimmed) {
-            return false;
-        }
-
-        return !list.some(p => p.name === playerNameTrimmed);
-    }, [playerName, list]);
+    const handleChange = (value: string): void => {
+        const playerNameTrimmed = value.trim();
+        setHasEmptyNameError(!playerNameTrimmed);
+        setHasSamePlayerError(name !== playerNameTrimmed && list.some(p => p.name === playerNameTrimmed));
+        setName(value);
+    };
 
     const savePlayer = (): void => {
         dispatch(setPlayerName(id, playerName.trim()));
@@ -52,6 +52,17 @@ const PlayerProfile: React.FC = () => {
         dispatch(setSettingsScreen(SETTINGS_SCREENS.PLAYERS));
     };
 
+    const errorText = React.useMemo((): string | undefined => {
+        if (hasSamePlayerError) {
+            return text('playerProfile.player_with_same_name_already_exist');
+        }
+        if (hasEmptyNameError) {
+            return text('playerProfile.name_cannot_be_empty');
+        }
+
+        return undefined;
+    }, [text, hasEmptyNameError, hasSamePlayerError]);
+
     return (
         <div className={b()}>
             <Header>{text('playerProfile.title')}</Header>
@@ -59,16 +70,17 @@ const PlayerProfile: React.FC = () => {
                 <Player color={color} size="medium" />
                 <TextField
                     value={playerName}
+                    errorText={errorText}
                     classNames={b('input')}
                     placeholder={text('playerProfile.type_player_name')}
-                    onChange={setName}
+                    onChange={handleChange}
                 />
             </div>
             <div className={b('remove-player')} onClick={deletePlayer}>
                 {text('playerProfile.remove_player')}
                 <RemoveIcon className={b('remove-icon')} />
             </div>
-            <Button onClick={savePlayer} type="action" disabled={!isSaveButtonEnabled}>
+            <Button onClick={savePlayer} type="action" disabled={hasEmptyNameError || hasSamePlayerError}>
                 {text('playerProfile.save')}
             </Button>
         </div>

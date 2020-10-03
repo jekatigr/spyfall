@@ -55,6 +55,8 @@ export default {
     playerProfile: {
         title: 'Player profile',
         type_player_name: 'Type player name...',
+        player_with_same_name_already_exist: 'Player with that name already exist!',
+        name_cannot_be_empty: "Name shouldn't be empty!",
         remove_player: 'Remove player',
         save: 'Save',
     },
