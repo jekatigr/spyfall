@@ -1,7 +1,7 @@
 import { useCallback, useContext } from 'react';
 import { storeContext } from 'store';
 
-type useI18nType = (translateKey: string) => string;
+type useI18nType = (translateKey: string | (string | number)[]) => string;
 
 const useI18n = (): useI18nType => {
     const {

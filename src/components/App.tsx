@@ -1,6 +1,7 @@
 import * as React from 'react';
 
 import Navigation from 'components/common/Navigation/Navigation';
+import MenuItem from 'components/common/Navigation/types';
 import StartScreen from 'components/screens/StartScreen/StartScreen';
 import Rules from 'components/screens/Rules/Rules';
 import Settings from 'components/screens/Settings/Settings';
@@ -12,11 +13,11 @@ import Questions from 'components/screens/Questions/Questions';
 import Discussion from 'components/screens/Discussion/Discussion';
 import IdentifySpies from 'components/screens/IdentifySpies/IdentifySpies';
 import Results from 'components/screens/Results/Results';
-import getMenuItems from 'utils/getMenuItems';
 
 import useStore from 'hooks/useStore';
+import useI18n from 'hooks/useI18n';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
-import { setScreen, setSettingsScreen } from 'store/screen/actions';
+import { setScreen, setSettingsScreen, setPreviousScreen } from 'store/screen/actions';
 
 import './App.less';
 
@@ -34,6 +35,7 @@ const App: React.FC = () => {
         },
         dispatch,
     } = useStore();
+    const text = useI18n();
 
     const hasMenu = React.useMemo(() => current !== SCREENS.START_SCREEN, [current]);
     const hasSandwich = React.useMemo(() => hasMenu && !SCREENS_WITH_BACK_BUTTON.includes(current), [current]);
@@ -51,29 +53,37 @@ const App: React.FC = () => {
     const isIdentifySpiesScreen = React.useMemo(() => current === SCREENS.IDENTIFY_SPIES, [current]);
     const isResultsScreen = React.useMemo(() => current === SCREENS.RESULTS, [current]);
 
-    const backButtonAction = React.useMemo(() => {
-        if (isRulesScreen) {
-            return setScreen(SCREENS.START_SCREEN);
-        }
-
-        if (isPlayerProfileScreen) {
-            return setSettingsScreen(SETTINGS_SCREENS.PLAYERS);
-        }
-
-        if (isBasicLocationsScreen || isCustomLocationsScreen) {
-            return setSettingsScreen(SETTINGS_SCREENS.LOCATIONS);
-        }
-
-        return null;
-    }, [isRulesScreen, isPlayerProfileScreen, isBasicLocationsScreen, isCustomLocationsScreen]);
+    const menuItems = React.useMemo(
+        (): MenuItem[] => [
+            {
+                title: text('menu.new_game'),
+                onClick: (): void => {
+                    dispatch(setSettingsScreen(SETTINGS_SCREENS.PLAYERS));
+                },
+            },
+            {
+                title: text('menu.how_to_play'),
+                onClick: (): void => {
+                    dispatch(setScreen(SCREENS.RULES));
+                },
+            },
+            {
+                title: text('menu.exit'),
+                onClick: (): void => {
+                    dispatch(setScreen(SCREENS.START_SCREEN));
+                },
+            },
+        ],
+        [dispatch, text],
+    );
 
     const handleBackClick = React.useCallback(() => {
-        dispatch(backButtonAction);
-    }, [dispatch, backButtonAction]);
+        dispatch(setPreviousScreen());
+    }, [dispatch]);
 
     return (
         <div className="app-container">
-            {hasSandwich && <Navigation menuItems={getMenuItems(dispatch)} />}
+            {hasSandwich && <Navigation menuItems={menuItems} />}
             {hasBackButton && <Navigation type="back" onClick={handleBackClick} />}
             {isStartScreen && <StartScreen />}
             {isRulesScreen && <Rules />}

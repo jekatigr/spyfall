@@ -1,18 +1,13 @@
 import { Reducer } from 'combine-reducers';
-import { LocationsStateType, LocationsActionsType } from './types';
-import {
-    SET_LOCATION_FOR_GAME,
-    TOGGLE_BASIC,
-    TOGGLE_CUSTOM,
-    UPDATE_BASIC,
-    UPDATE_CUSTOM,
-    BUILD_IN_LOCATIONS,
-} from './constants';
+import { LocationsStateType, LocationsActionsType, BASIC_LOCATIONS_COUNT } from './types';
+import { SET_LOCATION_FOR_GAME, TOGGLE_BASIC, TOGGLE_CUSTOM, UPDATE_BASIC, UPDATE_CUSTOM } from './constants';
 
-const initialState = {
+const initialBasicLocationsSelection = new Array(BASIC_LOCATIONS_COUNT).fill(0).map((_cur, index) => index);
+
+const initialState: LocationsStateType = {
     basic: {
         isActive: true,
-        list: BUILD_IN_LOCATIONS.map(l => ({ name: l, isActive: true })),
+        selected: initialBasicLocationsSelection,
     },
     custom: {
         isActive: false,
@@ -47,7 +42,7 @@ const screenReducer: Reducer<LocationsStateType, LocationsActionsType> = (
                 ...state,
                 basic: {
                     ...state.basic,
-                    list: action.payload,
+                    selected: action.payload,
                 },
             };
         case UPDATE_CUSTOM:

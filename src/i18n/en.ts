@@ -1,20 +1,24 @@
 /* eslint-disable @typescript-eslint/camelcase */
 export default {
+    menu: {
+        new_game: 'New game',
+        how_to_play: 'How to play',
+        exit: 'Exit',
+    },
     startScreen: {
         play: 'Play',
         rules: 'Rules',
         language: 'Language',
     },
-
     rules: {
         title: 'Rules',
         game_round: 'Game round',
-        text: `A game is a sequence of short rounds. In each round players find themselves in 
-        a certain location and each one has its own status. At least 
-        one player turns out to be a spy who doesn't know anything about the location. 
-        His task is determining the location due to questions and answers between participants and not to reveal himself. 
-        Each peaceful player for his part tries to make it clear to "friends" that he isn't a spy.
-        Observation, concentration, endurance, cunning — everything will come in handy in this game. Watch your back!`,
+        texts: [
+            'A game is a sequence of short rounds. In each round players find themselves in a certain location and each one has its own status.',
+            "At least one player turns out to be a spy who doesn't know anything about the location. His task is determining the location due to questions and answers between participants and not to reveal himself.",
+            'Each peaceful player for his part tries to make it clear to "friends" that he isn\'t a spy.',
+            'Observation, concentration, endurance, cunning — everything will come in handy in this game. Watch your back!',
+        ],
     },
     settings: {
         buttonsWizard: {
@@ -51,6 +55,8 @@ export default {
     playerProfile: {
         title: 'Player profile',
         type_player_name: 'Type player name...',
+        player_with_same_name_already_exist: 'Player with that name already exist!',
+        name_cannot_be_empty: "Name shouldn't be empty!",
         remove_player: 'Remove player',
         save: 'Save',
     },
@@ -58,6 +64,60 @@ export default {
         title: 'Basic locations',
         choose_locations: 'Select locations which can be used in the game:',
         save: 'Save',
+        list: [
+            'Aircraft',
+            'Bank',
+            'Beach',
+            'Theater',
+            'Casino',
+            'Church',
+            'Shapito circus',
+            'Corporate party',
+            'Crusader army',
+            'Spa',
+            'Embassy',
+            'Hospital',
+            'Hotel',
+            'Military unit',
+            'Film studio',
+            'Ocean liner',
+            'Passenger train',
+            'Pirate ship',
+            'Polar station',
+            'Police station',
+            'Restaurant',
+            'School',
+            'Service station',
+            'Orbital station',
+            'Submarine',
+            'Supermarket',
+            'University',
+            'Lunapark',
+            'Museum',
+            'Chocolate factory',
+            'Cat show',
+            'Cemetery',
+            'Mine',
+            'Construction site',
+            'Board games exhibition',
+            'Gas station',
+            'Port',
+            'Hockey arena',
+            'Jail',
+            'Jazz band',
+            'Library',
+            'Night club',
+            'Motor races',
+            'Nursing home',
+            'Rock concert',
+            'Sightseeing bus',
+            'Stadium',
+            'Underground',
+            'United Nations (UN)',
+            'Vineyard',
+            'Wedding',
+            'Zoo',
+        ],
     },
     customLocations: {
         title: 'Custom locations',

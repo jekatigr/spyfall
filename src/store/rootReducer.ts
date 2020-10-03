@@ -7,6 +7,8 @@ import time from 'store/time/reducer';
 import locations from 'store/locations/reducer';
 import language from 'store/language/reducer';
 
+export const SCHEMA_VERSION = 1;
+
 export default combineReducers({
     screen,
     players,
