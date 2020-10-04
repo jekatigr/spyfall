@@ -20,7 +20,7 @@ jobs:
         NEXT_TELEMETRY_DISABLED: 1
 
     - name: Deploy
-      if: github.ref == 'refs/heads/master'
+      if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/pwa-setup2'
       uses: JamesIves/github-pages-deploy-action@releases/v3
       with:
         ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN_SPYFALL }}
