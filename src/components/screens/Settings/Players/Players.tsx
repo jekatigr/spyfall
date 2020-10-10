@@ -14,11 +14,33 @@ import useStore from 'hooks/useStore';
 import useI18n from 'hooks/useI18n';
 import { setPlayerProfileScreen, setScreen, setSettingsScreen } from 'store/screen/actions';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
-import { PLAYER_COLORS } from 'store/players/types';
+import { PLAYER_COLORS, Player as PlayerType } from 'store/players/types';
 import { addPlayer } from 'store/players/actions';
 import { setDiscussionTimeLimit, setQuestionsTimeLimit } from 'store/time/actions';
 
 import './Players.less';
+
+const getNextPlayer = (playersList: PlayerType[], prefix: string): PlayerType => {
+    const id = Date.now();
+
+    const playersNames = playersList.map(p => p.name);
+    let number = playersList.length + 1;
+    let name = `${prefix} ${number}`;
+    while (playersNames.includes(name)) {
+        number += 1;
+        name = `${prefix} ${number}`;
+    }
+
+    const color = PLAYER_COLORS[Math.floor(Math.random() * PLAYER_COLORS.length)];
+
+    return {
+        id,
+        name,
+        color,
+        isUnderSuspicion: false,
+        isSpy: false,
+    };
+};
 
 const b = block('players');
 const Players: React.FC = () => {
@@ -31,10 +53,8 @@ const Players: React.FC = () => {
     const text = useI18n();
 
     const createPlayer = (): void => {
-        const id = Date.now();
-        const playerName = `${text('settings.players.new_player_name_prefix')} ${playersList.length + 1}`;
-        const newColor = PLAYER_COLORS[playersList.length % PLAYER_COLORS.length];
-        dispatch(addPlayer({ id, name: playerName, color: newColor, isSpy: false, isUnderSuspicion: false }));
+        const player = getNextPlayer(playersList, text('settings.players.new_player_name_prefix'));
+        dispatch(addPlayer(player));
         dispatch(setQuestionsTimeLimit(playersList.length + 1));
         dispatch(setDiscussionTimeLimit(Math.floor((playersList.length + 1) / 2) + 1));
     };
