@@ -6,6 +6,7 @@ import CardsSlider from 'components/common/CardsSlider/CardsSlider';
 
 import useStore from 'hooks/useStore';
 import useI18n from 'hooks/useI18n';
+import useNotification from 'hooks/useNotification';
 import { setScreen } from 'store/screen/actions';
 import { SCREENS } from 'store/screen/constants';
 import { setQuestionsTimeStart } from 'store/time/actions';
@@ -25,11 +26,13 @@ const RolesDistribution: React.FC = () => {
         dispatch,
     } = useStore();
     const text = useI18n();
+    const { initialize } = useNotification('RolesDistribution');
 
     const [isRolesDistributed, setRolesDistributed] = React.useState(false);
     const spies = React.useMemo(() => list.filter(p => p.isSpy).map(p => p.name), [list]);
 
     const startGame = (): void => {
+        initialize();
         dispatch(setQuestionsTimeStart(Date.now()));
         dispatch(setScreen(SCREENS.QUESTIONS));
     };

@@ -62,7 +62,7 @@ const TimeSettings: React.FC = () => {
         <div className={b()}>
             <Header>{text('settings.time.title')}</Header>
             <div className={b('inner')}>
-                <Switcher onChange={handleSoundToggle} enabledByDefault={sound}>
+                <Switcher onChange={handleSoundToggle} enabled={sound}>
                     {text('settings.time.sound_after_time_up')}
                 </Switcher>
                 <Counter

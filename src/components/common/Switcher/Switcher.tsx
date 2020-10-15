@@ -4,16 +4,13 @@ import { block } from 'bem-cn';
 import './Switcher.less';
 
 type Props = {
-    enabledByDefault?: boolean;
+    enabled?: boolean;
     onChange: (enabled: boolean) => void;
 };
 
 const b = block('switcher');
-const Switcher: React.FC<Props> = ({ children, enabledByDefault = false, onChange }) => {
-    const [enabled, setEnabled] = React.useState(enabledByDefault);
-
+const Switcher: React.FC<Props> = ({ children, enabled = false, onChange }) => {
     const handleChange = (): void => {
-        setEnabled(!enabled);
         onChange(!enabled);
     };
 

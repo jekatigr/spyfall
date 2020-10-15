@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, { useCallback } from 'react';
 import { block } from 'bem-cn';
 
 import './Timer.less';
@@ -18,10 +18,10 @@ const Timer: React.FC<Props> = ({ startTimestamp, fullDuration, onTimeUp }) => {
     const [timeUp, setTimeUp] = React.useState(false);
     const [{ minutes, seconds }, setDisplayTime] = React.useState({ minutes: '00', seconds: '00' });
 
-    const handleTimeUp = (): void => {
+    const handleTimeUp = useCallback((): void => {
         onTimeUp();
         setTimeUp(true);
-    };
+    }, [onTimeUp, setTimeUp]);
 
     const setDisplayTimeCallback = React.useCallback(
         (timeLeft: number) => {
@@ -59,7 +59,7 @@ const Timer: React.FC<Props> = ({ startTimestamp, fullDuration, onTimeUp }) => {
         return (): void => {
             clearInterval(timerId);
         };
-    }, [startTimestamp, fullDuration]);
+    }, [startTimestamp, fullDuration, handleTimeUp]);
 
     React.useLayoutEffect(() => {
         const timePassed = Date.now() - startTimestamp;

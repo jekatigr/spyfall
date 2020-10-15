@@ -6,6 +6,7 @@ import { SpiesStateType, SpiesActionsType } from 'store/spies/types';
 import { TimeStateType, TimeActionsType } from 'store/time/types';
 import { LocationsStateType, LocationsActionsType } from 'store/locations/types';
 import { LanguageStateType, LanguageActionsType } from 'store/language/types';
+import AudioElement from 'utils/AudioElement';
 
 export type InferValueTypes<T> = T extends { [key: string]: infer U } ? U : never;
 
@@ -34,4 +35,5 @@ export type StoreType = {
 export type ContextType = StoreType & {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     i18n: Rosetta.Rosetta<any>;
+    notification: AudioElement;
 };

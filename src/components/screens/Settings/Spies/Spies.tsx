@@ -86,7 +86,7 @@ const Spies: React.FC = () => {
                     interactive
                     onClick={handleSpecificCountClick}
                 />
-                <Switcher onChange={handleFamiliarToggle} enabledByDefault={isFamiliar}>
+                <Switcher onChange={handleFamiliarToggle} enabled={isFamiliar}>
                     {text('settings.spies.is_spies_familiar')}
                 </Switcher>
             </div>
