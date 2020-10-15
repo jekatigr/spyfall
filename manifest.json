@@ -5,5 +5,5 @@
   "background_color": "#002539",
   "display": "fullscreen",
   "scope": "/",
-  "start_url": "/spyfall"
+  "start_url": "/"
 }
