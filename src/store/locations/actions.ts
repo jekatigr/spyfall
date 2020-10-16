@@ -1,10 +1,16 @@
-import { SET_LOCATION_FOR_GAME, TOGGLE_BASIC, TOGGLE_CUSTOM, UPDATE_BASIC, UPDATE_CUSTOM } from './constants';
+import {
+    SET_LOCATION_FOR_GAME,
+    TOGGLE_BASIC_CATEGORY,
+    TOGGLE_CUSTOM_CATEGORY,
+    TOGGLE_BASIC_LOCATION,
+    UPDATE_CUSTOM,
+} from './constants';
 import { CustomLocation } from './types';
 
-export const toggleBasicLocations = () => ({ type: TOGGLE_BASIC } as const);
-export const toggleCustomLocations = () => ({ type: TOGGLE_CUSTOM } as const);
-export const updateBasicLocations = (locationsIndexes: number[]) =>
-    ({ type: UPDATE_BASIC, payload: locationsIndexes } as const);
+export const toggleBasicLocationsCategory = () => ({ type: TOGGLE_BASIC_CATEGORY } as const);
+export const toggleCustomLocationsCategory = () => ({ type: TOGGLE_CUSTOM_CATEGORY } as const);
+export const toggleBasicLocation = (locationIndex: number) =>
+    ({ type: TOGGLE_BASIC_LOCATION, payload: locationIndex } as const);
 export const updateCustomLocations = (locations: CustomLocation[]) =>
     ({ type: UPDATE_CUSTOM, payload: locations } as const);
 export const setLocationForGame = (locationName: string) =>

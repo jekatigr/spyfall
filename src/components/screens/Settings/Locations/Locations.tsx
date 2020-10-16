@@ -17,7 +17,7 @@ import useStore from 'hooks/useStore';
 import useI18n from 'hooks/useI18n';
 import { setSettingsScreen, setBasicLocationsScreen, setCustomLocationsScreen, setScreen } from 'store/screen/actions';
 import { SCREENS, SETTINGS_SCREENS } from 'store/screen/constants';
-import { toggleBasicLocations, toggleCustomLocations } from 'store/locations/actions';
+import { toggleBasicLocationsCategory, toggleCustomLocationsCategory } from 'store/locations/actions';
 
 import './Locations.less';
 
@@ -62,11 +62,11 @@ const Locations: React.FC = () => {
     };
 
     const handleToggleBasicClick = (): void => {
-        dispatch(toggleBasicLocations());
+        dispatch(toggleBasicLocationsCategory());
     };
 
     const handleToggleCustomClick = (): void => {
-        dispatch(toggleCustomLocations());
+        dispatch(toggleCustomLocationsCategory());
     };
 
     const handleEditBasicClick = (): void => {

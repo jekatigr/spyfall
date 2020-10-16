@@ -11,7 +11,7 @@ import useStore from 'hooks/useStore';
 import useI18n from 'hooks/useI18n';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
-import { updateBasicLocations } from 'store/locations/actions';
+import { toggleBasicLocation } from 'store/locations/actions';
 import { BASIC_LOCATIONS_COUNT } from 'store/locations/types';
 
 import './BasicLocations.less';
@@ -21,27 +21,18 @@ const BasicLocations: React.FC = () => {
     const {
         state: {
             locations: {
-                basic: { selected },
+                basic: { selected: locations },
             },
         },
         dispatch,
     } = useStore();
     const text = useI18n();
 
-    const [locations, setLocations] = React.useState(selected);
-
     const handleClick = (locationIndex: number) => (): void => {
-        let newLocationsIndexes;
-        if (locations.includes(locationIndex)) {
-            newLocationsIndexes = locations.filter(i => i !== locationIndex);
-        } else {
-            newLocationsIndexes = [...locations, locationIndex].sort();
-        }
-        setLocations(newLocationsIndexes);
+        dispatch(toggleBasicLocation(locationIndex));
     };
 
     const saveLocations = (): void => {
-        dispatch(updateBasicLocations(locations));
         dispatch(setSettingsScreen(SETTINGS_SCREENS.LOCATIONS));
     };
 

@@ -1,6 +1,12 @@
 import { Reducer } from 'combine-reducers';
 import { LocationsStateType, LocationsActionsType, BASIC_LOCATIONS_COUNT } from './types';
-import { SET_LOCATION_FOR_GAME, TOGGLE_BASIC, TOGGLE_CUSTOM, UPDATE_BASIC, UPDATE_CUSTOM } from './constants';
+import {
+    SET_LOCATION_FOR_GAME,
+    TOGGLE_BASIC_CATEGORY,
+    TOGGLE_CUSTOM_CATEGORY,
+    TOGGLE_BASIC_LOCATION,
+    UPDATE_CUSTOM,
+} from './constants';
 
 const initialBasicLocationsSelection = new Array(BASIC_LOCATIONS_COUNT).fill(0).map((_cur, index) => index);
 
@@ -21,7 +27,7 @@ const screenReducer: Reducer<LocationsStateType, LocationsActionsType> = (
     action: LocationsActionsType,
 ): LocationsStateType => {
     switch (action.type) {
-        case TOGGLE_BASIC:
+        case TOGGLE_BASIC_CATEGORY:
             return {
                 ...state,
                 basic: {
@@ -29,7 +35,7 @@ const screenReducer: Reducer<LocationsStateType, LocationsActionsType> = (
                     isActive: !state.basic.isActive,
                 },
             };
-        case TOGGLE_CUSTOM:
+        case TOGGLE_CUSTOM_CATEGORY:
             return {
                 ...state,
                 custom: {
@@ -37,14 +43,27 @@ const screenReducer: Reducer<LocationsStateType, LocationsActionsType> = (
                     isActive: !state.custom.isActive,
                 },
             };
-        case UPDATE_BASIC:
+        case TOGGLE_BASIC_LOCATION: {
+            const {
+                basic: { selected },
+            } = state;
+            let newSelected;
+
+            if (selected.includes(action.payload)) {
+                newSelected = selected.filter(index => index !== action.payload);
+            } else {
+                newSelected = [...selected, action.payload];
+                newSelected.sort();
+            }
+
             return {
                 ...state,
                 basic: {
                     ...state.basic,
-                    selected: action.payload,
+                    selected: newSelected,
                 },
             };
+        }
         case UPDATE_CUSTOM:
             return {
                 ...state,
