@@ -45,8 +45,7 @@ const Locations: React.FC = () => {
             return false;
         }
 
-        const hasBasicActive = Object.values(basicLocations).some(l => l);
-        if (isBasicActive && hasBasicActive) {
+        if (isBasicActive && basicLocations.length > 0) {
             return true;
         }
 
