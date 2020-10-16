@@ -55,7 +55,7 @@ export default {
     playerProfile: {
         title: 'Профиль игрока',
         type_player_name: 'Введите имя игрока...',
-        player_with_same_name_already_exist: 'Игрок к таким именем уже есть!',
+        player_with_same_name_already_exists: 'Игрок с таким именем уже есть!',
         name_cannot_be_empty: 'Имя не может быть пустым!',
         remove_player: 'Удалить игрока',
         save: 'Сохранить',
@@ -123,6 +123,8 @@ export default {
         title: 'Кастомные локации',
         type_locations: 'Введите локации, которые будут участвовать в игре:',
         type_location_name_and_press_enter: 'Введите название и нажмите Enter...',
+        location_already_exists: 'Локация "{{location}}" уже существует!',
+        location_name_cannot_be_empty: 'Имя локации не может быть пустым!',
         save: 'Сохранить',
     },
     rolesDistribution: {

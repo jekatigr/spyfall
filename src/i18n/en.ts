@@ -55,7 +55,7 @@ export default {
     playerProfile: {
         title: 'Player profile',
         type_player_name: 'Type player name...',
-        player_with_same_name_already_exist: 'Player with that name already exist!',
+        player_with_same_name_already_exists: 'Player with that name already exists!',
         name_cannot_be_empty: "Name shouldn't be empty!",
         remove_player: 'Remove player',
         save: 'Save',
@@ -123,6 +123,8 @@ export default {
         title: 'Custom locations',
         type_locations: 'Add locations which can be used in the game:',
         type_location_name_and_press_enter: 'Type location name and press ENTER...',
+        location_already_exists: 'Location "{{location}}" already exists!',
+        location_name_cannot_be_empty: "Location name shouldn't be empty!",
         save: 'Save',
     },
     rolesDistribution: {

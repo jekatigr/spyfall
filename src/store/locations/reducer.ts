@@ -5,7 +5,9 @@ import {
     TOGGLE_BASIC_CATEGORY,
     TOGGLE_CUSTOM_CATEGORY,
     TOGGLE_BASIC_LOCATION,
-    UPDATE_CUSTOM,
+    TOGGLE_CUSTOM_LOCATION,
+    ADD_CUSTOM_LOCATIONS,
+    REMOVE_CUSTOM_LOCATION,
 } from './constants';
 
 const initialBasicLocationsSelection = new Array(BASIC_LOCATIONS_COUNT).fill(0).map((_cur, index) => index);
@@ -64,12 +66,43 @@ const screenReducer: Reducer<LocationsStateType, LocationsActionsType> = (
                 },
             };
         }
-        case UPDATE_CUSTOM:
+        case TOGGLE_CUSTOM_LOCATION:
             return {
                 ...state,
                 custom: {
                     ...state.custom,
-                    list: action.payload,
+                    list: state.custom.list.map(l => {
+                        if (l.name === action.payload) {
+                            return {
+                                ...l,
+                                isActive: !l.isActive,
+                            };
+                        }
+
+                        return l;
+                    }),
+                },
+            };
+        case ADD_CUSTOM_LOCATIONS:
+            return {
+                ...state,
+                custom: {
+                    ...state.custom,
+                    list: [
+                        ...state.custom.list,
+                        ...action.payload.map(l => ({
+                            name: l,
+                            isActive: true,
+                        })),
+                    ],
+                },
+            };
+        case REMOVE_CUSTOM_LOCATION:
+            return {
+                ...state,
+                custom: {
+                    ...state.custom,
+                    list: state.custom.list.filter(l => l.name !== action.payload),
                 },
             };
         case SET_LOCATION_FOR_GAME:

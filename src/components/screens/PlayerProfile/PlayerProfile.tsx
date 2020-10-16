@@ -54,7 +54,7 @@ const PlayerProfile: React.FC = () => {
 
     const errorText = React.useMemo((): string | undefined => {
         if (hasSamePlayerError) {
-            return text('playerProfile.player_with_same_name_already_exist');
+            return text('playerProfile.player_with_same_name_already_exists');
         }
         if (hasEmptyNameError) {
             return text('playerProfile.name_cannot_be_empty');

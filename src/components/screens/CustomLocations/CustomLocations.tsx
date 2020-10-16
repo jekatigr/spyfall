@@ -11,7 +11,7 @@ import RemoveIcon from 'icons/remove.svg?sprite';
 
 import useStore from 'hooks/useStore';
 import useI18n from 'hooks/useI18n';
-import { updateCustomLocations } from 'store/locations/actions';
+import { addCustomLocations, removeCustomLocation, toggleCustomLocation } from 'store/locations/actions';
 import { setSettingsScreen } from 'store/screen/actions';
 import { SETTINGS_SCREENS } from 'store/screen/constants';
 
@@ -22,58 +22,68 @@ const CustomLocations: React.FC = () => {
     const {
         state: {
             locations: {
-                custom: { list: customLocations },
+                custom: { list: locations },
             },
         },
         dispatch,
     } = useStore();
     const text = useI18n();
 
-    const [locations, setLocations] = React.useState(customLocations);
     const [newLocation, setNewLocation] = React.useState('');
+    const [alreadyExistLocation, setAlreadyExistLocation] = React.useState<string | undefined>(undefined);
+    const [emptyLocationError, setEmptyLocationError] = React.useState(false);
+
+    const handleChange = (value: string): void => {
+        setAlreadyExistLocation(undefined);
+        setEmptyLocationError(false);
+        setNewLocation(value);
+    };
 
     const handleCheck = (locationName: string) => (): void => {
-        const newLocations = locations.map(l => {
-            if (l.name === locationName) {
-                return {
-                    ...l,
-                    isActive: !l.isActive,
-                };
-            }
-
-            return l;
-        });
-
-        setLocations(newLocations);
+        dispatch(toggleCustomLocation(locationName));
     };
 
     const handleKeyPressed = (e: React.KeyboardEvent): void => {
         if (e.charCode === 13) {
-            const newLocationsSeparated = newLocation.split(',').map(l => ({
-                name: l,
-                isActive: true,
-            }));
+            let newLocationsSeparated = newLocation
+                .split(',')
+                .map(l => l.trim())
+                .filter(l => !!l); // remove empty strings
+            newLocationsSeparated = Array.from(new Set(newLocationsSeparated)); // remove duplicates
 
-            const newLocations = [...locations, ...newLocationsSeparated];
+            const isEmptyLocation = newLocationsSeparated.length === 0;
+            setEmptyLocationError(isEmptyLocation);
 
-            dispatch(updateCustomLocations(newLocations));
-            setLocations(newLocations);
-            setNewLocation('');
+            const alreadyExist = locations.find(l => newLocationsSeparated.includes(l.name));
+            setAlreadyExistLocation(alreadyExist ? alreadyExist.name : undefined);
+
+            if (!isEmptyLocation && !alreadyExist) {
+                dispatch(addCustomLocations(newLocationsSeparated));
+                setNewLocation('');
+            }
         }
     };
 
     const handleRemove = (locationName: string) => (e: React.MouseEvent): void => {
         e.stopPropagation();
-        const newLocations = locations.filter(l => l.name !== locationName);
-
-        dispatch(updateCustomLocations(newLocations));
-        setLocations(newLocations);
+        dispatch(removeCustomLocation(locationName));
     };
 
     const saveLocations = (): void => {
-        dispatch(updateCustomLocations(locations));
         dispatch(setSettingsScreen(SETTINGS_SCREENS.LOCATIONS));
     };
+
+    const errorText = React.useMemo((): string | undefined => {
+        if (alreadyExistLocation) {
+            return text('customLocations.location_already_exists', { location: alreadyExistLocation });
+        }
+
+        if (emptyLocationError) {
+            return text('customLocations.location_name_cannot_be_empty');
+        }
+
+        return undefined;
+    }, [newLocation, text, alreadyExistLocation, emptyLocationError]);
 
     return (
         <div className={b()}>
@@ -98,8 +108,9 @@ const CustomLocations: React.FC = () => {
                     value={newLocation}
                     placeholder={text('customLocations.type_location_name_and_press_enter')}
                     classNames={b('input')}
-                    onChange={setNewLocation}
+                    onChange={handleChange}
                     onKeyPressed={handleKeyPressed}
+                    errorText={errorText}
                 />
             </div>
             <Button onClick={saveLocations} type="action">
