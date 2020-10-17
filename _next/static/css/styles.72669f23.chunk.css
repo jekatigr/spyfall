@@ -162,32 +162,52 @@
   width: 17px;
   height: 17px;
   position: relative;
-  right: 17px;
-}
-.progress-bar__circle-inner_show {
-  -webkit-animation: circlePaint forwards;
-          animation: circlePaint forwards;
   -webkit-animation-timing-function: linear;
           animation-timing-function: linear;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
+}
+.progress-bar__circle-inner_show {
+  right: 0;
+}
+.progress-bar__circle-inner_hide {
+  right: 17px;
+}
+.progress-bar__circle-inner_slide-in {
+  -webkit-animation-name: circleSlideIn;
+          animation-name: circleSlideIn;
+}
+.progress-bar__circle-inner_slide-out {
+  -webkit-animation-name: circleSlideOut;
+          animation-name: circleSlideOut;
 }
 .progress-bar__path {
   background: #FFFFFF;
-  width: calc(100% - 8px);
+  width: 100%;
   height: 3px;
   position: absolute;
-  top: 7px;
-  left: 8px;
+  top: calc(17px / 2 - 3px / 2);
   z-index: 1;
   overflow: hidden;
+  border-radius: 3px;
 }
 .progress-bar__path-inner {
   background: #02D113;
-  width: 100%;
-  height: 3px;
+  width: calc(100% - 17px);
+  height: 17px;
   position: relative;
-  right: calc(100% + 4px);
+  top: calc(17px / -2 + 3px / 2);
+  right: calc(100% - 2 * 17px);
+  border-radius: 0 17px 17px 0;
 }
-@-webkit-keyframes circlePaint {
+.progress-bar__path-inner-tail {
+  background: #02D113;
+  width: 17px;
+  height: 17px;
+  position: relative;
+  right: 17px;
+}
+@-webkit-keyframes circleSlideIn {
   0% {
     right: 17px;
   }
@@ -195,12 +215,28 @@
     right: 0;
   }
 }
-@keyframes circlePaint {
+@keyframes circleSlideIn {
   0% {
     right: 17px;
   }
   100% {
     right: 0;
+  }
+}
+@-webkit-keyframes circleSlideOut {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: 17px;
+  }
+}
+@keyframes circleSlideOut {
+  0% {
+    right: 0;
+  }
+  100% {
+    right: 17px;
   }
 }
 
