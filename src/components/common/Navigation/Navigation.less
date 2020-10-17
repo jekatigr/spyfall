@@ -3,8 +3,12 @@
 @el: e('.navigation');
 
 @{el} {
-  padding: 47px 0 40px 10px;
-  cursor: pointer;
+  &__control {
+    cursor: pointer;
+    padding: 20px;
+    width: 70px;
+    margin: 27px 0 20px 0;
+  }
 
   &__menu {
     position: absolute;
@@ -34,21 +38,27 @@
     flex-direction: column;
     justify-content: flex-end;
     border-bottom-right-radius: 6px;
-    padding: 65px 30px 20px 42px;
+    padding: 65px 30px 37px 22px;
   }
 
   &__menu-item {
-    margin-bottom: 35px;
+    cursor: pointer;
     font-weight: 500;
     font-size: 20px;
+    padding: 18px 20px;
   }
 
   &__menu-close {
+    cursor: pointer;
+    position: absolute;
+    top: 45px;
+    right: 10px;
+    padding: 20px;
+  }
+
+  &__menu-close-icon {
     width: 22px;
     height: 22px;
-    position: absolute;
-    top: 65px;
-    right: 30px;
   }
 
   &__icon-back {

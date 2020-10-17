@@ -1,42 +1,47 @@
 import * as React from 'react';
 import { block } from 'bem-cn';
 
-import MenuItem from 'components/common/Navigation/types';
 import BackIcon from 'icons/back.svg?sprite';
 import MenuIcon from 'icons/menu.svg?sprite';
 import RemoveIcon from 'icons/remove.svg?sprite';
 
 import './Navigation.less';
 
+export interface MenuItem {
+    title: string;
+    onClick: () => void;
+}
+
 type Props = {
     type?: 'back' | 'menu';
     menuItems?: MenuItem[];
-    onClick?: () => void;
+    onIconClick?: () => void;
 };
 
 const b = block('navigation');
-const Navigation: React.FC<Props> = ({ type = 'menu', menuItems = [], onClick }) => {
+const Navigation: React.FC<Props> = ({ type = 'menu', menuItems = [], onIconClick }) => {
     const [menuOpened, setMenuOpened] = React.useState(false);
 
     const isMenu = type === 'menu';
 
-    const handleClick = (): void => {
-        if (onClick) {
-            onClick();
-        }
+    const handleMenuToggle = (): void => {
+        setMenuOpened(!menuOpened);
+    };
 
-        if (isMenu) {
-            setMenuOpened(!menuOpened);
-        }
+    const handleMenuItemClick = (onItemClick: () => void) => (): void => {
+        setMenuOpened(false);
+        onItemClick();
     };
 
     const renderMenuPopup = (): React.ReactElement => (
         <div className={b('menu')}>
-            <div className={b('menu-background')} />
+            <div className={b('menu-background')} onClick={handleMenuToggle} />
             <div className={b('menu-inner')}>
-                <RemoveIcon className={b('menu-close')} />
+                <div className={b('menu-close')} onClick={handleMenuToggle}>
+                    <RemoveIcon className={b('menu-close-icon')} />
+                </div>
                 {menuItems.map(({ title, onClick: onItemClick }) => (
-                    <div className={b('menu-item')} onClick={onItemClick} key={title}>
+                    <div className={b('menu-item')} onClick={handleMenuItemClick(onItemClick)} key={title}>
                         {title}
                     </div>
                 ))}
@@ -44,11 +49,12 @@ const Navigation: React.FC<Props> = ({ type = 'menu', menuItems = [], onClick })
         </div>
     );
 
-    const icon = !isMenu ? <BackIcon className={b('icon-back')} /> : <MenuIcon className={b('icon-menu')} />;
-
     return (
-        <div className={b()} onClick={handleClick}>
-            {icon}
+        <div className={b()}>
+            <div className={b('control')} onClick={isMenu ? handleMenuToggle : onIconClick}>
+                {!isMenu && <BackIcon className={b('icon-back')} />}
+                {isMenu && <MenuIcon className={b('icon-menu')} />}
+            </div>
             {isMenu && menuOpened ? renderMenuPopup() : null}
         </div>
     );

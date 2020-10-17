@@ -1,7 +1,6 @@
 import * as React from 'react';
 
-import Navigation from 'components/common/Navigation/Navigation';
-import MenuItem from 'components/common/Navigation/types';
+import Navigation, { MenuItem } from 'components/common/Navigation/Navigation';
 import StartScreen from 'components/screens/StartScreen/StartScreen';
 import Rules from 'components/screens/Rules/Rules';
 import Settings from 'components/screens/Settings/Settings';
@@ -84,7 +83,7 @@ const App: React.FC = () => {
     return (
         <div className="app-container">
             {hasSandwich && <Navigation menuItems={menuItems} />}
-            {hasBackButton && <Navigation type="back" onClick={handleBackClick} />}
+            {hasBackButton && <Navigation type="back" onIconClick={handleBackClick} />}
             {isStartScreen && <StartScreen />}
             {isRulesScreen && <Rules />}
             {isSettingsScreen && <Settings />}
