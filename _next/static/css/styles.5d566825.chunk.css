@@ -1,6 +1,8 @@
-.navigation {
-  padding: 47px 0 40px 10px;
+.navigation__control {
   cursor: pointer;
+  padding: 20px;
+  width: 70px;
+  margin: 27px 0 20px 0;
 }
 .navigation__menu {
   position: absolute;
@@ -32,19 +34,24 @@
   -webkit-box-pack: end;
           justify-content: flex-end;
   border-bottom-right-radius: 6px;
-  padding: 65px 30px 20px 42px;
+  padding: 65px 30px 37px 22px;
 }
 .navigation__menu-item {
-  margin-bottom: 35px;
+  cursor: pointer;
   font-weight: 500;
   font-size: 20px;
+  padding: 18px 20px;
 }
 .navigation__menu-close {
+  cursor: pointer;
+  position: absolute;
+  top: 45px;
+  right: 10px;
+  padding: 20px;
+}
+.navigation__menu-close-icon {
   width: 22px;
   height: 22px;
-  position: absolute;
-  top: 65px;
-  right: 30px;
 }
 .navigation__icon-back {
   width: 15px;
