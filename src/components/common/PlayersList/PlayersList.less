@@ -4,28 +4,21 @@
 
 @{el} {
   text-align: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(90px, 1fr));
+  column-gap: 34.5px;
 
-  &__wrapper {
-    display: inline-block;
-  }
-
-  &__inner {
-    max-width: 650px;
-    margin: 19px -17px;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
+  @media (max-width: 374px) {
+    column-gap: 7px;
   }
 
   &__item {
-    text-align: center;
-    margin: 14.5px;
+    margin: 13px 0;
   }
 
   &__hack {
     height: 0;
     width: 90px;
     visibility: hidden;
-    margin: 0 14.5px;
   }
 }

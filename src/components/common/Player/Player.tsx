@@ -39,16 +39,14 @@ const Player: React.FC<Props> = ({
 
     return (
         <div className={b({ size, 'is-muted': isMuted })} onClick={handleClick}>
-            <div className={b('image', { [color]: true, 'is-interactive': !!onClick })}>
-                {icon === 'player' && <PlayerIcon className={b('icon')} />}
-                {icon === 'spy' && <SpyIcon />}
+            <div className={b('image-container')}>
+                <div className={b('image', { [color]: true, 'is-interactive': !!onClick })}>
+                    {icon === 'player' && <PlayerIcon className={b('icon')} />}
+                    {icon === 'spy' && <SpyIcon />}
+                </div>
+                {hasEditButton && <Edit classNames={b('edit')} />}
             </div>
-            {hasEditButton && <Edit classNames={b('edit')} />}
-            {name && (
-                <Paragraph hasMargin classNames={b('name')}>
-                    {name}
-                </Paragraph>
-            )}
+            {name && <Paragraph classNames={b('name')}>{name}</Paragraph>}
         </div>
     );
 };

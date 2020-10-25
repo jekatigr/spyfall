@@ -17,14 +17,10 @@ type Props = {
 
 const PlayersList: React.FC<Props> = ({ className, children }) => (
     <div className={b.mix(className)}>
-        <div className={b('wrapper')}>
-            <div className={b('inner')}>
-                {React.Children.map(children, child => (
-                    <div className={b('item')}>{child}</div>
-                ))}
-                {hacks}
-            </div>
-        </div>
+        {React.Children.map(children, child => (
+            <div className={b('item')}>{child}</div>
+        ))}
+        {hacks}
     </div>
 );
 
