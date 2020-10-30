@@ -85,15 +85,19 @@ const Results: React.FC = () => {
                 <Header>{text('results.title_show_spies')}</Header>
                 {spies.length === 1 && (
                     <div className={b('players', { center: true, one: true })}>
-                        <Player name={spies[0].name} size="big" color="pink" icon="spy" />
+                        <div className={b('player-container')}>
+                            <Player name={spies[0].name} size="big" color="pink" icon="spy" />
+                        </div>
                     </div>
                 )}
                 {spies.length === 2 && (
                     <div className={b('players', { center: true, two: true })}>
-                        <div className={b('first-player')}>
+                        <div className={b('player-container', { margin: true })}>
                             <Player name={spies[0].name} size="medium" color="pink" icon="spy" />
                         </div>
-                        <Player name={spies[1].name} size="medium" color="pink" icon="spy" />
+                        <div className={b('player-container')}>
+                            <Player name={spies[1].name} size="medium" color="pink" icon="spy" />
+                        </div>
                     </div>
                 )}
                 {spies.length > 2 && (

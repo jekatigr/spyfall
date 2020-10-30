@@ -187,7 +187,7 @@ const CardsSlider: React.FC<Props> = ({
 
     return (
         <div className={b()}>
-            <Header>{cards[currentCardIndex].name}</Header>
+            <Header classNames={b('name')}>{cards[currentCardIndex].name}</Header>
             <div className={b('roller')} onClick={handleClick}>
                 <div className={b('roller-inner')}>
                     {cards.map((c, index) => {
