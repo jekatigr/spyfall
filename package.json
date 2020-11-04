@@ -32,7 +32,8 @@
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
     "rosetta": "^1.1.0",
-    "svg-sprite-loader": "4.1.2"
+    "svg-sprite-loader": "4.1.2",
+    "swiper": "^6.3.5"
   },
   "devDependencies": {
     "@types/combine-reducers": "^1.0.1",

@@ -1,12 +1,16 @@
-import * as React from 'react';
+import React, { useState, useRef, useEffect, useCallback } from 'react';
 import { block } from 'bem-cn';
+import SwiperCore, { EffectCoverflow } from 'swiper';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import Card from 'components/common/Card/Card';
 import Header from 'components/common/Header/Header';
 import Paragraph from 'components/common/Paragraph/Paragraph';
-import useEventListener from 'utils/useEventListener';
 
+import 'swiper/swiper.less';
 import './CardsSlider.less';
+
+SwiperCore.use([EffectCoverflow]);
 
 type CardType = {
     name: string;
@@ -27,9 +31,12 @@ type Props = {
     onFinish: () => void;
 };
 
-type AnimationType = 'next' | 'previous' | 'center' | undefined;
+enum AnimationType {
+    NEXT = 'next',
+    PREVIOUS = 'previous',
+}
 
-const ANIMATION_DURATION_MS = 400;
+const ANIMATION_DURATION_MS = 300;
 
 const b = block('cards-slider');
 const CardsSlider: React.FC<Props> = ({
@@ -45,130 +52,34 @@ const CardsSlider: React.FC<Props> = ({
     familiarNoticeText,
     onFinish,
 }) => {
-    const [currentCardIndex, setCurrentCardIndex] = React.useState(0);
-    const [animationDirection, setAnimationDirection] = React.useState<AnimationType>(undefined);
-    const [isCenterFlipped, setIsCenterFlipped] = React.useState<boolean>(false);
-    const xDown = React.useRef<number>(-1);
+    const swiper = useRef<SwiperCore>();
 
-    const handleTouchStart = (e): void => {
-        const firstTouch = e.touches[0];
-        if (firstTouch) {
-            xDown.current = firstTouch.clientX;
-        }
-    };
+    const [currentCardIndex, setCurrentCardIndex] = useState(0);
+    const currentCardIndexRef = useRef(0);
+    const [isCenterFlipped, setIsCenterFlipped] = useState(false);
+    const shouldBackFlipIndex = useRef(-1);
 
-    const handleTouchEnd = (e): void => {
-        const firstTouch = e.changedTouches[0];
-        if (firstTouch) {
-            const diff = xDown.current - firstTouch.clientX;
-            if (Math.abs(diff) > 40) {
-                let newAnimationDirection;
-                switch (true) {
-                    case diff > 0: {
-                        newAnimationDirection = 'next';
-                        break;
-                    }
-                    case diff < 0: {
-                        newAnimationDirection = 'previous';
-                        break;
-                    }
-                    default:
-                        break;
-                }
+    const [animationType, setAnimationType] = useState<AnimationType>(undefined);
+    const animationTimerId = useRef(-1);
 
-                setIsCenterFlipped(false);
-                setAnimationDirection(newAnimationDirection);
-            }
-        }
-    };
+    useEffect(() => {
+        // swiper doesn't update callback when state changes
+        currentCardIndexRef.current = currentCardIndex;
+    }, [currentCardIndex]);
 
-    useEventListener('touchstart', handleTouchStart);
-    useEventListener('touchend', handleTouchEnd);
-
-    React.useEffect(() => {
-        let timeoutId;
-        if (animationDirection) {
-            timeoutId = setTimeout(() => {
-                let newCurrentCardIndex = currentCardIndex;
-                switch (animationDirection) {
-                    case 'next': {
-                        newCurrentCardIndex = currentCardIndex + 1;
-                        break;
-                    }
-                    case 'previous': {
-                        newCurrentCardIndex = currentCardIndex - 1;
-                        break;
-                    }
-                    default:
-                        break;
-                }
-
-                setAnimationDirection(undefined);
-
-                if (newCurrentCardIndex < 0) {
-                    return;
-                }
-
-                if (newCurrentCardIndex >= cards.length) {
-                    onFinish();
-                    return;
-                }
-
-                setCurrentCardIndex(newCurrentCardIndex);
-            }, ANIMATION_DURATION_MS);
-        }
-        return (): void => {
-            clearTimeout(timeoutId);
-        };
-    }, [animationDirection]);
-
-    const handleClick = (e): void => {
-        if (!animationDirection) {
-            const parentWidth = e.currentTarget.parentElement.clientWidth;
-            const point = e.clientX;
-
-            const center = parentWidth / 2;
-            const halfCardWidth = 250 / 2;
-
-            let newAnimationDirection;
-            let newIsCenterFlipped = isCenterFlipped;
-
-            switch (true) {
-                case point < center - halfCardWidth: {
-                    newAnimationDirection = 'previous';
-                    newIsCenterFlipped = false;
-                    break;
-                }
-                case point > center + halfCardWidth: {
-                    newAnimationDirection = 'next';
-                    newIsCenterFlipped = false;
-                    break;
-                }
-                default: {
-                    newAnimationDirection = 'center';
-                    newIsCenterFlipped = !isCenterFlipped;
-                    break;
-                }
-            }
-
-            setAnimationDirection(newAnimationDirection);
-            setIsCenterFlipped(newIsCenterFlipped);
-        }
-    };
-
-    const getNotice = (): React.ReactElement => {
+    const getNotice = (): JSX.Element => {
         let text;
 
         switch (true) {
-            case !animationDirection && isCenterFlipped && currentCardIndex === cards.length - 1: {
+            case !animationType && isCenterFlipped && currentCardIndex === cards.length - 1: {
                 text = swipeLastCardNoticeText;
                 break;
             }
-            case !animationDirection && !isCenterFlipped: {
+            case !animationType && !isCenterFlipped: {
                 text = flipCardNoticeText;
                 break;
             }
-            case !animationDirection && isCenterFlipped: {
+            case !animationType && isCenterFlipped: {
                 text = swipeCardNoticeText;
                 break;
             }
@@ -185,41 +96,117 @@ const CardsSlider: React.FC<Props> = ({
         );
     };
 
+    const handleClick = (): void => {
+        if (!isCenterFlipped) {
+            shouldBackFlipIndex.current = currentCardIndex;
+        } else {
+            shouldBackFlipIndex.current = -1;
+        }
+
+        setIsCenterFlipped(!isCenterFlipped);
+        setAnimationType(undefined);
+    };
+
+    const resetTimer = (): void => {
+        clearTimeout(animationTimerId.current);
+    };
+
+    const handleSlideChange = useCallback((swiperInstance: SwiperCore): void => {
+        const newCurrentSlideIndex = swiperInstance.activeIndex;
+
+        resetTimer();
+
+        let newAnimationType;
+
+        if (newCurrentSlideIndex > currentCardIndexRef.current) {
+            newAnimationType = AnimationType.NEXT;
+        }
+
+        if (newCurrentSlideIndex < currentCardIndexRef.current) {
+            newAnimationType = AnimationType.PREVIOUS;
+        }
+
+        let timerId;
+        if (newAnimationType) {
+            timerId = setTimeout(() => {
+                setAnimationType(undefined);
+                shouldBackFlipIndex.current = -1;
+            }, ANIMATION_DURATION_MS);
+
+            animationTimerId.current = timerId;
+        }
+
+        setAnimationType(newAnimationType);
+        setCurrentCardIndex(newCurrentSlideIndex);
+        setIsCenterFlipped(false);
+
+        // no deps because of swiper never updates onSlideChange callback
+    }, []);
+
+    const handleSlideTransitionEnd = (swiperInstance: SwiperCore): void => {
+        const newCurrentSlideIndex = swiperInstance.activeIndex;
+
+        if (newCurrentSlideIndex > cards.length - 1) {
+            onFinish();
+            resetTimer();
+        }
+    };
+
+    useEffect(() => {
+        return (): void => {
+            resetTimer();
+
+            swiper.current.destroy();
+        };
+    }, []);
+
     return (
         <div className={b()}>
-            <Header classNames={b('name')}>{cards[currentCardIndex].name}</Header>
-            <div className={b('roller')} onClick={handleClick}>
-                <div className={b('roller-inner')}>
-                    {cards.map((c, index) => {
-                        const isCenter = currentCardIndex === index;
+            <Header classNames={b('name')}>{cards[Math.min(currentCardIndex, cards.length - 1)].name}</Header>
+            <Swiper
+                className={b('slider')}
+                spaceBetween={18}
+                slidesPerView="auto"
+                onSlideChange={handleSlideChange}
+                onSwiper={(swiperInstance): void => {
+                    swiper.current = swiperInstance;
+                }}
+                onSlideNextTransitionEnd={handleSlideTransitionEnd}
+                effect="coverflow"
+                centeredSlides
+                freeModeMomentum={false}
+                coverflowEffect={{
+                    rotate: 0,
+                    stretch: -25,
+                    depth: 250,
+                    modifier: 1,
+                    slideShadows: false,
+                }}
+                threshold={5}
+            >
+                {cards.map(({ name, isSpy }, index) => {
+                    const isPrevious = currentCardIndex - 1 === index;
+                    const isCenter = currentCardIndex === index;
+                    const isNext = currentCardIndex + 1 === index;
 
-                        const isNext = currentCardIndex + 1 === index;
-                        const isSecondNext = currentCardIndex + 2 === index;
-                        const isNextHidden = index > currentCardIndex + 2;
+                    const isForwardAnimation = animationType === AnimationType.NEXT;
+                    const isBackwardAnimation = animationType === AnimationType.PREVIOUS;
+                    const inAnimation = isForwardAnimation || isBackwardAnimation;
 
-                        const isPrevious = currentCardIndex - 1 === index;
-                        const isSecondPrevious = index === currentCardIndex - 2;
-                        const isPreviousHidden = index < currentCardIndex - 2;
+                    const needBackFlip = inAnimation && (isNext || isPrevious) && shouldBackFlipIndex.current === index;
+                    const isFadeOut =
+                        !needBackFlip && ((isForwardAnimation && isPrevious) || (isBackwardAnimation && isNext));
 
-                        const isNextAnimation = animationDirection === 'next';
+                    const cardModifiers = {
+                        'fade-in': inAnimation && isCenter,
+                        'fade-out': isFadeOut,
+                        faded: !needBackFlip && !isCenter,
+                        flipped: isCenter && isCenterFlipped,
+                        'back-flip': needBackFlip,
+                    };
 
-                        const cardModifiers = {
-                            center: isCenter,
-                            flipped: isCenter && isCenterFlipped,
-                            next: isNext,
-                            'second-next': isSecondNext,
-                            previous: isPrevious,
-                            'second-previous': isSecondPrevious,
-                            hidden: isNextHidden || isPreviousHidden,
-                            'move-second-to-next': isNextAnimation && isSecondNext,
-                            'move-next-to-center': isNextAnimation && isNext,
-                            'move-center-to-previous': isNextAnimation && isCenter,
-                            'move-previous-to-second': isNextAnimation && isPrevious,
-                        };
-
-                        const { name, isSpy } = c;
-
-                        return (
+                    return (
+                        <SwiperSlide className={b('slide')} onClick={handleClick} key={`${name + index}`}>
                             <Card
                                 name={name}
                                 isSpy={isSpy}
@@ -230,12 +217,15 @@ const CardsSlider: React.FC<Props> = ({
                                 spies={spies}
                                 isSpiesFamiliar={isSpiesFamiliar}
                                 className={b('card', cardModifiers)}
-                                key={`${c.name + index}`}
                             />
-                        );
-                    })}
-                </div>
-            </div>
+                        </SwiperSlide>
+                    );
+                })}
+                <SwiperSlide className={b('slide')} key="last-slide">
+                    {' '}
+                </SwiperSlide>
+            </Swiper>
+
             {getNotice()}
         </div>
     );

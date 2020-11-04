@@ -2,6 +2,8 @@
 
 @el: e('.cards-slider');
 
+@animationDuration: 0.3s;
+
 @{el} {
   flex-grow: 1;
   display: flex;
@@ -12,137 +14,74 @@
     word-break: break-all;
   }
 
-  &__roller {
-    width: 339px;
-    height: 346px;
-    margin: 0 auto;
-  }
-
-  &__roller-inner {
-    margin: 0 -18px;
-    position: relative;
-    height: 100%;
-  }
-
-  &__card {
-    width: 250px;
-    position: absolute;
-    height: 100%;
-    z-index: 10;
-  }
-
-  &__card_hidden {
-    visibility: hidden;
-  }
-
-  &__card_center {
-    left: 62.5px;
-    transition-duration: 0.4s;
-    transform-style: preserve-3d;
-  }
-
-  &__card_flipped {
-    transform: perspective(600px) rotateY(180deg);
-  }
-
-  &__card_previous {
-    transform: translateX(-202.5px) scale(0.84);
-    transform-origin: 100% center;
-    filter: brightness(0.4);
-  }
-
-  &__card_second-previous {
-    transform: translateX(-202.5px) scale(0.6);
-    transform-origin: 100% center;
-    filter: brightness(0.2);
-    z-index: 5;
-  }
-
-  &__card_next {
-    transform: translateX(327.5px) scale(0.84);
-    transform-origin: 0 center;
-    filter: brightness(0.4);
-  }
-
-  &__card_second-next {
-    transform: translateX(327.5px) scale(0.6);
-    transform-origin: 0 center;
-    filter: brightness(0.2);
-    z-index: 5;
-  }
-
-  &__card_move-second-to-next {
-    animation: moveUp 0.2s forwards;
-    animation-delay: 0.2s;
-    animation-timing-function: ease-in;
-    transform-origin: 0 center;
-
-    @keyframes moveUp {
-      0% {
-        transform: translateX(327.5px) scale(0.6);
-        filter: brightness(0.2);
-      }
-      100% {
-        transform: translateX(327.5px) scale(0.84);
-        filter: brightness(0.4);
-      }
-    }
-  }
-
-  &__card_move-next-to-center {
-    animation: moveIn 0.3s forwards;
-    animation-timing-function: ease-in;
-    transform-origin: 0;
-
-    @keyframes moveIn {
-      0% {
-        transform: translateX(327.5px) scale(0.84);
-        filter: brightness(0.4);
-      }
-      100% {
-        transform: translateX(62.5px) scale(1);
-        filter: brightness(1);
-      }
-    }
-  }
-
-  &__card_move-center-to-previous {
-    transition-duration: unset;
-    animation: moveOut 0.3s forwards;
-    animation-timing-function: ease-in;
-    transform-origin: 100% center;
-
-    @keyframes moveOut {
-      0% {
-        filter: brightness(1);
-      }
-      100% {
-        filter: brightness(0.4);
-        transform: translateX(-265px) scale(0.84);
-      }
-    }
-  }
-
-  &__card_move-previous-to-second {
-    transition-duration: unset;
-    animation: moveOut2 0.3s forwards;
-    animation-timing-function: ease-in;
-    transform-origin: 100% center;
-
-    @keyframes moveOut2 {
-      0% {
-        transform: translateX(-202.5px) scale(0.84);
-        filter: brightness(0.4);
-      }
-      100% {
-        transform: translateX(-202.5px) scale(0.6);
-        filter: brightness(0.2);
-      }
-    }
-  }
-
   &__notice {
     margin-bottom: 71px;
     min-height: 41px;
+  }
+
+  &__slider {
+    height: 345px;
+    width: calc(100% + 36px);
+    margin-left: -18px;
+    margin-right: -18px;
+    overflow: visible;
+  }
+
+  &__slide {
+    width: 250px;
+  }
+
+  &__card {
+    transition-duration: @animationDuration;
+  }
+
+  &__card_fade-in {
+      animation: fadeInAnimation @animationDuration forwards;
+      animation-timing-function: linear;
+  }
+
+  @keyframes fadeInAnimation {
+    0% {
+      filter: brightness(0.4);
+    }
+    100% {
+      filter: brightness(1);
+    }
+  }
+
+  &__card_fade-out {
+    animation: fadeOutAnimation @animationDuration forwards;
+    animation-timing-function: linear;
+  }
+
+  @keyframes fadeOutAnimation {
+    0% {
+      filter: brightness(1);
+    }
+    100% {
+      filter: brightness(0.4);
+    }
+  }
+
+  &__card_faded {
+    filter: brightness(0.4);
+  }
+
+  &__card_flipped {
+    transform: rotateY(180deg);
+  }
+
+  &__card_back-flip {
+    animation: backFlipFadeOut @animationDuration forwards;
+    animation-timing-function: linear;
+  }
+
+  @keyframes backFlipFadeOut {
+    0% {
+      transform: rotateY(180deg);
+    }
+    100% {
+      transform: rotateY(0deg);
+    }
   }
 }

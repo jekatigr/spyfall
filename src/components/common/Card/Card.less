@@ -1,6 +1,10 @@
 @el: e('.card');
 
 @{el} {
+  position: relative;
+  transform-style: preserve-3d;
+  perspective: 600px;
+
   &__back {
     position: absolute;
     backface-visibility: hidden;
